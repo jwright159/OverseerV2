@@ -1,0 +1,23 @@
+div.echewrapper{
+	width:400px; height:600px; background:white;
+	
+	direction:rtl;  /* Right To Left */ 
+	text-align:left; /* Override direction */
+	overflow:scroll;
+	background-color:#aaeeaa;
+	border-left:5px solid #aaeeaa;
+	border-top:5px solid #aaeeaa;
+	border-bottom:5px solid #aaeeaa;
+	border-right:5px solid #aaeeaa;
+	padding:5px;
+	font-family:courier new;
+	font-weight:bold;
+	font-size:10pt;
+}
+
+div.echerung{
+	width:100%;
+	margin-bottom:3px;
+	height:25px;
+	border:1px solid red;
+	}

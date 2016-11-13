@@ -1,0 +1,90 @@
+###STAT SYSTEM DOCUMENTATION
+
+##INSTALATION
+
+ALTER TABLE Characters ADD achievements LONGTEXT NOT NULL;
+ALTER TABLE Characters ADD stats LONGTEXT NOT NULL;
+
+##EXPLANATION
+The system needed to be:
+-Scalable 
+-Easy to use
+-Transparent
+-Extremely efficient since it's going to be used everywhere
+
+I added a column to Characters called 'stats' where stats will be stored this way:
+
+stat1:statvalue1|stat2:statvalue2|
+
+and created a library of functions to easily deal with it. All the edge cases and problems are dealt with in the
+background. Since almost every single function in the game already uses $charrow, I decided to use that instead of
+having every function query the database again. For cases where you need to update some other character's stats, 
+you can use getChar($charrow) and use that as the parameter.
+
+For achievements, I use a column called 'achievements' and just...
+
+achievement1|achievement2|achievement3|
+
+This is already commented in detail in global_functions, but I'll just paste it here again. 
+It's similar-ish to the way we handle grist, but more efficient behind the scenes.
+
+1. if you want to get a stat value, use getStat(character row, stat you want)
+2. if you want to create or modify a stat, use updateStat(character row, stat you want, value you want it to have)
+3. if you want to just increment a stat by 1 use incrementStat(character row, stat you want to increment), sumStat(row, stat, increment) for everything else
+4. if you want to call by ID instead of character row just use functionname(getChar($char), whatever)
+5. onStat and maxStat are useful for ranking and achievements
+
+For achievements
+
+1. if you want to know if a character has an achievement, use getAchievement($char, $achievement), you'll get a boolean value.
+2. if you want to add an achievement to a character, use setAchievement($char, $achievement), if it's to another player (such as the assisting achievement) sendAchievement
+
+At character creation the stat 'creation' will be initialized with time(), which I can't believe we didn't track already.
+
+An use of the system was "incrementStat($charrow, 'enemiesbeaten');" in posteffects.php, to easily track number of monsters killed.
+For storing, for example, max boondollar drop we would add maxStat($charrow, 'boondrop', $value). The function will handle the comparison by itself.
+
+The good part of this system is that it works in a way that we don't need to update the database every time we need to track
+something new, or change the code in several places. And if we need to make it a column later, writing a script to port it is 
+trivial. It won't get pointlessly long either, a stat only exists if it's relevant.
+
+##CURRENT IMPLEMENTED ACHIEVEMENTS
+Check player overview code
+
+##TO-DO
+--Leaderboard ideas
+-power level 
+-fastest denizen kill
+-fastest black king kill
+
+--Achievement ideas
+
+--Maybe later/on it
+-sburb devices stuff
+-consort merc stuff
+-discovering atheneum codes (user)
+-different weapons
+-defeat your first X
+-quests
+-all monster types
+-alchemize your first X
+
+
+--Finished (or kind of finished)
+-x fraymotifs used
+-x aspect patterns used
+-fatigue stuff
+-learn of merc death
+-echeladder rung (done)
+-amount of grist (db)
+-amount of boondollars (db)
+-number of approved art (done)
+-highest damage (done)
+-underlings killed 
+-number of approved items
+-all grist types
+-reached echeladder 612
+-reached >9999 power level
+-moon fight stuff
+-money spent in shop
+-equipped all 4 items

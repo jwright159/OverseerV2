@@ -1,0 +1,289 @@
+- NOTE: "Damage" refers to once offense and defense have been calculated and it is determined that an attack is getting through for damage.
+
+---WEAPON EFFECTS---
+
+Affinity
+- Format on weapon: AFFINITY:<type>:<percentage>|
+- Adds <percentage>% damage
+- Bonus damage is resisted by a resistance of <type>
+- Example: AFFINITY:Void:20| deals 20% extra damage, affected by Void resistance.
+
+Randamage
+- Format on weapon: RANDAMAGE:<%variance>|
+- Damage inflicted varies between (100 - variance)% and (100 + variance)%
+- Example: A RANDAMAGE:50| weapon deals between 50% and 150% of the damage it would otherwise do.
+
+Lifesteal
+- Format on weapon: LIFESTEAL:<%chance>:<%absorbed>|
+- Has a <chance>% chance to restore <absorbed>% of damage done as health to the attacker
+- Blood resistance applies to Lifesteal. Blood resistance higher than 100 causes Lifesteal to damage the user.
+- Example: A LIFESTEAL:10:10| weapon has a 10% chance to restore 10% of damage done by attacks with the weapon
+
+Knockdown
+- Format on weapon: KNOCKDOWN:<%multiplier>|
+- Has a chance to apply KNOCKDOWN to struck enemies. KNOCKDOWN prevents the enemy from attacking next turn.
+- The chance is equal to four times the percentage of the enemy's max health that the attack did, multiplied by <multiplier>
+- Hence, a KNOCKDOWN:100| weapon is guaranteed to knock down on a hit of 25% of the target's max health
+- Breath resistance applies to knockdown. An enemy with 100 or more resistance is immune.
+- Example: A KNOCKDOWN:200| weapon, upon dealing 5% of an enemy's maximum health in one strike, has a 40% chance to knock them down.
+
+Apply Status Effect
+- Format on weapon: <status string>:<chance>:<resistance>:<message>|
+- <status string> is added to a struck enemy's status field if the effect succeeds. Colons (:) must be replaced by @.
+- <chance> is the chance of effect success, expressed as a percentage (1 to 100)
+- <resistance> is the resistance that applies to the effect's application, reducing the chance of it (immunity at a resist of 100 or higher)
+- <resistance> will be the resistance that applies against the underlying status effect, if any.
+- If no resistance applies against the underlying effect, a recommended resistance will be suggested in the effect's listing
+- <resistance> can be "Unresisted" for an unresistable effect. The status applied may still be affected by resistance.
+- <message> is the message that is displayed when the effect hits.
+- <message> may contain %USER% and %TARGET% and they will be replaced by the attacker and defender respectively
+- Example: A weapon with TIMESTOP@2:20:Time:%USER% freezes %TARGET% in time!| inflicts "TIMESTOP:2|" on struck enemies 20% of the time
+
+---OTHER EFFECTS---
+
+Readable
+- Format on item: READ:<reference>|
+- Looks up the "Reading" table and prints out the referenced text when the reading action is used with the item.
+
+---LIST OF STATUS EFFECTS---
+
+General notes:
+- Duration will tick down at the end of the turn the status is applied
+- The status will not apply during the turn it is inflicted
+- Thus, a status with a duration of 1 on a weapon will apply only at the end of the round it is inflicted (and then expire)
+- Hence a weapon that inflicts "TIMESTOP:2|" causes time stop for 1 round
+- Hence "TIMESTOP:1|" does nothing in practice, but "BURNING:1:100|" will inflict 100 damage from the burn before expiring immediately.
+- A duration of 0 causes the status effect to last for the entire strife (no TIMESTOP:0| weapons, please)
+- As noted above, to have a weapon apply a desired status effect use the "Apply status effect" template, replacing : with @ in the desired string
+- This means setting <status string> to exactly what you want to show up in the enemy's status field if the weapon procs (replacing : with @)
+- Unless otherwise stated, status effects stack.
+- However, some effects don't do anything interesting when stacked
+- Example: Two instances of TIMESTOP:1| will both deny the enemy their current turn and then disappear. Net result is the same as if they only had one.
+- A weapon that applies a POSITIVE status effect is possible as a drawback to a powerful weapon. Likewise negative status effects and wearables.
+- However, be wary of things like "give extra attacks to an enemy that can't hit the player because their weapon is OP"
+
+Timestop:
+- Format on strifer: TIMESTOP:<duration>|
+- Affected strifer cannot attack or take any action
+- Lasts for <duration> rounds
+- Usually resisted by Time, although no resistance affects the status effect once it is applied.
+
+Hopeless:
+- Format on strifer: HOPELESS:<duration>|
+- Affected strifer has a 50% chance to not attack every round (does not prevent taking actions)
+- Lasts for <duration> rounds
+- If the strifer succeeds in dealing damage, they get a roll to remove the status early
+- Usually resisted by Hope, although no resistance affects the status effect once it is applied.
+
+Knockdown:
+- Format on strifer: KNOCKDOWN:<duration>|
+- Affected strifer cannot attack. They may still take actions.
+- Lasts for <duration> rounds
+- Usually resisted by Breath, although no resistance affects the status effect once it is applied
+- More flexible in what it is resisted by than other statuses (Space in particular is fairly reasonable in a lot of cases)
+
+Watery Gel:
+- Format on strifer: WATERYGEL:<duration>|
+- Represents a watery health gel bar, making it easier to dislodge the vial
+- Affected strifer takes 1.15x damage from all attacks
+- Lasts for <duration> rounds
+- Usually resisted by Life, although no resistance affects the status effect once it is applied
+
+Poison:
+- Format on strifer: POISON:<duration>:<severity>|
+- Affected strifer suffers %maxhealth damage every round.
+- Each point of severity causes 0.1% of max health to be dealt.
+- So, poison of severity 15 deals 1.5% of the strifer's max health every round.
+- Lasts for <duration> rounds
+- There is a 5% chance every round to overcome an instance of poison. This increases by 1% for every point of Doom resistance.
+
+Bleeding:
+- Format on strifer: BLEEDING:<duration>:<severity>|
+- Affected strifer suffers %maxhealth damage and %maxpower drain every round.
+- Each point of severity causes 0.1% of max health to be dealt and 0.1% of max power to be drained.
+- So, bleeding of severity 15 deals 1.5% of the strifer's max health and drains 1.5% of the strifer's max power every round.
+- Lasts for <duration> rounds
+- There is a 20% chance every round to overcome an instance of bleeding. This increases by 1% for every point of Blood resistance.
+
+Disoriented:
+- Format on strifer: DISORIENTED:<duration>|
+- Affected strifer has a halved teamwork value and their offense is multiplied by 0.96x
+- This means they contribute half their usual value to their team
+- If they are the team leader, this means the team's big attack is at half power and will very likely fail as a result!
+- Lasts for <duration> rounds
+- Usually resisted by Mind, although no resistance affects the status effect once it is applied
+
+Distracted:
+- Format on strifer: DISTRACTED:<duration>|
+- Affected strifer loses an attack.
+- In normal circumstances, this means they will have zero attacks this round and fail to attack
+- Lasts for <duration> rounds
+- Usually resisted by Mind, although no resistance affects the status effect once it is applied
+
+Enraged:
+- Format on strifer: ENRAGED:<duration>|
+- Affected strifer gains a defense multiplier of 0.9x
+- Lasts for <duration> rounds
+- Usually resisted by Rage, although no resistance affects the status effect once it is applied
+
+Mellow:
+- Format on strifer: MELLOW:<duration>|
+- Affected strifer gains an offense multiplier of 0.9x
+- Lasts for <duration> rounds
+- Usually resisted by Rage, although no resistance affects the status effect once it is applied
+
+Glitched Out:
+- Format on strifer: GLITCHED:<duration>|
+- Affected strifer has a 20% chance of failing to attack every round. If this triggers, the strifer receives GLITCHED:5|
+- Lasts for <duration> rounds
+- Generally applied with a duration of 0, making it permanent until the enemy dies
+- Usually resisted by Void, although no resistance affects the status effect once it is applied
+
+Charmed:
+- Format on strifer: CHARMED:<duration>:<side>|
+- Affected strifer fights on the side of <side>
+- 0 is the player side, 1 is the starting enemy side (i.e. the side the initially engaged enemies are on)
+- Other sides are "independent" sides in the strife and usually don't exist until something makes them
+- Lasts for <duration> rounds
+- Usually resisted by Heart. Resistance does not affect the effect itself. May instead be resisted by Mind or Blood if appropriate.
+
+Delayed:
+- Format on strifer: DELAYED:<duration>:<status string>|
+- When the DELAYED status effect expires, the strifer receives <status string> added to their status field
+- Lasts for <duration> rounds (after which the status specified kicks in)
+- Usually resisted by whatever resists the status string being applied.
+
+Paralysis:
+- Format on strifer: PARALYZED:<duration>:<severity>|
+- Lasts for <duration> rounds
+- Affected strifer has a (100 - severity)% chance to be unable to attack every round
+
+Pinata:
+- Format on strifer: PINATA:0|
+- Affected strifer has been replaced by a giant grist pinata
+- This renders them unable to attack or defend or do anything
+- PINATA should be applied when the desired effect is to instantly kill the target. Thus, it can be resisted by whatever is appropriate.
+- Can in theory have durations other than 0 (whole strife) but in practice should not.
+
+Unlucky:
+- Format on strifer: UNLUCKY:<duration>|
+- Causes various misfortunes to befall the strifer
+- Lasts for <duration> rounds
+- 20% chance to throw off the debuff every round.
+- Generally applied with a duration of 0, making it permanent until the enemy manages to throw it off.
+- A higher Luck stat means less bad things happen and more chance to throw off the debuff.
+- Usually resisted by Light. Resistance does not affect the effect itself.
+
+Has Effect:
+- Format on strifer: HASEFFECT:<duration>:<effect string>|
+- Affected strifer gains the string in <effect string> as an on-hit effect.
+- Lasts for <duration> rounds
+- <effect string> will be @-separated, meaning anywhere we want a : in the effect we will put a @ in the effect string
+- Some on-hit effects, most notably the one that applies a status effect, want to contain @!
+- Thus, anywhere we want a @ in the effect string, we will instead put &
+- Example: HASEFFECT:0:TIMESTOP&2@20@Time@%USER% freezes %TARGET% in time!|
+- This gives the strifer an on-hit effect of TIMESTOP@2:20:Time:%USER% freezes %TARGET% in time!|
+- When a target is hit and the 20% chance comes through, they will then be afflicted with TIMESTOP:2|
+- As a positive effect, usually not resisted. Use whatever is appropriate if it needs to be.
+
+Inheritance:
+- Format on strifer: INHERITANCE:1|
+- Affected strifer is guaranteed to trigger Heir abilities.
+- Generally applied to a strifer when they use the Inheritance ability.
+- May have durations other than 1 in theory, but in practice probably should not.
+- Effect is very powerful for Heir characters and useless for anyone else. Consult The Overseer before applying it to anything.
+
+Isolated:
+- Format on strifer: ISOLATED:<duration>|
+- Affected strifer has their teamwork value zeroed
+- Represents the strifer being completely cut off from friendly support.
+- Should be resisted by whatever is appropriate to the separation mechanism. If nothing comes to mind, use Blood.
+
+Burning:
+- Format on strifer: BURNING:<duration>:<damage>|
+- Affected strifer is on fire! They take <damage> damage per round, with a chance to become DISTRACTED based on how much of their health <damage> is
+- Lasts for <duration> rounds
+- Rage resistance applies against the damage, while Mind resistance applies against the DISTRACTION panic effect.
+- Application of the effect is usually resisted by Rage, or by a specialty "Fire" resistance that not many things will have.
+
+Unstuck:
+- Format on strifer: UNSTUCK:<duration>|
+- Affected strifer has a 40% chance to become unstuck from reality every round.
+- Becoming unstuck means that the strifer stops existing until the next strife round. Yes, this has some weird effects.
+- Lasts for <duration> rounds
+- Usually resistd by Void, although this does not affect the effect itself
+
+Regeneration:
+- Format on strifer: REGENERATION:<duration>:<quantity>|
+- Affected strifer regenerates <quantity> flat health per round
+- Lasts for <duration> rounds
+- Should not be resisted.
+
+Recovery: 
+- Format on strifer: RECOVERY:<duration>:<quantity>|
+- Affected strife recovers <quantity> power every round if it was drained, not going over their maximum
+- Lasts for <duration> rounds
+- Should not be resisted
+- Handy for weapons that want to reduce the target's power but have it recover over time
+
+Boost Drain:
+- Format on strifer: POWERDRAIN:<duration>:<quantity>|
+- Affected strifer's enemies lose <quantity> in boosted power every round
+- Lasts for <duration> rounds
+- Positive effect, so not resisted.
+- Usually just placed on bosses to drain player power boosts.
+
+Power Loss:
+- Format on strifer: POWERLOSS:1:<amount>|
+- Duration should ALWAYS be 1. This is not a status effect in the traditional sense.
+- Triggers at end of turn, draining <amount> power and disappearing
+- Used to let a weapon reduce power on hit without reducing it on the turn the hit happens
+
+Power Gain:
+- Format on strifer: POWERGAIN:1:<amount>|
+- Duration should ALWAYS be 1. This is not a status effect in the traditional sense.
+- Triggers at end of turn, providing a flat power boost of <amount>
+- Used to let an effect increase power mid-strife without increasing it during the combat in which the boost occurs
+- May be used as a drawback on a powerful weapon, maybe
+
+Frozen:
+- Format on strifer: FROZEN:<duration>|
+- Affected strifer has an offense value of 0 and cannot take actions, but gains a 1.1x defense multiplier
+- Lasts for <duration> rounds
+- 20% chance to thaw every round. Increases with luck.
+- Generally resisted by a specialty "Ice" resistance. Other resistances may be appropriate, depending.
+
+Shrunk:
+- Format on strifer: SHRUNK:<duration>|
+- Affected strifer gains an offense multiplier of 0.8x and a defense multiplier of 0.8x
+- Lasts for <duration> rounds
+- Usually resisted by Space. Resistance does not affect the actual effect.
+
+Fury:
+- Format on strifer: FURY:<duration>|
+- Affected strifer gains an extra attack.
+- Lasts for <duration> rounds
+- As a positive effect, should not be resisted.
+
+Irradiated:
+- Format on strifer: IRRADIATED:<duration>:<severity>|
+- Affected strifer loses <severity> flat health and power every turn
+- Lasts for <duration> rounds
+- Usually resisted by Doom. Resistance does not affect the actual effect.
+
+Afflicted?:
+- Format on strifer: SELFINFLICT:<duration>:<status string>:<chance>:<resist>:<message>|
+- Affected strifer has a (<chance> - (their value in <resist>))% chance to have <status string> placed on them at the end of every round
+- Lasts for <duration> rounds
+- <message> is a text message that is printed when the trigger occurs
+
+Resistant:
+- Format on Strifer: HASRESIST:<duration>:<resist string>|
+- Affected strifer gains the string in <resist string> as a resistance (format <resistance name>:<resistance value>|)
+- Lasts for <duration> rounds
+- <resist string> will be @-separated, meaning anywhere we want a : in the resistance we will put a @ in the resist string
+
+Luck Boosted:
+- Format on Strifer: LUCKBOOST:<duration>:<amount>|
+- Affected strifer gains <amount> Luck points. Pretty simple!|
+- Lasts for <duration> rounds
