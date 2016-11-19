@@ -1,6 +1,6 @@
 <?php
 
-$to      = thethellere@gmail.com; // Send email to our user
+$to      = 'thethellere@gmail.com'; // Send email to our user
 $subject = 'Mail test'; // Give the email a subject 
 $message = 'This is a testmail to make sure it works
  
