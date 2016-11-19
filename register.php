@@ -1,5 +1,5 @@
 <?php
-require_once("header.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
  // Includes the header ?>
  <script type="text/javascript">
   $(document).ready(function() {	
