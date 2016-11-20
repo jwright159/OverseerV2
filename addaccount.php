@@ -17,7 +17,7 @@ function sendValidationEmail($mailto, $user, $confKey) {
     $headers = 'From: no-reply@overseer2.com' . "\r\n" .
     'Reply-To: no-reply@overseer2.com' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
-	mail($to, $subject, $message, $headers); 
+	mail($mailto, $subject, $message, $headers); 
 }
 
 // Set the Post vars
