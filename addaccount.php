@@ -22,8 +22,8 @@ function validateEmail($mailto, $user, $confKey) {
 
 // Set the Post vars
 $username = mysqli_escape_string($_POST['username']);
-$email = $_POST['email'];
-$emailConfirm = $_POST['emailconf'];
+$email = mysqli_escape_string($_POST['email']);
+$emailConfirm = mysqli_escape_string($_POST['emailconf']);
 $password = mysqli_escape_string($_POST['password']);
 $passwordConfirm = mysqli_escape_string($_POST['confirmpw']);
 $tosAccepted = mysqli_escape_string($_POST['tos']);
@@ -31,8 +31,6 @@ $tosAccepted = mysqli_escape_string($_POST['tos']);
 $emailCheck = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM 'Users' WHERE 'email' = $email;"));
 if ($emailCheck == NULL) {
 	if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		$email = mysqli_escape_string($_POST['email']);
-		$emailConfirm = mysqli_escape_string($_POST['emailconf']);
 		if ($email == $emailConfirm && (!empty($email))) {
 			if ($password == $passwordConfirm && (!empty($password))) {
 				$usernameCheck = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM 'Users' WHERE 'username' = $username;"));
