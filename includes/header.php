@@ -1,11 +1,11 @@
 <?php
 
-session_start(); // Session begin. Pages utilising the header don't need to repeat this. 
+session_start(); // Session begin. Pages utilising the header don't need to repeat this.
 
-if (empty($_SESSION['username'])) { 
+if (empty($_SESSION['username'])) {
     if (!stripos($_SERVER['REQUEST_URI'], 'resetpass.php') && !stripos($_SERVER['REQUEST_URI'], 'changelog.php') && !stripos($_SERVER['REQUEST_URI'], 'register.php')) {
-        header('Location: /'); 
-        exit(); 
+        header('Location: /');
+        exit();
     }
 }
 
