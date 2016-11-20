@@ -2,10 +2,10 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
  // Includes the header ?>
  <script type="text/javascript">
-  $(document).ready(function() {	
+  $(document).ready(function() {
     $('#RegisterForm').submit(function(event) { // catch the form's submit event
 	  event.preventDefault();
-    $.ajax('addaccount.php',{ // Do it 
+    $.ajax('addaccount.php',{ // Do it
         data: $(this).serialize(), // Gets form Data
         type: 'POST', // GET or POST
         url: $(this).attr('addaccount.php'), //Calls the file
@@ -25,13 +25,13 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="email">E-mail address: </label>
 		<div class="col-sm-3">
-			<input id="email" name="email" class="form-control" type="text" /> 
+			<input id="email" name="email" class="form-control" type="text" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="emailconf">E-mail (again!): </label>
 		<div class="col-sm-3">
-			<input id="emailconf" name="emailconf" class="form-control" type="text" /> 
+			<input id="emailconf" name="emailconf" class="form-control" type="text" />
 		</div>
 	</div>
 	<div class="form-group">
@@ -59,7 +59,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
       <div class="col-sm-offset-2 col-sm-10">
 	    <button name="submit" type="submit" class="btn btn-primary" id="submit" form="RegisterForm">Submit</button>
 	  </div><br>
-	  
+
 </div>
 <div id="DisplayDiv"></div>
 <br /><br /><div class="alert alert-warning" role="alert">Be advised: You'll be asked to confirm your email address, and it'll be needed if you ever need to reset your password. </div><br>
