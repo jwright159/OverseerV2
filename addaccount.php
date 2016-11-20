@@ -21,12 +21,12 @@ function validateEmail($mailto, $user, $confKey) {
 }
 
 // Set the Post vars
-$username = mysqli_escape_string($_POST['username']);
-$email = mysqli_escape_string($_POST['email']);
-$emailConfirm = mysqli_escape_string($_POST['emailconf']);
-$password = mysqli_escape_string($_POST['password']);
-$passwordConfirm = mysqli_escape_string($_POST['confirmpw']);
-$tosAccepted = mysqli_escape_string($_POST['tos']);
+$username = mysqli_escape_string($connection, $_POST['username']);
+$email = mysqli_escape_string($connection, $_POST['email']);
+$emailConfirm = mysqli_escape_string($connection, $_POST['emailconf']);
+$password = mysqli_escape_string($connection, $_POST['password']);
+$passwordConfirm = mysqli_escape_string($connection, $_POST['confirmpw']);
+$tosAccepted = mysqli_escape_string($connection, $_POST['tos']);
 
 $emailCheck = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM 'Users' WHERE 'email' = $email;"));
 if ($emailCheck == NULL) {
@@ -37,9 +37,11 @@ if ($emailCheck == NULL) {
 				if ($usernameCheck == NULL) {
 					$emailHash = substr(md5(rand()), 0, 20);
 					$hashedPass = password_hash($password, PASSWORD_DEFAULT);
-					mysqli_query($connection, "INSERT INTO 'Users' ('username', 'email', 'password', 'confirmationkey') VALUES ('$username', '$email', '$hashedPass', '$emailHash');");
-						validateEmail($email, $username, $emailHash);
-						echo '<div class="container"><div class="alert alert-success" role="alert">Success! Check your email for a validation key.</div></div>';
+                    $query = "INSERT INTO `Users` (`username`, `email`, `password`, `confirmationkey`) VALUES ('$username', '$email', '$hashedPass', '$emailHash');";
+					mysqli_query($connection, $query);
+                    echo mysqli_error($connection);
+                    validateEmail($email, $username, $emailHash);
+                    echo '<div class="container"><div class="alert alert-success" role="alert">Success! Check your email for a validation key.</div></div>';
 				} else {
 					echo '<div class="container"><div class="alert alert-danger" role="alert">Username taken!</div></div>';
 				}
