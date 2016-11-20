@@ -3,16 +3,16 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
 function sendValidationEmail($mailto, $user, $confKey) {
 	$subject = 'Welcome to Overseer v2!';
-	$message = 'Hello '.$user.'!\n
+	$message = "Hello ".$user."!\n
 	\n 
 	You, or someone pretending to be you, registered for Overseer v2 with this email. To confirm that it\'s actually you, please click the link below to verify your email.\n
 	\n
-	http://overseer2.com/confirm.php?email='.$mailto.'&confkey='.$confKey.'\n
+	http://overseer2.com/confirm.php?email=".$mailto."&confkey=".$confKey." \n
 	\n
 	If the link doesn\'t work, head to http://overseer2.com/confirm.php and enter the confirmation key below.\n
-	\n'.$confKey.'
+	\n".$confKey."
 	\n
-	Regards, the v2 Team';
+	Regards, the v2 Team";
 
     $headers = 'From: no-reply@overseer2.com' . "\r\n" .
     'Reply-To: no-reply@overseer2.com' . "\r\n" .
