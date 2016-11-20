@@ -67,5 +67,5 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 
 
 <?php
-require_once("footer.php");
+//require_once("footer.php");
 ?>
