@@ -1,22 +1,22 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
- // Includes the header ?>
- <script type="text/javascript">
-  $(document).ready(function() {
-    $('#RegisterForm').submit(function(event) { // catch the form's submit event
-	  event.preventDefault();
-    $.ajax('addaccount.php',{ // Do it
-        data: $(this).serialize(), // Gets form Data
-        type: 'POST', // GET or POST
-        url: $(this).attr('addaccount.php'), //Calls the file
-        success: function(response) {// on success..
-			console.log(response.substr(0,10));
-            $('#DisplayDiv').html(response); // update the DIV
-        }
-    });
-    return false; // cancel original event to prevent form submitting
-    });
-  });	
+    // Includes the header ?>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#RegisterForm').submit(function(event) { // catch the form's submit event
+            event.preventDefault();
+            $.ajax('addaccount.php',{ // Do it
+                data: $(this).serialize(), // Gets form Data
+                type: 'POST', // GET or POST
+                url: $(this).attr('addaccount.php'), //Calls the file
+                success: function(response) {// on success..
+                    console.log(response.substr(0,10));
+                    $('#DisplayDiv').html(response); // update the DIV
+                }
+            });
+            return false; // cancel original event to prevent form submitting
+        });
+    });	
 </script> 
 <div class="container">
 
