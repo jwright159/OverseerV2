@@ -21,7 +21,7 @@ function validateEmail($mailto, $user, $confKey) {
 }
 
 // Set the Post vars
-$username = mysqli_escpae_string($_POST['username']);
+$username = mysqli_escape_string($_POST['username']);
 $email = mysqli_escape_string($_POST['email']);
 $emailConfirm = mysqli_escape_string($_POST['emailconf']);
 $password = mysqli_escape_string($_POST['password']);
