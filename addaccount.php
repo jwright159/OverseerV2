@@ -3,7 +3,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
 function validateEmail($mailto, $user, $confKey) {
 	$subject = 'Welcome to Overseer v2!';
-	$message = 'Hello!\n
+	$message = 'Hello '.$user.'!\n
 	\n 
 	You, or someone pretending to be you, registered for Overseer v2 with this email. To confirm that it\'s actually you, please click the link below to verify your email.\n
 	\n
