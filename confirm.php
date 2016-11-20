@@ -8,7 +8,7 @@ $emailConfirming = mysqli_escape_string($connection, $_GET['email']);
 
 $confirmQuery = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `Users` WHERE `email` = '$emailConfirming' LIMIT 1;"));
 
-if (mysqli_num_rows($confirmQuery) > 0)) {
+if (mysqli_num_rows($confirmQuery) > 0) {
 	$status = $confirmQuery['confirmed'];
 	$confKey = $confirmQuery['confirmationkey'];
 	$emailInRow = $confirmQuery['email'];
