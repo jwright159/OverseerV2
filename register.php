@@ -35,9 +35,9 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-sm-2" for="blogname">Username: </label>
+		<label class="control-label col-sm-2" for="username">Username: </label>
 		<div class="col-sm-3">
-			<input id="blogname" name="blogname" class="form-control" maxlength="50" type="text" />
+			<input id="username" name="username" class="form-control" maxlength="50" type="text" />
 		</div>
 	</div>
 	<div class="form-group">
