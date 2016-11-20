@@ -17,7 +17,9 @@ if (mysqli_num_rows($emailCheck) > 0) {
 		echo '<div class="container"><div class="alert alert-danger" role="alert">This email is already confirmed!</div></div>';
 	} else {
 		if ($confKey == $confirmKey) {
-			mysqli_query($connection, "UPDATE 'Users' SET 'confirmed' = '1', 'confirmationkey' = '' WHERE 'email' = '$emailConfirming';");
+			mysqli_query($connection, "UPDATE `Users` SET `confirmed` = '1', `confirmationkey` = '' WHERE `email` = '$emailConfirming';");
+			echo '<div class="container"><div class="alert alert-success" role="alert">Confirmed! You can log in now.</div></div>';
+
 		} else {
 			echo '<div class="container"><div class="alert alert-danger" role="alert">Key did not match...</div></div>';
 		}
