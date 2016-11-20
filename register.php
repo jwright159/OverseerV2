@@ -52,7 +52,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
             </div>
         </div>
         <div class="checkbox">
-            <label><input id="tos" type="checkbox" value="">I agree to the <a href="rules.php">Terms and Conditions</a> and am happy with the <a href="privacy.php">Privacy Policy.<a></label>
+            <label><input id="tos" name="tos" type="checkbox" value="yes" />I agree to the <a href="rules.php">Terms and Conditions</a> and am happy with the <a href="privacy.php">Privacy Policy.</a></label>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

@@ -1,7 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
-function validateEmail($mailto, $user, $confKey) {
+function sendValidationEmail($mailto, $user, $confKey) {
 	$subject = 'Welcome to Overseer v2!';
 	$message = 'Hello '.$user.'!\n
 	\n 
@@ -26,34 +26,34 @@ $email = mysqli_escape_string($connection, $_POST['email']);
 $emailConfirm = mysqli_escape_string($connection, $_POST['emailconf']);
 $password = mysqli_escape_string($connection, $_POST['password']);
 $passwordConfirm = mysqli_escape_string($connection, $_POST['confirmpw']);
-$tosAccepted = mysqli_escape_string($connection, $_POST['tos']);
 
-$emailCheck = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM 'Users' WHERE 'email' = $email;"));
-if ($emailCheck == NULL) {
-	if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		if ($email == $emailConfirm && (!empty($email))) {
-			if ($password == $passwordConfirm && (!empty($password))) {
-				$usernameCheck = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM 'Users' WHERE 'username' = $username;"));
-				if ($usernameCheck == NULL) {
-					$emailHash = substr(md5(rand()), 0, 20);
-					$hashedPass = password_hash($password, PASSWORD_DEFAULT);
-                    $query = "INSERT INTO `Users` (`username`, `email`, `password`, `confirmationkey`) VALUES ('$username', '$email', '$hashedPass', '$emailHash');";
-					mysqli_query($connection, $query);
-                    echo mysqli_error($connection);
-                    validateEmail($email, $username, $emailHash);
-                    echo '<div class="container"><div class="alert alert-success" role="alert">Success! Check your email for a validation key.</div></div>';
-				} else {
-					echo '<div class="container"><div class="alert alert-danger" role="alert">Username taken!</div></div>';
-				}
-			} else {
-				echo '<div class="container"><div class="alert alert-danger" role="alert">Passwords didn\'t match.</div></div>';
-			}
-		} else {
-				echo '<div class="container"><div class="alert alert-danger" role="alert">E-mails didn\'t match.</div></div>';
-		}	
-	} else {
-		echo '<div class="container"><div class="alert alert-danger" role="alert">This email is invalid.</div></div>';
-	}	
+// normalize email
+$email = strtolower($email);
+$emailConfirm = strtolower($emailConfirm);
+
+if ($_POST['tos'] != "yes") {
+    echo '<div class="container"><div class="alert alert-danger" role="alert">You haven\'t accepted the conditions.</div></div>';
 } else {
-	echo '<div class="container"><div class="alert alert-danger" role="alert">This email is already registered.</div></div>';
+    $emailCheck = mysqli_query($connection, "SELECT `ID` FROM `Users` WHERE `email` = '$email';");
+    if (mysqli_num_rows($emailCheck) > 0) {
+        echo '<div class="container"><div class="alert alert-danger" role="alert">This email is already registered.</div></div>';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo '<div class="container"><div class="alert alert-danger" role="alert">This email is invalid.</div></div>';
+    } elseif ($email != $emailConfirm || empty($email)) {
+        echo '<div class="container"><div class="alert alert-danger" role="alert">E-mails didn\'t match.</div></div>';
+    } elseif ($password != $passwordConfirm || empty($password)) {
+        echo '<div class="container"><div class="alert alert-danger" role="alert">Passwords didn\'t match.</div></div>';
+    } else {
+        $usernameCheck = mysqli_query($connection, "SELECT `ID` FROM `Users` WHERE `username` = '$username';");
+        if (mysqli_num_rows($usernameCheck) > 0) {
+            echo '<div class="container"><div class="alert alert-danger" role="alert">Username taken!</div></div>';
+        } else {
+            $confirmationKey = substr(md5(rand()), 0, 20);
+            $hashedPass = password_hash($password, PASSWORD_DEFAULT);
+            $query = "INSERT INTO `Users` (`username`, `email`, `password`, `confirmationkey`) VALUES ('$username', '$email', '$hashedPass', '$confirmationKey');";
+            mysqli_query($connection, $query);
+            sendValidationEmail($email, $username, $confirmationKey);
+            echo '<div class="container"><div class="alert alert-success" role="alert">Success! Check your email for a validation key.</div></div>';
+        }
+    }
 }
