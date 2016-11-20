@@ -37,7 +37,7 @@ if ($emailCheck == NULL) {
 				if ($usernameCheck == NULL) {
 					$emailHash = substr(md5(rand()), 0, 20);
 					$hashedPass = password_hash($password, PASSWORD_DEFAULT);
-					mysqli_query($connection, "INSERT INTO 'Users' (username, email, password, confirmationkey) VALUES ($username, $email, $hashedPass, $emailHash);");
+					mysqli_query($connection, "INSERT INTO 'Users' ('username', 'email', 'password', 'confirmationkey') VALUES ('$username', '$email', '$hashedPass', '$emailHash');");
 						validateEmail($email, $username, $emailHash);
 						echo '<div class="container"><div class="alert alert-success" role="alert">Success! Check your email for a validation key.</div></div>';
 				} else {
