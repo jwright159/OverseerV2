@@ -38,3 +38,5 @@ if ($sessionName == '' || $sessionName == null) {
     	mysqli_query($connection, "INSERT INTO `Sessions` (name, creator, password, type) VALUES ($sessionName, $userCreating, $hashedPass, $sessionType);");
     	echo '<div class="container"><div class="alert alert-success" role="alert">Success! Check your email for a validation key.</div></div>';
     }
+}
+?>
