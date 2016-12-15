@@ -4,6 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/accrow.php');
 
 function pickSessionType($userID) {
+	global $connection;
 	$userRow = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `Users` WHERE `ID` = '$userID';"));
 	$hardmodeEnabled = $userRow['completedsession'];	//Is a boolean
 	if ($hardmodeEnabled == 0) {
