@@ -36,7 +36,7 @@ if ($sessionName == '' || $sessionName == null) {
     } else {
     	$sessionType = pickSessionType($userCreating);
     	$hashedPass = password_hash($sessionPassword, PASSWORD_DEFAULT);
-    	mysqli_query($connection, "INSERT INTO `Sessions` (name, creator, password, type) VALUES ($sessionName, $userCreating, $hashedPass, $sessionType);");
+    	mysqli_query($connection, "INSERT INTO `Sessions` (`name`, `creator`, `password`, `type`) VALUES ('$sessionName', '$userCreating', '$hashedPass', '$sessionType');");
     	echo '<div class="container"><div class="alert alert-success" role="alert">Success!</div></div>';
     }
 }
