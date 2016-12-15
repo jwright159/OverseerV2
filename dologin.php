@@ -9,7 +9,7 @@ if(mysqli_num_rows($userResult) == 0){
 } else {
 	$userRow = mysqli_fetch_array($userResult); //
 	$password = mysqli_escape_string($connection, $_POST['password']);
-	$correctPass = password_hash($password, $userRow['password']);
+	$correctPass = password_verify($password, $userRow['password']);
 	if ($correctPass == 1) {
 		echo '<div class="container"><div class="alert alert-success" role="alert">Login successful</div></div>';
 		$_SESSION['userID'] = $userRow['ID'];
