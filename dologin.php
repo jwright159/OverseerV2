@@ -1,7 +1,8 @@
 <?php
 session_start();
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
 $username = mysqli_escape_string($connection, $_POST['username']);
-$userResult = mysqli_query($connection, "SELECT * FROM Users WHERE `username` = '$username';");
+$userResult = mysqli_query($connection, "SELECT * FROM `Users` WHERE `username` = '$username';");
 
 if(mysqli_num_rows($userResult) == 0){
 	echo '<div class="container"><div class="alert alert-warning" role="alert">User doesn\'t exist!</div></div><br>';
