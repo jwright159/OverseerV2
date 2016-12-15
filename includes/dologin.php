@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
 $username = mysqli_escape_string($connection, $_POST['username']);
 $userResult = mysqli_query($connection, "SELECT * FROM `Users` WHERE `username` = '$username';");
 
