@@ -13,7 +13,7 @@ function pickSessionType($userID) {
 		$sessionTypePicked = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `SessionTypes` WHERE `special` = 0 AND `ID` > 3 ORDER BY RAND() LIMIT 1;"));
 	}
 	$primaryType = rand(0,1); //Random primary type. Normal = 0, Null = 1
-	$typeString = $primaryType.'|'.$sessionType;
+	$typeString = $primaryType.'|'.$sessionTypePicked;
 	return $typeString;
 }
 
