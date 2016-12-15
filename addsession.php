@@ -4,7 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/accrow.php');
 
 function pickSessionType($userID) {
-	$userRow = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `Users` WHERE `ID` = '$charID';"));
+	$userRow = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `Users` WHERE `ID` = '$userID';"));
 	$hardmodeEnabled = $userRow['completedsession'];	//Is a boolean
 	if ($hardmodeEnabled == 0) {
 		$sessionTypePicked = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `SessionTypes` WHERE `hardmode` = 0 AND `special` = 0 AND `ID` > 3 ORDER BY RAND() LIMIT 1;"));
@@ -28,15 +28,15 @@ if ($sessionName == '' || $sessionName == null) {
 	    echo '<div class="container"><div class="alert alert-danger" role="alert">You must name your session.</div></div>';
 } else {
 	$nameCheck = mysqli_query($connection, "SELECT `ID` FROM `Sessions` WHERE `name` = '$sessionName';");
-	if (mysqli_num_rows($emailCheck) > 0) {
+	if (mysqli_num_rows($nameCheck) > 0) {
         echo '<div class="container"><div class="alert alert-danger" role="alert">This session name is already in use.</div></div>';
 	} elseif ($sessionPassword != $confPass || empty($sessionPassword)) {
         echo '<div class="container"><div class="alert alert-danger" role="alert">Passwords didn\'t match.</div></div>';
     } else {
     	$sessionType = pickSessionType($userCreating);
-    	$hashedPass = password_hash($sessionPassword);
+    	$hashedPass = password_hash($sessionPassword, PASSWORD_DEFAULT);
     	mysqli_query($connection, "INSERT INTO `Sessions` (name, creator, password, type) VALUES ($sessionName, $userCreating, $hashedPass, $sessionType);");
-    	echo '<div class="container"><div class="alert alert-success" role="alert">Success! Check your email for a validation key.</div></div>';
+    	echo '<div class="container"><div class="alert alert-success" role="alert">Success!</div></div>';
     }
 }
 ?>
