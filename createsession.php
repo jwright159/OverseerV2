@@ -20,11 +20,11 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 </script>
 <div class="container">
     <p>Create a session!</p>
-    <form role="form" class="form-horizontal" id="SessionForm" action="addaccount.php" method="post">
+    <form role="form" class="form-horizontal" id="SessionForm" action="addsession.php" method="post">
         <div class="form-group">
             <label class="control-label col-sm-2" for="sessionName">Session Name: </label>
             <div class="col-sm-3">
-                <input id="email" name="email" class="form-control" type="text" />
+                <input id="sessionName" name="sessionName" class="form-control" type="text" />
             </div>
         </div>
         <div class="form-group">
