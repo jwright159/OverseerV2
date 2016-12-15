@@ -30,7 +30,7 @@ if ($sessionName == '' || $sessionName == null) {
 	$nameCheck = mysqli_query($connection, "SELECT `ID` FROM `Sessions` WHERE `name` = '$sessionName';");
 	if (mysqli_num_rows($emailCheck) > 0) {
         echo '<div class="container"><div class="alert alert-danger" role="alert">This session name is already in use.</div></div>';
-	} elseif ($password != $passwordConfirm || empty($password)) {
+	} elseif ($sessionPassword != $confPass || empty($sessionPassword)) {
         echo '<div class="container"><div class="alert alert-danger" role="alert">Passwords didn\'t match.</div></div>';
     } else {
     	$sessionType = pickSessionType($userCreating);
