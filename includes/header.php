@@ -9,7 +9,7 @@ if (empty($_SESSION['username'])) {
     }
 }
 
-if (!empty($_SESSION['username']) && empty($_SESSION['character'])) {
+if (!empty($_SESSION['username']) && empty($_SESSION['charID'])) {
 	header('Location: /charselect.php');
 	exit();
 }
