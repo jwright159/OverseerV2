@@ -9,10 +9,10 @@ if (empty($_SESSION['username'])) {
     }
 }
 
-if (!empty($_SESSION['username']) && empty($_SESSION['character'])) {
+/*if (!empty($_SESSION['username']) && empty($_SESSION['character'])) {
 	header('Location: /charselect.php');
 	exit();
-}
+}*/
 
 // Fantastic code for tracking page loading time
 $loadtime = explode(' ', microtime()); $loadtime = $loadtime[1] + $loadtime[0];
