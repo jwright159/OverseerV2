@@ -1,0 +1,4 @@
+div.healthvial{ width:200px; margin-top:10px;  height:60px; border:1px solid black; font-family:arial; text-align:center; float:left;}
+
+div.landselect_wrapper{width:360px; border: 1px solid black; min-height:60px; padding-left:20px; padding-right:20px; padding-top:5px;}
+input.landselectbutton{width:100px; height:50px; float:right; white-space: normal; }

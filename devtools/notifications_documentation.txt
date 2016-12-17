@@ -1,0 +1,26 @@
+##NOTIFICATIONS SYSTEM DOCUMENTATION
+
+##INSTALLATION
+ALTER TABLE Characters ADD notifications LONGTEXT NOT NULL;
+ALTER TABLE Characters ADD notif_history LONGTEXT NOT NULL;
+
+##HOW TO USE
+
+notifySession(the sender's charrow, 'message'). Notifies your session mates. Customize the message as you see fit.
+Check addcharacter.php for an example.
+
+notifyCharacter(the receiver's character **ID**, 'message'). Notifies a single character. Important to note this shouldn't be used when it can be spammed.
+
+notifyCharacterOnce(the sender's charrow, the receiver's character ID, 'message'). Notifies a single character and checks for uniqueness.
+
+You don't need to check for duplicates yourself, the function handles that and will only send any specific message once.
+
+
+#FULLY IMPLEMENTED IN 
+-GristWire
+-Session Admin 
+-SBURB Server
+-Enter (global)
+-After beating a denizen (global)
+-After deleting/creating a character (global)
+-After assisting a player (only leader gets notified)

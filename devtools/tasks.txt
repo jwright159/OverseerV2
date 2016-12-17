@@ -1,0 +1,70 @@
+To complete this release:
+- [IMPORTANT] Remove dungeon enemies left when exiting it.
+- Add Magnetic ability (affects metallic grist underlings. "affects", and "metallic" up for debate)
+- Temporary boosts for aspect patterns
+- Two missing Denizen abilities (Hephaestus and ?Nix?)
+- Generally sort out Denizen fights so that they are not trivial
+-- Add no assisting provision
+-- Add "empty effects field" provision
+- One missing tier II fraymotif (Hope II)
+- multiple abstrati
+- abstratus resets (conditional, maybe ignore and just allow people to get new ones)
+- Add a flag to the database that, if set, stops anyone with a mod level of less than 99 from accessing the game
+- Rogue roletech: Siphon, but distributes boosts out instead of holding them for self
+- Add the stock exchange? (If there's time)
+- Fix issue: Metis spamming invuln and not doing anything else, also damaging through high power maybe??
+- Fix Art Submitter interface
+- Add random session feature
+- Add a character per account limit (something like 12)
+
+Random events:
+- <insert carapace here> acquires BQ's ring. They appear in random strifes throughout the session, have a suite of standard abilities plus one or two specifics to whoever they actually are
+- <insert carapace here> acquires BK's scepter. They replace the final boss, same story
+- WK dies unexpectedly. Everyone gets Battlefield access instantly, and you sorry people have 24 hours to coordinate a BK fight.
+-- Only possible if everyone is max rung
+-- Might be part of a bigger system that tracks the Battlefields status and assigns a chance to it based on how that is going
+- Timeline Madness: A copy of the session's Time player shows up and goes berserk for reasons unknown (hint: they came from a doomed timeline and bad things happened there). Only occurs in sessions with a Time player.
+- Session glitches out (The Bug shows up, GLITCHED statuses everywhere, stuff gets replaced with 44444444 - ERROR CODE)
+- Characters become aware of their nature as characters in a video game. High correlation with glitched-out session.
+- Someone gets their hands on a Trickster Juju. Don't ask how.
+- The Dersites decide to raid someone's Land. Battleships fly over there and shit happens
+- Something with grimdark maybe?
+-- autopilot actions are kinda tricky. I'd rather feed the affected player misinformation so they do stupid things.
+-- (Indeed, the fun part might even be not notifying them they've gone grimdark but having it apparent to other players)
+- Battlefield Rebellion. Not sure of effects.
+
+Current list of to-do tasks:
+- Make items print out their abilities
+-- This can be done by having them print the status display they inflict
+-- e.g. "This item inflicts: Timestop: <Timestop message in displayfunctions.php>"
+- Look into dungeon multiplayer
+- "aspect" consumable tag that makes it only usable by people with a certain Aspect.
+- Second Mind roletech, maybe
+- MediaWiki wiki
+-- Already done, I need kitty or thellere to fix the image bugs and give Makin privileges, and it'll be ready to go live
+- Session randomizer
+- message system?
+- mass item dropper
+- Is there any way to edit items you have submitted the item creator page suggested as such
+- auto-captchalogue option for alchemized items
+- mass alchemy
+- view wearable stats
+- the grist type tiers should be shown in the quick item creator
+- holopad functionality somewhere
+- Better streamlining for turning quick-created items into "real" ones.
+- please please PLEASE include search buttons in captchaloguing from storage and item catalog
+- Multiple submissions per player
+- Storage page?
+- Denizen Dungeon
+- Make the Saigyouji Fan not suck
+- SOMETHING to make aspect patterns less overpoweringly good against bosses
+- Ideas for ways to fix the inventory while still keeping the cool new look:
+-- Make the box horizontal instead of vertical.?
+
+To investigate:
+- I think there may be something wrong with the punch designix sburb item.
+- I have it in my storage in one of my sessions, and it doesn't show up on the SBURB Client page as a usable item.
+- In another session, I tried to deploy it to my client, and the error message given was "Deploy failed: client lacks the required ."
+- As a result, canon alchemy is totally busted.
+-- ddsp reports that this is due to "7 grist" issues.
+-- Additionally, there's no code for using the designix in the first place!

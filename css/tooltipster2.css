@@ -1,0 +1,15 @@
+/* This is how you would create a theme called "my-custom-theme": */
+
+.my-custom-theme {
+	border-radius: 5px; 
+	border: 2px solid #C1C1C1;
+	background: #D6D6D6;
+	color: #000;
+}
+/* Use this next selector to style things like font-size and line-height: */
+.my-custom-theme .tooltipster-content {
+	font-family: "Courier New", Arial, sans-serif;
+	font-size: 14px;
+	line-height: 16px;
+	padding: 8px 10px;
+}
