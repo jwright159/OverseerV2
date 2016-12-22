@@ -5,10 +5,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
     $(document).ready(function() {
         $('#RegisterForm').submit(function(event) { // catch the form's submit event
             event.preventDefault();
-            $.ajax('addaccount.php',{ // Do it
+            $.ajax('forms/addaccount.php',{ // Do it
                 data: $(this).serialize(), // Gets form Data
                 type: 'POST', // GET or POST
-                url: $(this).attr('addaccount.php'), //Calls the file
+                url: $(this).attr('forms/addaccount.php'), //Calls the file
                 success: function(response) {// on success..
                     console.log(response.substr(0,10));
                     $('#DisplayDiv').html(response); // update the DIV
@@ -20,7 +20,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 </script>
 <div class="container">
     <p>Register an account!</p>
-    <form role="form" class="form-horizontal" id="RegisterForm" action="addaccount.php" method="post">
+    <form role="form" class="form-horizontal" id="RegisterForm" action="forms/addaccount.php" method="post">
         <div class="form-group">
             <label class="control-label col-sm-2" for="email">E-mail address: </label>
             <div class="col-sm-3">

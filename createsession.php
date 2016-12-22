@@ -5,10 +5,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
     $(document).ready(function() {
         $('#SessionForm').submit(function(event) { // catch the form's submit event
             event.preventDefault();
-            $.ajax('addsession.php',{ // Do it
+            $.ajax('forms/addsession.php',{ // Do it
                 data: $(this).serialize(), // Gets form Data
                 type: 'POST', // GET or POST
-                url: $(this).attr('addsession.php'), //Calls the file
+                url: $(this).attr('forms/addsession.php'), //Calls the file
                 success: function(response) {// on success..
                     console.log(response.substr(0,10));
                     $('#DisplayDiv').html(response); // update the DIV
@@ -20,7 +20,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 </script>
 <div class="container">
     <p>Create a session!</p>
-    <form role="form" class="form-horizontal" id="SessionForm" action="addsession.php" method="post">
+    <form role="form" class="form-horizontal" id="SessionForm" action="forms/addsession.php" method="post">
         <div class="form-group">
             <label class="control-label col-sm-2" for="sessionName">Session Name: </label>
             <div class="col-sm-3">
