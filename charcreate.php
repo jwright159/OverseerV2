@@ -10,7 +10,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
             <label class="control-label col-sm-2" for="species">Species</label>
                 <label class="radio-inline"><input type="radio" checked="checked" name="species" value="0">Human</label>
 				<label class="radio-inline"><input type="radio" name="species" value="1">Troll</label>
-            </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="characterName">Character Name: </label>
