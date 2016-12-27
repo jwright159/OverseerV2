@@ -15,25 +15,25 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
         <div class="form-group">
             <label class="control-label col-sm-2" for="characterName">Character Name: </label>
             <div class="col-sm-3">
-                <input id="characterName" name="characterName" class="form-control" type="text" />
+                <input id="characterName" name="characterName" class="form-control" type="text" /><br>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="chumHandle">Trollian/Pesterchum Handle: </label>
             <div class="col-sm-3">
-                <input id="chumHandle" name="chumHandle" class="form-control" type="text" />
+                <input id="chumHandle" name="chumHandle" class="form-control" type="text" /><br>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="sessionName">Session Name: </label>
             <div class="col-sm-3">
-                <input id="sessionName" name="sessionName" class="form-control" type="text" />
+                <input id="sessionName" name="sessionName" class="form-control" type="text" /><br>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="sessionPass">Session Password: </label>
             <div class="col-sm-3">
-                <input id="sessionPass" name="sessionPass" class="form-control" maxlength="50" type="password" />
+                <input id="sessionPass" name="sessionPass" class="form-control" maxlength="50" type="password" /><br>
             </div>
         </div>
         <div class="form-group">
