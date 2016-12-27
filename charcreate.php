@@ -7,7 +7,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 	<h1>Create a Character!</h1>
 	<form role="form" class="form-horizontal" id="SessionForm" action="charcreate2.php" method="post">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="species">
+            <label class="control-label col-sm-2" for="species">Species</label>
                 <label class="radio-inline"><input type="radio" checked="checked" name="species" value="0">Human</label>
 				<label class="radio-inline"><input type="radio" name="species" value="1">Troll</label>
             </div>
