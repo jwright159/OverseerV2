@@ -5,10 +5,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
     $(document).ready(function() {
         $('#LoginForm').submit(function(event) { // catch the form's submit event
             event.preventDefault();
-            $.ajax('dologin.php',{ // Do it
+            $.ajax('forms/dologin.php',{ // Do it
                 data: $(this).serialize(), // Gets form Data
                 type: 'POST', // GET or POST
-                url: $(this).attr('dologin.php'), //Calls the file
+                url: $(this).attr('forms/dologin.php'), //Calls the file
                 success: function(response) {// on success..
                     console.log(response.substr(0,10));
                     $('#DisplayDiv').html(response); // update the DIV
