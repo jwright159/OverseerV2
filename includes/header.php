@@ -25,7 +25,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/accrow.php');
 $maintResult = mysqli_query($connection, "SELECT * FROM `System` WHERE `Index` = '0';");
 $maintRow = mysqli_fetch_array($maintResult);
 $maint = $maintRow['maint'];
-if ($maint != 0 && $accountRow['modlevel'] < 99) { ?>
+if ($maint != 0 && $accountRow['modlevel'] < 99 && !stripos($_SERVER['REQUEST_URI'], 'login.php')) { ?>
   <style>
     h1 {text-align:center;}
     p {text-align:center;}
@@ -33,7 +33,7 @@ if ($maint != 0 && $accountRow['modlevel'] < 99) { ?>
   <title> Overseer v2</title>
   <h1> Overseer v2 is currently 
 <?php
-  if ($maint == 1 && $accountRow['modlevel'] < 10) {
+  if ($maint == 1 && $accountRow['modlevel'] < 10 && !stripos($_SERVER['REQUEST_URI'], 'login.php')) {
     echo 'in VIP Mode!</h1><p>This means that we\'re almost done, and just testing a few things.</p>';
   } elseif ($maint == 2) {
     echo 'down for maintenance!</h1>';
