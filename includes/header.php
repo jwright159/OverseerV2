@@ -22,6 +22,27 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/accrow.php');
 
+$maintResult = mysqli_query($connection, "SELECT * FROM `System` WHERE `Index` = '0';");
+$maintRow = mysqli_fetch_array($maintResult);
+$maint = $maintRow['maint'];
+if ($maint != 0 && $accountRow['modlevel'] < 99) { ?>
+  <style>
+    h1 {text-align:center;}
+    p {text-align:center;}
+  </style> 
+  <title> Overseer v2</title>
+  <h1> Overseer v2 is currently 
+<?php
+  if ($maint == 1 && $accountRow['modlevel'] < 10) {
+    echo 'in VIP Mode!</h1><p>This means that we\'re almost done, and just testing a few things.</p>';
+  } elseif ($maint == 2) {
+    echo 'down for maintenance!</h1>';
+  } ?>
+  <p>For more info, and live updates, feel free to join the official <a href="https://discord.gg/NgcS29n">Discord server</a> using either your browser, or the app! </p> <?php
+  exit();
+  }
+?>
+
 
 ?>
 
