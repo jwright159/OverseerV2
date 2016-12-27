@@ -1,2 +1,3 @@
-</div>
-This is a footer.
+		This is a footer.
+	</body>
+</html>
