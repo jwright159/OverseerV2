@@ -43,9 +43,6 @@ if ($maint != 0 && $accountRow['modlevel'] < 99 && !stripos($_SERVER['REQUEST_UR
   }
 ?>
 
-
-?>
-
 <!DOCTYPE html>
 <title>Overseer 2</title>
 <head>
