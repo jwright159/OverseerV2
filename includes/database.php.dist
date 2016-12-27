@@ -12,7 +12,8 @@ $conn_pass = '';
 // Database, er, uhm, database!
 $conn_db = '';
 
-
+// System table row index
+$system_index = 0;
 
 ////////////////////////////////////////////
 // and the actual reason this file exists //

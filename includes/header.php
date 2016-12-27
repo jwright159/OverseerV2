@@ -22,7 +22,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/accrow.php');
 
-$maintResult = mysqli_query($connection, "SELECT * FROM `System` WHERE `Index` = '0';");
+$maintResult = mysqli_query($connection, "SELECT * FROM `System` WHERE `Index` = '$system_index';");
 $maintRow = mysqli_fetch_array($maintResult);
 $maint = $maintRow['maint'];
 if ($maint != 0 && $accountRow['modlevel'] < 99 && !stripos($_SERVER['REQUEST_URI'], 'login.php')) { ?>
