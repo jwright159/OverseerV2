@@ -12,6 +12,13 @@ function initGrists() { //compiles an array with all grists in the game
 }
 
 function showTraitArt($traitID) { // Pass a Trait ID to this and it'll show the art. 
-	return "/images/art/traits/" .$traitID. ".png"; // If we're not using PNG we're doing it wrong. 
-	// It's the responsibility of the code calling this to set the right dimensions!
+	global $connection;
+	$traitArtResult = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `Traits` WHERE `id` = '$traitID' LIMIT 1;"));
+	$traitArt = $traitArtResult['art'];
+	if ($traitArt != null || $traitArt != '') {
+		return "/images/art/traits/" .$traitID. ".png"; // If we're not using PNG we're doing it wrong. 
+		// It's the responsibility of the code calling this to set the right dimensions!
+	} else {
+		return "/images/art/traits/noart.png";
+	}
 }
