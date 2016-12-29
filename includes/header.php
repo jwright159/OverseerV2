@@ -41,12 +41,12 @@ if ($maint != 0 && $accountRow['modlevel'] < 99 && !stripos($_SERVER['REQUEST_UR
 	<body>
 		<?php
 			if ($maint == 1 && $accountRow['modlevel'] < 10) {
-				echo '<h1>Overseer v2 is currently in VIP Mode!</h1>';
+				echo '<h1>Overseer v2.5 is currently in VIP Mode!</h1>';
 			} elseif ($maint == 2) {
-				echo '<h1>Overseer v2 is currently down for maintenance!</h1>';
+				echo '<h1>Overseer v2.5 is currently down for maintenance!</h1>';
 			}
 			// discord widget
-			echo '<div style="float:right; margin-right:4vw; margin-left:2vw;"><iframe src="https://discordapp.com/widget?id=76431126977064960&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe></div>';
+			echo '<div style="float:right; margin-right:1vw; margin-left:2vw;"><iframe src="https://discordapp.com/widget?id=76431126977064960&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe></div>';
 			if ($maint == 1 && $accountRow['modlevel'] < 10) {
 				echo '<p>This means that we\'re almost done, and just testing a few things.</p>';
 			}
