@@ -9,8 +9,8 @@ if (!empty($_SESSION['username'])) {
 		$characterRow = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `Characters` WHERE `ID` = " . $_SESSION['character'] . " LIMIT 1;"));
 		if ($characterRow['owner'] != $accountRow['ID']) {
 			echo "ERROR: You tried to select a character that doesn't belong to you!";
-			$_SESSION['character'] = 0; //reset character
-			$characterRow = array(); //blank the character row
+			unset($_SESSION['character']); //reset character
+			unset($characterRow); //blank the character row
 		} else {
 			$characterID = $characterRow['ID'];
 		}

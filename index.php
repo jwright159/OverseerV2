@@ -21,12 +21,19 @@ if (!isset($accountRow)) {
 		<li><a href="charcreate.php">Create character</a></li>
 		<li><a href="logout.php">Logout</a></li>
 	</ul>
-	
+
 	<?php
 	if (!isset($characterRow)) {
 		echo "<p>You have no character selected.</p>";
+		echo "<p>Your characters:<ul>";
+
+		$charsQuery = mysqli_query($connection, "SELECT `name`, `ID` FROM `Characters` WHERE `owner` = '$accountRow[ID]';");
+		while($char = mysqli_fetch_array($charsQuery)) {
+			echo '<li>' . $char['name'] . ': <a href="forms/selchar.php?id='.$char['ID'].'">select</a>.</li>';
+		}
+		echo "</ul>";
 	} else {
-		echo "<p>You have " . $characterName['name'] . " selected.</p>";
+		echo "<p>You have selected " . $characterRow['name'] . '. <a href="forms/selchar.php">Unselect</a>.</p>';
 	}
 }
 
