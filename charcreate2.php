@@ -16,7 +16,7 @@ if (empty($characterName) || $species == null || empty($chumHandle) || empty($se
     if (mysqli_num_rows($sessionCheck) > 0) {
     	$sessionRow = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `Sessions` WHERE `name` = '$sessionName';"));
     	$sessionID = $sessionRow['id'];
-		$correctPass = password_verify($password, $userRow['password']);
+		$correctPass = password_verify($password, $sessionRow['password']);
 		if ($correctPass) {
 			$charnameCheck = mysqli_query($connection, "SELECT * FROM `Characters` WHERE `name` = '$characterName' AND `session` = '$sessionID';");
 			if (mysqli_num_rows($charnameCheck) == 0) {
