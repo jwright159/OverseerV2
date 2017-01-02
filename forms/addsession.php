@@ -53,4 +53,3 @@ if ($sessionName == '' || $sessionName == null) {
 		echo '<div class="container"><div class="alert alert-success" role="alert">Success! Please make sure you\'re the first member of your session to ensure you get admin privileges.</div></div>';
 	}
 }
-?>

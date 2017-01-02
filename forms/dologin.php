@@ -15,6 +15,6 @@ if(mysqli_num_rows($userResult) == 0){
 		$_SESSION['userID'] = $userRow['ID'];
 		$_SESSION['username'] = $userRow['username'];
 	} else { 
-	echo '<div class="container"><div class="alert alert-warning" role="alert">Error: Invalid username/password combination</div></div><br>';
+		echo '<div class="container"><div class="alert alert-warning" role="alert">Error: Invalid username/password combination</div></div><br>';
 	}
 }

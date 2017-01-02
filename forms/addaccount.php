@@ -14,9 +14,9 @@ function sendValidationEmail($mailto, $user, $confKey) {
 	\n
 	Regards, the v2 Team";
 
-    $headers = 'From: no-reply@overseer2.com' . "\r\n" .
-    'Reply-To: no-reply@overseer2.com' . "\r\n" .
-    'X-Mailer: PHP/' . phpversion();
+	$headers = 'From: no-reply@overseer2.com' . "\r\n" .
+	'Reply-To: no-reply@overseer2.com' . "\r\n" .
+	'X-Mailer: PHP/' . phpversion();
 	mail($mailto, $subject, $message, $headers); 
 }
 
@@ -32,28 +32,28 @@ $email = strtolower($email);
 $emailConfirm = strtolower($emailConfirm);
 
 if ($_POST['tos'] != "yes") {
-    echo '<div class="container"><div class="alert alert-danger" role="alert">You haven\'t accepted the conditions.</div></div>';
+	echo '<div class="container"><div class="alert alert-danger" role="alert">You haven\'t accepted the conditions.</div></div>';
 } else {
-    $emailCheck = mysqli_query($connection, "SELECT `ID` FROM `Users` WHERE `email` = '$email';");
-    if (mysqli_num_rows($emailCheck) > 0) {
-        echo '<div class="container"><div class="alert alert-danger" role="alert">This email is already registered.</div></div>';
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo '<div class="container"><div class="alert alert-danger" role="alert">This email is invalid.</div></div>';
-    } elseif ($email != $emailConfirm || empty($email)) {
-        echo '<div class="container"><div class="alert alert-danger" role="alert">E-mails didn\'t match.</div></div>';
-    } elseif ($password != $passwordConfirm || empty($password)) {
-        echo '<div class="container"><div class="alert alert-danger" role="alert">Passwords didn\'t match.</div></div>';
-    } else {
-        $usernameCheck = mysqli_query($connection, "SELECT `ID` FROM `Users` WHERE `username` = '$username';");
-        if (mysqli_num_rows($usernameCheck) > 0) {
-            echo '<div class="container"><div class="alert alert-danger" role="alert">Username taken!</div></div>';
-        } else {
-            $confirmationKey = substr(md5(rand()), 0, 20);
-            $hashedPass = password_hash($password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO `Users` (`username`, `email`, `password`, `confirmationkey`) VALUES ('$username', '$email', '$hashedPass', '$confirmationKey');";
-            mysqli_query($connection, $query);
-            sendValidationEmail($email, $username, $confirmationKey);
-            echo '<div class="container"><div class="alert alert-success" role="alert">Success! Check your email for a validation key.</div></div>';
-        }
-    }
+	$emailCheck = mysqli_query($connection, "SELECT `ID` FROM `Users` WHERE `email` = '$email';");
+	if (mysqli_num_rows($emailCheck) > 0) {
+		echo '<div class="container"><div class="alert alert-danger" role="alert">This email is already registered.</div></div>';
+	} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		echo '<div class="container"><div class="alert alert-danger" role="alert">This email is invalid.</div></div>';
+	} elseif ($email != $emailConfirm || empty($email)) {
+		echo '<div class="container"><div class="alert alert-danger" role="alert">E-mails didn\'t match.</div></div>';
+	} elseif ($password != $passwordConfirm || empty($password)) {
+		echo '<div class="container"><div class="alert alert-danger" role="alert">Passwords didn\'t match.</div></div>';
+	} else {
+		$usernameCheck = mysqli_query($connection, "SELECT `ID` FROM `Users` WHERE `username` = '$username';");
+		if (mysqli_num_rows($usernameCheck) > 0) {
+			echo '<div class="container"><div class="alert alert-danger" role="alert">Username taken!</div></div>';
+		} else {
+			$confirmationKey = substr(md5(rand()), 0, 20);
+			$hashedPass = password_hash($password, PASSWORD_DEFAULT);
+			$query = "INSERT INTO `Users` (`username`, `email`, `password`, `confirmationkey`) VALUES ('$username', '$email', '$hashedPass', '$confirmationKey');";
+			mysqli_query($connection, $query);
+			sendValidationEmail($email, $username, $confirmationKey);
+			echo '<div class="container"><div class="alert alert-success" role="alert">Success! Check your email for a validation key.</div></div>';
+		}
+	}
 }

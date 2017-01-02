@@ -13,20 +13,19 @@ if (empty($characterName) || $species == null || empty($chumHandle) || empty($se
 } else {	
 // Verify session exists
 	$sessionCheck = mysqli_query($connection, "SELECT * FROM `Sessions` WHERE `name` = '$sessionName';");
-    if (mysqli_num_rows($sessionCheck) > 0) {
-    	$sessionRow = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `Sessions` WHERE `name` = '$sessionName';"));
-    	$sessionID = $sessionRow['id'];
+	if (mysqli_num_rows($sessionCheck) > 0) {
+		$sessionRow = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `Sessions` WHERE `name` = '$sessionName';"));
+		$sessionID = $sessionRow['id'];
 		$correctPass = password_verify($password, $sessionRow['password']);
 		if ($correctPass) {
 			$charnameCheck = mysqli_query($connection, "SELECT * FROM `Characters` WHERE `name` = '$characterName' AND `session` = '$sessionID';");
 			if (mysqli_num_rows($charnameCheck) == 0) {
 				$chumHandleCheck = mysqli_query($connection, "SELECT * FROM `Characters` WHERE `chumhandle` = '$chumHandle' AND `session` = $sessionID';");
-				    if (mysqli_num_rows($chumHandleCheck) > 0) {
-				    	echo 'Chumhandle taken in this session!';
-				    } else {
-				    	// Set session vars and display the rest of the page. 
-				    }
-
+				if (mysqli_num_rows($chumHandleCheck) > 0) {
+					echo 'Chumhandle taken in this session!';
+				} else {
+					// Set session vars and display the rest of the page. 
+				}
 			} else {
 				echo 'Character name is taken in this session!';
 			}
@@ -36,5 +35,4 @@ if (empty($characterName) || $species == null || empty($chumHandle) || empty($se
 	} else {
 		echo 'Session doesn\'t exist!';
 	}
-
 }

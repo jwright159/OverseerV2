@@ -46,16 +46,16 @@ if ($maint != 0 && $accountRow['modlevel'] < 99 && !stripos($_SERVER['REQUEST_UR
 	</head>
 	<body>
 		<?php
-			if ($maint == 1 && $accountRow['modlevel'] < 10) {
-				echo '<h1>Overseer v2.5 is currently in VIP Mode!</h1>';
-			} elseif ($maint == 2) {
-				echo '<h1>Overseer v2.5 is currently down for maintenance!</h1>';
-			}
-			// discord widget
-			echo '<div style="float:right; margin-right:1vw; margin-left:2vw;"><iframe src="https://discordapp.com/widget?id=76431126977064960&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe></div>';
-			if ($maint == 1 && $accountRow['modlevel'] < 10) {
-				echo '<p>This means that we\'re almost done, and just testing a few things.</p>';
-			}
+		if ($maint == 1 && $accountRow['modlevel'] < 10) {
+			echo '<h1>Overseer v2.5 is currently in VIP Mode!</h1>';
+		} elseif ($maint == 2) {
+			echo '<h1>Overseer v2.5 is currently down for maintenance!</h1>';
+		}
+		// discord widget
+		echo '<div style="float:right; margin-right:1vw; margin-left:2vw;"><iframe src="https://discordapp.com/widget?id=76431126977064960&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe></div>';
+		if ($maint == 1 && $accountRow['modlevel'] < 10) {
+			echo '<p>This means that we\'re almost done, and just testing a few things.</p>';
+		}
 		?>
 		<p>For more info, and live updates, feel free to join the official <a href="https://discord.gg/NgcS29n">Discord server</a> using either your browser, or the app!</p>
 		<p><a href="/login.php">Login</a></p>
