@@ -23,6 +23,12 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/accrow.php');
 
+if (isset($pageTitle)) {
+	$title = $pageTitle.' - Overseer v2';
+} else {
+	$title = 'Overseer v2';
+}
+
 $maintResult = mysqli_query($connection, "SELECT * FROM `System` WHERE `Index` = '$system_index';");
 $maintRow = mysqli_fetch_array($maintResult);
 $maint = $maintRow['maint'];
@@ -64,7 +70,7 @@ if ($maint != 0 && $accountRow['modlevel'] < 99 && !stripos($_SERVER['REQUEST_UR
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Overseer 2</title>
+		<title><?php echo $title; ?></title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="includes/css/bootstrap.min.css">
