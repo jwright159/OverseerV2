@@ -5,6 +5,9 @@ composer.phar
 ### Vagrant ###
 .vagrant/
 
+### PHPStorm ###
+.idea/
+
 ##### TEXT EDITORS #####
 ### SublimeText ###
 # cache files for sublime text
