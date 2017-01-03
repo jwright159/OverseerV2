@@ -1,10 +1,17 @@
 // HTML elements are global.
-var draw = document.getElementById("canvas").getContext("2d");
+var canvas = document.getElementById("canvas")
+var draw = canvas.getContext("2d");
 var work = document.getElementById("working");
-// loads image, but doesn't actually. it makes an invisible temporary image with the source so that the browser downloads it, but it doesn't block until the image is downloaded.
-// make sure to add a .onload hook to the returned object, it'll call it when it's done.
+
+// The big thing. Defining one of these will start the game with the specified map.
+// Metadata will presumably be attached to the map, later.
 function game(map) {
 	// Stores game specific variables.
+	// Set proper canvas resolution for pov.
+	var canvas= document.getElementById("canvas");
+	canvas.height=map.tilesize*16;
+	canvas.width=map.tilesize*16;	
+	// Init variables
 	this.map=map;
 	this.yoffset=0;
 	this.xoffset=0;
@@ -24,12 +31,14 @@ function game(map) {
 		// Rendering...
 		window.draw.putImageData(this.map,this.xoffset,this.yoffset);
 		if (this.keys["w"] && this.yoffset<0) this.yoffset++;
-		if (this.keys["s"] && this.yoffset>-map.height+canvas.clientHeight) this.yoffset--;
+		if (this.keys["s"] && this.yoffset>-map.height+canvas.height) this.yoffset--;
 		if (this.keys["a"] && this.xoffset<0) this.xoffset++;
-		if (this.keys["d"] && this.xoffset>-map.height+canvas.clientWidth) this.xoffset--;
+		if (this.keys["d"] && this.xoffset>-map.height+canvas.width) this.xoffset--;
 	}.bind(this);
 	window.setInterval(this.tick,12);
 }
+// loads image, but doesn't actually. it makes an invisible temporary image with the source so that the browser downloads it, but it doesn't block until the image is downloaded.
+// make sure to add a .onload hook to the returned object, it'll call it when it's done.
 function loadimage(uri) {
 	img = document.createElement("img");
 	img.style="display:none";
@@ -67,7 +76,8 @@ function genmap(tiles,map) {
 	pic = drawer.getImageData(0,0,work.width,work.height);
 	pic.width=work.width;
 	pic.height=work.height;
-	return drawer.getImageData(0,0,work.width,work.height);
+	pic.tilesize=tiles.size;
+	return pic;
 }
 // temporary function
 function randommap(tiles,size) {
