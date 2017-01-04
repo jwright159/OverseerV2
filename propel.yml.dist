@@ -1,4 +1,6 @@
 propel:
+  paths:
+    outputDir: build/orm/
   database:
     connections:
       default:
