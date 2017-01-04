@@ -1,5 +1,7 @@
 <?php
 
+require($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php'); // Run Composer's autoloader.
+
 session_start(); // Session begin. Pages utilising the header don't need to repeat this.
 
 if (empty($_SESSION['username'])) {
