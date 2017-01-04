@@ -1,6 +1,10 @@
 propel:
   paths:
-    outputDir: build/orm/
+    outputDir: build/orm
+    phpDir: build/orm/classes
+    phpConfDir: build/orm/conf
+    migrationDir: build/orm/migrations
+    sqlDir: build/orm/sql
   database:
     connections:
       default:
@@ -10,6 +14,9 @@ propel:
         password: overseer
         settings:
           charset: utf8
+  generator:
+    schema:
+      autoPackage: true
 
 ## Copy the following into `propel.yml` on the server, with proper db and credentials.
 ## **DO THIS BEFORE RUNNING ANY BUILD TASKS.**
