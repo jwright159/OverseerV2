@@ -3,6 +3,10 @@
         "propel/propel": "~2.0@dev"
     },
 
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^2.7"
+    },
+
     "autoload": {
         "psr-0": {
             "Overseer\\Models\\": "build/orm/classes"
