@@ -1,5 +1,11 @@
 {
     "require": {
         "propel/propel": "~2.0@dev"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "Overseer\\Models\\": "build/orm/classes"
+        }
     }
 }
