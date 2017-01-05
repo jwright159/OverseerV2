@@ -1,19 +1,30 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/includes/global_functions.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/includes/database.php");
-if (!empty($_SESSION['username'])) {
-	$username = $_SESSION['username'];
-	$accountRow = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `Users` WHERE `username` = '" . $_SESSION['username'] . "' LIMIT 1;"));
-	$_SESSION['userID'] = $accountRow['ID'];
-	if (!empty($_SESSION['character'])) {
-		$characterRow = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `Characters` WHERE `ID` = " . $_SESSION['character'] . " LIMIT 1;"));
-		if ($characterRow['owner'] != $accountRow['ID']) {
+/*
+ * Hydrate the request-global $user variable from the DB.
+ * Uses $_SESSION['uid'] to do so. This session variable should be set on login.
+ */
+
+use Overseer\Models\CharacterQuery;
+use Overseer\Models\UserQuery;
+
+if (!empty($_SESSION['user_id'])) {
+	$uid = $_SESSION['user_id'];
+
+	// fetch the user object from the db
+	$user = UserQuery::create()->findPK($uid); // findPK = find by primary key = find by id (since User's pk = `id`)
+	$_SESSION['username'] = $user->getUsername();
+
+	if (!empty($_SESSION['character_id'])) {
+		$cid = $_SESSION['character_id'];
+
+		$character = CharacterQuery::create()->findPK($cid);
+		if ($character->getOwner() !== $user) {
+			// TODO: replace with a real error flash
 			echo "ERROR: You tried to select a character that doesn't belong to you!";
-			unset($_SESSION['character']); //reset character
-			unset($characterRow); //blank the character row
-		} else {
-			$characterID = $characterRow['ID'];
+
+			// wipe the character out of the request and session
+			unset($_SESSION['character']);
+			unset($character);
 		}
-		$time = time();
 	}
 }
