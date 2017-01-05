@@ -31,7 +31,7 @@
         <column name="user_id" type="integer" required="true" />
         <column name="session_id" type="integer" required="true" />
 
-        <foreign-key foreignTable="users">
+        <foreign-key foreignTable="users" phpName="Owner">
             <reference local="user_id" foreign="id" />
         </foreign-key>
         <foreign-key foreignTable="sessions">
