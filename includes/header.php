@@ -1,6 +1,5 @@
 <?php
-
-require($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php'); // Run Composer's autoloader.
+require_once __DIR__."/bootstrap.php";
 
 session_start(); // Session begin. Pages utilising the header don't need to repeat this.
 
@@ -20,10 +19,6 @@ if (empty($_SESSION['username'])) {
 // Fantastic code for tracking page loading time
 $loadtime = explode(' ', microtime()); $loadtime = $loadtime[1] + $loadtime[0];
 
-// All of our required things for running this show
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/accrow.php');
 
 if (isset($pageTitle)) {
 	$title = $pageTitle.' - Overseer v2';
