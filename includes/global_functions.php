@@ -32,3 +32,10 @@ function requires_login() {
 		exit();
 	}
 }
+
+/*
+ * Just syntactic sugar for header('Location: $someurl').
+ */
+function redirect_to($url) {
+	header("Location: $url");
+}
