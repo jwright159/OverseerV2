@@ -75,4 +75,4 @@ if ($maint != 0 && $accountRow['modlevel'] < 99 && !stripos($_SERVER['REQUEST_UR
 	</head>
 
 		<body>
-			This is a header.
+			<div>This is a header.</div>
