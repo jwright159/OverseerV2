@@ -1,7 +1,6 @@
 <?php
-require_once __DIR__."/bootstrap.php";
-
 session_start(); // Session begin. Pages utilising the header don't need to repeat this.
+require_once __DIR__."/bootstrap.php";
 
 if (empty($_SESSION['username'])) {
 	if (!stripos($_SERVER['REQUEST_URI'], 'resetpass.php') && !stripos($_SERVER['REQUEST_URI'], 'changelog.php') && !stripos($_SERVER['REQUEST_URI'], 'register.php') && !stripos($_SERVER['REQUEST_URI'], 'confirm.php') && !stripos($_SERVER['REQUEST_URI'], 'login.php') && !stripos($_SERVER['PHP_SELF'], 'index.php')) {
