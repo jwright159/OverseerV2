@@ -62,7 +62,7 @@ function getMaintLevel() {
 /*
  * Returns true if a given user has access during maintenance at the level given.
  */
-function hasAccessDuringMaint($maintLevel, User $user) {
+function hasAccessDuringMaint($maintLevel, User $user = null) {
 	if ($maintLevel === 0) {
 		return true;
 	}
