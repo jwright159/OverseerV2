@@ -1,4 +1,6 @@
 <?php 
+use Overseer\Models\SystemParametersQuery;
+
 
 function initGrists() { //compiles an array with all grists in the game
 	global $connection;
@@ -38,4 +40,20 @@ function requires_login() {
  */
 function redirect_to($url) {
 	header("Location: $url");
+}
+
+/*
+ * Returns the instance's current maintenance level.
+ *
+ * Return value: integer, where
+ * 0 - Normal
+ * 1 - VIP Mode
+ * 2 - Full maintenance
+ */
+function getMaintLevel() {
+	$system = SystemParametersQuery::create()->findPK(1);
+	if (!isset($system)) {
+		return 0;
+	}
+	return $system->getMaintenanceLevel();
 }
