@@ -3,7 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 
 echo '<div class="content">';
 
-if (!isset($accountRow)) {
+if (!isset($currentUser)) {
 	echo "<p>You are not logged in.</p>";
 
 	?>
@@ -13,7 +13,7 @@ if (!isset($accountRow)) {
 	</ul>
 	<?php
 } else {
-	echo "<p>You are logged in as " . $accountRow['username'] . ".</p>";
+	echo "<p>You are logged in as <b>" . $currentUser->getUsername() . "</b>.</p>";
 	
 	?>
 	<ul>
@@ -23,17 +23,16 @@ if (!isset($accountRow)) {
 	</ul>
 
 	<?php
-	if (!isset($characterRow)) {
+	if (!isset($currentCharacter)) {
 		echo "<p>You have no character selected.</p>";
 		echo "<p>Your characters:<ul>";
 
-		$charsQuery = mysqli_query($connection, "SELECT `name`, `ID` FROM `Characters` WHERE `owner` = '$accountRow[ID]';");
-		while($char = mysqli_fetch_array($charsQuery)) {
-			echo '<li>' . $char['name'] . ': <a href="forms/selchar.php?id='.$char['ID'].'">select</a>.</li>';
+		foreach ($currentUser->getCharacters() as $char) {
+			echo '<li>' . $char->getName() . ': <a href="forms/selchar.php?id='.$char->getId().'">select</a>.</li>';
 		}
 		echo "</ul>";
 	} else {
-		echo "<p>You have selected " . $characterRow['name'] . '. <a href="forms/selchar.php">Unselect</a>.</p>';
+		echo "<p>You have selected <b>" . $currentCharacter->getName() . '</b>. <a href="forms/selchar.php">Unselect</a>.</p>';
 	}
 }
 

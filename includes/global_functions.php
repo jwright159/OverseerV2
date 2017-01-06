@@ -1,4 +1,7 @@
 <?php 
+use Overseer\Models\User;
+use Overseer\Models\SystemParametersQuery;
+
 
 function initGrists() { //compiles an array with all grists in the game
 	global $connection;
@@ -20,5 +23,59 @@ function showTraitArt($traitID) { // Pass a Trait ID to this and it'll show the 
 		// It's the responsibility of the code calling this to set the right dimensions!
 	} else {
 		return "/images/art/traits/noart.png";
+	}
+}
+
+/*
+ * Run at the top of a page to make it redirect to `/` if there isn't an active user session
+ */
+function requires_login() {
+	if (empty($_SESSION['userId'])) {
+		header('Location: /');
+		exit();
+	}
+}
+
+/*
+ * Just syntactic sugar for header('Location: $someurl').
+ */
+function redirect_to($url) {
+	header("Location: $url");
+}
+
+/*
+ * Returns the instance's current maintenance level.
+ *
+ * Return value: integer, where
+ * 0 - Normal
+ * 1 - VIP Mode
+ * 2 - Full maintenance
+ */
+function getMaintLevel() {
+	$system = SystemParametersQuery::create()->findPK(1);
+	if (!isset($system)) {
+		return 0;
+	}
+	return $system->getMaintenanceLevel();
+}
+
+/*
+ * Returns true if a given user has access during maintenance at the level given.
+ */
+function hasAccessDuringMaint($maintLevel, User $user) {
+	if ($maintLevel === 0) {
+		return true;
+	}
+
+	if (!isset($user)) {
+		return false;
+	}
+
+	switch ($maintLevel) {
+		case 1:
+			return $user->getModlevel() >= 10;
+		case 2:
+		default: // level should never be >2, but if it is, make sure mods still have access
+			return $user->getModlevel() >= 99;
 	}
 }

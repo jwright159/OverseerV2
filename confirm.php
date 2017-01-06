@@ -1,31 +1,29 @@
 <?php
+session_start();
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/bootstrap.php');
 
+use Overseer\Models\UserQuery;
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
-//GET VARS
-$confirmKey = mysqli_escape_string($connection, $_GET['confkey']);
-$emailConfirming = mysqli_escape_string($connection, $_GET['email']);
+$confirmKey = $_GET['confkey'];
+$emailConfirming = $_GET['email'];
 
-$confirmQuery = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM `Users` WHERE `email` = '$emailConfirming' LIMIT 1;"));
-$emailCheck = mysqli_query($connection, "SELECT * FROM `Users` WHERE `email` = '$emailConfirming' LIMIT 1;");
+$user = UserQuery::create()->findOneByEmail($emailConfirming);
 
-if (mysqli_num_rows($emailCheck) > 0) {
-	$status = $confirmQuery['confirmed'];
-	$confKey = $confirmQuery['confirmationkey'];
-	$emailInRow = $confirmQuery['email'];
-	if ($status == 1) {
-		echo '<div class="container"><div class="alert alert-danger" role="alert">This email is already confirmed!</div></div>';
+if ($user) { // if the user actually exists
+	if ($user->getConfirmed() === true) { // if the user is already confirmed
+		$flash->warning("This email is already confirmed.");
+		redirect_to('/');
 	} else {
-		if ($confKey == $confirmKey) {
-			mysqli_query($connection, "UPDATE `Users` SET `confirmed` = '1', `confirmationkey` = '' WHERE `email` = '$emailConfirming';");
-			echo '<div class="container"><div class="alert alert-success" role="alert">Confirmed! You can log in now.</div></div>';
-
+		if ($user->getConfirmationKey() === $confirmKey) {
+			$user->setConfirmed(true); $user->save();
+			$flash->success("Email confirmed! You can log in now.");
+			redirect_to('/login.php');
 		} else {
-			echo '<div class="container"><div class="alert alert-danger" role="alert">Key did not match...</div></div>';
+			$flash->error("Confirmation key did not match!");
+			redirect_to('/');
 		}
 	}
 } else {
-	echo '<div class="container"><div class="alert alert-danger" role="alert">This email wasn\'t in the database!</div></div>';
+	$flash->error("This email isn't in the database!");
+	redirect_to('/');
 }
-
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php');

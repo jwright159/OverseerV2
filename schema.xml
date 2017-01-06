@@ -1,0 +1,68 @@
+<!--                                                           ______    ______
+    ...............................................    .......|__    |  |    __|
+    |  _  |  |  |  .__|   _|__ ..|  .__|  .__|   _|    |  |  ||    __|__|__    |
+    |_____|\___/|_____|__| |_____|_____|_____|__|       \___/ |______|__|______|
+
+         __ __                   __
+     ...|  |  |...   ...........|  |........................
+     |  _  |  _  |   |__ ..|  __|     |  .__|        |  _  |
+     |_____|_____|   |_____|____|__|__|_____|__|__|__|___._|
+!-->
+
+<database name="default" defaultIdMethod="native"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://xsd.propelorm.org/1.6/database.xsd"
+          namespace="Overseer\Models">
+
+    <table name="users" phpName="User">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+
+        <column name="username" type="varchar" size="255" required="true" />
+        <column name="password" type="varchar" size="255" required="true" />
+        <column name="email" type="varchar" size="255" required="true" />
+
+        <!-- Moderator level. 0 => normal user, ≥10 => VIP, ≥99 => admin/developer !-->
+        <column name="modlevel" type="integer" required="true" />
+
+        <column name="confirmed" type="boolean" required="true" />
+        <column name="confirmation_key" type="varchar" size="255" required="true" />
+    </table>
+
+    <table name="characters" phpName="Character">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+
+        <column name="species" type="integer" required="true" />
+        <column name="name" type="varchar" size="255" required="true" />
+        <column name="chumhandle" type="varchar" size="255" required="true" />
+
+        <column name="owner_id" type="integer" required="true" />
+        <column name="session_id" type="integer" required="true" />
+
+        <foreign-key foreignTable="users" phpName="Owner">
+            <reference local="owner_id" foreign="id" />
+        </foreign-key>
+        <foreign-key foreignTable="sessions">
+            <reference local="session_id" foreign="id" />
+        </foreign-key>
+    </table>
+
+    <table name="sessions" phpName="Session">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="name" type="varchar" size="255" required="true" />
+        <column name="password" type="varchar" size="255" required="true" />
+
+        <column name="owner_id" type="integer" required="true"/>
+
+        <foreign-key foreignTable="users" phpName="Owner">
+            <reference local="owner_id" foreign="id" />
+        </foreign-key>
+    </table>
+
+
+    <!-- INSTANCE METADATA !-->
+    <!-- warning: huge kludge. *******do not touch******* !-->
+    <table name="system_parameters" phpName="SystemParameters">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="maintenance_level" type="integer" required="true" defaultValue="0" />
+    </table>
+</database>

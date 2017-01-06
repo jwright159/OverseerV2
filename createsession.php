@@ -1,6 +1,8 @@
 <?php
+$pageTitle = 'Create a session';
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
-	// Includes the header ?>
+?>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#SessionForm').submit(function(event) { // catch the form's submit event
@@ -45,9 +47,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 			</div><br>
 		</div>
 		<div id="DisplayDiv"></div>
-		<br><br>
-		<br>
-		<br>
 	</form>
 </div>
 

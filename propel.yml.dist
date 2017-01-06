@@ -1,0 +1,30 @@
+propel:
+  paths:
+    outputDir: build/orm
+    phpDir: build/orm/classes
+    phpConfDir: build/orm/conf
+    migrationDir: build/orm/migrations
+    sqlDir: build/orm/sql
+  database:
+    connections:
+      default:
+        adapter: mysql
+        dsn: mysql:host=localhost;port=3306;dbname=overseer
+        user: overseer
+        password: overseer
+        settings:
+          charset: utf8
+  generator:
+    schema:
+      autoPackage: true
+
+## Copy the following into `propel.yml` on the server, with proper db and credentials.
+## **DO THIS BEFORE RUNNING ANY BUILD TASKS.**
+# propel:
+#   database:
+#     connections:
+#       default:
+#         adapter: mysql
+#         dsn: mysql:host=localhost;port=3306;dbname=overseer
+#         user: overseer
+#         password:
