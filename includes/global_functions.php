@@ -22,3 +22,13 @@ function showTraitArt($traitID) { // Pass a Trait ID to this and it'll show the 
 		return "/images/art/traits/noart.png";
 	}
 }
+
+/*
+ * Run at the top of a page to make it redirect to `/` if there isn't an active user session
+ */
+function requires_login() {
+	if (empty($_SESSION['userId'])) {
+		header('Location: /');
+		exit();
+	}
+}
