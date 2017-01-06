@@ -57,5 +57,12 @@
             <reference local="owner_id" foreign="id" />
         </foreign-key>
     </table>
+
+
+    <!-- INSTANCE METADATA !-->
+    <!-- warning: huge kludge. *******do not touch******* !-->
+    <table name="system_parameters" phpName="SystemParameters">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="maintenance_level" type="integer" required="true" defaultValue="0" />
     </table>
 </database>
