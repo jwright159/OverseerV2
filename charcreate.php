@@ -1,7 +1,7 @@
 <?php
+$pageTitle = 'Create a character';
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 
-//Title
 ?>
 <div class="container">
 	<h1>Create a Character!</h1>
