@@ -35,11 +35,11 @@
         <column name="name" type="varchar" size="255" required="true" />
         <column name="chumhandle" type="varchar" size="255" required="true" />
 
-        <column name="user_id" type="integer" required="true" />
+        <column name="owner_id" type="integer" required="true" />
         <column name="session_id" type="integer" required="true" />
 
         <foreign-key foreignTable="users" phpName="Owner">
-            <reference local="user_id" foreign="id" />
+            <reference local="owner_id" foreign="id" />
         </foreign-key>
         <foreign-key foreignTable="sessions">
             <reference local="session_id" foreign="id" />
