@@ -70,4 +70,8 @@ exit();
 	</head>
 
 		<body>
+			<?php
+			// display flashed messages
+			$flash->display();
+			?>
 			<div>This is a header.</div>

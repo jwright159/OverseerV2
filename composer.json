@@ -1,6 +1,7 @@
 {
     "require": {
-        "propel/propel": "~2.0@dev"
+        "propel/propel": "~2.0@dev",
+        "plasticbrain/php-flash-messages": "^1.0"
     },
 
     "require-dev": {
