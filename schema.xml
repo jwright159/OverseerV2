@@ -19,6 +19,13 @@
 
         <column name="username" type="varchar" size="255" required="true" />
         <column name="password" type="varchar" size="255" required="true" />
+        <column name="email" type="varchar" size="255" required="true" />
+
+        <!-- Moderator level. 0 => normal user, ≥10 => VIP, ≥99 => admin/developer !-->
+        <column name="modlevel" type="integer" required="true" />
+
+        <column name="confirmed" type="boolean" required="true" />
+        <column name="confirmation_key" type="varchar" size="255" required="true" />
     </table>
 
     <table name="characters" phpName="Character">
