@@ -92,9 +92,9 @@ class CharacterTableMap extends TableMap
     const COL_CHUMHANDLE = 'characters.chumhandle';
 
     /**
-     * the column name for the user_id field
+     * the column name for the owner_id field
      */
-    const COL_USER_ID = 'characters.user_id';
+    const COL_OWNER_ID = 'characters.owner_id';
 
     /**
      * the column name for the session_id field
@@ -113,10 +113,10 @@ class CharacterTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'Species', 'Name', 'Chumhandle', 'UserId', 'SessionId', ),
-        self::TYPE_CAMELNAME     => array('id', 'species', 'name', 'chumhandle', 'userId', 'sessionId', ),
-        self::TYPE_COLNAME       => array(CharacterTableMap::COL_ID, CharacterTableMap::COL_SPECIES, CharacterTableMap::COL_NAME, CharacterTableMap::COL_CHUMHANDLE, CharacterTableMap::COL_USER_ID, CharacterTableMap::COL_SESSION_ID, ),
-        self::TYPE_FIELDNAME     => array('id', 'species', 'name', 'chumhandle', 'user_id', 'session_id', ),
+        self::TYPE_PHPNAME       => array('Id', 'Species', 'Name', 'Chumhandle', 'OwnerId', 'SessionId', ),
+        self::TYPE_CAMELNAME     => array('id', 'species', 'name', 'chumhandle', 'ownerId', 'sessionId', ),
+        self::TYPE_COLNAME       => array(CharacterTableMap::COL_ID, CharacterTableMap::COL_SPECIES, CharacterTableMap::COL_NAME, CharacterTableMap::COL_CHUMHANDLE, CharacterTableMap::COL_OWNER_ID, CharacterTableMap::COL_SESSION_ID, ),
+        self::TYPE_FIELDNAME     => array('id', 'species', 'name', 'chumhandle', 'owner_id', 'session_id', ),
         self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, )
     );
 
@@ -127,10 +127,10 @@ class CharacterTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'Species' => 1, 'Name' => 2, 'Chumhandle' => 3, 'UserId' => 4, 'SessionId' => 5, ),
-        self::TYPE_CAMELNAME     => array('id' => 0, 'species' => 1, 'name' => 2, 'chumhandle' => 3, 'userId' => 4, 'sessionId' => 5, ),
-        self::TYPE_COLNAME       => array(CharacterTableMap::COL_ID => 0, CharacterTableMap::COL_SPECIES => 1, CharacterTableMap::COL_NAME => 2, CharacterTableMap::COL_CHUMHANDLE => 3, CharacterTableMap::COL_USER_ID => 4, CharacterTableMap::COL_SESSION_ID => 5, ),
-        self::TYPE_FIELDNAME     => array('id' => 0, 'species' => 1, 'name' => 2, 'chumhandle' => 3, 'user_id' => 4, 'session_id' => 5, ),
+        self::TYPE_PHPNAME       => array('Id' => 0, 'Species' => 1, 'Name' => 2, 'Chumhandle' => 3, 'OwnerId' => 4, 'SessionId' => 5, ),
+        self::TYPE_CAMELNAME     => array('id' => 0, 'species' => 1, 'name' => 2, 'chumhandle' => 3, 'ownerId' => 4, 'sessionId' => 5, ),
+        self::TYPE_COLNAME       => array(CharacterTableMap::COL_ID => 0, CharacterTableMap::COL_SPECIES => 1, CharacterTableMap::COL_NAME => 2, CharacterTableMap::COL_CHUMHANDLE => 3, CharacterTableMap::COL_OWNER_ID => 4, CharacterTableMap::COL_SESSION_ID => 5, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'species' => 1, 'name' => 2, 'chumhandle' => 3, 'owner_id' => 4, 'session_id' => 5, ),
         self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, )
     );
 
@@ -155,7 +155,7 @@ class CharacterTableMap extends TableMap
         $this->addColumn('species', 'Species', 'INTEGER', true, null, null);
         $this->addColumn('name', 'Name', 'VARCHAR', true, 255, null);
         $this->addColumn('chumhandle', 'Chumhandle', 'VARCHAR', true, 255, null);
-        $this->addForeignKey('user_id', 'UserId', 'INTEGER', 'users', 'id', true, null, null);
+        $this->addForeignKey('owner_id', 'OwnerId', 'INTEGER', 'users', 'id', true, null, null);
         $this->addForeignKey('session_id', 'SessionId', 'INTEGER', 'sessions', 'id', true, null, null);
     } // initialize()
 
@@ -167,7 +167,7 @@ class CharacterTableMap extends TableMap
         $this->addRelation('Owner', '\\Overseer\\Models\\User', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
-    0 => ':user_id',
+    0 => ':owner_id',
     1 => ':id',
   ),
 ), null, null, null, false);
@@ -325,14 +325,14 @@ class CharacterTableMap extends TableMap
             $criteria->addSelectColumn(CharacterTableMap::COL_SPECIES);
             $criteria->addSelectColumn(CharacterTableMap::COL_NAME);
             $criteria->addSelectColumn(CharacterTableMap::COL_CHUMHANDLE);
-            $criteria->addSelectColumn(CharacterTableMap::COL_USER_ID);
+            $criteria->addSelectColumn(CharacterTableMap::COL_OWNER_ID);
             $criteria->addSelectColumn(CharacterTableMap::COL_SESSION_ID);
         } else {
             $criteria->addSelectColumn($alias . '.id');
             $criteria->addSelectColumn($alias . '.species');
             $criteria->addSelectColumn($alias . '.name');
             $criteria->addSelectColumn($alias . '.chumhandle');
-            $criteria->addSelectColumn($alias . '.user_id');
+            $criteria->addSelectColumn($alias . '.owner_id');
             $criteria->addSelectColumn($alias . '.session_id');
         }
     }

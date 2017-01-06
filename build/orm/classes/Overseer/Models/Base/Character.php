@@ -92,11 +92,11 @@ abstract class Character implements ActiveRecordInterface
     protected $chumhandle;
 
     /**
-     * The value for the user_id field.
+     * The value for the owner_id field.
      *
      * @var        int
      */
-    protected $user_id;
+    protected $owner_id;
 
     /**
      * The value for the session_id field.
@@ -389,13 +389,13 @@ abstract class Character implements ActiveRecordInterface
     }
 
     /**
-     * Get the [user_id] column value.
+     * Get the [owner_id] column value.
      *
      * @return int
      */
-    public function getUserId()
+    public function getOwnerId()
     {
-        return $this->user_id;
+        return $this->owner_id;
     }
 
     /**
@@ -489,20 +489,20 @@ abstract class Character implements ActiveRecordInterface
     } // setChumhandle()
 
     /**
-     * Set the value of [user_id] column.
+     * Set the value of [owner_id] column.
      *
      * @param int $v new value
      * @return $this|\Overseer\Models\Character The current object (for fluent API support)
      */
-    public function setUserId($v)
+    public function setOwnerId($v)
     {
         if ($v !== null) {
             $v = (int) $v;
         }
 
-        if ($this->user_id !== $v) {
-            $this->user_id = $v;
-            $this->modifiedColumns[CharacterTableMap::COL_USER_ID] = true;
+        if ($this->owner_id !== $v) {
+            $this->owner_id = $v;
+            $this->modifiedColumns[CharacterTableMap::COL_OWNER_ID] = true;
         }
 
         if ($this->aOwner !== null && $this->aOwner->getId() !== $v) {
@@ -510,7 +510,7 @@ abstract class Character implements ActiveRecordInterface
         }
 
         return $this;
-    } // setUserId()
+    } // setOwnerId()
 
     /**
      * Set the value of [session_id] column.
@@ -584,8 +584,8 @@ abstract class Character implements ActiveRecordInterface
             $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : CharacterTableMap::translateFieldName('Chumhandle', TableMap::TYPE_PHPNAME, $indexType)];
             $this->chumhandle = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : CharacterTableMap::translateFieldName('UserId', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->user_id = (null !== $col) ? (int) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : CharacterTableMap::translateFieldName('OwnerId', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->owner_id = (null !== $col) ? (int) $col : null;
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : CharacterTableMap::translateFieldName('SessionId', TableMap::TYPE_PHPNAME, $indexType)];
             $this->session_id = (null !== $col) ? (int) $col : null;
@@ -619,7 +619,7 @@ abstract class Character implements ActiveRecordInterface
      */
     public function ensureConsistency()
     {
-        if ($this->aOwner !== null && $this->user_id !== $this->aOwner->getId()) {
+        if ($this->aOwner !== null && $this->owner_id !== $this->aOwner->getId()) {
             $this->aOwner = null;
         }
         if ($this->aSession !== null && $this->session_id !== $this->aSession->getId()) {
@@ -837,8 +837,8 @@ abstract class Character implements ActiveRecordInterface
         if ($this->isColumnModified(CharacterTableMap::COL_CHUMHANDLE)) {
             $modifiedColumns[':p' . $index++]  = 'chumhandle';
         }
-        if ($this->isColumnModified(CharacterTableMap::COL_USER_ID)) {
-            $modifiedColumns[':p' . $index++]  = 'user_id';
+        if ($this->isColumnModified(CharacterTableMap::COL_OWNER_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'owner_id';
         }
         if ($this->isColumnModified(CharacterTableMap::COL_SESSION_ID)) {
             $modifiedColumns[':p' . $index++]  = 'session_id';
@@ -866,8 +866,8 @@ abstract class Character implements ActiveRecordInterface
                     case 'chumhandle':
                         $stmt->bindValue($identifier, $this->chumhandle, PDO::PARAM_STR);
                         break;
-                    case 'user_id':
-                        $stmt->bindValue($identifier, $this->user_id, PDO::PARAM_INT);
+                    case 'owner_id':
+                        $stmt->bindValue($identifier, $this->owner_id, PDO::PARAM_INT);
                         break;
                     case 'session_id':
                         $stmt->bindValue($identifier, $this->session_id, PDO::PARAM_INT);
@@ -947,7 +947,7 @@ abstract class Character implements ActiveRecordInterface
                 return $this->getChumhandle();
                 break;
             case 4:
-                return $this->getUserId();
+                return $this->getOwnerId();
                 break;
             case 5:
                 return $this->getSessionId();
@@ -986,7 +986,7 @@ abstract class Character implements ActiveRecordInterface
             $keys[1] => $this->getSpecies(),
             $keys[2] => $this->getName(),
             $keys[3] => $this->getChumhandle(),
-            $keys[4] => $this->getUserId(),
+            $keys[4] => $this->getOwnerId(),
             $keys[5] => $this->getSessionId(),
         );
         $virtualColumns = $this->virtualColumns;
@@ -1072,7 +1072,7 @@ abstract class Character implements ActiveRecordInterface
                 $this->setChumhandle($value);
                 break;
             case 4:
-                $this->setUserId($value);
+                $this->setOwnerId($value);
                 break;
             case 5:
                 $this->setSessionId($value);
@@ -1116,7 +1116,7 @@ abstract class Character implements ActiveRecordInterface
             $this->setChumhandle($arr[$keys[3]]);
         }
         if (array_key_exists($keys[4], $arr)) {
-            $this->setUserId($arr[$keys[4]]);
+            $this->setOwnerId($arr[$keys[4]]);
         }
         if (array_key_exists($keys[5], $arr)) {
             $this->setSessionId($arr[$keys[5]]);
@@ -1174,8 +1174,8 @@ abstract class Character implements ActiveRecordInterface
         if ($this->isColumnModified(CharacterTableMap::COL_CHUMHANDLE)) {
             $criteria->add(CharacterTableMap::COL_CHUMHANDLE, $this->chumhandle);
         }
-        if ($this->isColumnModified(CharacterTableMap::COL_USER_ID)) {
-            $criteria->add(CharacterTableMap::COL_USER_ID, $this->user_id);
+        if ($this->isColumnModified(CharacterTableMap::COL_OWNER_ID)) {
+            $criteria->add(CharacterTableMap::COL_OWNER_ID, $this->owner_id);
         }
         if ($this->isColumnModified(CharacterTableMap::COL_SESSION_ID)) {
             $criteria->add(CharacterTableMap::COL_SESSION_ID, $this->session_id);
@@ -1269,7 +1269,7 @@ abstract class Character implements ActiveRecordInterface
         $copyObj->setSpecies($this->getSpecies());
         $copyObj->setName($this->getName());
         $copyObj->setChumhandle($this->getChumhandle());
-        $copyObj->setUserId($this->getUserId());
+        $copyObj->setOwnerId($this->getOwnerId());
         $copyObj->setSessionId($this->getSessionId());
         if ($makeNew) {
             $copyObj->setNew(true);
@@ -1309,9 +1309,9 @@ abstract class Character implements ActiveRecordInterface
     public function setOwner(ChildUser $v = null)
     {
         if ($v === null) {
-            $this->setUserId(NULL);
+            $this->setOwnerId(NULL);
         } else {
-            $this->setUserId($v->getId());
+            $this->setOwnerId($v->getId());
         }
 
         $this->aOwner = $v;
@@ -1336,8 +1336,8 @@ abstract class Character implements ActiveRecordInterface
      */
     public function getOwner(ConnectionInterface $con = null)
     {
-        if ($this->aOwner === null && ($this->user_id !== null)) {
-            $this->aOwner = ChildUserQuery::create()->findPk($this->user_id, $con);
+        if ($this->aOwner === null && ($this->owner_id !== null)) {
+            $this->aOwner = ChildUserQuery::create()->findPk($this->owner_id, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
@@ -1418,7 +1418,7 @@ abstract class Character implements ActiveRecordInterface
         $this->species = null;
         $this->name = null;
         $this->chumhandle = null;
-        $this->user_id = null;
+        $this->owner_id = null;
         $this->session_id = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();

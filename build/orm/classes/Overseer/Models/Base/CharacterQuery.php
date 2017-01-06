@@ -24,14 +24,14 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacterQuery orderBySpecies($order = Criteria::ASC) Order by the species column
  * @method     ChildCharacterQuery orderByName($order = Criteria::ASC) Order by the name column
  * @method     ChildCharacterQuery orderByChumhandle($order = Criteria::ASC) Order by the chumhandle column
- * @method     ChildCharacterQuery orderByUserId($order = Criteria::ASC) Order by the user_id column
+ * @method     ChildCharacterQuery orderByOwnerId($order = Criteria::ASC) Order by the owner_id column
  * @method     ChildCharacterQuery orderBySessionId($order = Criteria::ASC) Order by the session_id column
  *
  * @method     ChildCharacterQuery groupById() Group by the id column
  * @method     ChildCharacterQuery groupBySpecies() Group by the species column
  * @method     ChildCharacterQuery groupByName() Group by the name column
  * @method     ChildCharacterQuery groupByChumhandle() Group by the chumhandle column
- * @method     ChildCharacterQuery groupByUserId() Group by the user_id column
+ * @method     ChildCharacterQuery groupByOwnerId() Group by the owner_id column
  * @method     ChildCharacterQuery groupBySessionId() Group by the session_id column
  *
  * @method     ChildCharacterQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
@@ -71,7 +71,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacter findOneBySpecies(int $species) Return the first ChildCharacter filtered by the species column
  * @method     ChildCharacter findOneByName(string $name) Return the first ChildCharacter filtered by the name column
  * @method     ChildCharacter findOneByChumhandle(string $chumhandle) Return the first ChildCharacter filtered by the chumhandle column
- * @method     ChildCharacter findOneByUserId(int $user_id) Return the first ChildCharacter filtered by the user_id column
+ * @method     ChildCharacter findOneByOwnerId(int $owner_id) Return the first ChildCharacter filtered by the owner_id column
  * @method     ChildCharacter findOneBySessionId(int $session_id) Return the first ChildCharacter filtered by the session_id column *
 
  * @method     ChildCharacter requirePk($key, ConnectionInterface $con = null) Return the ChildCharacter by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -81,7 +81,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacter requireOneBySpecies(int $species) Return the first ChildCharacter filtered by the species column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacter requireOneByName(string $name) Return the first ChildCharacter filtered by the name column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacter requireOneByChumhandle(string $chumhandle) Return the first ChildCharacter filtered by the chumhandle column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildCharacter requireOneByUserId(int $user_id) Return the first ChildCharacter filtered by the user_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCharacter requireOneByOwnerId(int $owner_id) Return the first ChildCharacter filtered by the owner_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacter requireOneBySessionId(int $session_id) Return the first ChildCharacter filtered by the session_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildCharacter[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildCharacter objects based on current ModelCriteria
@@ -89,7 +89,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacter[]|ObjectCollection findBySpecies(int $species) Return ChildCharacter objects filtered by the species column
  * @method     ChildCharacter[]|ObjectCollection findByName(string $name) Return ChildCharacter objects filtered by the name column
  * @method     ChildCharacter[]|ObjectCollection findByChumhandle(string $chumhandle) Return ChildCharacter objects filtered by the chumhandle column
- * @method     ChildCharacter[]|ObjectCollection findByUserId(int $user_id) Return ChildCharacter objects filtered by the user_id column
+ * @method     ChildCharacter[]|ObjectCollection findByOwnerId(int $owner_id) Return ChildCharacter objects filtered by the owner_id column
  * @method     ChildCharacter[]|ObjectCollection findBySessionId(int $session_id) Return ChildCharacter objects filtered by the session_id column
  * @method     ChildCharacter[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
@@ -189,7 +189,7 @@ abstract class CharacterQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, species, name, chumhandle, user_id, session_id FROM characters WHERE id = :p0';
+        $sql = 'SELECT id, species, name, chumhandle, owner_id, session_id FROM characters WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -412,18 +412,18 @@ abstract class CharacterQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the user_id column
+     * Filter the query on the owner_id column
      *
      * Example usage:
      * <code>
-     * $query->filterByUserId(1234); // WHERE user_id = 1234
-     * $query->filterByUserId(array(12, 34)); // WHERE user_id IN (12, 34)
-     * $query->filterByUserId(array('min' => 12)); // WHERE user_id > 12
+     * $query->filterByOwnerId(1234); // WHERE owner_id = 1234
+     * $query->filterByOwnerId(array(12, 34)); // WHERE owner_id IN (12, 34)
+     * $query->filterByOwnerId(array('min' => 12)); // WHERE owner_id > 12
      * </code>
      *
      * @see       filterByOwner()
      *
-     * @param     mixed $userId The value to use as filter.
+     * @param     mixed $ownerId The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -431,16 +431,16 @@ abstract class CharacterQuery extends ModelCriteria
      *
      * @return $this|ChildCharacterQuery The current query, for fluid interface
      */
-    public function filterByUserId($userId = null, $comparison = null)
+    public function filterByOwnerId($ownerId = null, $comparison = null)
     {
-        if (is_array($userId)) {
+        if (is_array($ownerId)) {
             $useMinMax = false;
-            if (isset($userId['min'])) {
-                $this->addUsingAlias(CharacterTableMap::COL_USER_ID, $userId['min'], Criteria::GREATER_EQUAL);
+            if (isset($ownerId['min'])) {
+                $this->addUsingAlias(CharacterTableMap::COL_OWNER_ID, $ownerId['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($userId['max'])) {
-                $this->addUsingAlias(CharacterTableMap::COL_USER_ID, $userId['max'], Criteria::LESS_EQUAL);
+            if (isset($ownerId['max'])) {
+                $this->addUsingAlias(CharacterTableMap::COL_OWNER_ID, $ownerId['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -451,7 +451,7 @@ abstract class CharacterQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(CharacterTableMap::COL_USER_ID, $userId, $comparison);
+        return $this->addUsingAlias(CharacterTableMap::COL_OWNER_ID, $ownerId, $comparison);
     }
 
     /**
@@ -511,14 +511,14 @@ abstract class CharacterQuery extends ModelCriteria
     {
         if ($user instanceof \Overseer\Models\User) {
             return $this
-                ->addUsingAlias(CharacterTableMap::COL_USER_ID, $user->getId(), $comparison);
+                ->addUsingAlias(CharacterTableMap::COL_OWNER_ID, $user->getId(), $comparison);
         } elseif ($user instanceof ObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(CharacterTableMap::COL_USER_ID, $user->toKeyValue('PrimaryKey', 'Id'), $comparison);
+                ->addUsingAlias(CharacterTableMap::COL_OWNER_ID, $user->toKeyValue('PrimaryKey', 'Id'), $comparison);
         } else {
             throw new PropelException('filterByOwner() only accepts arguments of type \Overseer\Models\User or Collection');
         }

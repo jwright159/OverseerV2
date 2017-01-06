@@ -6,9 +6,12 @@ use \Exception;
 use \PDO;
 use Overseer\Models\Character as ChildCharacter;
 use Overseer\Models\CharacterQuery as ChildCharacterQuery;
+use Overseer\Models\Session as ChildSession;
+use Overseer\Models\SessionQuery as ChildSessionQuery;
 use Overseer\Models\User as ChildUser;
 use Overseer\Models\UserQuery as ChildUserQuery;
 use Overseer\Models\Map\CharacterTableMap;
+use Overseer\Models\Map\SessionTableMap;
 use Overseer\Models\Map\UserTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
@@ -86,10 +89,44 @@ abstract class User implements ActiveRecordInterface
     protected $password;
 
     /**
+     * The value for the email field.
+     *
+     * @var        string
+     */
+    protected $email;
+
+    /**
+     * The value for the modlevel field.
+     *
+     * @var        int
+     */
+    protected $modlevel;
+
+    /**
+     * The value for the confirmed field.
+     *
+     * @var        boolean
+     */
+    protected $confirmed;
+
+    /**
+     * The value for the confirmation_key field.
+     *
+     * @var        string
+     */
+    protected $confirmation_key;
+
+    /**
      * @var        ObjectCollection|ChildCharacter[] Collection to store aggregation of ChildCharacter objects.
      */
     protected $collCharacters;
     protected $collCharactersPartial;
+
+    /**
+     * @var        ObjectCollection|ChildSession[] Collection to store aggregation of ChildSession objects.
+     */
+    protected $collSessions;
+    protected $collSessionsPartial;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -104,6 +141,12 @@ abstract class User implements ActiveRecordInterface
      * @var ObjectCollection|ChildCharacter[]
      */
     protected $charactersScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ChildSession[]
+     */
+    protected $sessionsScheduledForDeletion = null;
 
     /**
      * Initializes internal state of Overseer\Models\Base\User object.
@@ -361,6 +404,56 @@ abstract class User implements ActiveRecordInterface
     }
 
     /**
+     * Get the [email] column value.
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Get the [modlevel] column value.
+     *
+     * @return int
+     */
+    public function getModlevel()
+    {
+        return $this->modlevel;
+    }
+
+    /**
+     * Get the [confirmed] column value.
+     *
+     * @return boolean
+     */
+    public function getConfirmed()
+    {
+        return $this->confirmed;
+    }
+
+    /**
+     * Get the [confirmed] column value.
+     *
+     * @return boolean
+     */
+    public function isConfirmed()
+    {
+        return $this->getConfirmed();
+    }
+
+    /**
+     * Get the [confirmation_key] column value.
+     *
+     * @return string
+     */
+    public function getConfirmationKey()
+    {
+        return $this->confirmation_key;
+    }
+
+    /**
      * Set the value of [id] column.
      *
      * @param int $v new value
@@ -421,6 +514,94 @@ abstract class User implements ActiveRecordInterface
     } // setPassword()
 
     /**
+     * Set the value of [email] column.
+     *
+     * @param string $v new value
+     * @return $this|\Overseer\Models\User The current object (for fluent API support)
+     */
+    public function setEmail($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->email !== $v) {
+            $this->email = $v;
+            $this->modifiedColumns[UserTableMap::COL_EMAIL] = true;
+        }
+
+        return $this;
+    } // setEmail()
+
+    /**
+     * Set the value of [modlevel] column.
+     *
+     * @param int $v new value
+     * @return $this|\Overseer\Models\User The current object (for fluent API support)
+     */
+    public function setModlevel($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->modlevel !== $v) {
+            $this->modlevel = $v;
+            $this->modifiedColumns[UserTableMap::COL_MODLEVEL] = true;
+        }
+
+        return $this;
+    } // setModlevel()
+
+    /**
+     * Sets the value of the [confirmed] column.
+     * Non-boolean arguments are converted using the following rules:
+     *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     *
+     * @param  boolean|integer|string $v The new value
+     * @return $this|\Overseer\Models\User The current object (for fluent API support)
+     */
+    public function setConfirmed($v)
+    {
+        if ($v !== null) {
+            if (is_string($v)) {
+                $v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+            } else {
+                $v = (boolean) $v;
+            }
+        }
+
+        if ($this->confirmed !== $v) {
+            $this->confirmed = $v;
+            $this->modifiedColumns[UserTableMap::COL_CONFIRMED] = true;
+        }
+
+        return $this;
+    } // setConfirmed()
+
+    /**
+     * Set the value of [confirmation_key] column.
+     *
+     * @param string $v new value
+     * @return $this|\Overseer\Models\User The current object (for fluent API support)
+     */
+    public function setConfirmationKey($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->confirmation_key !== $v) {
+            $this->confirmation_key = $v;
+            $this->modifiedColumns[UserTableMap::COL_CONFIRMATION_KEY] = true;
+        }
+
+        return $this;
+    } // setConfirmationKey()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -464,6 +645,18 @@ abstract class User implements ActiveRecordInterface
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : UserTableMap::translateFieldName('Password', TableMap::TYPE_PHPNAME, $indexType)];
             $this->password = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : UserTableMap::translateFieldName('Email', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->email = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : UserTableMap::translateFieldName('Modlevel', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->modlevel = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : UserTableMap::translateFieldName('Confirmed', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->confirmed = (null !== $col) ? (boolean) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : UserTableMap::translateFieldName('ConfirmationKey', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->confirmation_key = (null !== $col) ? (string) $col : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -472,7 +665,7 @@ abstract class User implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 3; // 3 = UserTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 7; // 7 = UserTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\Overseer\\Models\\User'), 0, $e);
@@ -534,6 +727,8 @@ abstract class User implements ActiveRecordInterface
         if ($deep) {  // also de-associate any related objects?
 
             $this->collCharacters = null;
+
+            $this->collSessions = null;
 
         } // if (deep)
     }
@@ -666,6 +861,23 @@ abstract class User implements ActiveRecordInterface
                 }
             }
 
+            if ($this->sessionsScheduledForDeletion !== null) {
+                if (!$this->sessionsScheduledForDeletion->isEmpty()) {
+                    \Overseer\Models\SessionQuery::create()
+                        ->filterByPrimaryKeys($this->sessionsScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->sessionsScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collSessions !== null) {
+                foreach ($this->collSessions as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
             $this->alreadyInSave = false;
 
         }
@@ -701,6 +913,18 @@ abstract class User implements ActiveRecordInterface
         if ($this->isColumnModified(UserTableMap::COL_PASSWORD)) {
             $modifiedColumns[':p' . $index++]  = 'password';
         }
+        if ($this->isColumnModified(UserTableMap::COL_EMAIL)) {
+            $modifiedColumns[':p' . $index++]  = 'email';
+        }
+        if ($this->isColumnModified(UserTableMap::COL_MODLEVEL)) {
+            $modifiedColumns[':p' . $index++]  = 'modlevel';
+        }
+        if ($this->isColumnModified(UserTableMap::COL_CONFIRMED)) {
+            $modifiedColumns[':p' . $index++]  = 'confirmed';
+        }
+        if ($this->isColumnModified(UserTableMap::COL_CONFIRMATION_KEY)) {
+            $modifiedColumns[':p' . $index++]  = 'confirmation_key';
+        }
 
         $sql = sprintf(
             'INSERT INTO users (%s) VALUES (%s)',
@@ -720,6 +944,18 @@ abstract class User implements ActiveRecordInterface
                         break;
                     case 'password':
                         $stmt->bindValue($identifier, $this->password, PDO::PARAM_STR);
+                        break;
+                    case 'email':
+                        $stmt->bindValue($identifier, $this->email, PDO::PARAM_STR);
+                        break;
+                    case 'modlevel':
+                        $stmt->bindValue($identifier, $this->modlevel, PDO::PARAM_INT);
+                        break;
+                    case 'confirmed':
+                        $stmt->bindValue($identifier, (int) $this->confirmed, PDO::PARAM_INT);
+                        break;
+                    case 'confirmation_key':
+                        $stmt->bindValue($identifier, $this->confirmation_key, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -792,6 +1028,18 @@ abstract class User implements ActiveRecordInterface
             case 2:
                 return $this->getPassword();
                 break;
+            case 3:
+                return $this->getEmail();
+                break;
+            case 4:
+                return $this->getModlevel();
+                break;
+            case 5:
+                return $this->getConfirmed();
+                break;
+            case 6:
+                return $this->getConfirmationKey();
+                break;
             default:
                 return null;
                 break;
@@ -825,6 +1073,10 @@ abstract class User implements ActiveRecordInterface
             $keys[0] => $this->getId(),
             $keys[1] => $this->getUsername(),
             $keys[2] => $this->getPassword(),
+            $keys[3] => $this->getEmail(),
+            $keys[4] => $this->getModlevel(),
+            $keys[5] => $this->getConfirmed(),
+            $keys[6] => $this->getConfirmationKey(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -846,6 +1098,21 @@ abstract class User implements ActiveRecordInterface
                 }
 
                 $result[$key] = $this->collCharacters->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collSessions) {
+
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'sessions';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'sessionss';
+                        break;
+                    default:
+                        $key = 'Sessions';
+                }
+
+                $result[$key] = $this->collSessions->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -890,6 +1157,18 @@ abstract class User implements ActiveRecordInterface
             case 2:
                 $this->setPassword($value);
                 break;
+            case 3:
+                $this->setEmail($value);
+                break;
+            case 4:
+                $this->setModlevel($value);
+                break;
+            case 5:
+                $this->setConfirmed($value);
+                break;
+            case 6:
+                $this->setConfirmationKey($value);
+                break;
         } // switch()
 
         return $this;
@@ -924,6 +1203,18 @@ abstract class User implements ActiveRecordInterface
         }
         if (array_key_exists($keys[2], $arr)) {
             $this->setPassword($arr[$keys[2]]);
+        }
+        if (array_key_exists($keys[3], $arr)) {
+            $this->setEmail($arr[$keys[3]]);
+        }
+        if (array_key_exists($keys[4], $arr)) {
+            $this->setModlevel($arr[$keys[4]]);
+        }
+        if (array_key_exists($keys[5], $arr)) {
+            $this->setConfirmed($arr[$keys[5]]);
+        }
+        if (array_key_exists($keys[6], $arr)) {
+            $this->setConfirmationKey($arr[$keys[6]]);
         }
     }
 
@@ -974,6 +1265,18 @@ abstract class User implements ActiveRecordInterface
         }
         if ($this->isColumnModified(UserTableMap::COL_PASSWORD)) {
             $criteria->add(UserTableMap::COL_PASSWORD, $this->password);
+        }
+        if ($this->isColumnModified(UserTableMap::COL_EMAIL)) {
+            $criteria->add(UserTableMap::COL_EMAIL, $this->email);
+        }
+        if ($this->isColumnModified(UserTableMap::COL_MODLEVEL)) {
+            $criteria->add(UserTableMap::COL_MODLEVEL, $this->modlevel);
+        }
+        if ($this->isColumnModified(UserTableMap::COL_CONFIRMED)) {
+            $criteria->add(UserTableMap::COL_CONFIRMED, $this->confirmed);
+        }
+        if ($this->isColumnModified(UserTableMap::COL_CONFIRMATION_KEY)) {
+            $criteria->add(UserTableMap::COL_CONFIRMATION_KEY, $this->confirmation_key);
         }
 
         return $criteria;
@@ -1063,6 +1366,10 @@ abstract class User implements ActiveRecordInterface
     {
         $copyObj->setUsername($this->getUsername());
         $copyObj->setPassword($this->getPassword());
+        $copyObj->setEmail($this->getEmail());
+        $copyObj->setModlevel($this->getModlevel());
+        $copyObj->setConfirmed($this->getConfirmed());
+        $copyObj->setConfirmationKey($this->getConfirmationKey());
 
         if ($deepCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1072,6 +1379,12 @@ abstract class User implements ActiveRecordInterface
             foreach ($this->getCharacters() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addCharacter($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getSessions() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addSession($relObj->copy($deepCopy));
                 }
             }
 
@@ -1118,6 +1431,9 @@ abstract class User implements ActiveRecordInterface
     {
         if ('Character' == $relationName) {
             return $this->initCharacters();
+        }
+        if ('Session' == $relationName) {
+            return $this->initSessions();
         }
     }
 
@@ -1372,6 +1688,231 @@ abstract class User implements ActiveRecordInterface
     }
 
     /**
+     * Clears out the collSessions collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addSessions()
+     */
+    public function clearSessions()
+    {
+        $this->collSessions = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collSessions collection loaded partially.
+     */
+    public function resetPartialSessions($v = true)
+    {
+        $this->collSessionsPartial = $v;
+    }
+
+    /**
+     * Initializes the collSessions collection.
+     *
+     * By default this just sets the collSessions collection to an empty array (like clearcollSessions());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initSessions($overrideExisting = true)
+    {
+        if (null !== $this->collSessions && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = SessionTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collSessions = new $collectionClassName;
+        $this->collSessions->setModel('\Overseer\Models\Session');
+    }
+
+    /**
+     * Gets an array of ChildSession objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildUser is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ChildSession[] List of ChildSession objects
+     * @throws PropelException
+     */
+    public function getSessions(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collSessionsPartial && !$this->isNew();
+        if (null === $this->collSessions || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collSessions) {
+                // return empty collection
+                $this->initSessions();
+            } else {
+                $collSessions = ChildSessionQuery::create(null, $criteria)
+                    ->filterByOwner($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collSessionsPartial && count($collSessions)) {
+                        $this->initSessions(false);
+
+                        foreach ($collSessions as $obj) {
+                            if (false == $this->collSessions->contains($obj)) {
+                                $this->collSessions->append($obj);
+                            }
+                        }
+
+                        $this->collSessionsPartial = true;
+                    }
+
+                    return $collSessions;
+                }
+
+                if ($partial && $this->collSessions) {
+                    foreach ($this->collSessions as $obj) {
+                        if ($obj->isNew()) {
+                            $collSessions[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collSessions = $collSessions;
+                $this->collSessionsPartial = false;
+            }
+        }
+
+        return $this->collSessions;
+    }
+
+    /**
+     * Sets a collection of ChildSession objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $sessions A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildUser The current object (for fluent API support)
+     */
+    public function setSessions(Collection $sessions, ConnectionInterface $con = null)
+    {
+        /** @var ChildSession[] $sessionsToDelete */
+        $sessionsToDelete = $this->getSessions(new Criteria(), $con)->diff($sessions);
+
+
+        $this->sessionsScheduledForDeletion = $sessionsToDelete;
+
+        foreach ($sessionsToDelete as $sessionRemoved) {
+            $sessionRemoved->setOwner(null);
+        }
+
+        $this->collSessions = null;
+        foreach ($sessions as $session) {
+            $this->addSession($session);
+        }
+
+        $this->collSessions = $sessions;
+        $this->collSessionsPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related Session objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related Session objects.
+     * @throws PropelException
+     */
+    public function countSessions(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collSessionsPartial && !$this->isNew();
+        if (null === $this->collSessions || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collSessions) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getSessions());
+            }
+
+            $query = ChildSessionQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByOwner($this)
+                ->count($con);
+        }
+
+        return count($this->collSessions);
+    }
+
+    /**
+     * Method called to associate a ChildSession object to this object
+     * through the ChildSession foreign key attribute.
+     *
+     * @param  ChildSession $l ChildSession
+     * @return $this|\Overseer\Models\User The current object (for fluent API support)
+     */
+    public function addSession(ChildSession $l)
+    {
+        if ($this->collSessions === null) {
+            $this->initSessions();
+            $this->collSessionsPartial = true;
+        }
+
+        if (!$this->collSessions->contains($l)) {
+            $this->doAddSession($l);
+
+            if ($this->sessionsScheduledForDeletion and $this->sessionsScheduledForDeletion->contains($l)) {
+                $this->sessionsScheduledForDeletion->remove($this->sessionsScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ChildSession $session The ChildSession object to add.
+     */
+    protected function doAddSession(ChildSession $session)
+    {
+        $this->collSessions[]= $session;
+        $session->setOwner($this);
+    }
+
+    /**
+     * @param  ChildSession $session The ChildSession object to remove.
+     * @return $this|ChildUser The current object (for fluent API support)
+     */
+    public function removeSession(ChildSession $session)
+    {
+        if ($this->getSessions()->contains($session)) {
+            $pos = $this->collSessions->search($session);
+            $this->collSessions->remove($pos);
+            if (null === $this->sessionsScheduledForDeletion) {
+                $this->sessionsScheduledForDeletion = clone $this->collSessions;
+                $this->sessionsScheduledForDeletion->clear();
+            }
+            $this->sessionsScheduledForDeletion[]= clone $session;
+            $session->setOwner(null);
+        }
+
+        return $this;
+    }
+
+    /**
      * Clears the current object, sets all attributes to their default values and removes
      * outgoing references as well as back-references (from other objects to this one. Results probably in a database
      * change of those foreign objects when you call `save` there).
@@ -1381,6 +1922,10 @@ abstract class User implements ActiveRecordInterface
         $this->id = null;
         $this->username = null;
         $this->password = null;
+        $this->email = null;
+        $this->modlevel = null;
+        $this->confirmed = null;
+        $this->confirmation_key = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();
         $this->resetModified();
@@ -1404,9 +1949,15 @@ abstract class User implements ActiveRecordInterface
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collSessions) {
+                foreach ($this->collSessions as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
         } // if ($deep)
 
         $this->collCharacters = null;
+        $this->collSessions = null;
     }
 
     /**

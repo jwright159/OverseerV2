@@ -23,10 +23,18 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildUserQuery orderById($order = Criteria::ASC) Order by the id column
  * @method     ChildUserQuery orderByUsername($order = Criteria::ASC) Order by the username column
  * @method     ChildUserQuery orderByPassword($order = Criteria::ASC) Order by the password column
+ * @method     ChildUserQuery orderByEmail($order = Criteria::ASC) Order by the email column
+ * @method     ChildUserQuery orderByModlevel($order = Criteria::ASC) Order by the modlevel column
+ * @method     ChildUserQuery orderByConfirmed($order = Criteria::ASC) Order by the confirmed column
+ * @method     ChildUserQuery orderByConfirmationKey($order = Criteria::ASC) Order by the confirmation_key column
  *
  * @method     ChildUserQuery groupById() Group by the id column
  * @method     ChildUserQuery groupByUsername() Group by the username column
  * @method     ChildUserQuery groupByPassword() Group by the password column
+ * @method     ChildUserQuery groupByEmail() Group by the email column
+ * @method     ChildUserQuery groupByModlevel() Group by the modlevel column
+ * @method     ChildUserQuery groupByConfirmed() Group by the confirmed column
+ * @method     ChildUserQuery groupByConfirmationKey() Group by the confirmation_key column
  *
  * @method     ChildUserQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChildUserQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -46,14 +54,28 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildUserQuery rightJoinWithCharacter() Adds a RIGHT JOIN clause and with to the query using the Character relation
  * @method     ChildUserQuery innerJoinWithCharacter() Adds a INNER JOIN clause and with to the query using the Character relation
  *
- * @method     \Overseer\Models\CharacterQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
+ * @method     ChildUserQuery leftJoinSession($relationAlias = null) Adds a LEFT JOIN clause to the query using the Session relation
+ * @method     ChildUserQuery rightJoinSession($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Session relation
+ * @method     ChildUserQuery innerJoinSession($relationAlias = null) Adds a INNER JOIN clause to the query using the Session relation
+ *
+ * @method     ChildUserQuery joinWithSession($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the Session relation
+ *
+ * @method     ChildUserQuery leftJoinWithSession() Adds a LEFT JOIN clause and with to the query using the Session relation
+ * @method     ChildUserQuery rightJoinWithSession() Adds a RIGHT JOIN clause and with to the query using the Session relation
+ * @method     ChildUserQuery innerJoinWithSession() Adds a INNER JOIN clause and with to the query using the Session relation
+ *
+ * @method     \Overseer\Models\CharacterQuery|\Overseer\Models\SessionQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
  * @method     ChildUser findOne(ConnectionInterface $con = null) Return the first ChildUser matching the query
  * @method     ChildUser findOneOrCreate(ConnectionInterface $con = null) Return the first ChildUser matching the query, or a new ChildUser object populated from the query conditions when no match is found
  *
  * @method     ChildUser findOneById(int $id) Return the first ChildUser filtered by the id column
  * @method     ChildUser findOneByUsername(string $username) Return the first ChildUser filtered by the username column
- * @method     ChildUser findOneByPassword(string $password) Return the first ChildUser filtered by the password column *
+ * @method     ChildUser findOneByPassword(string $password) Return the first ChildUser filtered by the password column
+ * @method     ChildUser findOneByEmail(string $email) Return the first ChildUser filtered by the email column
+ * @method     ChildUser findOneByModlevel(int $modlevel) Return the first ChildUser filtered by the modlevel column
+ * @method     ChildUser findOneByConfirmed(boolean $confirmed) Return the first ChildUser filtered by the confirmed column
+ * @method     ChildUser findOneByConfirmationKey(string $confirmation_key) Return the first ChildUser filtered by the confirmation_key column *
 
  * @method     ChildUser requirePk($key, ConnectionInterface $con = null) Return the ChildUser by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildUser requireOne(ConnectionInterface $con = null) Return the first ChildUser matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -61,11 +83,19 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildUser requireOneById(int $id) Return the first ChildUser filtered by the id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildUser requireOneByUsername(string $username) Return the first ChildUser filtered by the username column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildUser requireOneByPassword(string $password) Return the first ChildUser filtered by the password column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildUser requireOneByEmail(string $email) Return the first ChildUser filtered by the email column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildUser requireOneByModlevel(int $modlevel) Return the first ChildUser filtered by the modlevel column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildUser requireOneByConfirmed(boolean $confirmed) Return the first ChildUser filtered by the confirmed column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildUser requireOneByConfirmationKey(string $confirmation_key) Return the first ChildUser filtered by the confirmation_key column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildUser[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildUser objects based on current ModelCriteria
  * @method     ChildUser[]|ObjectCollection findById(int $id) Return ChildUser objects filtered by the id column
  * @method     ChildUser[]|ObjectCollection findByUsername(string $username) Return ChildUser objects filtered by the username column
  * @method     ChildUser[]|ObjectCollection findByPassword(string $password) Return ChildUser objects filtered by the password column
+ * @method     ChildUser[]|ObjectCollection findByEmail(string $email) Return ChildUser objects filtered by the email column
+ * @method     ChildUser[]|ObjectCollection findByModlevel(int $modlevel) Return ChildUser objects filtered by the modlevel column
+ * @method     ChildUser[]|ObjectCollection findByConfirmed(boolean $confirmed) Return ChildUser objects filtered by the confirmed column
+ * @method     ChildUser[]|ObjectCollection findByConfirmationKey(string $confirmation_key) Return ChildUser objects filtered by the confirmation_key column
  * @method     ChildUser[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
  */
@@ -164,7 +194,7 @@ abstract class UserQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, username, password FROM users WHERE id = :p0';
+        $sql = 'SELECT id, username, password, email, modlevel, confirmed, confirmation_key FROM users WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -346,6 +376,124 @@ abstract class UserQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the email column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByEmail('fooValue');   // WHERE email = 'fooValue'
+     * $query->filterByEmail('%fooValue%', Criteria::LIKE); // WHERE email LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $email The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildUserQuery The current query, for fluid interface
+     */
+    public function filterByEmail($email = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($email)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(UserTableMap::COL_EMAIL, $email, $comparison);
+    }
+
+    /**
+     * Filter the query on the modlevel column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByModlevel(1234); // WHERE modlevel = 1234
+     * $query->filterByModlevel(array(12, 34)); // WHERE modlevel IN (12, 34)
+     * $query->filterByModlevel(array('min' => 12)); // WHERE modlevel > 12
+     * </code>
+     *
+     * @param     mixed $modlevel The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildUserQuery The current query, for fluid interface
+     */
+    public function filterByModlevel($modlevel = null, $comparison = null)
+    {
+        if (is_array($modlevel)) {
+            $useMinMax = false;
+            if (isset($modlevel['min'])) {
+                $this->addUsingAlias(UserTableMap::COL_MODLEVEL, $modlevel['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($modlevel['max'])) {
+                $this->addUsingAlias(UserTableMap::COL_MODLEVEL, $modlevel['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(UserTableMap::COL_MODLEVEL, $modlevel, $comparison);
+    }
+
+    /**
+     * Filter the query on the confirmed column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByConfirmed(true); // WHERE confirmed = true
+     * $query->filterByConfirmed('yes'); // WHERE confirmed = true
+     * </code>
+     *
+     * @param     boolean|string $confirmed The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildUserQuery The current query, for fluid interface
+     */
+    public function filterByConfirmed($confirmed = null, $comparison = null)
+    {
+        if (is_string($confirmed)) {
+            $confirmed = in_array(strtolower($confirmed), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(UserTableMap::COL_CONFIRMED, $confirmed, $comparison);
+    }
+
+    /**
+     * Filter the query on the confirmation_key column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByConfirmationKey('fooValue');   // WHERE confirmation_key = 'fooValue'
+     * $query->filterByConfirmationKey('%fooValue%', Criteria::LIKE); // WHERE confirmation_key LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $confirmationKey The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildUserQuery The current query, for fluid interface
+     */
+    public function filterByConfirmationKey($confirmationKey = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($confirmationKey)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(UserTableMap::COL_CONFIRMATION_KEY, $confirmationKey, $comparison);
+    }
+
+    /**
      * Filter the query by a related \Overseer\Models\Character object
      *
      * @param \Overseer\Models\Character|ObjectCollection $character the related object to use as filter
@@ -357,7 +505,7 @@ abstract class UserQuery extends ModelCriteria
     {
         if ($character instanceof \Overseer\Models\Character) {
             return $this
-                ->addUsingAlias(UserTableMap::COL_ID, $character->getUserId(), $comparison);
+                ->addUsingAlias(UserTableMap::COL_ID, $character->getOwnerId(), $comparison);
         } elseif ($character instanceof ObjectCollection) {
             return $this
                 ->useCharacterQuery()
@@ -416,6 +564,79 @@ abstract class UserQuery extends ModelCriteria
         return $this
             ->joinCharacter($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'Character', '\Overseer\Models\CharacterQuery');
+    }
+
+    /**
+     * Filter the query by a related \Overseer\Models\Session object
+     *
+     * @param \Overseer\Models\Session|ObjectCollection $session the related object to use as filter
+     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ChildUserQuery The current query, for fluid interface
+     */
+    public function filterBySession($session, $comparison = null)
+    {
+        if ($session instanceof \Overseer\Models\Session) {
+            return $this
+                ->addUsingAlias(UserTableMap::COL_ID, $session->getOwnerId(), $comparison);
+        } elseif ($session instanceof ObjectCollection) {
+            return $this
+                ->useSessionQuery()
+                ->filterByPrimaryKeys($session->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterBySession() only accepts arguments of type \Overseer\Models\Session or Collection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Session relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return $this|ChildUserQuery The current query, for fluid interface
+     */
+    public function joinSession($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Session');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Session');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Session relation Session object
+     *
+     * @see useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return \Overseer\Models\SessionQuery A secondary query class using the current class as primary query
+     */
+    public function useSessionQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinSession($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Session', '\Overseer\Models\SessionQuery');
     }
 
     /**

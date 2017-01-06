@@ -2,8 +2,8 @@
 
 namespace Overseer\Models\Map;
 
-use Overseer\Models\User;
-use Overseer\Models\UserQuery;
+use Overseer\Models\SystemParameter;
+use Overseer\Models\SystemParameterQuery;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\InstancePoolTrait;
@@ -16,7 +16,7 @@ use Propel\Runtime\Map\TableMapTrait;
 
 
 /**
- * This class defines the structure of the 'users' table.
+ * This class defines the structure of the 'system_parameters' table.
  *
  *
  *
@@ -26,7 +26,7 @@ use Propel\Runtime\Map\TableMapTrait;
  * (i.e. if it's a text column type).
  *
  */
-class UserTableMap extends TableMap
+class SystemParameterTableMap extends TableMap
 {
     use InstancePoolTrait;
     use TableMapTrait;
@@ -34,7 +34,7 @@ class UserTableMap extends TableMap
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'Overseer.Models.Map.UserTableMap';
+    const CLASS_NAME = 'Overseer.Models.Map.SystemParameterTableMap';
 
     /**
      * The default database name for this class
@@ -44,22 +44,22 @@ class UserTableMap extends TableMap
     /**
      * The table name for this class
      */
-    const TABLE_NAME = 'users';
+    const TABLE_NAME = 'system_parameters';
 
     /**
      * The related Propel class for this table
      */
-    const OM_CLASS = '\\Overseer\\Models\\User';
+    const OM_CLASS = '\\Overseer\\Models\\SystemParameter';
 
     /**
      * A class that can be returned by this tableMap
      */
-    const CLASS_DEFAULT = 'Overseer.Models.User';
+    const CLASS_DEFAULT = 'Overseer.Models.SystemParameter';
 
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 7;
+    const NUM_COLUMNS = 2;
 
     /**
      * The number of lazy-loaded columns
@@ -69,42 +69,17 @@ class UserTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 7;
+    const NUM_HYDRATE_COLUMNS = 2;
 
     /**
      * the column name for the id field
      */
-    const COL_ID = 'users.id';
+    const COL_ID = 'system_parameters.id';
 
     /**
-     * the column name for the username field
+     * the column name for the maintenance_level field
      */
-    const COL_USERNAME = 'users.username';
-
-    /**
-     * the column name for the password field
-     */
-    const COL_PASSWORD = 'users.password';
-
-    /**
-     * the column name for the email field
-     */
-    const COL_EMAIL = 'users.email';
-
-    /**
-     * the column name for the modlevel field
-     */
-    const COL_MODLEVEL = 'users.modlevel';
-
-    /**
-     * the column name for the confirmed field
-     */
-    const COL_CONFIRMED = 'users.confirmed';
-
-    /**
-     * the column name for the confirmation_key field
-     */
-    const COL_CONFIRMATION_KEY = 'users.confirmation_key';
+    const COL_MAINTENANCE_LEVEL = 'system_parameters.maintenance_level';
 
     /**
      * The default string format for model objects of the related table
@@ -118,11 +93,11 @@ class UserTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'Username', 'Password', 'Email', 'Modlevel', 'Confirmed', 'ConfirmationKey', ),
-        self::TYPE_CAMELNAME     => array('id', 'username', 'password', 'email', 'modlevel', 'confirmed', 'confirmationKey', ),
-        self::TYPE_COLNAME       => array(UserTableMap::COL_ID, UserTableMap::COL_USERNAME, UserTableMap::COL_PASSWORD, UserTableMap::COL_EMAIL, UserTableMap::COL_MODLEVEL, UserTableMap::COL_CONFIRMED, UserTableMap::COL_CONFIRMATION_KEY, ),
-        self::TYPE_FIELDNAME     => array('id', 'username', 'password', 'email', 'modlevel', 'confirmed', 'confirmation_key', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
+        self::TYPE_PHPNAME       => array('Id', 'MaintenanceLevel', ),
+        self::TYPE_CAMELNAME     => array('id', 'maintenanceLevel', ),
+        self::TYPE_COLNAME       => array(SystemParameterTableMap::COL_ID, SystemParameterTableMap::COL_MAINTENANCE_LEVEL, ),
+        self::TYPE_FIELDNAME     => array('id', 'maintenance_level', ),
+        self::TYPE_NUM           => array(0, 1, )
     );
 
     /**
@@ -132,11 +107,11 @@ class UserTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'Username' => 1, 'Password' => 2, 'Email' => 3, 'Modlevel' => 4, 'Confirmed' => 5, 'ConfirmationKey' => 6, ),
-        self::TYPE_CAMELNAME     => array('id' => 0, 'username' => 1, 'password' => 2, 'email' => 3, 'modlevel' => 4, 'confirmed' => 5, 'confirmationKey' => 6, ),
-        self::TYPE_COLNAME       => array(UserTableMap::COL_ID => 0, UserTableMap::COL_USERNAME => 1, UserTableMap::COL_PASSWORD => 2, UserTableMap::COL_EMAIL => 3, UserTableMap::COL_MODLEVEL => 4, UserTableMap::COL_CONFIRMED => 5, UserTableMap::COL_CONFIRMATION_KEY => 6, ),
-        self::TYPE_FIELDNAME     => array('id' => 0, 'username' => 1, 'password' => 2, 'email' => 3, 'modlevel' => 4, 'confirmed' => 5, 'confirmation_key' => 6, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
+        self::TYPE_PHPNAME       => array('Id' => 0, 'MaintenanceLevel' => 1, ),
+        self::TYPE_CAMELNAME     => array('id' => 0, 'maintenanceLevel' => 1, ),
+        self::TYPE_COLNAME       => array(SystemParameterTableMap::COL_ID => 0, SystemParameterTableMap::COL_MAINTENANCE_LEVEL => 1, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'maintenance_level' => 1, ),
+        self::TYPE_NUM           => array(0, 1, )
     );
 
     /**
@@ -149,20 +124,15 @@ class UserTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('users');
-        $this->setPhpName('User');
+        $this->setName('system_parameters');
+        $this->setPhpName('SystemParameter');
         $this->setIdentifierQuoting(false);
-        $this->setClassName('\\Overseer\\Models\\User');
+        $this->setClassName('\\Overseer\\Models\\SystemParameter');
         $this->setPackage('Overseer.Models');
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
-        $this->addColumn('username', 'Username', 'VARCHAR', true, 255, null);
-        $this->addColumn('password', 'Password', 'VARCHAR', true, 255, null);
-        $this->addColumn('email', 'Email', 'VARCHAR', true, 255, null);
-        $this->addColumn('modlevel', 'Modlevel', 'INTEGER', true, null, null);
-        $this->addColumn('confirmed', 'Confirmed', 'BOOLEAN', true, 1, null);
-        $this->addColumn('confirmation_key', 'ConfirmationKey', 'VARCHAR', true, 255, null);
+        $this->addColumn('maintenance_level', 'MaintenanceLevel', 'INTEGER', true, null, 0);
     } // initialize()
 
     /**
@@ -170,20 +140,6 @@ class UserTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Character', '\\Overseer\\Models\\Character', RelationMap::ONE_TO_MANY, array (
-  0 =>
-  array (
-    0 => ':owner_id',
-    1 => ':id',
-  ),
-), null, null, 'Characters', false);
-        $this->addRelation('Session', '\\Overseer\\Models\\Session', RelationMap::ONE_TO_MANY, array (
-  0 =>
-  array (
-    0 => ':owner_id',
-    1 => ':id',
-  ),
-), null, null, 'Sessions', false);
     } // buildRelations()
 
     /**
@@ -243,7 +199,7 @@ class UserTableMap extends TableMap
      */
     public static function getOMClass($withPrefix = true)
     {
-        return $withPrefix ? UserTableMap::CLASS_DEFAULT : UserTableMap::OM_CLASS;
+        return $withPrefix ? SystemParameterTableMap::CLASS_DEFAULT : SystemParameterTableMap::OM_CLASS;
     }
 
     /**
@@ -257,22 +213,22 @@ class UserTableMap extends TableMap
      *
      * @throws PropelException Any exceptions caught during processing will be
      *                         rethrown wrapped into a PropelException.
-     * @return array           (User object, last column rank)
+     * @return array           (SystemParameter object, last column rank)
      */
     public static function populateObject($row, $offset = 0, $indexType = TableMap::TYPE_NUM)
     {
-        $key = UserTableMap::getPrimaryKeyHashFromRow($row, $offset, $indexType);
-        if (null !== ($obj = UserTableMap::getInstanceFromPool($key))) {
+        $key = SystemParameterTableMap::getPrimaryKeyHashFromRow($row, $offset, $indexType);
+        if (null !== ($obj = SystemParameterTableMap::getInstanceFromPool($key))) {
             // We no longer rehydrate the object, since this can cause data loss.
             // See http://www.propelorm.org/ticket/509
             // $obj->hydrate($row, $offset, true); // rehydrate
-            $col = $offset + UserTableMap::NUM_HYDRATE_COLUMNS;
+            $col = $offset + SystemParameterTableMap::NUM_HYDRATE_COLUMNS;
         } else {
-            $cls = UserTableMap::OM_CLASS;
-            /** @var User $obj */
+            $cls = SystemParameterTableMap::OM_CLASS;
+            /** @var SystemParameter $obj */
             $obj = new $cls();
             $col = $obj->hydrate($row, $offset, false, $indexType);
-            UserTableMap::addInstanceToPool($obj, $key);
+            SystemParameterTableMap::addInstanceToPool($obj, $key);
         }
 
         return array($obj, $col);
@@ -295,18 +251,18 @@ class UserTableMap extends TableMap
         $cls = static::getOMClass(false);
         // populate the object(s)
         while ($row = $dataFetcher->fetch()) {
-            $key = UserTableMap::getPrimaryKeyHashFromRow($row, 0, $dataFetcher->getIndexType());
-            if (null !== ($obj = UserTableMap::getInstanceFromPool($key))) {
+            $key = SystemParameterTableMap::getPrimaryKeyHashFromRow($row, 0, $dataFetcher->getIndexType());
+            if (null !== ($obj = SystemParameterTableMap::getInstanceFromPool($key))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj->hydrate($row, 0, true); // rehydrate
                 $results[] = $obj;
             } else {
-                /** @var User $obj */
+                /** @var SystemParameter $obj */
                 $obj = new $cls();
                 $obj->hydrate($row);
                 $results[] = $obj;
-                UserTableMap::addInstanceToPool($obj, $key);
+                SystemParameterTableMap::addInstanceToPool($obj, $key);
             } // if key exists
         }
 
@@ -327,21 +283,11 @@ class UserTableMap extends TableMap
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(UserTableMap::COL_ID);
-            $criteria->addSelectColumn(UserTableMap::COL_USERNAME);
-            $criteria->addSelectColumn(UserTableMap::COL_PASSWORD);
-            $criteria->addSelectColumn(UserTableMap::COL_EMAIL);
-            $criteria->addSelectColumn(UserTableMap::COL_MODLEVEL);
-            $criteria->addSelectColumn(UserTableMap::COL_CONFIRMED);
-            $criteria->addSelectColumn(UserTableMap::COL_CONFIRMATION_KEY);
+            $criteria->addSelectColumn(SystemParameterTableMap::COL_ID);
+            $criteria->addSelectColumn(SystemParameterTableMap::COL_MAINTENANCE_LEVEL);
         } else {
             $criteria->addSelectColumn($alias . '.id');
-            $criteria->addSelectColumn($alias . '.username');
-            $criteria->addSelectColumn($alias . '.password');
-            $criteria->addSelectColumn($alias . '.email');
-            $criteria->addSelectColumn($alias . '.modlevel');
-            $criteria->addSelectColumn($alias . '.confirmed');
-            $criteria->addSelectColumn($alias . '.confirmation_key');
+            $criteria->addSelectColumn($alias . '.maintenance_level');
         }
     }
 
@@ -354,7 +300,7 @@ class UserTableMap extends TableMap
      */
     public static function getTableMap()
     {
-        return Propel::getServiceContainer()->getDatabaseMap(UserTableMap::DATABASE_NAME)->getTable(UserTableMap::TABLE_NAME);
+        return Propel::getServiceContainer()->getDatabaseMap(SystemParameterTableMap::DATABASE_NAME)->getTable(SystemParameterTableMap::TABLE_NAME);
     }
 
     /**
@@ -362,16 +308,16 @@ class UserTableMap extends TableMap
      */
     public static function buildTableMap()
     {
-        $dbMap = Propel::getServiceContainer()->getDatabaseMap(UserTableMap::DATABASE_NAME);
-        if (!$dbMap->hasTable(UserTableMap::TABLE_NAME)) {
-            $dbMap->addTableObject(new UserTableMap());
+        $dbMap = Propel::getServiceContainer()->getDatabaseMap(SystemParameterTableMap::DATABASE_NAME);
+        if (!$dbMap->hasTable(SystemParameterTableMap::TABLE_NAME)) {
+            $dbMap->addTableObject(new SystemParameterTableMap());
         }
     }
 
     /**
-     * Performs a DELETE on the database, given a User or Criteria object OR a primary key value.
+     * Performs a DELETE on the database, given a SystemParameter or Criteria object OR a primary key value.
      *
-     * @param mixed               $values Criteria or User object or primary key or array of primary keys
+     * @param mixed               $values Criteria or SystemParameter object or primary key or array of primary keys
      *              which is used to create the DELETE statement
      * @param  ConnectionInterface $con the connection to use
      * @return int             The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -382,27 +328,27 @@ class UserTableMap extends TableMap
      public static function doDelete($values, ConnectionInterface $con = null)
      {
         if (null === $con) {
-            $con = Propel::getServiceContainer()->getWriteConnection(UserTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(SystemParameterTableMap::DATABASE_NAME);
         }
 
         if ($values instanceof Criteria) {
             // rename for clarity
             $criteria = $values;
-        } elseif ($values instanceof \Overseer\Models\User) { // it's a model object
+        } elseif ($values instanceof \Overseer\Models\SystemParameter) { // it's a model object
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
-            $criteria = new Criteria(UserTableMap::DATABASE_NAME);
-            $criteria->add(UserTableMap::COL_ID, (array) $values, Criteria::IN);
+            $criteria = new Criteria(SystemParameterTableMap::DATABASE_NAME);
+            $criteria->add(SystemParameterTableMap::COL_ID, (array) $values, Criteria::IN);
         }
 
-        $query = UserQuery::create()->mergeWith($criteria);
+        $query = SystemParameterQuery::create()->mergeWith($criteria);
 
         if ($values instanceof Criteria) {
-            UserTableMap::clearInstancePool();
+            SystemParameterTableMap::clearInstancePool();
         } elseif (!is_object($values)) { // it's a primary key, or an array of pks
             foreach ((array) $values as $singleval) {
-                UserTableMap::removeInstanceFromPool($singleval);
+                SystemParameterTableMap::removeInstanceFromPool($singleval);
             }
         }
 
@@ -410,20 +356,20 @@ class UserTableMap extends TableMap
     }
 
     /**
-     * Deletes all rows from the users table.
+     * Deletes all rows from the system_parameters table.
      *
      * @param ConnectionInterface $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).
      */
     public static function doDeleteAll(ConnectionInterface $con = null)
     {
-        return UserQuery::create()->doDeleteAll($con);
+        return SystemParameterQuery::create()->doDeleteAll($con);
     }
 
     /**
-     * Performs an INSERT on the database, given a User or Criteria object.
+     * Performs an INSERT on the database, given a SystemParameter or Criteria object.
      *
-     * @param mixed               $criteria Criteria or User object containing data that is used to create the INSERT statement.
+     * @param mixed               $criteria Criteria or SystemParameter object containing data that is used to create the INSERT statement.
      * @param ConnectionInterface $con the ConnectionInterface connection to use
      * @return mixed           The new primary key.
      * @throws PropelException Any exceptions caught during processing will be
@@ -432,22 +378,22 @@ class UserTableMap extends TableMap
     public static function doInsert($criteria, ConnectionInterface $con = null)
     {
         if (null === $con) {
-            $con = Propel::getServiceContainer()->getWriteConnection(UserTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(SystemParameterTableMap::DATABASE_NAME);
         }
 
         if ($criteria instanceof Criteria) {
             $criteria = clone $criteria; // rename for clarity
         } else {
-            $criteria = $criteria->buildCriteria(); // build Criteria from User object
+            $criteria = $criteria->buildCriteria(); // build Criteria from SystemParameter object
         }
 
-        if ($criteria->containsKey(UserTableMap::COL_ID) && $criteria->keyContainsValue(UserTableMap::COL_ID) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.UserTableMap::COL_ID.')');
+        if ($criteria->containsKey(SystemParameterTableMap::COL_ID) && $criteria->keyContainsValue(SystemParameterTableMap::COL_ID) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.SystemParameterTableMap::COL_ID.')');
         }
 
 
         // Set the correct dbName
-        $query = UserQuery::create()->mergeWith($criteria);
+        $query = SystemParameterQuery::create()->mergeWith($criteria);
 
         // use transaction because $criteria could contain info
         // for more than one table (I guess, conceivably)
@@ -456,7 +402,7 @@ class UserTableMap extends TableMap
         });
     }
 
-} // UserTableMap
+} // SystemParameterTableMap
 // This is the static code needed to register the TableMap for this table with the main Propel class.
 //
-UserTableMap::buildTableMap();
+SystemParameterTableMap::buildTableMap();

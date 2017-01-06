@@ -59,7 +59,7 @@ class SessionTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 3;
+    const NUM_COLUMNS = 4;
 
     /**
      * The number of lazy-loaded columns
@@ -69,7 +69,7 @@ class SessionTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 3;
+    const NUM_HYDRATE_COLUMNS = 4;
 
     /**
      * the column name for the id field
@@ -87,6 +87,11 @@ class SessionTableMap extends TableMap
     const COL_PASSWORD = 'sessions.password';
 
     /**
+     * the column name for the owner_id field
+     */
+    const COL_OWNER_ID = 'sessions.owner_id';
+
+    /**
      * The default string format for model objects of the related table
      */
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -98,11 +103,11 @@ class SessionTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'Name', 'Password', ),
-        self::TYPE_CAMELNAME     => array('id', 'name', 'password', ),
-        self::TYPE_COLNAME       => array(SessionTableMap::COL_ID, SessionTableMap::COL_NAME, SessionTableMap::COL_PASSWORD, ),
-        self::TYPE_FIELDNAME     => array('id', 'name', 'password', ),
-        self::TYPE_NUM           => array(0, 1, 2, )
+        self::TYPE_PHPNAME       => array('Id', 'Name', 'Password', 'OwnerId', ),
+        self::TYPE_CAMELNAME     => array('id', 'name', 'password', 'ownerId', ),
+        self::TYPE_COLNAME       => array(SessionTableMap::COL_ID, SessionTableMap::COL_NAME, SessionTableMap::COL_PASSWORD, SessionTableMap::COL_OWNER_ID, ),
+        self::TYPE_FIELDNAME     => array('id', 'name', 'password', 'owner_id', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, )
     );
 
     /**
@@ -112,11 +117,11 @@ class SessionTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'Name' => 1, 'Password' => 2, ),
-        self::TYPE_CAMELNAME     => array('id' => 0, 'name' => 1, 'password' => 2, ),
-        self::TYPE_COLNAME       => array(SessionTableMap::COL_ID => 0, SessionTableMap::COL_NAME => 1, SessionTableMap::COL_PASSWORD => 2, ),
-        self::TYPE_FIELDNAME     => array('id' => 0, 'name' => 1, 'password' => 2, ),
-        self::TYPE_NUM           => array(0, 1, 2, )
+        self::TYPE_PHPNAME       => array('Id' => 0, 'Name' => 1, 'Password' => 2, 'OwnerId' => 3, ),
+        self::TYPE_CAMELNAME     => array('id' => 0, 'name' => 1, 'password' => 2, 'ownerId' => 3, ),
+        self::TYPE_COLNAME       => array(SessionTableMap::COL_ID => 0, SessionTableMap::COL_NAME => 1, SessionTableMap::COL_PASSWORD => 2, SessionTableMap::COL_OWNER_ID => 3, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'name' => 1, 'password' => 2, 'owner_id' => 3, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, )
     );
 
     /**
@@ -139,6 +144,7 @@ class SessionTableMap extends TableMap
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('name', 'Name', 'VARCHAR', true, 255, null);
         $this->addColumn('password', 'Password', 'VARCHAR', true, 255, null);
+        $this->addForeignKey('owner_id', 'OwnerId', 'INTEGER', 'users', 'id', true, null, null);
     } // initialize()
 
     /**
@@ -146,6 +152,13 @@ class SessionTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Owner', '\\Overseer\\Models\\User', RelationMap::MANY_TO_ONE, array (
+  0 =>
+  array (
+    0 => ':owner_id',
+    1 => ':id',
+  ),
+), null, null, null, false);
         $this->addRelation('Character', '\\Overseer\\Models\\Character', RelationMap::ONE_TO_MANY, array (
   0 =>
   array (
@@ -299,10 +312,12 @@ class SessionTableMap extends TableMap
             $criteria->addSelectColumn(SessionTableMap::COL_ID);
             $criteria->addSelectColumn(SessionTableMap::COL_NAME);
             $criteria->addSelectColumn(SessionTableMap::COL_PASSWORD);
+            $criteria->addSelectColumn(SessionTableMap::COL_OWNER_ID);
         } else {
             $criteria->addSelectColumn($alias . '.id');
             $criteria->addSelectColumn($alias . '.name');
             $criteria->addSelectColumn($alias . '.password');
+            $criteria->addSelectColumn($alias . '.owner_id');
         }
     }
 
