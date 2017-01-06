@@ -50,5 +50,12 @@
         <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
         <column name="name" type="varchar" size="255" required="true" />
         <column name="password" type="varchar" size="255" required="true" />
+
+        <column name="owner_id" type="integer" required="true"/>
+
+        <foreign-key foreignTable="users" phpName="Owner">
+            <reference local="owner_id" foreign="id" />
+        </foreign-key>
+    </table>
     </table>
 </database>
