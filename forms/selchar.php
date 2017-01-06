@@ -1,26 +1,23 @@
 <?php
 session_start();
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/accrow.php');
+require_once __DIR__.'/../includes/bootstrap.php';
+
+use Overseer\Models\CharacterQuery;
 
 if (isset($_GET['id'])) {
-	$charID = mysqli_escape_string($connection, $_GET['id']);
-	$charQuery = mysqli_query($connection, "SELECT `owner` FROM `Characters` WHERE `ID` = '$charID';");
-	if (mysqli_num_rows($charQuery) == 0) {
+	$character = CharacterQuery::create()->findPK($_GET['id']);
+	if (!$character) {
 		echo 'No such character.';
 	} else {
-		$charRow = mysqli_fetch_array($charQuery);
-		if ($charRow['owner'] != $accountRow['ID']) {
-			echo 'That character doesn\'t belong to you!';
+		if ($character->getOwner() !== $currentUser) {
+			$flash->error('That character doesn\'t belong to you!');
 		} else {
-			$_SESSION['character'] = $charID;
-			header('Location: /');
+			$_SESSION['characterId'] = $_GET['id'];
 		}
+		header('Location: /');
 	}
 } else {
-	// unselect character
-	unset($_SESSION['character']);
+	// unselect current character
+	unset($_SESSION['characterId']);
 	header('Location: /');
 }
-
-?>
