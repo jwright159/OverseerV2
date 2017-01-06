@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+
 require_once __DIR__.'/../vendor/autoload.php'; // Run Composer's autoloader.
 require_once __DIR__.'/../build/orm/conf/config.php'; // Connect to the databas and initialize Propel
 
