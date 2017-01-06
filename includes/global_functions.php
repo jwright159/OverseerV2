@@ -1,4 +1,5 @@
 <?php 
+use Overseer\Models\User;
 use Overseer\Models\SystemParametersQuery;
 
 
@@ -56,4 +57,25 @@ function getMaintLevel() {
 		return 0;
 	}
 	return $system->getMaintenanceLevel();
+}
+
+/*
+ * Returns true if a given user has access during maintenance at the level given.
+ */
+function hasAccessDuringMaint($maintLevel, User $user) {
+	if ($maintLevel === 0) {
+		return true;
+	}
+
+	if (!isset($user)) {
+		return false;
+	}
+
+	switch ($maintLevel) {
+		case 1:
+			return $user->getModlevel() >= 10;
+		case 2:
+		default: // level should never be >2, but if it is, make sure mods still have access
+			return $user->getModlevel() >= 99;
+	}
 }
