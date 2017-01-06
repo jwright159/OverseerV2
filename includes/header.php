@@ -65,5 +65,10 @@ exit();
 			<?php
 			// display flashed messages
 			$flash->display();
+
+			// display a note in the header if maintenance mode is enabled
+			if ($maint > 0) {
+				echo "<i>Overseer is currently in maintainance mode (level $maint)</i>";
+			}
 			?>
 			<div>This is a header.</div>
