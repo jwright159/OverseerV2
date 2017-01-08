@@ -1,3 +1,3 @@
-		<div>This is a footer.</div>
+		This is a footer.
 	</body>
 </html>

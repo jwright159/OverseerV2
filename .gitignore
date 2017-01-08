@@ -1,9 +1,3 @@
-### Overseer ###
-old/
-
-### Propel2 ORM ###
-propel.yml
-
 ### Composer ###
 composer.phar
 /vendor/

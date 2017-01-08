@@ -1,25 +1,20 @@
 <?php
 session_start();
-require_once __DIR__.'/../includes/bootstrap.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
+$username = mysqli_escape_string($connection, $_POST['username']);
+$userResult = mysqli_query($connection, "SELECT * FROM `Users` WHERE `username` = '$username';");
 
-use Overseer\Models\UserQuery;
-
-$username = $_POST['username'];
-$password = $_POST['password'];
-$user = UserQuery::create()->findOneByUsername($username);
-
-if (!$user) {
-	// redirect back to the login page, displaying an error
-	$flash->error("User doesn't exist!");
-	header('Location: /login.php');
+if(mysqli_num_rows($userResult) == 0){
+	echo '<div class="container"><div class="alert alert-warning" role="alert">User doesn\'t exist!</div></div><br>';
 } else {
-	if (password_verify($password, $user->getPassword())) {
-		$flash->success("Login successful!");
-		$_SESSION['userId'] = $user->getId();
-		$_SESSION['username'] = $user->getUsername();
-		header('Location: /');
-	} else {
-		$flash->error("Invalid username or password.");
-		header('Location: /login.php');
+	$userRow = mysqli_fetch_array($userResult); //
+	$password = mysqli_escape_string($connection, $_POST['password']);
+	$correctPass = password_verify($password, $userRow['password']);
+	if ($correctPass == 1) {
+		echo '<div class="container"><div class="alert alert-success" role="alert">Login successful</div></div>';
+		$_SESSION['userID'] = $userRow['ID'];
+		$_SESSION['username'] = $userRow['username'];
+	} else { 
+		echo '<div class="container"><div class="alert alert-warning" role="alert">Error: Invalid username/password combination</div></div><br>';
 	}
 }
