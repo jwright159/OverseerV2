@@ -27,6 +27,9 @@ if (empty($characterName) || empty($chumHandle) || empty($sessionName) || empty(
 } elseif (!validateCharacterName($characterName)) {
 	$flash->error("Invalid character name. Character names consist of letters, accents, and spaces.");
 	redirect_to('/charcreate.php');
+} elseif (!validateChumhandle($chumHandle)) {
+	$flash->error("Invalid chumhandle. Chumhandles can only consist of letters.");
+	redirect_to('/charcreate.php');
 } else {
 	$session = SessionQuery::create()->findOneByName($sessionName);
 	if ($session) {
