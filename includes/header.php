@@ -1,5 +1,4 @@
 <?php
-
 session_start(); // Session begin. Pages utilising the header don't need to repeat this.
 
 if (empty($_SESSION['username'])) {
@@ -10,15 +9,6 @@ if (empty($_SESSION['username'])) {
 	}
 }
 
-/*if (!empty($_SESSION['username']) && empty($_SESSION['character'])) {
-	header('Location: /charselect.php');
-	exit();
-}*/
-
-// Fantastic code for tracking page loading time
-$loadtime = explode(' ', microtime()); $loadtime = $loadtime[1] + $loadtime[0];
-
-// All of our required things for running this show
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/database.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/accrow.php');
