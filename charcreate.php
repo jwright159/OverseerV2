@@ -5,7 +5,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 ?>
 <div class="container">
 	<h1>Create a Character!</h1>
-	<form role="form" class="form-horizontal" id="SessionForm" action="charcreate2.php" method="post">
+	<form role="form" class="form-horizontal" id="SessionForm" action="forms/charcreate.php" method="post">
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="species">Species</label>
 				<label class="radio-inline"><input type="radio" checked="checked" name="species" value="0">Human</label>
