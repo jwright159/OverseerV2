@@ -1,6 +1,6 @@
 <?php
 $pageTitle = 'Login';
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/head.php');
 	// Includes the header ?>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -48,5 +48,5 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 </div> 
 
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/ui/footer.php');
 ?>
