@@ -40,7 +40,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/head.php');
 				<button name="submit" type="submit" class="btn btn-primary" id="submit" form="SessionForm">Next</button>
 			</div><br>
 		</div>
-
+	</form>
+</div>
 <?php
 
 
