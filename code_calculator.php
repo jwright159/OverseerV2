@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/head.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/captchalogue.php');
 
 ?>
@@ -37,5 +37,5 @@ if (isset($_POST['code1']) && isset($_POST['code2'])) {
 	echo '<p>'.$code1->to_string().' ^^ '.$code2->to_string().' => '.$xor->to_string().'<img src="/util/render_card.php?code='.urlencode($xor->to_string()).'"></p>';
 }
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/ui/footer.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php');
 ?>

@@ -1,6 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/head.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/ui/header.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
+
 echo '<div class="content">';
 
 if (!isset($accountRow)) {
@@ -39,5 +39,5 @@ if (!isset($accountRow)) {
 
 echo '</div>';
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/ui/footer.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php');
 ?>

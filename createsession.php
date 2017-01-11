@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/head.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 	// Includes the header ?>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -52,5 +52,5 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/head.php');
 </div>
 
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/ui/footer.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php');
 ?>

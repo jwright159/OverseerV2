@@ -1,7 +1,7 @@
 <?php
 
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/head.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php');
 //GET VARS
 $confirmKey = mysqli_escape_string($connection, $_GET['confkey']);
 $emailConfirming = mysqli_escape_string($connection, $_GET['email']);
@@ -28,4 +28,4 @@ if (mysqli_num_rows($emailCheck) > 0) {
 	echo '<div class="container"><div class="alert alert-danger" role="alert">This email wasn\'t in the database!</div></div>';
 }
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/ui/footer.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php');
