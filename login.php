@@ -22,7 +22,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/head.php');
 
 <div class="container">
 	<p>Login</p>
-	<form role="form" class="form-horizontal" id="LoginForm" action="dolgin.php" method="post">
+	<form role="form" class="form-horizontal" id="LoginForm">
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="username">Username: </label>
 			<div class="col-sm-3">
