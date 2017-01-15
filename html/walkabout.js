@@ -9,13 +9,16 @@ function game(map) {
 	// Stores game specific variables.
 	// Set proper canvas resolution for pov.
 	var canvas= document.getElementById("canvas");
-	canvas.height=map.tilesize*16;
-	canvas.width=map.tilesize*16;	
+	canvas.height=map.tiles.size*16;
+	canvas.width=map.tiles.size*16;	
+	this.mode=1;
 	// Init variables
 	this.map=map;
+	this.tiles=map.tiles;
 	this.yoffset=0;
 	this.xoffset=0;
 	this.keys=[];
+	this.redraw=[1,1];
 	// Key listeners save current key state into global variable keys.
 	this.keysdown = function keysdown(e) {
 		//console.log("keypressed " + e.key)
@@ -29,14 +32,34 @@ function game(map) {
 	this.tick=function() {
 		// Welcome to the main event loop!
 		// Rendering...
-		window.draw.putImageData(this.map,this.xoffset,this.yoffset);
+		if (this.redraw[0]!=this.yoffset || this.redraw[1]!=this.xoffset) {
+			if (this.mode) {
+				window.draw.putImageData(this.map,this.xoffset,this.yoffset);
+			} else {
+				this.slowrender();
+			}
+			this.redraw=[this.yoffset,this.xoffset];
+		}
 		if (this.keys["w"] && this.yoffset<0) this.yoffset++;
 		if (this.keys["s"] && this.yoffset>-map.height+canvas.height) this.yoffset--;
 		if (this.keys["a"] && this.xoffset<0) this.xoffset++;
 		if (this.keys["d"] && this.xoffset>-map.height+canvas.width) this.xoffset--;
 	}.bind(this);
+	this.slowrender= function() {
+		var ytiles=canvas.height/this.tiles.size;
+		var xtiles=canvas.width/this.tiles.size;
+		var xot=-this.xoffset/this.tiles.size;
+		var yot=-this.yoffset/this.tiles.size;
+		for (var x=0; x<xtiles;x++) {
+			for (var y=0;y<ytiles;y++) {
+				draw.putImageData(this.tiles[this.map.tiledata[Math.round(x+xot)][Math.round(y+yot)]],x*this.tiles.size,y*this.tiles.size);
+			}
+		}
+	}.bind(this);
 	window.setInterval(this.tick,12);
+
 }
+
 // loads image, but doesn't actually. it makes an invisible temporary image with the source so that the browser downloads it, but it doesn't block until the image is downloaded.
 // make sure to add a .onload hook to the returned object, it'll call it when it's done.
 function loadimage(uri) {
@@ -76,9 +99,11 @@ function genmap(tiles,map) {
 	pic = drawer.getImageData(0,0,work.width,work.height);
 	pic.width=work.width;
 	pic.height=work.height;
-	pic.tilesize=tiles.size;
+	pic.tiles=tiles;
+	pic.tiledata=map;
 	return pic;
 }
+
 // temporary function
 function randommap(tiles,size) {
 	map = [];
@@ -93,11 +118,9 @@ function randommap(tiles,size) {
 
 a = loadimage("spritesheet.png");
 a.onload=function(){
-	//Generate a global tilesheet from our now loaded image, and then a global map from the tilesheet.
-	window.tiles=tilesheet(a,16);
-	window.map=randommap(window.tiles,32);
-	// Key listeners save current key state into global variable keys.
-	window.game = new game(window.map);
+	// why does canvas have built in antialiasing
+	draw.imageSmoothingEnabled=false;
+	window.game = new game(randommap(tilesheet(a,16),32));
 }
 
 
