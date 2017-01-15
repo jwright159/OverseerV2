@@ -115,11 +115,9 @@ function randommap(tiles,size) {
 	}
 	return genmap(tiles,map);
 } 
-
 a = loadimage("spritesheet.png");
 a.onload=function(){
 	// why does canvas have built in antialiasing
-	draw.imageSmoothingEnabled=false;
 	window.game = new game(randommap(tilesheet(a,16),32));
 }
 
