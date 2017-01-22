@@ -29,7 +29,16 @@ class Item {
 	}
 	
 	public function insert($conn) {
-		// TODO
+		// TODO: check for errors
+		if (is_null($this->code)) {
+			$code_str = 'NULL';
+		} else {
+			$code_str = "'".$this->code->to_string()."'";
+		}
+		$name = mysqli_real_escape_string($conn, $this->name);
+		$description = mysqli_real_escape_string($conn, $this->description);
+		mysqli_query($conn, "INSERT INTO `Items` (`code`, `name`, `description`) VALUES ($code_str, '$name', '$description')");
+		$this->id = mysqli_insert_id($conn);
 	}
 }
 
