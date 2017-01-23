@@ -7,14 +7,24 @@ class Item {
 	public $code = null;
 	public $name = "", $description = "";
 	
+	// Item cache
+	private static $cache = [];
+	
 	// Loads a certain item from the database
-	public static function load($conn, $id) {
+	public static function load($conn, $id, $useCache = true) {
+		if ($useCache && isset(Item::$cache[$id])) {
+			return Item::$cache[$id];
+		}
+		
 		// escape the id, just to be sure
 		$id = mysqli_real_escape_string($conn, $id);
 		$result = mysqli_query($conn, "SELECT * FROM `Items` WHERE `ID` = '$id' LIMIT 1;");
 		// TODO: error handling
 		$row = mysqli_fetch_array($result);
-		return Item::from_row($row);
+		$item = Item::from_row($row);
+		Item::$cache[$id] = $item;
+		echo 'fetched '.$id;
+		return $item;
 	}
 	
 	public static function from_row($row) {
