@@ -1,4 +1,4 @@
-<?php 
+<?php
 $pagetitle = "SESSION ADMIN";
 require_once("header.php");
 
@@ -42,24 +42,24 @@ if ($_SESSION['username'] != $sessionRow['creator']) {
 			echo "This character isn't in your session.<br><br>";
 		}
 }elseif (isset($_POST['adminchar'])) {
-	$adminChar = mysqli_escape_string($connection, $_POST['adminchar']);
+	$adminChar = mysqli_real_escape_string($connection, $_POST['adminchar']);
 	$adminQuery = mysqli_query($connection, "SELECT * FROM `Characters` WHERE `ID` = '".$adminChar."';");
 	$adminRow = mysqli_fetch_array($adminQuery);
-	
-	$ownerQuery = mysqli_query($connection, "SELECT * FROM `users` WHERE `ID` = '".$adminRow['owner']."';");
+
+	$ownerQuery = mysqli_query($connection, "SELECT * FROM `Users` WHERE `ID` = '".$adminRow['owner']."';");
 	$ownerRow = mysqli_fetch_array($ownerQuery);
 	$newAdmin = $ownerRow['username'];
-	
-	mysqli_query($connection, "UPDATE `sessions` SET `creator` = '$newAdmin' WHERE `ID` = '".$charrow['session']."';");
+
+	mysqli_query($connection, "UPDATE `Sessions` SET `creator` = '$newAdmin' WHERE `ID` = '".$charrow['session']."';");
 
 	if($adminQuery) notifyCharacter($_POST['adminchar'], "You have become the session's admin!");
-	
+
 	echo "Admin successfully changed</br> </br>";
-	
+
 }elseif (isset($_POST['deleteS'])){
 	$session = $charrow['session'];
 	$session_query = mysqli_query($connection, "SELECT * FROM `Characters` WHERE `session` = '$session'");
-	
+
 	while($exileplayer = mysqli_fetch_assoc($session_query)){
 		$exiledRow = $exileplayer;
 		$exileChar = $exiledRow['ID'];
@@ -93,14 +93,14 @@ if ($_SESSION['username'] != $sessionRow['creator']) {
 			notifyCharacter($exileChar, "You have been sent to DoomHeim as a result of your session being destroyed!");
 		}
 	}
-	
+
 	mysqli_query($connection, "DELETE FROM Sessions WHERE `ID` = '$session'");
 }elseif (isset($_POST['delete1'])){
 	echo "<span style='color:red;'>" . "Are you SURE you want to delete your entire session and doom every single member? This can't be undone.". "</span><br><br>";
 	echo '<form id="deleteS" action="sessionadmin.php" method="post">
 		<input type="submit" value="Yes, I want to permanently delete this session">
 		<input type="hidden" name="deleteS" value="true">
-	</form><br>';		
+	</form><br>';
 }elseif (isset($_POST['changepw'])){
 	if(isset($_POST['changepw2'])){
 		if($_POST['changepw2'] == $_POST['changepw']){
@@ -108,7 +108,7 @@ if ($_SESSION['username'] != $sessionRow['creator']) {
 			mysqli_query($connection, "UPDATE Sessions SET password='" . $password . "' WHERE ID=" . $charrow['session'] . " LIMIT 1;");
 			echo "Password changed successfully!<br>";
 			}else echo "The two passwords are different!<br>";
-	}else echo "You need to fill the password confirmation box!<br>";	
+	}else echo "You need to fill the password confirmation box!<br>";
 }elseif (!isset($_POST['chainclient']) || empty($_POST['chainclient'])) {
 		echo "You need to set people to rearrange their chain.<br><br>";
 }elseif (!isset($_POST['chainserver']) || empty($_POST['chainserver'])) {
@@ -123,7 +123,7 @@ if ($_SESSION['username'] != $sessionRow['creator']) {
 	$serverRow = mysqli_fetch_array($serverQuery);
 	if ($clientRow['session'] != $charrow['session']) {
 		echo "The client isn't in your session.<br><br>";
-	} elseif ($serverRow['session'] != $charrow['session']) { 
+	} elseif ($serverRow['session'] != $charrow['session']) {
 		echo "The server isn't in your session.<br><br>";
 	} else {
 		// Start the stuff
@@ -188,7 +188,7 @@ while ($namesRow = mysqli_fetch_assoc($namesResult)) {
 $namesResult = mysqli_query($connection, "SELECT * FROM `Characters` WHERE `session` = '$charSession';");
 echo '<br> Set <form id="chain" action="sessionadmin.php" method="post">
 	<select name="chainserver">
-	<option value="">Select Server</option>'; // Start selecting server. 
+	<option value="">Select Server</option>'; // Start selecting server.
 while ($namesRow = mysqli_fetch_assoc($namesResult)) {
 	echo '<option value="'.$namesRow['ID'].'">'.$namesRow['name'].'</option>';
 }
@@ -207,7 +207,7 @@ while ($namesRow = mysqli_fetch_assoc($namesResult)) {
 	echo "<form action='sessionadmin.php' method='post'>New Password: <input type='password' name='changepw' />";
 	echo "  Verify Password: <input type='password' name='changepw2' />";
 	echo "<input type='submit' value='CHANGE' /></form><br />";
-	
+
 	echo 'Delete Session <br><br>';
 
 	echo '<form id="delete1" action="sessionadmin.php" method="post">
