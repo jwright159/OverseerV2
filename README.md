@@ -7,3 +7,7 @@ The configuration file is in inc/database.php and the database dump can be found
 The repository also contains the status of the then upcoming Overseer v2.5, on the dev branch and a couple of feature branches.
 
 Godspeed.
+
+## Setup video
+
+https://youtu.be/sNQw6eO1aJ0
