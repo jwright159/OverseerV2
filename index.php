@@ -98,6 +98,10 @@ function showCaptcha() {
 					<img src="images/title/smallgrist.png">
 					<a href="/?changelog">CHANGELOG</a>
 					<img src="images/title/smallgrist.png">
+					<a href="https://www.patreon.com/OverseerReboot">DONATE</a>
+					<img src="images/title/smallgrist.png">
+					<a href="https://github.com/jwright159/OverseerV2">GITHUB</a>
+					<img src="images/title/smallgrist.png">
 					<a href="/?faq">FAQ</a></div>
 				<div id="content-container2">
 <?php if (isset($_GET['changelog'])) include($_SERVER['DOCUMENT_ROOT'] . '/inc/title/changelog.html');
