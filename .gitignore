@@ -1,5 +1,7 @@
-inc/database.php
 phpmyadmin
+.env
+composer.phar
+/vendor/
 
 *~
 \#*\#

@@ -1,16 +1,18 @@
 <?php
 
+require_once 'inc/dotenv_load.php';
+
 // Database host
-$conn_host = 'localhost';
+$conn_host = $_ENV['DB_HOSTNAME'];
 
 // Database user
-$conn_user = '';
+$conn_user = $_ENV['DB_USERNAME'];
 
 // Database password
-$conn_pass = '';
+$conn_pass = $_ENV['DB_PASSWORD'];
 
 // Database, er, uhm, database!
-$conn_db = '';
+$conn_db = $_ENV['DB_DATABASE'];
 
 
 
