@@ -1,6 +1,6 @@
 <?php
 
-require_once 'inc/dotenv_load.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/dotenv_load.php';
 
 // Database host
 $conn_host = $_ENV['DB_HOSTNAME'];
