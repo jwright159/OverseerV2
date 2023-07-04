@@ -62,7 +62,7 @@ if ($_POST['password'] != $_POST['confirmpw']) {
 // Insert the session.
 $insertquery = $db->prepare("INSERT INTO Sessions (name, password, creator) VALUES (:name, :password, :username)");
 $insertquery->bindParam(':name', $_POST['sessionname']);
-$insertquery->bindValue(':password', crypt($_POST['password']));
+$insertquery->bindValue(':password', password_hash($_POST['password'], PASSWORD_BCRYPT));
 $insertquery->bindParam(':username', $accrow['username']);
 $insertquery->execute();
 unset($insertquery);

@@ -104,7 +104,7 @@ if ($_SESSION['username'] != $sessionRow['creator']) {
 }elseif (isset($_POST['changepw'])){
 	if(isset($_POST['changepw2'])){
 		if($_POST['changepw2'] == $_POST['changepw']){
-			$password = crypt($_POST['changepw']);
+			$password = password_hash($_POST['changepw'], PASSWORD_BCRYPT);
 			mysqli_query($connection, "UPDATE Sessions SET password='" . $password . "' WHERE ID=" . $charrow['session'] . " LIMIT 1;");
 			echo "Password changed successfully!<br>";
 			}else echo "The two passwords are different!<br>";

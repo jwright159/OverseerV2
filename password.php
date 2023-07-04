@@ -14,7 +14,7 @@ if($_POST['op'] == "verify") {
 		echo 'false';
 	}
 } elseif($_POST['op'] == "crypt") {
-	echo crypt($_POST['password']);
+	echo password_hash($_POST['password'], PASSWORD_BCRYPT);
 }
 
 ?>

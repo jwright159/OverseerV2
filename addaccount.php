@@ -51,7 +51,7 @@ if (!isset($_POST['email'])) $_POST['email'] = "";
 
 $insertquery = $db->prepare("INSERT INTO Users (username, password, email) VALUES (:username, :password, :email)");
 $insertquery->bindParam(':username', $_POST['username']);
-$insertquery->bindValue(':password', crypt($_POST['password']));
+$insertquery->bindValue(':password', password_hash($_POST['password'], PASSWORD_BCRYPT));
 $insertquery->bindParam(':email', $_POST['email']);
 $insertquery->execute();
 unset($insertquery);
