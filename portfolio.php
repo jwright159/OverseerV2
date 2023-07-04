@@ -390,7 +390,7 @@ if (empty($_SESSION['username'])) {
 	echo '<div class="inventory">';
 	while ($i < $invslots) {
 		$meta = explode(":", $_SESSION['imeta'][$i]);
-		if ($meta[0] % 2 == 1) { //odd-numbered first arg, item is available
+		if ((int)$meta[0] % 2 == 1) { //odd-numbered first arg, item is available
 			if (empty($erow[$_SESSION['inv'][$i]]['name'])) {
 				$eresult = mysqli_query($connection, "SELECT * FROM Captchalogue WHERE ID = '" . $_SESSION['inv'][$i] . "';");
 				$erow[$_SESSION['inv'][$i]] = mysqli_fetch_array($eresult);
