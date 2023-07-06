@@ -42,5 +42,4 @@ if (empty($_SESSION['username'])) {
          </body>
          </html> ';
   }
-}
 ?> 

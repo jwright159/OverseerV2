@@ -2,7 +2,6 @@
 $pagetitle = "Item Editor";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/glitches.php";
-require_once "devconnect.php";
 //require_once "includes/grist_icon_parser.php";
 
 function anyglitch() {
@@ -28,7 +27,7 @@ function heaviestBonus($workrow){
 	$bonusrow['aggress']=$workrow['aggress'];
 	$bonusrow['assail']=$workrow['assail'];
 	$bonusrow['assault']=$workrow['assault'];
-	$bonusrow = array_map(intval,$bonusrow); //Make sure they're all integer values.
+	$bonusrow = array_map('intval', $bonusrow); //Make sure they're all integer values.
 	$bestbonus=max($bonusrow);
 	if($bestbonus==0)return "none";
 	elseif($bonusrow['abstain']==$bestbonus)return "abstain";
@@ -41,7 +40,7 @@ function heaviestBonus($workrow){
 	elseif($bonusrow['assault']==$bestbonus)return "assault";
 }
 
-if ($accrow['modlevel'] < 4 && $accrow['username'] != "Blahnotdumb") {
+if ($accrow['modlevel'] < 4) {
 	echo "What are you doing here?";
 } elseif (empty($_GET['db'])) {
   echo "Select a database:<br />";
@@ -517,5 +516,5 @@ if ($accrow['modlevel'] < 4 && $accrow['username'] != "Blahnotdumb") {
 	}
 }
 
-require_once$_SERVER['DOCUMENT_ROOT'] . "/footer.php");
+require_once$_SERVER['DOCUMENT_ROOT'] . "/footer.php";
 ?>
