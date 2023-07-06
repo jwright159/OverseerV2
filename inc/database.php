@@ -21,12 +21,12 @@ $conn_db = $_ENV['DB_DATABASE'];
 ////////////////////////////////////////////
 global $dbtype;
 if ($dbtype == "PDO") {
-  try {
-    $db = new PDO('mysql:host=' . $conn_host . ';dbname=' . $conn_db . ';', $conn_user, $conn_pass);
-  } catch (PDOException $e) {
-    exit("Could not connect to database: " . $e->getMessage() . "<br/>");
-  }
+	try {
+		$db = new PDO('mysql:host=' . $conn_host . ';dbname=' . $conn_db . ';', $conn_user, $conn_pass);
+	} catch (PDOException $e) {
+		exit("Could not connect to database: " . $e->getMessage() . "<br/>");
+	}
 } else {
-  global $connection;
-  $connection = mysqli_connect($conn_host, $conn_user, $conn_pass, $conn_db);
+	global $connection;
+	$connection = mysqli_connect($conn_host, $conn_user, $conn_pass, $conn_db);
 }

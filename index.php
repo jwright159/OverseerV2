@@ -1,8 +1,10 @@
 <?php
-require_once('inc/database.php');
-require_once('includes/global_functions.php');
-require_once('inc/autoload.php');
+require_once 'inc/database.php';
+require_once 'includes/global_functions.php';
+require_once 'inc/autoload.php';
+
 session_start();
+
 if (!empty($_SESSION['username'])) { // If the user is already logged in, get accrow.
 	$username = $_SESSION['username'];
 	$accresult = mysqli_query($connection, "SELECT * FROM `Users` WHERE `username` = '" . $_SESSION['username'] . "' LIMIT 1;");
@@ -148,7 +150,7 @@ elseif (isset($_GET['credits'])) include($_SERVER['DOCUMENT_ROOT'] . '/inc/title
 				Confirm password: <input id="confirmpw" name="confirmpw" type="password"><br>
 			<input type="submit" value="Create session">
 			</form>
-<?php } else if (isset($_GET['newchar'])) { // If the user wants to make a new character, we give them the character form. ?>
+<?php } elseif (isset($_GET['newchar'])) { // If the user wants to make a new character, we give them the character form. ?>
 			<?php showloginmsg(); ?>
 			<form name="charForm" action="addcharacter.php" onsubmit="return validateChar()" method="post"> Character name: <input id="charname" name="charname" type="text" /><br />
 				Session name: <input id="session" name="session" type="text"><br>
@@ -190,8 +192,8 @@ elseif (isset($_GET['credits'])) include($_SERVER['DOCUMENT_ROOT'] . '/inc/title
 			</form>
 <?php } else { // The user OBVIOUSLY doesn't want any other pages, and they're already logged in, so we give them the character select page. ?>
 			<div id="controlbuttons">
-				<a href="/?newchar"><div style="width: 64px; height: 64px; border-radius: 18px; background: url(images/title/addchar.png) no-repeat center center, #b8e0ef; display: inline-block;"></div></a>
 				<a href="/?newsession"><div style="width: 64px; height: 64px; border-radius: 18px; background: url(images/title/addsession.png) no-repeat center center, #b8e0ef; display: inline-block;"></div></a>
+				<a href="/?newchar"><div style="width: 64px; height: 64px; border-radius: 18px; background: url(images/title/addchar.png) no-repeat center center, #b8e0ef; display: inline-block;"></div></a>
 				<a href="/logout.php"><div style="width: 64px; height: 64px; border-radius: 18px; background: url(images/title/logout.png) no-repeat center center, #b8e0ef; display: inline-block;"></div></a>
 			</div>
 			<div id="charheader"></div>
@@ -214,7 +216,7 @@ elseif (isset($_GET['credits'])) include($_SERVER['DOCUMENT_ROOT'] . '/inc/title
 												if (empty($sname[$row['session']])) {
 																$sesrow = loadSessionrow($row['session']);
 																$sname[$row['session']] = $sesrow['name'];
-												} 
+												}
 				$symbol = "'" . $row['symbol'] . "'";?>
 				<a title="<?php echo($sname[$row['session']]); ?>" href="/changechar.php?c=<?php echo($row['ID']); ?>">
 					<div class="character" charid="<?php echo($row['ID']); ?>" style="<?php echo(getcharbgcolor('#'.$row['colour'])); ?>;">
