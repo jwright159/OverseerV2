@@ -110,7 +110,11 @@ function showCaptcha() {
 elseif (isset($_GET['faq'])) include($_SERVER['DOCUMENT_ROOT'] . '/inc/title/faq.html');
 elseif (isset($_GET['credits'])) include($_SERVER['DOCUMENT_ROOT'] . '/inc/title/credits.html');
 			else { // no other pages requested so they must want the news! ?>
-					There's no content here anymore!
+					<ol style="text-align: left">
+						<li>Create an account.</li>
+						<li>Create a session (first button) if someone hasn't made it yet.</li>
+						<li>Create a character (second button).</li>
+					</ol>
 <?php } ?>
 				</div>
 			</div>
