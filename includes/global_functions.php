@@ -354,16 +354,16 @@ function chainArray($charrow) {
 }
 function getBonusname($n) {
 	switch ($n) {
-		case 0: return "aggrieve"; break;
-		case 1: return "aggress"; break;
-		case 2: return "assail"; break;
-		case 3: return "assault"; break;
-		case 4: return "abuse"; break;
-		case 5: return "accuse"; break;
-		case 6: return "abjure"; break;
-		case 7: return "abstain"; break;
-		case 8: return "defense"; break;
-		default: return "ERROR"; break;
+		case 0: return "aggrieve";
+		case 1: return "aggress";
+		case 2: return "assail";
+		case 3: return "assault";
+		case 4: return "abuse";
+		case 5: return "accuse";
+		case 6: return "abjure";
+		case 7: return "abstain";
+		case 8: return "defense";
+		default: return "ERROR";
 	}
 }
 
@@ -406,7 +406,8 @@ function rowProfileStringSoft($row){ //same as rowProfileString but no underline
 
 //end of profile shit
 
-function hex2RGB($hexStr, $returnAsString = false, $seperator = ',') {
+function hex2RGB($hexStr, $returnAsString = false, $seperator = ',')
+{
     $hexStr = preg_replace("/[^0-9A-Fa-f]/", '', $hexStr); // Gets a proper hex string
     $rgbArray = array();
     if (strlen($hexStr) == 6) { //If a proper hex code, convert using bitwise operation. No overhead... faster
@@ -422,9 +423,13 @@ function hex2RGB($hexStr, $returnAsString = false, $seperator = ',') {
         return false; //Invalid hex color code
     }
     return $returnAsString ? implode($seperator, $rgbArray) : $rgbArray; // returns the rgb string or the associative array
-} 
+}
 
-function strifeInit($charrow) { //Function takes the given character row and re-initializes the character's strife rows based on it
+/**
+ * Takes the given character row and re-initializes the character's strife rows based on it
+ */
+function strifeInit($charrow)
+{
 	//NOTE: Recalculates power, abilities, equipment bonuses (NOT the regular bonus field), and on-hit effects
 	//A lot of this will be going over equipped items and getting the proper properties out of them
 	//We probably want to grab the current health% and energy% and multiply them into the calculated maximums to get new current health/energy values
@@ -469,7 +474,7 @@ function strifeInit($charrow) { //Function takes the given character row and re-
 				$wid = $portfolio[0]; //get the item ID of the weapon equipped in main
 				$weapon = true;
 			}
-		} else if ($equip[0] == "off") { //off weapon slot
+		} elseif ($equip[0] == "off") { //off weapon slot
 			if ($equip[1] == 1) { //off weapon is equipped
 				$wid = $portfolio[1]; //get the item ID of the weapon equipped in off
 				$weapon = true;
@@ -530,8 +535,13 @@ function strifeInit($charrow) { //Function takes the given character row and re-
 	mysqli_query($connection, "UPDATE `Strifers` SET `maxhealth` = $viscosity, `maxenergy` = $viscosity, `abilities` = '" . $charrow['abilities'] . "', `aspect` = '" . $charrow['aspect'] . "', `echeladder` = " . $charrow['echeladder'] . ", `maxpower` = $dreampower, `power` = $dreampower WHERE `Strifers`.`ID` IN (" . $charrow['wakeself'] . ", " . $charrow['dreamself'] . ") LIMIT 2;");
 	mysqli_query($connection, "UPDATE `Strifers` SET `maxpower` = $wakepower, `power` = $wakepower, `effects` = '$wakeeffects', `equipbonuses` = '$wakebonuses', `equipstatus` = '$wakestatus' WHERE `Strifers`.`ID` = " . $charrow['wakeself'] . " LIMIT 1;");
 }
-function gainRungs($charrow,$rungs) { //Function takes a character row and a number of rungs, updates all the associated database entries with the rung-up
-        global $connection;
+
+/**
+ * Takes a character row and a number of rungs, updates all the associated database entries with the rung-up
+ */
+function gainRungs($charrow,$rungs)
+{
+     global $connection;
 	$class = $charrow['class'];
 	$aspect = $charrow['aspect'];
 	$oldrung = $charrow['echeladder'];
@@ -560,7 +570,7 @@ function gainRungs($charrow,$rungs) { //Function takes a character row and a num
 		$abilityresult = mysqli_query($connection, "SELECT `ID`,`Name` FROM `Abilities` WHERE
 		`Abilities`.`Class` IN ('$class', 'All') AND `Abilities`.`Aspect` IN ('$aspect', 'All') AND `Abilities`.`Rungreq` BETWEEN 1 AND $newrung;");
 		//NOTE - No need to check for god tiers here. They'll be listed as requiring a rung of "1025" and have a god tier requirement instead.
-		if ($abilityresult != false) {
+		if ($abilityresult) {
 			while ($row = mysqli_fetch_array($abilityresult)) {
 				if (strpos("|" . $charrow['abilities'], "|" . $row['ID'] . "|") === false) {
 					$abilities .= intval($row['ID']) . "|"; //Add this ability to the ability string
@@ -575,9 +585,13 @@ function gainRungs($charrow,$rungs) { //Function takes a character row and a num
 	}
 }
 
-function surgicalSearch($string, $search, $first = false) { //Take an effect/status/similar string, search for a tag (or component) and build an array containing
-	//all bits that have the search term in it and the associated arguments. Should be cleaner/faster than just a straight up explosion search.
-	//Set $first to true if you only care about the first tag that you find; in this case, it'll return just the one array.
+/**
+ * Take an effect/status/similar string, search for a tag (or component) and build an array containing
+ * all bits that have the search term in it and the associated arguments. Should be cleaner/faster than just a straight up explosion search.
+ * @param bool $first If true, you only care about the first tag that you find; in this case, it'll return just the one array.
+ */
+function surgicalSearch($string, $search, $first = false)
+{
 	$i = 0;
 	$string = "|" . $string; //add a | to the beginning so that you can search for "|EFFECT:", for instance, and still be able to count the first tag
 	$pos = strpos($string, $search); //Search for ANY occurrence of the search in the string. Add format characters (:, |, etc) as necessary to ensure you pick up the right instances
@@ -601,7 +615,11 @@ function surgicalSearch($string, $search, $first = false) { //Take an effect/sta
 	return $returnarray; //returns every tag that contains the search terms, already split up into arguments
 }
 
-function logDebugMessage($debugmsg) {     //writes message to debug log
+/**
+ * Writes a message to the debug log
+ */
+function logDebugMessage($debugmsg)
+{
   $time = date('Y-m-d H:i:s');            //gets current time
   $debugmsg = "($time) $debugmsg";
   $debugfile = fopen($_SERVER['DOCUMENT_ROOT'] . "/overseer/devtools/debuglog.txt", "a");    //opens the debug log
@@ -612,7 +630,11 @@ function logDebugMessage($debugmsg) {     //writes message to debug log
     }
 }
 
-function logCheatMessage($cheatmsg) {      //writes message to cheat log, same format as logDebugMessage
+/**
+ * Writes a message to the cheat log, same format as logDebugMessage
+ */
+function logCheatMessage($cheatmsg)
+{
   $time = date('Y-m-d H:i:s');
   $cheatmsg = "($time) $cheatmsg";
   $cheatfile = fopen($_SERVER['DOCUMENT_ROOT'] . "/devtools/cheatpolice.txt", "a");
@@ -623,7 +645,11 @@ function logCheatMessage($cheatmsg) {      //writes message to cheat log, same f
     }
 }
 
-function checkValidGrist($teststring) {    //check to see if a string is a valid grist type
+/**
+ * Check to see if a string is a valid grist type
+ */
+function checkValidGrist($teststring)
+{
   $gristarray = initGrists();                         //retrieve grist names
   for ($i = 1; $i <= count($gristarray); $i++) {      //for each grist
     if ($gristarray[$i]['name'] == $teststring) {             //check if it matches the test string
@@ -634,7 +660,8 @@ function checkValidGrist($teststring) {    //check to see if a string is a valid
 
 }
 
-function grist($griststring) {
+function grist($griststring)
+{
   $gristvalues = explode("|", $griststring);
   foreach ($gristvalues as $gristvalue) {
     $gristbreakdown = explode(":", $gristvalue);
@@ -645,40 +672,51 @@ function grist($griststring) {
   return $gristarray;
 }
 
-function logThis($string, $charID) {
+function logThis($string, $charID)
+{
     $filename = "../logs/char".$charID.".txt";
     $newString = $string.'<br>';
     if (!file_exists($filename)) {
         $myFile = fopen($filename, "w");
-        fwrite($myFile, $newString);
-        fclose($myFile);
+		if ($myFile)
+		{
+			fwrite($myFile, $newString);
+			fclose($myFile);
+		}
     } else {
         $myFile = fopen($filename, "a");
         fwrite($myFile, $newString);
         fclose($myFile);
-    }   
+    }
 }
 
-function readCharLog($charID) {
+function readCharLog($charID)
+{
 	$filename = "logs/char".$charID.".txt";
-	if (!file_exists($filename)) {
+	if (!file_exists($filename))
+	{
 		$myFile = fopen($filename, "w");
-        fwrite($myFile, '');
-        fclose($myFile);
-		$logContent = "Empty!";
-	} else {
+		if ($myFile)
+		{
+			fwrite($myFile, '');
+			fclose($myFile);
+			return "Empty!";
+		}
+		else
+			return "Character log not available - file could not be opened. This is likely a restriction of the platform the server is on.";
+	}
+	else
+	{
 		$myFile = fopen($filename, "r+");
 		$logContent = fread($myFile,filesize($filename));
 		ftruncate($myFile, 0);
 		fclose($myFile);
-		if (empty($logContent)) {
-			$logContent = "Empty!";
-		}
+		return !empty($logContent) ? $logContent : "Empty!";
 	}
-	return $logContent;
 }
 
-function calculateComputability($charrow) { //NOTE - computability 2 is currently non-functional.
+function calculateComputability($charrow) //NOTE - computability 2 is currently non-functional.
+{
 	$computability = 0;
 	if (strpos($charrow['storeditems'], "ISCOMPUTER.") !== false) $computability = 1;
 	if ($charrow['hascomputer'] != 0) $computability = 2;
