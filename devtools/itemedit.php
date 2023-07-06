@@ -256,8 +256,6 @@ if ($accrow['modlevel'] < 4) {
 					if (!empty($_POST['devcomments'])) $sysrow['addlog'] .= " (" . $_POST['devcomments'] . ")";
 					mysqli_query($connection, "UPDATE `System` SET `addlog` = '" . mysqli_real_escape_string($connection, $sysrow['addlog']) . "' WHERE 1");
 					echo "Addlog updated.<br />";
-					//mysqli_query($connection, "DELETE FROM `Captchalogue_Old` WHERE `captchalogue_code` = '$editcode'"); //an item with this code exists now, so delete any old ones
-					echo "If there was an old version of this item, it's gone now.<br />";
 				} else {
 					echo "Oops, something is wrong! The query didn't go through, and the item wasn't created. If all else fails, send that query to Blah!<br />";
 				}
@@ -287,34 +285,22 @@ if ($accrow['modlevel'] < 4) {
 		while ($srow = mysqli_fetch_array($lookupresult)) {
 			$_GET['editcode'] = $srow['code'];
 		}
-		if (empty($_GET['editcode'])) echo "No more non-reference base items in the old database? Rejoice!<br />";
-		//else $_GET['oldcode'] = "yep";
 	}
 	
 	if (!empty($_GET['editname'])) {
-		if (!empty($_GET['oldcode'])) {
-			$sname = str_replace("'", "\\\\''", $_GET['editname']);
-			$lookupresult = mysqli_query($connection, "SELECT `captchalogue_code`,`name` FROM `Captchalogue_Old` WHERE `name` = '$sname' LIMIT 1;");
-			while ($srow = mysqli_fetch_array($lookupresult)) {
-				$_GET['editcode'] = $srow['captchalogue_code'];
-			}
-		} else {
-			$sname = mysqli_real_escape_string($connection, $_GET['editname']);
-			$lookupresult = mysqli_query($connection, "SELECT `code`,`name` FROM `Captchalogue` WHERE `name` = '$sname' LIMIT 1;");
-			while ($srow = mysqli_fetch_array($lookupresult)) {
-				$_GET['editcode'] = $srow['code'];
-			}
+		$sname = mysqli_real_escape_string($connection, $_GET['editname']);
+		$lookupresult = mysqli_query($connection, "SELECT `code`,`name` FROM `Captchalogue` WHERE `name` = '$sname' LIMIT 1;");
+		while ($srow = mysqli_fetch_array($lookupresult)) {
+			$_GET['editcode'] = $srow['code'];
 		}
 		if (empty($_GET['editcode'])) {
 			echo $_GET['editname'] . " could not be found in the database, please check spelling and remove any backslashes before trying again.<br />";
 		}
 	}
 	$populate = false;
-	$loadold = false;
 	if (!empty($_GET['editcode'])) {
 		$editcode = $_GET['editcode'];
-		if (!empty($_GET['oldcode'])) $loadold = true;
-		else $populate = true;
+		$populate = true;
 	} else {
 		$editcode = "00000000";
 	}
@@ -421,22 +407,10 @@ if ($accrow['modlevel'] < 4) {
 			$erow = $row;
 		}
 	}
-	if ($loadold) {
-		$editresult = mysqli_query($connection, "SELECT * FROM `Captchalogue_Old` WHERE `Captchalogue_Old`.`captchalogue_code` = '$editcode' LIMIT 1;");
-		while($row = mysqli_fetch_array($editresult)) {
-			$founditem = true;
-			echo $row['name'] . " loaded<br />";
-			$erow = $row;
-			$erow['code'] = $row['captchalogue_code'];
-			$erow['base'] = $row['catalogue'];
-			$erow['loot'] = $row['lootonly'];
-			$erow['Artifact_Cost'] = $row['Artifact_Grist_Cost'];
-		}
-	}
 	
-	if ($founditem == false) {
+	if (!$founditem) {
 		echo "No item loaded. You may use the following to search for one:<br />";
-		echo '<form action="itemedit.php" method="get">Item code: <input type="text" name="editcode" /><br />-OR-<br />Item name: <input type="text" name="editname" /><br /><input type="checkbox" name="oldcode" value="yep" />Look through the old database instead<br /><input type="submit" value="Search" /></form>';
+		echo '<form action="itemedit.php" method="get">Item code: <input type="text" name="editcode" /><br />-OR-<br />Item name: <input type="text" name="editname" /><br /><input type="submit" value="Search" /></form>';
 	}
 	echo '<form action="itemedit.php';
   echo '?db=' . $_GET['db'];

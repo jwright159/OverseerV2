@@ -21,12 +21,10 @@ function realpower($row) {
 
 function lookup($code,$table) {
   global $connection;
-  if ($table != "Captchalogue_Old") $codevar = "code";
-  else $codevar = "captchalogue_code";
+  $codevar = "code";
   $result = mysqli_query($connection, "SELECT * FROM `$table` WHERE `$codevar` = '$code'");
   //echo "SELECT * FROM `$table` WHERE `$codevar` = '$code'<br />";
-  $row = mysqli_fetch_array($result);
-  return $row;
+  return mysqli_fetch_array($result);
 }
 
 function lookleft($name) {

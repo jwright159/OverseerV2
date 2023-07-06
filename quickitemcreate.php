@@ -151,12 +151,6 @@ if ($_SESSION['username'] != "") {
                         $_SESSION['code2'] = $code2;
                         $_SESSION['combineop'] = $op;
                         $loaded = true;
-                        $olditem = false;
-                        $itemresult = mysqli_query($connection, "SELECT * FROM Captchalogue_Old WHERE captchalogue_code = '$combine'");
-                        while ($itemrow = mysqli_fetch_array($itemresult)) {
-                            echo "Note: This code belonged to an item from the old version of Overseer. Its old stats have been provided so that you may edit it to better fit the new system if desired, or make one from scratch.<br />";
-                            $olditem = true;
-                        }
                         echo "<form action='quickitemgen.php' method='post' onsubmit='return validateForm()' id='itemcreate'>Fill out the below to create this item:<br />";
                         echo "Name: <input type='text' name='name' value='" . $itemrow['name'] . "' /><br />";
                         echo "Description:<br /><textarea id='itemcreate' name='description' rows='6' cols='40'>" . $itemrow['description'] . "</textarea><br />";
