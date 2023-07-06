@@ -1,7 +1,7 @@
 <?php
 $pagetitle = "Strife!";
 $headericon = "/images/header/rancorous.png";
-require_once("header.php");
+require_once "header.php";
 if (!empty($_POST['land'])) {
 	$maxenemies = 12;
 	if ($_POST['land'] == "battlefield") {
@@ -60,5 +60,5 @@ if (!empty($_POST['land'])) {
 } else {
 	echo "You need to select a Land to go find underlings to beat up on!<br />";
 }
-require_once("footer.php");
+require_once "footer.php";
 ?>

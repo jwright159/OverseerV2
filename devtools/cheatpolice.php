@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . "/header.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
 if ($accrow['modlevel'] < 10) {
   echo "You don't have sufficient permissions to view the cheat log!";
  } else {
@@ -20,5 +20,5 @@ if ($accrow['modlevel'] < 10) {
   echo '<br /><br /><form action="cheatpolice.php" method="post" id="clear"><input type="hidden" name="clear" id="clear" value="true" /><input type="submit" value="Clear the cheat log" /></form>';
   
  }
- require_once($_SERVER['DOCUMENT_ROOT'] . "/footer.php");
+ require_once $_SERVER['DOCUMENT_ROOT'] . "/footer.php";
 ?>

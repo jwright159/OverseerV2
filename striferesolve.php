@@ -1,9 +1,9 @@
 <?php
 $pagetitle = "Strife!";
 $headericon = "/images/header/rancorous.png";
-require_once("header.php");
-require_once("includes/strifefunctions.php"); //This file contains powerCalc, which takes a strife row and returns an array containing offense and defense
-require_once("includes/glitches.php"); //For printing glitchy shit
+require_once "header.php";
+require_once "includes/strifefunctions.php"; //This file contains powerCalc, which takes a strife row and returns an array containing offense and defense
+require_once "includes/glitches.php"; //For printing glitchy shit
 //The above file also contains buildMegaquery, which makes the database updating query at the end of the file
 
 ?>
@@ -73,7 +73,7 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 		//If for some reason we want NPC strifers to have commands, an AI file can go here
 		$i++;
 	}
-	require_once("includes/preeffects.php"); //Pre-resolution effects go here. Note that immobilizing effects are resolved here so that
+	require_once "includes/preeffects.php"; //Pre-resolution effects go here. Note that immobilizing effects are resolved here so that
 	//if they are applied in an attack later they do not prevent the victim from performing their own attack.
 	//A note on teamwork: Leaderless enemy encounters will not receive any teamwork boosts. Gotta have a team leader for teamwork to work, apparently.
 	//A note on teamwork-granted boosts: The duration of 1 is a formality. Since the boost is not added to the updated status effect list, it takes effect
@@ -143,7 +143,7 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 					$damage = $offense - $defense;
 					$basedamage = $damage; //The base damage of the attack (i.e. only the power comparison) may be used by some abilities
 					if ($basedamage < 0) $basedamage = 0; //It can't be less than 0.
-					require_once("includes/damageeffects.php"); //This file checks any damage-relevant effects on the two strifers involved.
+					require_once "includes/damageeffects.php"; //This file checks any damage-relevant effects on the two strifers involved.
 					//This file will check on-hit effects as well as status effects on the attacker and defender and any relevant abilities.
 					//Note that bonuses have already been handled by this point.
 					if ($damage < 0) $damage = 0; //No, failing to beat their defense does not heal them
@@ -158,7 +158,7 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 		$i++;
 	}
 	$enemynumber=0;
-	require_once("includes/posteffects.php"); //Post-resolution effects go here. This includes and will largely consist of end-of-turn considerations.
+	require_once "includes/posteffects.php"; //Post-resolution effects go here. This includes and will largely consist of end-of-turn considerations.
 	//It also covers KOing, loot, rung climbing, and anything that happens with regards to exploration/dungeons/etc as a result of strife
 	sumStat($charrow, 'enemiesbeaten',$enemynumber);
 	sumStat($charrow, 'moonprince', $moonprince);
@@ -166,7 +166,7 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 	$megaquery = buildMegaquery($strifers,$n,$connection);
 	mysqli_query($connection, $megaquery);
 	echo $output;
-	require_once("strifedisplay.php");
+	require_once "strifedisplay.php";
 }
-require_once("footer.php");
+require_once "footer.php";
 ?>

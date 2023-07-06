@@ -1,6 +1,6 @@
 <?php
 //REPLACE $logpaths for whatever your server uses
-require_once($_SERVER['DOCUMENT_ROOT'] . "/header.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
 $pagetitle = "Log Viewer";
 $headericon = "/images/header/spirograph.png";
 $phplogpath = 'C:/wamp/logs/php_error.log';
@@ -109,5 +109,5 @@ if ($accrow['modlevel'] < 10) {
 		<input type="submit" value="Retrieve log"></form><br>';
 }
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/footer.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/footer.php";
 ?>

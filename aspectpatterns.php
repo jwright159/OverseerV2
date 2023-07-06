@@ -24,8 +24,8 @@ function getHintStr($effectiveness) { //Takes an effectiveness value (assume 10k
 		return "completely ridiculous!";
 	}
 }
-require_once("includes/strifefunctions.php");
-require_once("header.php");
+require_once "includes/strifefunctions.php";
+require_once "header.php";
 if (empty($charrow)) {
 	echo "Select a character to manipulate your aspect.</br>";
 } else {
@@ -318,5 +318,5 @@ if (empty($charrow)) {
 		$i++;
 	}
 }
-require_once("footer.php");
+require_once "footer.php";
 ?>

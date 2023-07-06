@@ -1,6 +1,6 @@
 <?php
 
-require_once("header.php");
+require_once "header.php";
 
 
 if (empty($_SESSION['username'])) {
@@ -13,6 +13,6 @@ if (empty($_SESSION['username'])) {
     echo file_get_contents($filename); // Echoes out the content of the file
     file_put_contents($filename, ''); // Empties the file.
 }
-require_once("footer.php");
+require_once "footer.php";
 
 ?>

@@ -2,7 +2,7 @@
 $pagetitle = "Session Mates";
 $headericon = "/images/header/chummy.png";
 require($_SERVER['DOCUMENT_ROOT'] . '/inc/header.php');
-require_once("includes/global_functions.php");
+require_once "includes/global_functions.php";
 
 $characters = array();
 $querycount = 0;

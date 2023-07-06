@@ -1,7 +1,7 @@
 <?php
 $pagetitle = "Inventory";
 $headericon = "/images/header/inventory.png";
-require_once("header.php");
+require_once "header.php";
 require ("includes/additem.php");
 require ("includes/item_render.php");
 
@@ -388,5 +388,5 @@ if (empty($_SESSION['character'])) {
 	}
 }
 
-require_once("footer.php");
+require_once "footer.php";
 ?>

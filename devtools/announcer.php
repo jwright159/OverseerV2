@@ -1,7 +1,7 @@
 <?php
 
 $pagetitle = "Announcer";
-require_once($_SERVER['DOCUMENT_ROOT'] . "/header.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
 
 
 
@@ -66,7 +66,7 @@ if ($accrow['modlevel'] < 99) {
 ?>
 
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . "/footer.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/footer.php";
 ?>
 <script src="/js/moment.min.js"></script> 
 <script src="/js/combodate.js"></script> 

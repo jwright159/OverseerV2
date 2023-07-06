@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . "/header.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
 if ($accrow['modlevel'] < 10) {
   echo "You don't have sufficient permissions to view the debug log!";
  } else {
@@ -21,5 +21,5 @@ if ($accrow['modlevel'] < 10) {
   echo '<br /><br /><form action="debuglog.php" method="post" id="clear"><input type="hidden" id="clear" name="clear" value="true" /><input type="submit" value="Clear the debug log" /></form>';
   
  }
-require_once($_SERVER['DOCUMENT_ROOT'] . "/footer.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/footer.php";
 ?>

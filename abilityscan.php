@@ -1,5 +1,5 @@
 <?php
-require_once("header.php");
+require_once "header.php";
 $message = "";
 $class = $charrow['class'];
 $aspect = $charrow['aspect'];
@@ -22,5 +22,5 @@ if ($message == "") $message = "No new abilities available.<br />";
 mysqli_query($connection, "UPDATE `Characters` SET `abilities` = '$abilities' WHERE `Characters`.`ID` = $charrow[ID] LIMIT 1;");
 echo $message;
 strifeInit($charrow);
-require_once("footer.php");
+require_once "footer.php";
 ?>

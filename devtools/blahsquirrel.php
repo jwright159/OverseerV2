@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . "/header.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
 
 if ($accrow['modlevel'] < 99) {
 	echo "denied.<br />";
@@ -115,5 +115,5 @@ if ($accrow['modlevel'] < 99) {
 	echo "<br />";
 }
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/footer.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/footer.php";
 ?>

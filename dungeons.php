@@ -1,9 +1,9 @@
 <?php
 $pagetitle = "Dungeon";
 $headericon = "/images/header/compass.png";
-require_once("header.php");
-require_once("includes/strifefunctions.php");
-require_once("includes/additem.php");
+require_once "header.php";
+require_once "includes/strifefunctions.php";
+require_once "includes/additem.php";
 
 //WARNING: The coordinate system in here is convoluted. "row" means column, "column" means row, up is down, north is west...
 //...yeah, it's a bit of a mess. Just do things experimentally and try to reference nearby stuff. Sorry. --Overseer
@@ -552,5 +552,5 @@ if (empty($_SESSION['character'])) {
 	}
 }
 
-require_once("footer.php");
+require_once "footer.php";
 ?>

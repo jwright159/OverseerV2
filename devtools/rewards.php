@@ -1,6 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . "/header.php");
-require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/additem.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/additem.php";
 if ($accrow['modlevel'] < 10) {
   echo "You don't have sufficient permissions! Please go away.";
  } else {
@@ -24,5 +24,5 @@ if ($accrow['modlevel'] < 10) {
   echo 'ID of item: <input id="itemID" name="itemID" type="text" /></br>';
   echo '<input type="submit" value="Give reward!" /></form>';
  }
- require_once($_SERVER['DOCUMENT_ROOT'] . "/footer.php");
+ require_once $_SERVER['DOCUMENT_ROOT'] . "/footer.php";
 ?>

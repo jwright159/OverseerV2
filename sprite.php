@@ -1,7 +1,7 @@
 <?php
 $pagetitle = "Sprite";
 $headericon = "/images/header/chummy.png";
-require_once("header.php");
+require_once "header.php";
 
 if (empty($_SESSION['character'])) {
 	echo "Choose a character to interact with your sprite.<br />";
@@ -201,5 +201,5 @@ if (empty($_SESSION['character'])) {
 	}
 }
 
-require_once("footer.php");
+require_once "footer.php";
 ?>

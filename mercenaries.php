@@ -1,6 +1,6 @@
 <?php
 $pagetitle = "CONSORT MERCENARIES";
-require_once("header.php");
+require_once "header.php";
 
 if (empty($_SESSION['username'])) {
 	echo "Choose a character to see your hired consorts.<br>";
@@ -87,7 +87,7 @@ if (empty($_SESSION['username'])) {
 		}
 	}
 	if(isset($_GET['unequip'])) {
-		require_once("includes/additem.php");
+		require_once "includes/additem.php";
 		
 		while ($row = mysqli_fetch_assoc($consortRows)) {
 			$consortID = $row['id'];
@@ -147,5 +147,5 @@ if (empty($_SESSION['username'])) {
 	echo 'To collect it, <a href="mercenaries.php?collect">click here.</a>';
 	}
 
-require_once("footer.php");
+require_once "footer.php";
 ?>

@@ -1,6 +1,6 @@
 <?php
 $pagetitle = "Art Approver";
-require_once($_SERVER['DOCUMENT_ROOT'] . "/header.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
 require ($_SERVER['DOCUMENT_ROOT'] . "/includes/item_render.php");
 
 if ($accrow['modlevel'] < 4) {
@@ -70,5 +70,5 @@ if ($accrow['modlevel'] < 4) {
 	}
 }
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/footer.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/footer.php";
 ?>

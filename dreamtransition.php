@@ -1,8 +1,8 @@
 <?php
 $pagetitle = "Sleep";
 $headericon = "/images/header/sleep.png";
-require_once("header.php");
-require_once("includes/global_functions.php");
+require_once "header.php";
+require_once "includes/global_functions.php";
 if (empty($_SESSION['character'])) {
 	echo "You must have a character selected to switch selves!<br />";
 } elseif ($charrow['dreamer'] == "Unawakened") {
@@ -26,5 +26,5 @@ if (empty($_SESSION['character'])) {
 		}
 	}
 }
-require_once("footer.php");
+require_once "footer.php";
 ?>

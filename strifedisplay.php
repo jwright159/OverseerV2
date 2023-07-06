@@ -1,10 +1,10 @@
 <?php
 $pagetitle = "Strife!";
 $headericon = "/images/header/rancorous.png";
-require_once("header.php");
-require_once("includes/glitches.php");
-require_once("includes/displayfunctions.php");
-require_once("includes/strifefunctions.php");
+require_once "header.php";
+require_once "includes/glitches.php";
+require_once "includes/displayfunctions.php";
+require_once "includes/strifefunctions.php";
 
 ?>
 <script type="text/javascript">
@@ -366,5 +366,5 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 	//Print out an abscond button.
 	echo "<form action='strifedisplay.php' method='post'><input type='hidden' name='abscond' value='yes'><input type='submit' value='Abscond'></form><br />";
 }
-require_once("footer.php");
+require_once "footer.php";
 ?>

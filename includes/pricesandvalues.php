@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/global_functions.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/global_functions.php";
 
 function randomItem($querystring = "", $costcap = false, $session = 0) {
   // finds random item

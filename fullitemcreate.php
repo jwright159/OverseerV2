@@ -1,8 +1,8 @@
 <?php
 $pagetitle = "Full Item Creator";
 $headericon = "/images/header/inventory.png";
-require_once("header.php");
-require_once("includes/designix.php");
+require_once "header.php";
+require_once "includes/designix.php";
 
 function realpower($row) {
 	$power = $row['power'];
@@ -258,6 +258,6 @@ if ($_SESSION['username'] != "") {
 	echo "Log in to create items.";
 }
 
-require_once("footer.php");
+require_once "footer.php";
 ?>
 

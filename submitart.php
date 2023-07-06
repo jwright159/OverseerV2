@@ -1,8 +1,8 @@
 <?php
 $pagetitle = "Art Submitter";
 $headericon = "/images/header/inventory.png";
-require_once("header.php");
-require_once("includes/designix.php");
+require_once "header.php";
+require_once "includes/designix.php";
 require ("includes/item_render.php");
 
 if ($_SESSION['username'] == "") {
@@ -94,6 +94,6 @@ if ($_SESSION['username'] == "") {
 	}
 }
 
-require_once("footer.php");
+require_once "footer.php";
 ?>
 

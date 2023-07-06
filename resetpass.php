@@ -1,8 +1,8 @@
 <?php
 
-//require_once("header.php");
-require_once("includes/global_functions.php");
-require_once("inc/database.php");
+//require_once "header.php";
+require_once "includes/global_functions.php";
+require_once "inc/database.php";
 
 if (!isset($_POST['email']) && !isset($_POST['resetkey']) && !isset($_POST['password'])) {
     echo 'Enter your email address to reset your password.<br><br>'; ?>
@@ -62,6 +62,6 @@ if (!isset($_POST['email']) && !isset($_POST['resetkey']) && !isset($_POST['pass
 
 
 
-//require_once("footer.php");
+//require_once "footer.php";
 
 ?>

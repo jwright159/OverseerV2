@@ -4,7 +4,7 @@
 // Start the session and fire up the database connection.
 session_start();
 $dbtype = "PDO";
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/database.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/database.php';
 
 
 // Check that the account name isnt' blank, otherwise error out.

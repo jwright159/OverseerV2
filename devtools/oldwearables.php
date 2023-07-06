@@ -1,6 +1,6 @@
 <?php
 $pagetitle = "old wearable fixer upper";
-require_once($_SERVER['DOCUMENT_ROOT'] . "/header.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
 
 if ($accrow['modlevel'] < 10) {
   echo "nope.rtf";
@@ -35,5 +35,5 @@ if ($accrow['modlevel'] < 10) {
   echo "done with those 100. refresh the page to do more";
 }
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/footer.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/footer.php";
 ?>

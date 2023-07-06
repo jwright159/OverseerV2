@@ -1,9 +1,9 @@
 <?php
 $pagetitle = "Atheneum";
 $headericon = "/images/header/atheneum.png";
-require_once("header.php");
-require_once("includes/additem.php");
-require_once("includes/item_render.php");
+require_once "header.php";
+require_once "includes/additem.php";
+require_once "includes/item_render.php";
 if (empty($_SESSION['character'])) {
 	echo "You can't look at the atheneum from a nonexistent character!<br />";
 } else {
@@ -172,5 +172,5 @@ if (empty($_SESSION['character'])) {
 	}
 }
 echo "<br /><br />";
-require_once("footer.php");
+require_once "footer.php";
 ?>

@@ -1,6 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/includes/global_functions.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/inc/database.php");
+require_once $_SERVER['DOCUMENT_ROOT']."/includes/global_functions.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/inc/database.php";
 if (!empty($_SESSION['username'])) {
 	$username = $_SESSION['username'];
 	$accresult = mysqli_query($connection, "SELECT * FROM `Users` WHERE `username` = '" . $_SESSION['username'] . "' LIMIT 1;");

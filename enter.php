@@ -1,5 +1,5 @@
 <?php
-require_once("header.php");
+require_once "header.php";
 require ("includes/additem.php");
 /*function initRandomGrists($charrow) {
 	global $connection;
@@ -228,5 +228,5 @@ if (empty($_SESSION['character'])) {
 	}
 }
 
-require_once("footer.php");
+require_once "footer.php";
 ?>

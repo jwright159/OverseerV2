@@ -1,9 +1,9 @@
 <?php
 $pagetitle = "Item Editor";
-require_once($_SERVER['DOCUMENT_ROOT'] . "/header.php");
-require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/glitches.php");
-require_once("devconnect.php");
-//require_once("includes/grist_icon_parser.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/glitches.php";
+require_once "devconnect.php";
+//require_once "includes/grist_icon_parser.php";
 
 function anyglitch() {
 	$gtype = rand(1,5);

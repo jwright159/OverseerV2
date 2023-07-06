@@ -1,5 +1,5 @@
 <?php
-require_once("includes/global_functions.php");
+require_once "includes/global_functions.php";
 $connection = mysqli_connect('localhost', 'overseer_connect', 'TFtCuAYGCyvCXhNQ', 'Overseer');
 if (!empty($_SESSION['username'])) {
 	$accresult = mysqli_query($connection, "SELECT * FROM `Users` WHERE `username` = '" . $_SESSION['username'] . "' LIMIT 1;");

@@ -1,9 +1,9 @@
 <?php
 $pagetitle = "Alchemy";
 $headericon = "/images/header/inventory.png";
-require_once("header.php");
-require_once("includes/designix.php");
-require_once("includes/additem.php");
+require_once "header.php";
+require_once "includes/designix.php";
+require_once "includes/additem.php";
 
 if ($_SESSION['username'] != "") {
 	if (!empty($_POST['alchcode'])) { //user is alchemizing something
@@ -109,5 +109,5 @@ if ($_SESSION['username'] != "") {
 	echo "Log in to do alchemy.<br />";
 }
 
-require_once("footer.php");
+require_once "footer.php";
 ?>

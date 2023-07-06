@@ -1,7 +1,7 @@
 <?php
 $pagetitle = "Item Catalogue";
 $headericon = "/images/header/atheneum.png";
-require_once("header.php");
+require_once "header.php";
 require 'includes/additem.php';
 
 if (empty($_SESSION['username'])) {
@@ -75,5 +75,5 @@ if (empty($_SESSION['username'])) {
 
 }
 
-require_once("footer.php");
+require_once "footer.php";
 ?>

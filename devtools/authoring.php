@@ -1,6 +1,6 @@
 <?php
 $pagetitle = "Authoring Module";
-require_once($_SERVER['DOCUMENT_ROOT'] . "/header.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
 if ($accrow['modlevel'] < 1) {
   echo "You don't have authoring privileges.";
  } else {
@@ -25,5 +25,5 @@ if ($accrow['modlevel'] < 1) {
   echo "Text to add (can include HTML code):<br /><textarea id='author' name='text' rows='12' cols='80'></textarea>";
   echo '<input type="submit" value="Publish!" /></form>';
  }
- require_once($_SERVER['DOCUMENT_ROOT'] . "/footer.php");
+ require_once $_SERVER['DOCUMENT_ROOT'] . "/footer.php";
 ?>

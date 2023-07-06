@@ -1,8 +1,8 @@
 <?php
 $pagetitle = "Chain Viewer";
 $headericon = "/images/header/spirograph.png";
-require_once("header.php");
-require_once("includes/global_functions.php");
+require_once "header.php";
+require_once "includes/global_functions.php";
 
 echo '<form action="chainviewer.php" method="get">';
 echo 'Session to retrieve info about: <input id="session" name="session" type="text" /><input type="submit" value="Examine it!" /> </form></br>';
@@ -83,5 +83,5 @@ while(sizeof($characterid)>2){
 
 
 
-require_once("footer.php");
+require_once "footer.php";
 ?>

@@ -1,5 +1,5 @@
 <?php
-require_once("header.php");
+require_once "header.php";
 if (empty($_POST['orderby'])) {
 	$itemresult = mysqli_query($connection, "SELECT * FROM Captchalogue ORDER BY name ASC;");
 } else {
@@ -21,5 +21,5 @@ while ($itemrow = mysqli_fetch_array($itemresult)) {
 	}
 	echo "<br />";
 }
-require_once("footer.php");
+require_once "footer.php";
 ?>

@@ -1,7 +1,7 @@
 <?php
 $pagetitle = "SBURB Client";
 $headericon = "/images/header/spirograph.png";
-require_once("header.php");
+require_once "header.php";
 require 'includes/additem.php';
 require 'includes/designix.php';
 
@@ -270,5 +270,5 @@ if (empty($_SESSION['username'])) {
 	}
 }
 
-require_once("footer.php");
+require_once "footer.php";
 ?>

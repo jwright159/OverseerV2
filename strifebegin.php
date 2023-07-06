@@ -1,8 +1,8 @@
 <?php
 $pagetitle = "Strife!";
 $headericon = "/images/header/rancorous.png";
-require_once("header.php");
-require_once("includes/strifefunctions.php");
+require_once "header.php";
+require_once "includes/strifefunctions.php";
 $i = 1;
 $enemystr = "enemy" . strval($i);
 $enemycreated = false;
@@ -132,7 +132,7 @@ if ($legit) {
 			if (strpos($savedcommand, "DONOTSAVE") === false) {
 				mysqli_query($connection, "UPDATE Characters SET oldenemydata = '$savedcommand' WHERE Characters.ID = $charrow[ID] LIMIT 1;");
 			}
-			require_once("strifedisplay.php");
+			require_once "strifedisplay.php";
 		} else {
 			echo "ERROR: Enemy creation failed!<br />";
 		}
@@ -140,5 +140,5 @@ if ($legit) {
 		echo "No enemies were queued up to be processed, so strifebegin failed to produce any enemies.<br />";
 	}
 }
-require_once("footer.php");
+require_once "footer.php";
 ?>

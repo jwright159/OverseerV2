@@ -1,8 +1,8 @@
 <?php
 $pagetitle = "Session Viewer";
 $headericon = "/images/header/spirograph.png";
-require_once("header.php");
-require_once("includes/global_functions.php");
+require_once "header.php";
+require_once "includes/global_functions.php";
 
 echo '<form action="sessioninfo.php" method="post">';
 echo 'Session to retrieve info about: <input id="session" name="session" type="text" /><input type="submit" value="Examine it!" /> </form></br>';
@@ -240,5 +240,5 @@ if (!empty($session)) { //Session to examine
 		}
 	}
 }
-require_once("footer.php");
+require_once "footer.php";
 ?>

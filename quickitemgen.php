@@ -1,7 +1,7 @@
 <table>
 <?php 
-require_once("header.php");
-require_once("includes/designix.php");
+require_once "header.php";
+require_once "includes/designix.php";
 //name
 //description
 //power
@@ -383,7 +383,7 @@ if ($powerAllowed == True && $powerAllowedBonus == True && $fullyUnstable == 0) 
 //echo $grists.'<br>'; //Debug lines
 
 
-require_once("footer.php");
+require_once "footer.php";
 // Test data:
 /*name	Commemorative Second Amendment Pistol
 description	Celebrate your right to bear arms with this trendy pistol! Fires miniature American flags. The ends are quite pointy.

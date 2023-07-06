@@ -1,7 +1,7 @@
 <?php
 session_start();
 $dbtype = "PDO";
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/database.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/database.php';
 require($_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php');
 
 // Check if the user is logged in.

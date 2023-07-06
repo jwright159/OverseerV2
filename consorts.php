@@ -2,8 +2,8 @@
 $pagetitle = "Consorts";
 $headericon = "/images/header/chummy.png";
 require($_SERVER['DOCUMENT_ROOT'] . "/inc/header.php");
-require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/pricesandvalues.php");
-require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/additem.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/pricesandvalues.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/additem.php";
 
 // start page
 

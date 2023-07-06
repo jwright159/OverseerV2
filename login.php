@@ -3,7 +3,7 @@
 
 // Fire up the database connection.
 $dbtype = "PDO"; // New-fangled PDO style database stuff.
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/database.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/database.php';
 
 
 // Grab the user row for specified user.

@@ -64,7 +64,7 @@ function addItem($item,$userrow,$incode = "00000000") { //Adds an item to a user
 function addAbstratus($absstring,$userrow) {
 	echo "WARNING: addAbstratus function is now defunct. Please use addSpecibus (includes/fieldparser.php) instead. If you're not a developer and you see this message, please submit a bug report immediately!<br />";
 	$strifeslots = 16;
-	//require_once("includes/SQLconnect.php");
+	//require_once "includes/SQLconnect.php";
 	/*$result = mysql_query("SELECT * FROM Players WHERE `Players`.`username` = '" . $username . "'");
   while($row = mysql_fetch_array($result)) {
     if ($row['username'] == $username) {

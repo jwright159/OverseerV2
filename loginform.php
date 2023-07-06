@@ -1,5 +1,5 @@
 <?php
-require_once("header.php");
+require_once "header.php";
 if (empty($_SESSION['username'])) {
 	echo '
 	<form id="login" action="login.php" method="post">
@@ -35,5 +35,5 @@ if (empty($_SESSION['username'])) {
 } else {
 	echo "You are currently logged in as $_SESSION[username]<br />";
 }
-require_once("footer.php");
+require_once "footer.php";
 ?>

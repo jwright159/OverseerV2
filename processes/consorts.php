@@ -1,6 +1,6 @@
 <?php
-require_once("/var/www/overseer2.com/includes/global_functions.php");
-require_once("/var/www/overseer2.com/inc/database.php");
+require_once "/var/www/overseer2.com/includes/global_functions.php";
+require_once "/var/www/overseer2.com/inc/database.php";
 
 
 session_start();

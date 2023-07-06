@@ -1,7 +1,7 @@
 <?php
 $pagetitle = "Item Submissions";
 $headericon = "/images/header/inventory.png";
-require_once("header.php");
+require_once "header.php";
 
 function updateSubmission($subid) {
   global $connection;
@@ -458,5 +458,5 @@ echo "<!DOCTYPE html><html><head><style>itemcode{font-family:'Courier New'}</sty
   }
   echo "<br /><center>You can submit your own using one of these forms:<br /><a href='quickitemcreate.php'>Quick</a> | <a href='fullitemcreate.php'>Full</a></center>";
 }
-require_once("footer.php");
+require_once "footer.php";
 ?>

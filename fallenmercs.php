@@ -1,5 +1,5 @@
 <?php
-require_once("header.php");
+require_once "header.php";
 
 if (empty($_SESSION['character'])) {
 	echo "Choose a character to see your killed consorts.<br />";
@@ -15,4 +15,4 @@ if (empty($_SESSION['character'])) {
 	}
 	echo '</h5>';
 }	
-require_once("footer.php");
+require_once "footer.php";

@@ -1,5 +1,5 @@
 <?php
-require_once("header.php");
+require_once "header.php";
 
 if (empty($_SESSION['username'])) {
 	echo "Log in to be someone else.<br />";
@@ -49,5 +49,5 @@ if (empty($_SESSION['username'])) {
 	} else echo "You don't appear to have any characters yet! <a href='characterform.php'>Click here to create one.</a>";
 }
 
-require_once("footer.php");
+require_once "footer.php";
 ?>

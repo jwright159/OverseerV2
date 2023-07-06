@@ -1,8 +1,8 @@
 <?php
 $pagetitle = "Strife!";
 $headericon = "/images/header/rancorous.png";
-require_once("header.php");
-require_once("includes/strifefunctions.php");
+require_once "header.php";
+require_once "includes/strifefunctions.php";
 if (!empty($_POST['strifetojoin'])) {
 	$newID = intval($_POST['strifetojoin']); //This covers against SQL injection so escaping is unnecessary
 	$fatiguestr = 'wakefatigue'; //Should be overwritten by the below code, but just in case
@@ -22,7 +22,7 @@ if (!empty($_POST['strifetojoin'])) {
 		$leader=mysqli_fetch_array($lead);
 		notifyCharacter($leader['owner'], $charrow['name'] . " has joined you in Strife #" . $newID . "!");
 	}
-	require_once("strifedisplay.php");
+	require_once "strifedisplay.php";
 }
-require_once("footer.php");
+require_once "footer.php";
 ?>

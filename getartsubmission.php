@@ -12,12 +12,12 @@ if (empty($_SESSION['username']) or empty($_SESSION['character'])) {
 $loadtime = explode(' ', microtime()); $loadtime = $loadtime[1] + $loadtime[0];
 
 // All of our required things for running this show
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/autoload.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/autoload.php';
 // Nasty hack to enable simultaneous MySQL and PDO.
 $dbtype="PDO"; require($_SERVER['DOCUMENT_ROOT'] . '/inc/database.php');
 unset($dbtype); require($_SERVER['DOCUMENT_ROOT'] . '/inc/database.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/pageload.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/pageload.php';
 
 header("Content-type: image/png");
 

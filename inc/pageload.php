@@ -1,8 +1,8 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/global_functions.php");
-require_once($_SERVER['DOCUMENT_ROOT'] . "/inc/database.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/global_functions.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/inc/database.php";
 if (!empty($_SESSION['forever'])) {
 	if ($_SESSION['forever']) setcookie(session_name(),session_id(),time()+60*60*24*365); //Reset cookie expiration date to a year in the future if user logged in forever.
 }

@@ -214,6 +214,6 @@ $me->save();
 
 // More of this epic fancy error code handler stuff.
 if ((($_SERVER['HTTP_HOST'] == "dev.overseer2.com") || (explode(":", $_SERVER['HTTP_HOST'])[0] == "localhost")) && isset($errorlog)) echo '<div style="background-color: #F88; padding: 5px; margin: 10px; border-radius: 8px;">' . $errorlog . '</div>';
-require_once("bugcatcher.php"); ?>
+require_once "bugcatcher.php"; ?>
 	</body>
 </html>

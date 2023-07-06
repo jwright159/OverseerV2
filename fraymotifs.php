@@ -1,7 +1,7 @@
 <?php
 $pagetitle = "Fraymotifs";
 $headericon = "/images/header/rancorous.png";
-require_once("header.php");
+require_once "header.php";
 //Note on formatting: Fraymotifs are stored as I, II, and III for single motifs, and as the supporting Aspect for combo motifs
 if (empty($_SESSION['username'])) {
 	echo "Log in to access fraymotifs.<br />";
@@ -145,5 +145,5 @@ if (empty($_SESSION['username'])) {
 		$i++;
 	}
 }
-require_once("footer.php");
+require_once "footer.php";
 ?>

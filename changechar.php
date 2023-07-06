@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once("inc/database.php");
-require_once("includes/global_functions.php");
-require_once("inc/accrow.php");
+require_once "inc/database.php";
+require_once "includes/global_functions.php";
+require_once "inc/accrow.php";
 if (empty($_SESSION['username'])) {
 	echo "Log in to be someone else.<br />";
 } else {

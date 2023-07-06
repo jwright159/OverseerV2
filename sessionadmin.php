@@ -1,6 +1,6 @@
 <?php
 $pagetitle = "SESSION ADMIN";
-require_once("header.php");
+require_once "header.php";
 
 // Check theyre session admin first
 $sessionQuery = mysqli_query($connection, "SELECT * FROM `Sessions` WHERE `ID` = '".$charrow['session']."';");
@@ -216,4 +216,4 @@ while ($namesRow = mysqli_fetch_assoc($namesResult)) {
 		<input type="hidden" name="delete1" value="true">
 	</form>';
 
-require_once("footer.php");
+require_once "footer.php";

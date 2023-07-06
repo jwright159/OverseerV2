@@ -1,8 +1,8 @@
 <?php
 $pagetitle = "Quick Item Creator";
 $headericon = "/images/header/inventory.png";
-require_once("header.php");
-require_once("includes/designix.php"); ?>
+require_once "header.php";
+require_once "includes/designix.php"; ?>
 <script>
     function validateForm() {
         var name = document.forms["itemcreate"]["name"].value;
@@ -261,5 +261,5 @@ For example, putting a 2 in grist A and a 3 in grist B will make the item's Gris
     echo "Log in to create items.";
 }
 
-require_once("footer.php");
+require_once "footer.php";
 ?>

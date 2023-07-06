@@ -16,12 +16,12 @@ if (empty($_SESSION['username']) or empty($_SESSION['character'])) {
 $loadtime = explode(' ', microtime()); $loadtime = $loadtime[1] + $loadtime[0];
 
 // All of our required things for running this show
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/autoload.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/autoload.php';
 // Nasty hack to enable simultaneous MySQL and PDO.
 $dbtype="PDO"; require($_SERVER['DOCUMENT_ROOT'] . '/inc/database.php');
 unset($dbtype); require($_SERVER['DOCUMENT_ROOT'] . '/inc/database.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/pageload.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/pageload.php';
 
 // Load striferow
 if ($charrow['dreamingstatus'] == "Awake") {
@@ -34,7 +34,7 @@ $striferow = mysqli_fetch_array($striferesult);
 
 $me = new \Overseer\Character($db, $_SESSION['character']);
 
-require_once("accrow.php");
+require_once "accrow.php";
 $maintResult = mysqli_query($connection, "SELECT * FROM `System` WHERE `Index` = '0';");
 $maintRow = mysqli_fetch_array($maintResult);
 $maint = isset($maintRow['maint']) ? $maintRow['maint'] : 0;

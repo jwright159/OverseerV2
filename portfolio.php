@@ -1,7 +1,7 @@
 <?php
 $pagetitle = "Strife Portfolio";
 $headericon = "/images/header/rancorous.png";
-require_once("header.php");
+require_once "header.php";
 require 'includes/additem.php';
 require 'includes/item_render.php';
 
@@ -430,5 +430,5 @@ if (empty($_SESSION['username'])) {
 	if ($i > 0) echo "</select><input type='submit' value='Equip' /></form>";
 }
 
-require_once("footer.php");
+require_once "footer.php";
 ?>

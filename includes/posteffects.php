@@ -484,7 +484,7 @@ while ($i <= $n) {
 							$lootstr .= "$boonies Boondollars, ";
 							break;
 						case "ITEM": //Format: ITEM:<ID>:<Metadata>|. Metadata separated by @'s. addItem adds the "1" by default, so metadata can be empty.
-							require_once("includes/additem.php"); //Necessary for item drops
+							require_once "includes/additem.php"; //Necessary for item drops
 							$metadata = str_replace("@", ":", $current[2]);
 							$itemcreate = addItem($charrow,intval($current[1]),$metadata);
 							$itemname = itemName($current[1], $connection);
