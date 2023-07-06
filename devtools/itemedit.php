@@ -61,22 +61,22 @@ if ($accrow['modlevel'] < 4) {
 		$sysrow = mysqli_fetch_array($sysresult);
 		if ($sysrow['addlog'] != "") {
 			if (!empty($_POST['publishtitle']))
-			$titletext = mysqli_real_escape_string($connection, $_POST['publishtitle']);
+				$titletext = mysqli_real_escape_string($connection, $_POST['publishtitle']);
 			else {
 				$titletext = "Auto-posted addlog number ";
 				$titletext .= strval(rand(1000000,9999999));
 			}
 			$datetext = mysqli_real_escape_string($connection, date("Y-m-d H:i:s"));
 			$nametext = mysqli_real_escape_string($connection, $accrow['username']);
-			if (!empty($_POST['publishbody'])) 
-			$leadintext = $_POST['publishbody'];
+			if (!empty($_POST['publishbody']))
+				$leadintext = $_POST['publishbody'];
 			else $leadintext = "This is an automatically generated addlog of items that were created using the on-site Item Editor. The person posting this is too lazy to actually include a message, so enjoy these items:";
 			$bodytext = mysqli_real_escape_string($connection, $leadintext . "<br />" . $sysrow['addlog']);
 			mysqli_query($connection, "INSERT INTO `News` (`date`, `title`, `postedby`, `news`) VALUES ('$datetext', '$titletext', '$nametext', '$bodytext')");
 			echo $bodytext; //in case it fails to post
 			mysqli_query($connection, "UPDATE `System` SET `addlog` = '' WHERE 1");
 			echo "<br />News has been posted, and the addlog has been cleared.<br />";
-		} else "ERROR: Addlog is empty. Someone might have beaten you to it!<br />";
+		} else echo "ERROR: Addlog is empty. Someone might have beaten you to it!<br />";
 		} else echo "You don't have permission to post an addlog.<br />";
 	}
 	
@@ -184,7 +184,7 @@ if ($accrow['modlevel'] < 4) {
 						if ($_POST['populate'] == "no") {
 							echo 'An item with this code already exists! ';
 							if ($_POST['processing'] == 0)
-							echo 'If you intended to edit it, <a href="itemedit.php?editcode=' . $editcode . '">click here</a>.<br />';
+								echo 'If you intended to edit it, <a href="itemedit.php?editcode=' . $editcode . '">click here</a>.<br />';
 							else echo 'Check to see if the submission has the correct code for its recipe.<br />';
 							$blocked = true;
 							break;
@@ -368,11 +368,11 @@ if ($accrow['modlevel'] < 4) {
 			$wornpower = $erow['power'] + $erow['aggrieve'] + $erow['aggress'] + $erow['assail'] + $erow['assault'] + $erow['abuse'] + $erow['accuse'] + $erow['abjure'] + $erow['abstain'];
 			$wpnpower = $erow['power'] + $erow[heaviestBonus($erow)];
 			if (!empty($weapon))
-			$basetotalcost = (pow($wpnpower, 2) / 8) + ($wpnpower * 1.5);
+				$basetotalcost = (pow($wpnpower, 2) / 8) + ($wpnpower * 1.5);
 			elseif (!empty($bodygear))
-			$basetotalcost = (pow($wornpower, 2) * 1.25) + ($wornpower * 2);
+				$basetotalcost = (pow($wornpower, 2) * 1.25) + ($wornpower * 2);
 			else
-			$basetotalcost = (pow($wornpower, 3) / 150) + ($wornpower * 3);
+				$basetotalcost = (pow($wornpower, 3) / 150) + ($wornpower * 3);
 			echo "Suggested total grist cost: $basetotalcost<br />";
 			if (!empty($feedrow['grists'])) {
 				$barray = explode("|", $feedrow['grists']);
@@ -491,4 +491,3 @@ if ($accrow['modlevel'] < 4) {
 }
 
 require_once$_SERVER['DOCUMENT_ROOT'] . "/footer.php";
-?>
