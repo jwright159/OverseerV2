@@ -43,8 +43,8 @@ if (empty($charrow)) {
 		$aspectrow = $_SESSION['aspectrow'];
 		$classrow = $_SESSION['classrow'];
 	}
-	$classrow = array_map(intval, $classrow);
-	$aspectrow = array_map(intval, $aspectrow);
+	$classrow = array_map('intval', $classrow);
+	$aspectrow = array_map('intval', $aspectrow);
 	//Pull strife row here. It is necessary every page for at least determining a list of valid targets.
 	if ($charrow['dreamingstatus'] == "Awake") { //Grab the character's waking row
 		$sid = $charrow['wakeself'];
