@@ -188,7 +188,7 @@ if (empty($_SESSION['username'])) {
 		$listv[0] = "none";
 		while ($i < $invslots) { //sort through inventory and record all available captcha cards
 			$meta = explode(":", $_SESSION['imeta'][$i]);
-			if ($meta[0] % 2 == 1) { //this item is available
+			if ((int)$meta[0] % 2 == 1) { //this item is available
 				if ($_SESSION['inv'][$i] == 11) { //this is a captcha card
 					if (strpos($meta[1], "CODE=") !== false) { //has a code
 						$code = substr($meta[1], strpos($meta[1], "CODE=")+5, 8); //Retrieve the card code from the storage string
