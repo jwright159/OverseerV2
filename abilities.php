@@ -98,23 +98,27 @@ if (empty($_SESSION['username'])) {
 	}
 	echo "Roletechs and other abilities possessed:<br /><br />";
 	$abilities = substr(str_replace("|", ", ", $charrow['abilities']), 0, -2); //Replace "|" with ", ", knock off the last ", "
-	$abilityresult = mysqli_query($connection, "SELECT * FROM `Abilities` WHERE `Abilities`.`ID` IN ($abilities);");
-	while ($abilityrow = mysqli_fetch_array($abilityresult)) { //Ability the player possesses: Print it!
-		echo "Name: $abilityrow[Name]<br />";
-		echo "Description: $abilityrow[Description]<br />";
-		if ($abilityrow['Aspect_Cost'] != 0) {
-			$abilitycost = floor(($abilityrow['Aspect_Cost'] / $striferow['maxenergy']) * 100);
-			echo "Aspect cost: $abilitycost%<br />";
-		}
-		if ($abilityrow['Active'] == 1) {
-			echo '<form action="abilities.php" method="post"><input type="hidden" name="abilityused" value="' . $abilityrow['ID'] . '">';
-			if ($abilityrow['targets'] == 1) {
-				echo 'Ability target: <input type="text" name="target"><br />';
+	if ($abilities)
+	{
+		echo $abilities;
+		$abilityresult = mysqli_query($connection, "SELECT * FROM Abilities WHERE ID IN ($abilities);");
+		while ($abilityrow = mysqli_fetch_array($abilityresult)) { //Ability the player possesses: Print it!
+			echo "Name: $abilityrow[Name]<br />";
+			echo "Description: $abilityrow[Description]<br />";
+			if ($abilityrow['Aspect_Cost'] != 0) {
+				$abilitycost = floor(($abilityrow['Aspect_Cost'] / $striferow['maxenergy']) * 100);
+				echo "Aspect cost: $abilitycost%<br />";
 			}
-			echo '<input type="submit" value="Use it!"></form><br />';
+			if ($abilityrow['Active'] == 1) {
+				echo '<form action="abilities.php" method="post"><input type="hidden" name="abilityused" value="' . $abilityrow['ID'] . '">';
+				if ($abilityrow['targets'] == 1) {
+					echo 'Ability target: <input type="text" name="target"><br />';
+				}
+				echo '<input type="submit" value="Use it!"></form><br />';
+			}
+			echo "<br />";
 		}
-		echo "<br />";
 	}
 }
-require_once("footer.php");
-?>
+
+require_once "footer.php";
