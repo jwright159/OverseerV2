@@ -116,9 +116,10 @@ if ($legit) {
 		}
 		//Retrieve the next ID from masterID and use it
 		mysqli_multi_query($connection, "UPDATE System SET masterID = masterID + 1; SELECT masterID from System WHERE 1;");
-		mysqli_next_result(mysqli_next_result($connection));
+		mysqli_next_result($connection);
+		mysqli_next_result($connection);
 		$masterresult = mysqli_store_result($connection); //Store the second result
-		$masterrow = mysqli_fetch_array($masterresult);	
+		$masterrow = mysqli_fetch_array($masterresult);
 		$newID = $masterrow['masterID']; //Grab the master ID
 		mysqli_query($connection, "UPDATE `Strifers` SET `strifeID` = $newID WHERE `Strifers`.`ID` = $sid LIMIT 1;"); //To minimize the time this strifer is part of the group getting an ID
 		$enemies = generateEnemies($enemyarray,$newID,$connection,$appearson,1,$charrow['session'],$_POST['land'],$tierlist);
@@ -141,4 +142,3 @@ if ($legit) {
 	}
 }
 require_once "footer.php";
-?>
