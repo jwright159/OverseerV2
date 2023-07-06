@@ -178,7 +178,7 @@ if (empty($_SESSION['username'])) {
 							if ($canafford) {
 								$success = storeItem($clientrow, $drow['ID'], 1, $extras);
 								if ($success) {
-									mysqli_query($connection, "UPDATE `Characters` SET `grists` = $newgrist WHERE `ID` = '" . $clientrow['ID'] . "' LIMIT 1;");
+									mysqli_query($connection, "UPDATE Characters SET grists = '$newgrist' WHERE ID = '$clientrow[ID]' LIMIT 1;");
 									notifyCharacterOnce($charrow, $clientrow['ID'], $charrow['name'] . " has deployed a " . $drow['name'] . " in your house!");
 									if ($clientrow['inmedium'] == 0 && $drow['ID'] == 11) echo "Pre-punched Card successfully deployed!<br />";
 									else echo $drow['name'] . " successfully deployed!<br />";
