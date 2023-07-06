@@ -459,6 +459,7 @@ function strifeInit($charrow)
 	//NOTE - Limit weapon-based power based on Echeladder rung. You need a decent level to unlock the potential of high-end weapons.
 	$wakeeffects = ""; //This also does!
 	$wakebonuses = ""; //As does this!
+	$wakestatus = "";
 	$equips = explode("|", $charrow['equips']);
 	$portfolio = explode("|", $charrow['strifedeck']);
 	$i = 0;
