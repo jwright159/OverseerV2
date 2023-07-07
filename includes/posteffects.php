@@ -402,10 +402,10 @@ while ($i <= $n) {
 				$newfatigue = $korow['dreamfatigue'] + 100;
 				mysqli_query($connection, "UPDATE Characters set dreamfatigue = $newfatigue WHERE Characters.ID = " . $strifers[$i]['owner'] . " LIMIT 1;");
 			} else { //Waking self was KOed
-				$newfatigue = $korow['fatigue'] + 100;
+				$newfatigue = $korow['wakefatigue'] + 100;
 				$olddungeonrow = $korow['olddungeonrow'];
 				$olddungeoncol = $korow['olddungeoncol'];
-				mysqli_query($connection, "UPDATE Characters set fatigue = $newfatigue, dungeonrow = $olddungeonrow, dungeoncol = $olddungeoncol WHERE Characters.ID = " . $strifers[$i]['owner'] . " LIMIT 1;");
+				mysqli_query($connection, "UPDATE Characters set wakefatigue = $newfatigue, dungeonrow = $olddungeonrow, dungeoncol = $olddungeoncol WHERE Characters.ID = " . $strifers[$i]['owner'] . " LIMIT 1;");
 			}
 			if ($strifers[$i]['leader'] != 0) { //This strifer was the leader! We'll need to try and find another one
 				$j = 0;
@@ -453,7 +453,7 @@ while ($i <= $n) {
 					$moonprince = $moonprince+1;
 				}
 				if($strifers[$i]['name']=="Royal Assassin"){
-					$moonprince = $moonprince+1; 
+					$moonprince = $moonprince+1;
 				}
 				$ondeath = explode('|', $strifers[$i]['ondeath']); //Expand out the status string so we can look at it
 				$j = 0;

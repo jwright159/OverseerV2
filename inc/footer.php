@@ -12,19 +12,22 @@ if ($newinv != $charrow['inventory'] || $newmeta != $charrow['metadata']) { //in
 }
 
 checkNotifications($charrow);
-
-if (!empty($_SESSION['character'])) {
-	echo "Fatigue($me->wakefatigue) Dreamself fatigue($me->dreamfatigue)<br>";
-	if ($me->wakefatigue > 1025) echo "Waking fatigue penalty: " . (($me->wakefatigue - 1025) / 10) . "%<br>";
-	if ($me->dreamfatigue > 1025) echo "Dreamself fatigue penalty: " . (($me->dreamfatigue - 1025) / 10) . "%<br>";
-}
 $symbol = "'/" . $me->symbol . "'";
 $background='no';
 if($charrow['dreamingstatus']=='Prospit') $background='prospit';
 else if($charrow['dreamingstatus']=='Derse') $background='derse';
 ?>
 			</div><?php // id: content-area ?>
-			<footer>Page generated in <span id="pagegentime">???</span> seconds and loaded in <span id="pageloadtime"><span style="color: blue;">calculating </span></span>ms.</footer>
+			<footer>
+				<?php
+					if (!empty($_SESSION['character'])) {
+						echo "Fatigue($me->wakefatigue) Dreamself fatigue($me->dreamfatigue)<br>";
+						if ($me->wakefatigue > 1025) echo "Waking fatigue penalty: " . (($me->wakefatigue - 1025) / 10) . "%<br>";
+						if ($me->dreamfatigue > 1025) echo "Dreamself fatigue penalty: " . (($me->dreamfatigue - 1025) / 10) . "%<br>";
+					}
+				?>
+				Page generated in <span id="pagegentime">???</span> seconds and loaded in <span id="pageloadtime"><span style="color: blue;">calculating </span></span>ms.
+			</footer>
 		</div><?php // id: content-container ?>
 	</div><?php // id: layout-container ?>
 	<svg width=400 height=220 style="position: fixed; left: 0px; top: 0px; pointer-events: none;">

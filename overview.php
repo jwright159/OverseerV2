@@ -26,7 +26,7 @@ if ($me->client != 0) {
 if(isset($_POST['wastetime'])){
     echo "You laze around for a while and generally waste time.<br>";
     spendFatigue(10,$charrow);
-    if($charrow['wakefatigue']>1499 OR $charrow['dreamfatigue']>1499) setAchievement($charrow, 'fatigue');
+    if($charrow['wakefatigue'] > 1499 || $charrow['dreamfatigue'] > 1499) setAchievement($charrow, 'fatigue');
 }
 
 // Player is attempting to change dream moon.
