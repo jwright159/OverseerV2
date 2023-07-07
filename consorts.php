@@ -297,7 +297,7 @@ if (empty($_SESSION['character'])) {
 				$shoprow = getDialogue("shop", $charrow, $gate);
 				echo "$consort: " . $shoprow['dialogue'] . "<br /><br />";
 				$querystring = "SELECT MAX(`power`) FROM `Captchalogue` WHERE `ID` IN (";
-				$strifedeck = explode("|", strpos($charrow['strifedeck'], 0, -1));
+				$strifedeck = explode("|", substr($charrow['strifedeck'], 0, -1));
 				for ($i = 0; $i < count($strifedeck); $i++) {
 					if ($i > 0) $querystring .= ", ";
 					$querystring .= $strifedeck[$i];

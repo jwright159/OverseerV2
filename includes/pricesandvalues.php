@@ -394,10 +394,9 @@ function calcGristValue($gristname, $charrow) {
   // given a grist, the grist's tier, and a character row
   // returns the value of the grist within the character's land based on land and session
 
-  $charrow = mysqli_fetch_assoc($thisrow);
   if (strpos($charrow['grist_type'], $gristname) !== false)   // if the grist is on this land
     {
-      $thistier =  substr_count(substr($charrow['grist_type'], 0, strpos($thisland['grist_type'], $gristname)), "|")+1;    // count what number grist this is in the string (equal to number of previous "|"s + 1)
+      $thistier =  substr_count(substr($charrow['grist_type'], 0, strpos($charrow['grist_type'], $gristname)), "|")+1;    // count what number grist this is in the string (equal to number of previous "|"s + 1)
       if ($thistier > 9) return 40 * ($thistier-8);   // if it's grist number 10-18 (ie a bonus grist) it's worth double
       return 20 * ($thistier + 1);                    // otherwise it's worth 20 per tier
     }
@@ -563,11 +562,11 @@ function phatLoot(& $charrow, $qrow, & $landrow, $gate = 1, $itemcost = 0) {
 
   global $connection;
   $boonreward = 0;
-  $itemreward;
+  $itemreward = false;
   $rewardstring = "";
   $unlockreward = "";
   $questreward = 0;
-  $reward = rand(1,(100 - ($userrow['luck'] / 2))); //chance of getting an item instead of boons
+  $reward = rand(1,(100 - ($charrow['luck'] / 2))); //chance of getting an item instead of boons
   $inflation = rand(-90,-50) + econonyLevel($landrow['economy']);
   if ($inflation > 100) $inflation = 100;
   if (!empty($qrow['rewards']))
@@ -650,7 +649,7 @@ function phatLoot(& $charrow, $qrow, & $landrow, $gate = 1, $itemcost = 0) {
   else if ($reward < 10)  // 10% chance normally of getting an item in return, 20% if max luck
     {
       $itemreward = randomItem("", floor($itemcost/20));
-      if ($randomitem !== false && $randomitem !== -1)
+      if ($itemreward !== false && $itemreward !== -1)
 	{
 	  $rewarditemcost = totalBooncost($itemreward['gristcosts'], $landrow);
 	  $basecost = $itemcost - $rewarditemcost;
@@ -722,5 +721,3 @@ function phatLoot(& $charrow, $qrow, & $landrow, $gate = 1, $itemcost = 0) {
   logDebugMessage("There was an issue giving a reward! Item: " . $item . ", boons: " . $boons . ", unlock: " . $ally);
   return false;
 }
-
-?>
