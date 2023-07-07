@@ -382,10 +382,10 @@ $enemyslain = false;
 $moonprince = 0;
 
 //health gel stats
-$gelchance=15; //% chance of the first health gel dropping, to be divided by 2 each drop
-$topgel=3; //max number of dropped gels
-$healthfraction=10; //top% of health to be restored per gel unit
-$toheal=0; //to be applied later
+$gelchance = 15; //% chance of the first health gel dropping, to be divided by 2 each drop
+$topgel = 3; //max number of dropped gels
+$healthfraction = 10; //top% of health to be restored per gel unit
+$toheal = 0; //to be applied later
 $starthealth=$striferow['health'];
 while ($i <= $n) {
 	if ($strifers[$i]['health'] > $strifers[$i]['maxhealth']) $strifers[$i]['health'] = $strifers[$i]['maxhealth']; //Ensure strifer is not above their maximum
@@ -523,13 +523,13 @@ while ($i <= $n) {
 				}
 				//HEALTH GEL CODE
 
-				if (rand(0,100)<$gelchance && $topgel>0){
-					$gelchance=$gelchance/2; //it becomes exponentially less likely to get more units
-					$topgel=$topgel-1;
+				if (rand(0,100) < $gelchance && $topgel > 0) {
+					$gelchance = $gelchance / 2; //it becomes exponentially less likely to get more units
+					$topgel = $topgel - 1;
 
-					if($charrow['dreamingstatus']!='Prospit'){
+					if ($charrow['dreamingstatus'] != 'Prospit') {
 						$lootstr .= 'and some Vitality Gel cubes., '; //using 'and' in both because it'll always happen at the end of the string
-					}else{
+					} else {
 						$lootstr .= 'and a prospitian kindly offers you a refreshing glass of home-made lemonade for a job well done!, ';
 					}
 
@@ -538,25 +538,25 @@ while ($i <= $n) {
 					$lead = $strifers[$firstkey];
 
 
-					if($charrow['dreamingstatus']!='Awake') $powerdifference=($strifers[$i]['power']*1.5)/$lead['power']; //acounting for lack of equipment and passive class bullshit
-					elseif($charrow['dungeon']!=0){
-						$healthfraction=15;
-						$powerdifference=($strifers[$i]['power']*1.5)/$lead['power']; //buff to dungeon health gel to make up for wild power differences
-					} else $powerdifference=($strifers[$i]['power'])/$lead['power'];
-					if($powerdifference>1) $powerdifference = 1; //you get minimum penalty if your power is lower than the enemy's, so you'll recover $healthfraction
-					elseif($powerdifference>0.90 && $powerdifference<0.95) $powerdifference*=0.75; //penalties
-					elseif($powerdifference>0.80) $powerdifference*= 0.50;  
-					elseif($powerdifference<=0.80) $powerdifference*= 0.1;  //this is so much more complicated than it needs to be
+					if($charrow['dreamingstatus'] != 'Awake') $powerdifference = ($strifers[$i]['power'] * 1.5) / $lead['power']; //acounting for lack of equipment and passive class bullshit
+					elseif ($charrow['dungeon'] != 0) {
+						$healthfraction = 15;
+						$powerdifference = ($strifers[$i]['power'] * 1.5) / $lead['power']; //buff to dungeon health gel to make up for wild power differences
+					} else $powerdifference = ($strifers[$i]['power']) / $lead['power'];
+					if ($powerdifference > 1) $powerdifference = 1; //you get minimum penalty if your power is lower than the enemy's, so you'll recover $healthfraction
+					elseif ($powerdifference > 0.90 && $powerdifference < 0.95) $powerdifference *= 0.75; //penalties
+					elseif ($powerdifference > 0.80) $powerdifference *= 0.50;
+					elseif ($powerdifference <= 0.80) $powerdifference *= 0.1;  //this is so much more complicated than it needs to be
 
-					$toheal=$toheal+$healthfraction*$powerdifference;
+					$toheal = $toheal + $healthfraction * $powerdifference;
 
-					$finalhealth = floor($lead['maxhealth']/(100/$toheal));
-					if($finalhealth < 10) $finalhealth=10;
-					if($lead['health']+$finalhealth > $lead['maxhealth'])
+					$finalhealth = $toheal == 0 ? 0 : floor($lead['maxhealth'] / (100 / $toheal));
+					if ($finalhealth < 10) $finalhealth = 10;
+					if ($lead['health'] + $finalhealth > $lead['maxhealth'])
 						$lead['health'] = $lead['maxhealth'];
-					else $lead['health'] +=$finalhealth;
+					else $lead['health'] += $finalhealth;
 
-					$strifers[$firstkey]=$lead;
+					$strifers[$firstkey] = $lead;
 				}
 
 				//END OF HEALTH GEL CODE
