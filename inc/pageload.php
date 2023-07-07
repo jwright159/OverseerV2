@@ -22,9 +22,9 @@ if (!empty($_SESSION['username'])) {
 			//$striferesult = mysqli_query($connection, "SELECT * FROM `Users` WHERE `ID` = " . $_SESSION['character'] . " LIMIT 1;");
 			//maybe only load in strifer row when on a strife-related page?
 		}
-		$_SESSION['inv'] = explode("|", $charrow['inventory'], -1);
-		$_SESSION['imeta'] = explode("|", $charrow['metadata'], -1);
+		$_SESSION['inv'] = array_filter(explode("|", $charrow['inventory']), function($item){ return (bool)$item; });
 		$invslots = count($_SESSION['inv']);
+		$_SESSION['imeta'] = explode("|", $charrow['metadata'], $invslots);
 		$fatiguetimer = 100;
 		if (!empty($charrow['Aspect'])) {
 			if ($charrow['Aspect'] == "Time") $fatiguetimer = floor($fatiguetimer * 0.9); //Hack - Temporal Warp. Not worth checking abilities just for this.

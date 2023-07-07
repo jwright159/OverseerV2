@@ -14,8 +14,8 @@ if ($newinv != $charrow['inventory'] || $newmeta != $charrow['metadata']) { //in
 checkNotifications($charrow);
 $symbol = "'/" . $me->symbol . "'";
 $background='no';
-if($charrow['dreamingstatus']=='Prospit') $background='prospit';
-else if($charrow['dreamingstatus']=='Derse') $background='derse';
+if ($charrow['dreamingstatus']=='Prospit') $background='prospit';
+elseif ($charrow['dreamingstatus']=='Derse') $background='derse';
 ?>
 			</div><?php // id: content-area ?>
 			<footer>
@@ -63,7 +63,7 @@ else if($charrow['dreamingstatus']=='Derse') $background='derse';
 		array_pop($announcements);
 		foreach($announcements as $announcement){
 			$announce = explode("@", $announcement);
-			if(strtotime("now")>$announce[1] && strtotime("now")<$announce[2] && $once==false){
+			if(strtotime("now")>$announce[1] && strtotime("now")<$announce[2] && !$once){
 				echo '<div id="announcement-container">
 				<div class="nano" id ="announcement">
 				<div class="nano-content"><strong><center>ANNOUNCEMENTS</center></strong>';

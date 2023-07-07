@@ -58,7 +58,7 @@ if (empty($_SESSION['character'])) {
 						$consumuser = $charrow['wakeself'];
 						if (empty($_POST['target'])) $_POST['target'] = $charrow['ID'];
 						if ($_POST['target'] != $charrow['ID']) { //Fetch the target's rows and do some verification
-							$targetcharresult = mysqli_query($connection, "SELECT * FROM Characters WHERE Characters.ID = ". mysqli_real_escape_string($connection, $_POST[target]) ." LIMIT 1;");
+							$targetcharresult = mysqli_query($connection, "SELECT * FROM Characters WHERE Characters.ID = ". mysqli_real_escape_string($connection, $_POST['target']) ." LIMIT 1;");
 							$targetcharrow = mysqli_fetch_array($targetcharresult);
 							if ($targetcharrow['dreamingstatus'] != "Awake") {
 								echo "That player is currently asleep!<br />";
@@ -102,7 +102,7 @@ if (empty($_SESSION['character'])) {
 					}
 					if ($validtarget) {
 						$consumeffectstr = $irow[$i]['consumable'];
-						include("includes/consumeeffects.php");
+						include "includes/consumeeffects.php";
 						$strifers[$consumerindex]['subaction'] = 1; //Use up the user's subaction
 						if (!$donotconsume) { //item was consumed, remove it lol
 							array_splice($_SESSION['inv'], $item, 1);
@@ -115,7 +115,7 @@ if (empty($_SESSION['character'])) {
 							$strifers[$i]['bonuses'] = $updatedbonus[$strifers[$i]['ID']];
 							$i++;
 						}
-						include("includes/strifefunctions.php"); //for the megaquery
+						include "includes/strifefunctions.php"; //for the megaquery
 						$megaquery = buildMegaquery($strifers,$n,$connection);
 						mysqli_query($connection, $megaquery);
 					}
@@ -145,8 +145,7 @@ if (empty($_SESSION['character'])) {
           echo "You read your " . $irow[$i]['name'] . "...<br /><br />";
           echo $reading['text'] . "<br />";
         } else echo "Your " . $irow[$i]['name'] . " is not good reading material.<br />(But if you think it should be, feel free to submit a text for it to <a href='http://babbyoverseer.tumblr.com'>the Overseer Item Blog</a>!)<br />";
-      } elseif($_POST['invaction'] == "recycle"){
-		  $gristed = false;
+      } elseif ($_POST['invaction'] == "recycle") {
 			if (!empty($charrow['inventory'])) {
 				$invNew = $charrow['inventory'];
 				$boom = explode("|", $charrow['inventory']);
@@ -156,7 +155,7 @@ if (empty($_SESSION['character'])) {
 					$irow = mysqli_fetch_array($iresult);
 					$nothing = true;
 					$gristname = initGrists();
-					$totalgrists = count($gristname);		
+					$totalgrists = count($gristname);
 					$deploytag = specialArray($irow['effects'], "DEPLOYABLE"); //should always return an array because of the search query above
 					if ($deploytag[1] == "FREE") $zerobuild = true;
 					elseif ($deploytag[1] == "TIER1") {
@@ -164,7 +163,7 @@ if (empty($_SESSION['character'])) {
 						$zerobuild = true;
 					}
 					echo "You recycle a " . $irow['name'] . " into ";
-					if($irow['name']=='Perfectly Unique Object') setAchievement($charrow, 'allgrist');	
+					if($irow['name']=='Perfectly Unique Object') setAchievement($charrow, 'allgrist');
 					$g = 0;
 					$boomi = explode("|", $irow['gristcosts']);
 					while (!empty($boomi[$g])) {
@@ -173,7 +172,7 @@ if (empty($_SESSION['character'])) {
 							$nothing = false;
 							$boomo[1] = intval($boomo[1]);
 							$newgrist = modifyGrist($newgrist, $boomo[0], $boomo[1]);
-                            $imageUrl = gristImage($boomo[0]); 
+                            $imageUrl = gristImage($boomo[0]);
                             echo '<img src=
 									"'.$imageUrl.
 									 '" height="50" width="50" title="' . $boomo[0] . '"></img>';
@@ -203,9 +202,8 @@ if (empty($_SESSION['character'])) {
 		$gotten = false;
 		$success = false;
 		$totalitems = count($boom);
-		$i = 1;
-		while ($i < $totalitems) {
-			if ($gotten == false) {
+		for ($i = 1; $i < $totalitems; $i++) {
+			if (!$gotten) {
 				$args = explode(":", $boom[$i - 1]);
 				if ($args[0] == $get[0] && $args[2] == $get[1]) { //this is the item we want to retrieve
 					$gotten = true; //found the item, no need to explode/check any more
@@ -227,7 +225,6 @@ if (empty($_SESSION['character'])) {
 					}
 				} else $updatestore .= $boom[$i - 1] . "|";
 			} else $updatestore .= $boom[$i - 1] . "|";
-			$i++;
 		}
 		if ($success && $charrow['storeditems'] != $updatestore) { //item was retrieved, update storage
 			if (empty($updatestore)) $charrow['storedspace'] = 0; //Paranoia: if the storage is empty and the game thinks something is taking up space, reset it to 0
@@ -248,9 +245,7 @@ if (empty($_SESSION['character'])) {
 	echo "Slots Filled/Available: $filled/" . strval($charrow['invslots']) . "<br />";
 	echo strval($charrow['invslots']-$filled).' free slots.<br/>';
 
-	$i = 0;
-	$j = 0;
-	while ($i < $invslots) {
+	for ($i = 0; $i < $invslots; $i++) {
 		$newequip = $_SESSION['inv'][$i];
 		if (!empty($newequip)) {
 			if (empty($irow[$newequip]['name'])) {
@@ -260,10 +255,8 @@ if (empty($_SESSION['character'])) {
 			$meta = explode(":", $_SESSION['imeta'][$i]);
 			if ($meta[0] % 2 == 1) { //item is available
 				$itemlist .= "<option value='$i'>" . $irow[$newequip]['name'] . "</option>";
-				$j++;
 			}
 		}
-		$i++;
 	}
 	
 	echo "<br /><form id='inv' action='inventory.php' method='post'>Actions: <select id='invaction' name='invaction'>";
@@ -313,14 +306,12 @@ if (empty($_SESSION['character'])) {
 
 				renderItem2($irow[$item], $meta2, $menuid);
 			} else {
-				renderItem2(NULL);
+				renderItem2(null);
 			}
 		}
 		echo '</div>';
 	} else {
-		$i = 0;
-		$j = 0;
-		while ($i < $invslots) {
+		for ($i = 0; $i < $invslots; $i++) {
 			$newequip = $_SESSION['inv'][$i];
 			if (!empty($newequip)) {
 				if (empty($irow[$newequip]['name'])) {
@@ -333,8 +324,7 @@ if (empty($_SESSION['character'])) {
 					echo "Available: Yes<br />";
 				} else echo "Available: No<br />";
 				echo "<br />";
-			}	
-			$i++;
+			}
 		}
 	}
 	echo "<br /><form action='inventory.php' method='post'>Actions: <select name='invaction'>";

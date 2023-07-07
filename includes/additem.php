@@ -1,7 +1,11 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/global_functions.php";
 
-function addItem($charrow, $id, $extras = "", $shouldeject = true, $shouldrefreshatheneum = true) { //adds an item to the player's inventory, returns true if the item was added
+/**
+ * Adds an item to the player's inventory, returns true if the item was added
+ */
+function addItem(array $charrow, string $id, string $extras = "", bool $shouldeject = true, bool $shouldrefreshatheneum = true)
+{
 	global $connection;
 	$taken = count($_SESSION['inv']); //find the number of occupied slots. $_SESSION['inv'] will always be more up to date.
 	if (!$shouldeject) $eject = false;
@@ -23,8 +27,12 @@ function addItem($charrow, $id, $extras = "", $shouldeject = true, $shouldrefres
 	}
 }
 
-function removeItem($slot) { //removes an item from the player's inventory in a specific slot
-        $inv = $_SESSION['inv'];
+/**
+ * Removes an item from the player's inventory in a specific slot
+ */
+function removeItem(int $slot)
+{
+	$inv = $_SESSION['inv'];
 	$imeta = $_SESSION['imeta'];
 	$invbefore = array_slice($inv, 0, $slot - 1);
 	$invafter = array_slice($inv, $slot + 1);
@@ -36,7 +44,8 @@ function removeItem($slot) { //removes an item from the player's inventory in a 
 	$_SESSION['imeta'] = $imeta;
 }
 
-function storeItem($charrow, $id, $amount, $extras = "", $shouldrefreshatheneum = true) {
+function storeItem($charrow, $id, $amount, $extras = "", $shouldrefreshatheneum = true)
+{
 	global $connection;
 	$sresult = mysqli_query($connection, "SELECT `size`,`effects` FROM `Captchalogue` WHERE `ID` = $id");
 	$srow = mysqli_fetch_array($sresult);
@@ -74,8 +83,10 @@ function storeItem($charrow, $id, $amount, $extras = "", $shouldrefreshatheneum 
 	return true;
 }
 
-function itemSize($size) {
-	switch ($size) {
+function itemSize($size)
+{
+	switch ($size)
+	{
 		case "miniature": return 1; break;
 		case "tiny": return 5; break;
 		case "small": return 10; break;
@@ -97,7 +108,11 @@ function willEject($charrow) { //returns true if the user's modus will eject an 
 	else return true;
 }
 
-function availableInv($charrow) { //returns an array listing all inventory slots that can be accessed
+/**
+ * Returns an array listing all inventory slots that can be accessed
+ */
+function availableInv($charrow)
+{
 	if ($_SESSION['lastinv'] != $charrow['inventory']) { //has inventory changed since we last ran this calculation?
 		$inv = explode("|", $charrow['inventory']);
 		$i = 0;

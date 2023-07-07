@@ -89,20 +89,18 @@ $stats2 = [                    //put stats you want the character to start with 
           'creation' => $time,
           //'examplestat' => 0,
           //'examplestat2' => 0,
-          ]; 
+          ];
 
 $stats = '';
 foreach($stats2 as $key => $stat){
   $stats= $stats . $key . ':' . $stat . '|';
-} 
+}
 
 $achievements = array('created');
 
 
 
-$insertchar = $db->prepare(
-  "INSERT INTO Characters (name, owner, session, class, aspect, dreamer, symbol, grists, stats, fatiguetimer, invslots)
-   VALUES (:charname, :userid, :session, :class, :aspect, :dreamer, :symbol, :grists, :stats, :time, 25);");
+$insertchar = $db->prepare("INSERT INTO Characters (name, owner, session, class, aspect, dreamer, symbol, grists, stats, fatiguetimer, invslots) VALUES (:charname, :userid, :session, :class, :aspect, :dreamer, :symbol, :grists, :stats, :time, 25);");
 $insertchar->bindParam(':charname', $_POST['charname']);
 $insertchar->bindParam(':userid', $_SESSION['userid']);
 $insertchar->bindParam(':session', $sessionrow['ID']);
@@ -117,7 +115,7 @@ $insertchar->execute();
 $newcharid = $db->lastInsertId();
 unset($insertchar);
 
-$addtosession = $db->prepare("UPDATE Sessions SET members = :members WHERE ID = :sessionid");
+$addtosession = $db->prepare("UPDATE `Sessions` SET members = :members WHERE ID = :sessionid");
 $addtosession->bindValue(':members', $members.strval($newcharid).'|');
 $addtosession->bindParam(':sessionid', $sessionrow['ID']);
 $addtosession->execute();
@@ -129,9 +127,7 @@ $addtoaccount->bindParam(':userid', $accrow['ID']);
 $addtoaccount->execute();
 unset($addtoaccount);
 
-$addstrifer = $db->prepare(
-  "INSERT INTO Strifers (name, owner, leader, teamwork, control, health, maxhealth, description)
-   VALUES (:charname, :charid, 1, 100, 1, 10, 10, :description)");
+$addstrifer = $db->prepare("INSERT INTO Strifers (name, owner, leader, teamwork, control, health, maxhealth, description) VALUES (:charname, :charid, 1, 100, 1, 10, 10, :description)");
 $addstrifer->bindParam(':charname', $_POST['charname']);
 $addstrifer->bindParam(':charid', $newcharid);
 $addstrifer->bindValue(':description', $_POST['charname']."'s waking self");
@@ -151,11 +147,11 @@ unset($updatestrifers);
 
 // This is gonna need to be rewritten, I couldn't be bothered to do it right now.
 $dbtype = "";
-require($_SERVER['DOCUMENT_ROOT'] . '/inc/database.php');
-require($_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php';
 $charresult = mysqli_query($connection, "SELECT * FROM `Characters` WHERE `ID` = $newcharid LIMIT 1;");
 $charrow = mysqli_fetch_array($charresult);
-strifeInit($charrow,$connection);
+strifeInit($charrow);
 echo "Character " . $_POST['charname'] . " has been successfully created!<br />";
 echo "You have joined session " . $_POST['session'] . " and have been credited with $startgrist Build Grist.<br />";
 $string = "" . $charrow['name'] . " has joined the session!";
@@ -164,4 +160,3 @@ notifySession($charrow, $string);
 echo '<script>
 setTimeout(function() {window.location = "/";}, 3000);
 </script>';
-

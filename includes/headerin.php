@@ -16,9 +16,8 @@ if (!empty($_SESSION['username'])) {
 			//$striferesult = mysqli_query($connection, "SELECT * FROM `Users` WHERE `ID` = " . $_SESSION['character'] . " LIMIT 1;");
 			//maybe only load in strifer row when on a strife-related page?
 		}
-		$_SESSION['inv'] = explode("|", $charrow['inventory']);
-		$_SESSION['imeta'] = explode("|", $charrow['metadata']);
+		$_SESSION['inv'] = array_filter(explode("|", $charrow['inventory']), function($item){ return (bool)$item; });
 		$invslots = count($_SESSION['inv']);
+		$_SESSION['imeta'] = explode("|", $charrow['metadata'], $invslots);
 	}
 }
-?>
