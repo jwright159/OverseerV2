@@ -1,5 +1,5 @@
 <table>
-<?php 
+<?php
 require_once "header.php";
 require_once "includes/designix.php";
 //name
@@ -40,7 +40,7 @@ function gristSeeSaw($power) {
 		$lowestPower = 0;
 		$highestPower = 7;
 		$lowerGristBound = 1;
-		$upperGristBound = 7;		
+		$upperGristBound = 7;
 	} elseif ($power >= 7 && $power < 18) {
 		$lowestPower = 7;
 		$highestPower = 18;
@@ -48,7 +48,7 @@ function gristSeeSaw($power) {
 		$upperGristBound = 85;
 	} elseif ($power >= 18 && $power < 50) {
 		$lowestPower = 18;
-		$highestPower = 50;		
+		$highestPower = 50;
 		$lowerGristBound = 85;
 		$upperGristBound = 140;
 	} elseif ($power >= 50 && $power < 110) {
@@ -58,87 +58,87 @@ function gristSeeSaw($power) {
 		$upperGristBound = 1600;
 	} elseif ($power >= 110 && $power < 168) {
 		$lowestPower = 110;
-		$highestPower = 168;		
+		$highestPower = 168;
 		$lowerGristBound = 1600;
 		$upperGristBound = 4500;
 	} elseif ($power >= 168 && $power < 309) {
 		$lowestPower = 168;
-		$highestPower = 309;		
+		$highestPower = 309;
 		$lowerGristBound = 4500;
-		$upperGristBound = 49000;	
+		$upperGristBound = 49000;
 	} elseif ($power >= 309 && $power < 507) {
 		$lowestPower = 309;
-		$highestPower = 507;		
+		$highestPower = 507;
 		$lowerGristBound = 49000;
-		$upperGristBound = 106000;	
+		$upperGristBound = 106000;
 	} elseif ($power >= 507 && $power < 650) {
 		$lowestPower = 507;
-		$highestPower = 650;		
+		$highestPower = 650;
 		$lowerGristBound = 106000;
-		$upperGristBound = 129000;	
+		$upperGristBound = 129000;
 	} elseif ($power >= 650 && $power < 1253) {
 		$lowestPower = 650;
-		$highestPower = 1253;		
+		$highestPower = 1253;
 		$lowerGristBound = 129000;
 		$upperGristBound = 242000;
 	} elseif ($power >= 1253 && $power < 1347) {
 		$lowestPower = 1253;
-		$highestPower = 1347;		
+		$highestPower = 1347;
 		$lowerGristBound = 242000;
-		$upperGristBound = 314370;		
+		$upperGristBound = 314370;
 	} elseif ($power >= 1347 && $power < 2401) {
 		$lowestPower = 1347;
-		$highestPower = 2401;		
+		$highestPower = 2401;
 		$lowerGristBound = 314370;
-		$upperGristBound = 415104;	
+		$upperGristBound = 415104;
 	} elseif ($power >= 2401 && $power < 3222) {
 		$lowestPower = 2401;
-		$highestPower = 3222;		
+		$highestPower = 3222;
 		$lowerGristBound = 415104;
-		$upperGristBound = 977281;	
+		$upperGristBound = 977281;
 	} elseif ($power >= 3222 && $power < 4745) {
 		$lowestPower = 3222;
-		$highestPower = 4745;		
+		$highestPower = 4745;
 		$lowerGristBound = 977281;
-		$upperGristBound = 2695735;	
+		$upperGristBound = 2695735;
 	} elseif ($power >= 4745 && $power < 6924) {
 		$lowestPower = 4745;
-		$highestPower = 6924;		
+		$highestPower = 6924;
 		$lowerGristBound = 2695735;
 		$upperGristBound = 5158470;
 	} elseif ($power >= 6924 && $power < 8400) {
 		$lowestPower = 6924;
-		$highestPower = 8400;		
+		$highestPower = 8400;
 		$lowerGristBound = 5158570;
 		$upperGristBound = 7687245;
 	} elseif ($power >= 8400 && $power < 10103) {
 		$lowestPower = 8400;
-		$highestPower = 10103;		
+		$highestPower = 10103;
 		$lowerGristBound = 7687245;
-		$upperGristBound = 9875292;	
+		$upperGristBound = 9875292;
 	} elseif ($power >= 10103 && $power < 16399) {
 		$lowestPower = 10103;
-		$highestPower = 16399;		
+		$highestPower = 16399;
 		$lowerGristBound = 9875292;
-		$upperGristBound = 24370125;	
+		$upperGristBound = 24370125;
 	} elseif ($power >= 16399 && $power < 33999) {
 		$lowestPower = 16399;
-		$highestPower = 33999;		
+		$highestPower = 33999;
 		$lowerGristBound = 24370125;
 		$upperGristBound = 30204292;
 	} elseif ($power >= 33999 && $power < 60663) {
 		$lowestPower = 33999;
-		$highestPower = 60663;		
+		$highestPower = 60663;
 		$lowerGristBound = 30204292;
-		$upperGristBound = 43658786;	
+		$upperGristBound = 43658786;
 	} elseif ($power >= 60663 && $power < 89991) {
 		$lowestPower = 60663;
-		$highestPower = 89991;		
+		$highestPower = 89991;
 		$lowerGristBound = 43658786;
 		$upperGristBound = 85024933;
 	}
 		// Formula lowGrist + [(newPower - lowPower)(highGrist - lowGrist) / (highPower - lowPower)]
-	$gristTotalAmount = $lowerGristBound + (($power - $lowestPower) * ($upperGristBound - $lowerGristBound)) / ($highestPower - $lowestPower);	
+	$gristTotalAmount = $lowerGristBound + (($power - $lowestPower) * ($upperGristBound - $lowerGristBound)) / ($highestPower - $lowestPower);
 	return $gristTotalAmount;
 }
 
@@ -148,19 +148,19 @@ $i = 1;
 while ($i <= $abscount) {
 	${'abstratus'.$i} = mysqli_escape_string($connection, $_POST['abstratus'.$i]); // Echoes out all the abstrati into a variable
 	$i++;
-} 
+}
 $wearcount = $_SESSION['wearcount'];
 unset($_SESSION['wearcount']);
 $i = 1;
 while ($i <= $wearcount) {
 	${'wearable'.$i} = mysqli_escape_string($connection, $_POST['wearable'.$i]); // Echoes out all the abstrati into a variable
 	$i++;
-} 
-$code1 = mysqli_escape_string($connection, $_SESSION['code1']); // Codes of the 
+}
+$code1 = mysqli_escape_string($connection, $_SESSION['code1']); // Codes of the
 $code2 = mysqli_escape_string($connection, $_SESSION['code2']); // initial items
 $combineop = mysqli_escape_string($connection, $_SESSION['combineop']); // And or or?
 $maxPower = mysqli_escape_string($connection, $_SESSION['maxpower']); // Used in a check for whether the maximum power exceeds the given power
-unset($_SESSION['code1']); 
+unset($_SESSION['code1']);
 unset($_SESSION['code2']);
 unset($_SESSION['combineop']);
 unset($_SESSION['maxpower']);
@@ -168,13 +168,13 @@ if ($combineop == "and") { // Begin new item code generation
 	$code = andcombine($code1,$code2);
 } elseif ($combineop == "or") {
 	$code = orcombine($code1,$code2);
-} 
+}
 	// BEGIN STABILITY CHECK
 $fullyUnstable = 0;
-$stringArray = str_split($code, 1); // Splits the combined code into single characters. 
+$stringArray = str_split($code, 1); // Splits the combined code into single characters.
 $binaryString = binary($stringArray[0]).binary($stringArray[1]).binary($stringArray[2]).binary($stringArray[3]).binary($stringArray[4]).binary($stringArray[5]).binary($stringArray[6]).binary($stringArray[7]);
 if (substr_count($binaryString, '0') <= 12 || substr_count($binaryString, '0') >= 36) {
-	if ($op = '||') {	
+	if ($op = '||') {
 		$newCode = andCombine($code1, $code2);
 		$stringArray = str_split($newCode, 1);
 		$binaryString = binary($stringArray[0]).binary($stringArray[1]).binary($stringArray[2]).binary($stringArray[3]).binary($stringArray[4]).binary($stringArray[5]).binary($stringArray[6]).binary($stringArray[7]);
@@ -197,8 +197,8 @@ if (substr_count($binaryString, '0') <= 12 || substr_count($binaryString, '0') >
 			$code = $newCode;
 		}
 	}
-}	
-// END STABILITY CHECK 
+}
+// END STABILITY CHECK
 //End new item code generation. $code is now the code of the new item.
 // Begin Power Check Block
 $power = mysqli_escape_string($connection, $_POST['power']);
@@ -206,27 +206,27 @@ $maxBonus = getMaxBonus($_POST);
 // Calculate:
 $powerCheck = $power + $maxBonus;
 $b = 0;
-$powerAllowedBonus = True;
+$powerAllowedBonus = true;
 while ($b < 8) { //build this query snippet containing bonuses
       $thisbonus = intval($_POST[getBonusname($b)]);
       if ($thisbonus > 9999) {
-          $powerAllowedBonus = False;
+          $powerAllowedBonus = false;
       }
       $b++;
 }
 if ($fullyUnstable == 1) {
 	echo 'This item cannot be made - the resulting code is too unstable in either operation. Please make a full submission instead. Any additional errors below may serve to refine your submission.';
 }
-if ($powerAllowedBonus == False) {
+if (!$powerAllowedBonus) {
     echo "Invalid - One or more bonuses is too high.";
 }
-if ($powerCheck > $maxPower || $power > 9999) { 
-	$powerAllowed = False;
+if ($powerCheck > $maxPower || $power > 9999) {
+	$powerAllowed = false;
     echo "Invalid - You tried to give it too much power! Must be below " .$maxPower. " or if that's higher than 9999, 9999.";
 } else {
-	$powerAllowed = True;
+	$powerAllowed = true;
 }
-if ($powerAllowed == True && $powerAllowedBonus == True && $fullyUnstable == 0) {
+if ($powerAllowed && $powerAllowedBonus && $fullyUnstable == 0) {
 	if ($partiallyUnstable == 1) {
 		echo "Be advised: Do to code stability reasons, the combining operation you selected has been switched to ".$op.".";
 	}
@@ -257,7 +257,7 @@ if ($powerAllowed == True && $powerAllowedBonus == True && $fullyUnstable == 0) 
 	$maxdefense = max(intval($_POST['abuse']), intval($_POST['accuse']), intval($_POST['abjure']), intval($_POST['abstain']));
 	$totalPower = $_POST['power'] + ($maxoffense * 4) + ($maxdefense * 4); //Hotfix: Use the highest bonus times 4. Won't account for versatility.
 	$newGristTotal = round(gristSeeSaw($totalPower));
-	// Calculate the new grist total 
+	// Calculate the new grist total
   //We prefer the standard grist/power ratio, but multiply it by the net deviation of the components from the standard value (if positive).
   //This is to account for components with higher costs due to effects, etc. The grist costs can always be modified by staff when finalizing the item,
   //but this ensures that a user can't create a super easy power upgrade for themselves without any staff intervention.
@@ -276,18 +276,18 @@ if ($powerAllowed == True && $powerAllowedBonus == True && $fullyUnstable == 0) 
 	}
 	*/
 	$gristResult = mysqli_query($connection, "SELECT * FROM `Grists`;");
-	while ($v = mysqli_fetch_assoc($gristResult)) {
-		$v['name'] = 0;
-		if (isset($_POST[''.$v['name'].''])) {
-				if ($_POST[''.$v['name'].''] > 20) {
-					$_POST[''.$v['name'].''] = 20;
-				}
+	while ($v = mysqli_fetch_assoc($gristResult))
+	{
+		if (isset($_POST["$v[name]"]))
+		{
+			if ($_POST["$v[name]"] > 20)
+				$_POST["$v[name]"] = 20;
 			$gristWeightTotal = $gristWeightTotal + $_POST["$v[name]"];
 		}
 	}
 	$gristTiersSatisfied = 0;
 	$gristResult = mysqli_query($connection, "SELECT * FROM `Grists`;");
-	while ($v = mysqli_fetch_assoc($gristResult)) {	
+	while ($v = mysqli_fetch_assoc($gristResult)) {
 		if (isset($_POST[''.$v['name'].''])) {
 			$gristWeight = $_POST[''.$v['name'].''];
 			$gristName = $v['name'];
@@ -331,7 +331,7 @@ if ($powerAllowed == True && $powerAllowedBonus == True && $fullyUnstable == 0) 
 	}
 	$gristRunthrough = 0;
 	while ($gristRunthrough <= $gristTierRequired) {
-		if (strpos($gristTiersSatisfied, (string)$gristRunthrough) !== False) {
+		if (strpos($gristTiersSatisfied, (string)$gristRunthrough) !== false) {
 			// Continue
 		} else {
 			$overallGristSatisfied = 0;
@@ -340,19 +340,19 @@ if ($powerAllowed == True && $powerAllowedBonus == True && $fullyUnstable == 0) 
 	}
 	if ($overallGristSatisfied == 0) {
 	echo "Your weapon is rated as a Tier ".$gristTierRequired." weapon, and therefore needs grist tiers equivalent. At least one grist from each tier up to and including the weapon tier must be selected.";
-	} else {	
+	} else {
 		// Pass the grists to whatever function before adding here
 		// Wearable stuff goes here
 		$i = 2;
 		if (isset($wearable1)) {
-		$wearables = $wearable1;
-		while ($i <= $wearcount) {
-			$wearables = $wearables.', '.${'wearable'.$i};
-			$i++;
-		} 
-		$wearables = mysqli_escape_string($connection, $wearables);
+			$wearables = $wearable1;
+			while ($i <= $wearcount) {
+				$wearables = $wearables.', '.${'wearable'.$i};
+				$i++;
+			}
+			$wearables = mysqli_escape_string($connection, $wearables);
 		} else {
-		$wearables = 'none';	
+			$wearables = 'none';
 		}
 		//Insert into DB here
 

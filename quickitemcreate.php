@@ -9,7 +9,7 @@ require_once "includes/designix.php"; ?>
         var description = document.forms["itemcreate"]["description"].value;
         if (description == '') {
             alert("Must have a description!");
-            return false; 
+            return false;
         } else {
         //Abstrati?
         var power = document.forms["itemcreate"]["power"].value;
@@ -20,7 +20,7 @@ require_once "includes/designix.php"; ?>
         var abjure = document.forms["itemcreate"]["abjure"].value;
         var abuse = document.forms["itemcreate"]["abuse"].value;
         var accuse = document.forms["itemcreate"]["accuse"].value;
-        var abstain = document.forms["itemcreate"]["abstain"].value;   
+        var abstain = document.forms["itemcreate"]["abstain"].value;
         var checked = $("input[type=checkbox]:checked");
         }
         if (checked.length != 0) {
@@ -75,10 +75,10 @@ if ($_SESSION['username'] != "") {
         $op = $_GET['op'];
         $aok = false;
         $code1 = $_GET['code1'];
-        $code2 = $_GET['code2'];    
+        $code2 = $_GET['code2'];
         // BEGIN STABILITY CHECK
         $fullyUnstable = 0;
-        $stringArray = str_split($code, 1); // Splits the combined code into single characters. 
+        $stringArray = str_split($code, 1); // Splits the combined code into single characters.
         $binaryString = binary($stringArray[0]).binary($stringArray[1]).binary($stringArray[2]).binary($stringArray[3]).binary($stringArray[4]).binary($stringArray[5]).binary($stringArray[6]).binary($stringArray[7]);
         if (substr_count($binaryString, '0') <= 12 || substr_count($binaryString, '0') >= 36) {
             if ($op = 'or') {
@@ -105,7 +105,7 @@ if ($_SESSION['username'] != "") {
                 }
             }
         }
-        // END STABILITY CHECK 
+        // END STABILITY CHECK
         if ($fullyUnstable == 1) {
             echo "The code you are trying to create is too unstable. Please pick other items.<br/>";
         } else {
