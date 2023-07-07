@@ -271,12 +271,11 @@ function powerCalc($strifer) {
 	}
 	//Then, we check abilities on the strifer to see if any of those are relevant
 	$abilities = explode('|', $strifer['abilities']); //Expand out the ability string so we can look at it
-	$i = 0;
-	while(!empty($abilities[$i])) { //We've found an ability
+	for ($i = 0; !empty($abilities[$i]); $i++) { //We've found an ability
 		switch ($abilities[$i]) {
 			//Each ability with an effect on offense or defense power has an entry in this switch statement.
 			case "15": //One with Nothing
-				if (strpos($strifer[$i]['description'], "dreamself") !== false) { //Dreamself unaffected by One with Nothing
+				if (strpos($strifer['description'], "dreamself") !== false) { //Dreamself unaffected by One with Nothing
 					$minimum = floor($strifer['echeladder'] * (1 + ($strifer['echeladder'] * 0.04))); //Just under 15k at rung 612.
 					if ($offense < $minimum && $defense < $minimum)  {
 						$offense = $minimum;
@@ -292,12 +291,10 @@ function powerCalc($strifer) {
 			default:
 				break;
 		}
-		$i++;
 	}
 	//Finally, we check statuses on the strifer to see if any of those affect the result
 	$status = explode('|', $strifer['status']); //Expand out the status string so we can look at it
-	$i = 0;
-	while(!empty($status[$i])) { //We've found a status entry
+	for ($i = 0; !empty($status[$i]); $i++) { //We've found a status entry
 		$currentstatus = explode(':', $status[$i]); //Expand it out so we can work with it
 		switch ($currentstatus[0]) {
 			//Each status with an effect on offense or defense power has an entry in this switch statement.
@@ -314,6 +311,7 @@ function powerCalc($strifer) {
 			case "SHRUNK":
 				$offense = floor($offense * 0.8);
 				$defense = floor($defense * 0.8);
+				break;
 			case "DISORIENTED":
 				$offense = floor($offense * 0.96);
 				break;
@@ -330,7 +328,6 @@ function powerCalc($strifer) {
 			default:
 				break;
 		}
-		$i++;
 	}
 	//We check fatigue effects at the absolute end so that they affect EVERYTHING and can't be simply ignored with any kind of boost.
 	if ($strifer['fatigue'] > 1025) {
