@@ -279,7 +279,7 @@ class User
 
             // Create the prepared statement object.
             $updateuser = $this->_dbhandle->prepare(
-                'UPDATE Users SET ' . implode($querypairs, ',') .
+                'UPDATE Users SET ' . implode(',', $querypairs) .
                 ' WHERE ID=:userid'
             );
 

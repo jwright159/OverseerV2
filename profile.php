@@ -1,7 +1,7 @@
 <?php
 $pagetitle = "Character Profile";
 $headericon = "/images/header/chummy.png";
-require $_SERVER['DOCUMENT_ROOT'] . '/inc/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/header.php';
 ?>
 <link rel="stylesheet" type="text/css" href="/css/tooltipster.css" />
 <link rel="stylesheet" type="text/css" href="/css/tooltipster2.css" />
@@ -24,9 +24,9 @@ if($profiler){
     echo 'Name: <a style="text-decoration:none" href="profile.php?ID=' . $profiler["ID"] . '"><span id="charname" style="color:#' . $profiler['colour'] . '"><b>' . $profiler['name'] . '</b></span></a><br>';
     if (($profiler['class'] == '') || ($profiler['aspect'] == '')) {
         echo 'Title: As of yet unknown.<br>';
-    } else { 
+    } else {
         echo "Title: " . $profiler['class'] . " of " . $profiler['aspect'] . "<br>";
-    } 
+    }
     echo "Moon: " . $profiler['dreamer'] . "<br>";
 
     $ownsession = mysqli_query($connection, "SELECT name FROM Sessions WHERE `ID` = $profiler[session];");
@@ -37,27 +37,27 @@ if($profiler){
 
     if (!$profiler['inmedium'])
         echo "This player has not yet entered the medium. <br>Their land and strife stats will be visible here once they become relevant.<br>";
-    else { 
+    else {
         echo 'Echeladder rung: ' . $strifer['echeladder'] . '<br>';
         echo 'Health Vial: <b>' . ceil(($strifer['health']/$strifer['maxhealth'])*100) . '%</b><br>';
         echo 'Aspect Vial: <b>' . ceil(($strifer['energy']/$strifer['maxenergy'])*100) . '%</b><br>';
         echo 'Land: The Land of ' . $profiler['land1'] . ' and ' . $profiler['land2'] . '<br>';
-        //echo "Grists available on this land: " . implode($profiler[grist_type, ', ') . '<br>';
+        //echo "Grists available on this land: " . implode(', ', $profiler[grist_type) . '<br>';
         echo "Consorts: " . $profiler['consort'] . "<br><br>";
     }
     $psession = mysqli_query($connection, "SELECT name FROM Sessions WHERE `ID` =" . $profiler['session'] . ";");
     $psessionarray = mysqli_fetch_array($psession);
     echo 'Session: <a href="/sessioninfo.php?session=' . $psessionarray['name'] . '">' . $psessionarray['name'] . "</a><br>";
-    if (isset($server))  
+    if (isset($server))
         echo "Server Player: " . profileString($server['ID']) . "<br>";
-    else 
+    else
         echo "Server Player: Not yet connected. <br>";
-    if (isset($client))  
+    if (isset($client))
         echo "Client Player: " . profileString($client['ID']) . "<br>";
-    else 
+    else
         echo "Client Player: Not yet connected. <br>";
 
-    if ($profiler['inmedium']) 
+    if ($profiler['inmedium'])
         echo 'Gates accessible: ' . $profiler['gatescleared'] . '<br>';
     $achievements = array(
                         'medium' =>['[S] Enter', 'Enter the medium'],

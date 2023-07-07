@@ -88,23 +88,23 @@ if (isset($_POST['symbol'])) {
             $file_basename = substr($filename, 0, strripos($filename, '.')); // get file extention
             $file_ext = substr($filename, strripos($filename, '.')); // get file name
             $filesize = $_FILES["file"]["size"];
-            $allowed_file_types = array('.png');  
+            $allowed_file_types = array('.png');
             $image_info = getimagesize($_FILES["file"]["tmp_name"]);
             $image_width = $image_info[0];
             $image_height = $image_info[1];
-            if (in_array($file_ext,$allowed_file_types) && ($filesize < 200000) && ($image_width == 64) && ($image_height == 64) ) { 
+            if (in_array($file_ext,$allowed_file_types) && ($filesize < 200000) && ($image_width == 64) && ($image_height == 64) ) {
                 // Rename file
-                $newfilename = $charrow['name'] . '_' . $session . $file_ext; 
+                $newfilename = $charrow['name'] . '_' . $session . $file_ext;
                 move_uploaded_file($_FILES["file"]["tmp_name"], "images/symbols/" . $newfilename);
                 $me->symbol="images/symbols/" . $newfilename;
                 echo "File uploaded successfully.";
-            } elseif (empty($file_basename)) { 
+            } elseif (empty($file_basename)) {
                 // file selection error
                 echo "Please select a file to upload.";
-            } elseif ($filesize > 200000) { 
+            } elseif ($filesize > 200000) {
                 // file size error
                 echo "The file you are trying to upload is too large.";
-            } elseif (($image_width != 64) || ($image_height != 64)) { 
+            } elseif (($image_width != 64) || ($image_height != 64)) {
                 // file size error
                 echo "The file's dimensions need to be 64x64 pixels.";
             } else {
@@ -141,7 +141,7 @@ Moon: <?php echo $me->dreamer; ?><br>
 
 
 <br>
-<?php 
+<?php
 $ownsession = mysqli_query($connection, "SELECT name FROM Sessions WHERE `ID` = $charrow[session];");
 $sessiont = mysqli_fetch_array($ownsession);
 $session = str_replace("''", "'", $sessiont['name']);
@@ -169,15 +169,15 @@ Echeladder rung: <?php echo $me->strife->echeladder; ?><br>
 Health Vial: <b><?php echo ceil($me->strife->healthpercent); ?>%</b><br>
 Aspect Vial: <b><?php echo ceil($me->strife->energypercent); ?>%</b><br>
 Land: The Land of <?php echo $me->land1 . ' and ' . $me->land2; ?><br>
-Grists available on this land: <?php echo implode($me->grist_type, ', '); ?><br>
+Grists available on this land: <?php echo implode(', ', $me->grist_type); ?><br>
 Consorts: <?php echo $me->consort; ?><br>
 <?php
 } ?>
 <br>
 <?php
-if (isset($server))  
+if (isset($server))
     echo "Server Player: " . profileString($server->id) . "<br>";
-else 
+else
     echo "Server Player: Not yet connected. <br>";
 ?>
 Build grist expended on your dwelling: <?php echo $me->house_build; ?><br>
