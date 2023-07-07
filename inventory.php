@@ -2,8 +2,8 @@
 $pagetitle = "Inventory";
 $headericon = "/images/header/inventory.png";
 require_once "header.php";
-require ("includes/additem.php");
-require ("includes/item_render.php");
+require_once "includes/additem.php";
+require_once "includes/item_render.php";
 
 ?>
 <script src="/js/clipboard.min.js"></script>
@@ -40,7 +40,7 @@ if (empty($_SESSION['character'])) {
 	if (!empty($_POST['invaction'])) {
 		$item = $_POST['invitem'];
 		$meta = explode(":", $_SESSION['imeta'][$item]);
-		if ($meta[0] % 2 == 1) { //item is available
+		if ((int)$meta[0] % 2 == 1) { //item is available
 			$i = $_SESSION['inv'][$item];
 			if (empty($irow[$i]['name'])) {
 				$eresult = mysqli_query($connection, "SELECT * FROM Captchalogue WHERE ID = " . $i); //first load it up
