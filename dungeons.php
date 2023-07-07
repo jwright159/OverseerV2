@@ -254,9 +254,10 @@ if (empty($_SESSION['character'])) {
 					}
 					//Retrieve the next ID from masterID and use it
 					mysqli_multi_query($connection, "UPDATE System SET masterID = masterID + 1; SELECT masterID from System WHERE 1;");
-					mysqli_next_result(mysqli_next_result($connection));
+					mysqli_next_result($connection);
+					mysqli_next_result($connection);
 					$masterresult = mysqli_store_result($connection); //Store the second result
-					$masterrow = mysqli_fetch_array($masterresult);	
+					$masterrow = mysqli_fetch_array($masterresult);
 					$newID = $masterrow['masterID']; //Grab the master ID
 					echo "<br />";
 					generateEnemies($names, $newID, $connection, "ANY", 1, $charrow['session'], $dungeonrow['land'], $tiers, 1);
@@ -297,9 +298,10 @@ if (empty($_SESSION['character'])) {
 					} else {
 						//Retrieve the next ID from masterID and use it
 						mysqli_multi_query($connection, "UPDATE System SET masterID = masterID + 1; SELECT masterID from System WHERE 1;");
-						mysqli_next_result(mysqli_next_result($connection));
+						mysqli_next_result($connection);
+						mysqli_next_result($connection);
 						$masterresult = mysqli_store_result($connection); //Store the second result
-						$masterrow = mysqli_fetch_array($masterresult);	
+						$masterrow = mysqli_fetch_array($masterresult);
 						$newID = $masterrow['masterID']; //Grab the master ID
 						generateEnemies($names, $newID, $connection, "ANY", 1, $charrow['session'], $dungeonrow['land'], $tiers, 1);
 						$newencstr = $currentroom . ":EXISTS:" . strval($newID);
