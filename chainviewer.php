@@ -39,13 +39,13 @@ else
 		$head = $original;
 		while (($client = getChar($head)['client']) && $client != $original)
 		{
-			echo "Client $client <br>";
 			$head = $client;
 		}
+		$original = $head;
 		
 		// Now that we have the head, go server-wise and add members to the chain
 		$chain = [$head];
-		while (($server = getChar($head)['server']) && $server != $head)
+		while (($server = getChar($head)['server']) && $server != $original)
 		{
 			$head = $server;
 			$chain[] = $head;
