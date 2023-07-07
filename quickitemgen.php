@@ -36,6 +36,10 @@ function gristSeeSaw($power) {
 	// 7687245 + ((9999 - 8400) * (9875292 - 7687245)) / (10103 - 8400)
 	// Powers correspond to an Example Stamp item in the database, these act as "stepping stones"
 	// That we use to calculate.
+
+	// Except ya forgot negative values!
+	$power = abs($power);
+
 	if ($power >= 0 && $power < 7) {
 		$lowestPower = 0;
 		$highestPower = 7;
