@@ -26,23 +26,24 @@ if (empty($_SESSION['username'])) {
 			echo "Your dreambot can't use the SBURB server program without access to a computer in storage!<br />";
 			$compugood = false;
 		}
-	} else {
-  if (!empty($charrow['enemydata']) || !empty($charrow['aiding'])) {
-  	if (($charrow['enemydata'] != "" || $charrow['aiding'] != "") && $computability < 3) {
-  		if ($compugood == true) echo "You don't have a hands-free computer equipped, so you can't use the SBURB server program during strife.<br />";
-  		$compugood = false;
-  	}
-  }
-  if (!empty($charrow['indungeon'])) {
-	if ($charrow['indungeon'] != 0 && $computability < 2) {
-		if ($compugood == true) echo "You'll need to use a computer from your inventory in order to retrieve and use it for SBURB on the go.<br />";
-			$compugood = false;
 	}
-  }
-  if ($computability == 0) {
-  	if ($compugood == true) echo "<div class='alert alert-danger' role='alert'>You need a computer in storage or hands-free device in your inventory to use the SBURB server program.</div>";
-  	$compugood = false;
-  }
+	elseif ($compugood)
+	{
+		if ((!empty($charrow['enemydata']) || !empty($charrow['aiding'])) && ($charrow['enemydata'] != "" || $charrow['aiding'] != "") && $computability < 3)
+		{
+			echo "You don't have a hands-free computer equipped, so you can't use the SBURB server program during strife.<br />";
+			$compugood = false;
+		}
+		if (!empty($charrow['indungeon']) && $charrow['indungeon'] != 0 && $computability < 2)
+		{
+			echo "You'll need to use a computer from your inventory in order to retrieve and use it for SBURB on the go.<br />";
+			$compugood = false;
+		}
+		if ($computability == 0)
+		{
+			echo "<div class='alert alert-danger' role='alert'>You need a computer in storage or hands-free device in your inventory to use the SBURB server program.</div>";
+			$compugood = false;
+		}
 	}
   if ($compugood) {
   	$sesrow = loadSessionrow($charrow['session']);
@@ -104,9 +105,9 @@ if (empty($_SESSION['username'])) {
 			if (!empty($landgrists[1])) $tier1grist = $landgrists[1];
 			$cgrists = explode("|", $clientrow['grists']);
 			$builds = explode(":", $cgrists[0]); //build grist will always be first
-			$build = $builds[1];
+			$build = (int)$builds[1];
 			$t1s = explode(":", $cgrists[1]); //land first tier will always be second (canon)
-			if (!empty($t1s[1]))$tier1 = $t1s[1];
+			if (!empty($t1s[1]))$tier1 = (int)$t1s[1];
 			if ($clientrow['server'] != $cid) {
 				echo "Something went amiss, and your client player doesn't have you set as their server! We've just attempted to fix this, but if you see this message multiple times, please submit a bug report.<br />";
 				mysqli_query($connection, "UPDATE `Characters` SET `server` = $cid WHERE `Characters`.`ID` = '" . $clientrow['ID'] . "' LIMIT 1;");
@@ -164,13 +165,13 @@ if (empty($_SESSION['username'])) {
 								$newgrist = $clientrow['grists'];
 								if ($drow['ID'] == 11) $extras = "CODE=cZCMY4Qf."; //This is the code and ID for the pre-punched card.
 							} elseif ($deploytag[1] == "TIER1") {
-								if ($tier1 > $deploytag[2]) {
+								if ($tier1 >= (int)$deploytag[2]) {
 									if ($charrow['inmedium'] == 1) $canafford = true;
-									$newgrist = modifyGrist($clientrow['grists'], $tier1grist, ($deploytag[2] * -1));
+									$newgrist = modifyGrist($clientrow['grists'], $tier1grist, ((int)$deploytag[2] * -1));
 								}
 							} else {
 								$bcost = howmuchGrist($drow['gristcosts'], "Build_Grist");
-								if ($build > $bcost) {
+								if ($build >= $bcost) {
 									if ($charrow['inmedium'] == 1) $canafford = true;
 									$newgrist = modifyGrist($clientrow['grists'], "Build_Grist", ($bcost * -1));
 								}
@@ -184,7 +185,7 @@ if (empty($_SESSION['username'])) {
 									else echo $drow['name'] . " successfully deployed!<br />";
 								} else echo "Deploy failed: you can't find enough room in the client's house to put down the item! You'll have to make some room first.<br />";
 							} else {
-								if ($clientrow['inmedium'] == 1) echo "Deploy failed: client lacks the required $coststring.<br />";
+								if ($clientrow['inmedium'] == 1) echo "Deploy failed: client lacks the required grist.<br />";
 								else echo "Deploy failed: you don't have access to that item yet!<br />";
 							}
 						} else echo "Deploy failed: Your client already has as many of those items as they'll need.<br />";
@@ -243,7 +244,7 @@ if (empty($_SESSION['username'])) {
 									$clientrow['storedspace'] -= itemSize($irow['size']) * $_POST['q-' . $args[0]];
 									if ($nothing) echo "nothing, because you originally deployed it for free or for a non-build cost."; //items will ALWAYS have a grist cost listed, even if just a vanity cost of 0
 									echo '<br />';
-								} else "Error: Client does not have " . $args[1] . " of " . $irow['name'] . "<br />";
+								} else echo "Error: Client does not have " . $args[1] . " of " . $irow['name'] . "<br />";
 							} else echo 'Error: unknown item<br />';
 						}
 						if ($args[1] > 0) {
@@ -344,4 +345,3 @@ if (empty($_SESSION['username'])) {
 }
 
 require_once "footer.php";
-?>

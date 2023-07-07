@@ -291,16 +291,16 @@ function howmuchGrist($griststr, $type) { //returns the amount of $type grist in
 	return 0;
 }
 
-function specialArray($string, $search) { //looks up and returns the full tag with the keyword $search
+/**
+ * Looks up and returns the full tag with the keyword $search
+ */
+function specialArray($string, $search) {
 	$boom = explode("|", $string);
-	$i = 0;
-	while (!empty($boom[$i])) {
+	for ($i = 0; !empty($boom[$i]); $i++) {
 		$boomo = explode(":", $boom[$i]);
 		if ($boomo[0] == $search) return $boomo;
-		$i++;
 	}
-	$boomo[0] = "nope";
-	return $boomo;
+	return ["nope"];
 }
 
 function gristImage($name) { //old hardcoded grist image producer because sometimes the cheapest solution is the best
