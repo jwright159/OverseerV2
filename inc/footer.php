@@ -55,7 +55,7 @@ else if($charrow['dreamingstatus']=='Derse') $background='derse';
 	<?php
 	//announcement code
 
-	$system = mysqli_query($connection, "SELECT * from System;");
+	$system = mysqli_query($connection, "SELECT * from `System`;");
 	$systemarray = mysqli_fetch_array($system);
 	$announcements = explode("|", urldecode($systemarray['announcements']));
 	$once = false;
