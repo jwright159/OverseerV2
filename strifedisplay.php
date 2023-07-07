@@ -38,59 +38,47 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 		if ($charrow['down'] != 1 && $charrow['dungeon'] == 0) { //Player is not KOed and not in a dungeon
 			if ($charrow['inmedium'] == 1) { //Player is in the medium
 				$connected = chainArray($charrow); //Get an array of connected Lands
-				$chumroll = mysqli_query($connection, "SELECT * FROM `Characters` WHERE `Characters`.`session` = '$charrow[session]';");
-				$n = 0;
-				while ($chumrow = mysqli_fetch_array($chumroll)) {
-					if($connected[$chumrow['ID']] || $chumrow['ID'] == $charrow['ID']) { //Can always fight your own underlings, even with no building done
-						$lands[$n] = $chumrow;
-						$n++;
-					}
-				}
-				$i = 0;
+				$chumroll = mysqli_query($connection, "SELECT * FROM Characters WHERE session = '$charrow[session]';");
+				while ($chumrow = mysqli_fetch_array($chumroll))
+					if ($connected[$chumrow['ID']] || $chumrow['ID'] == $charrow['ID']) //Can always fight your own underlings, even with no building done
+						$chums[] = $chumrow;
 				echo '<form action="strifeselect.php" method="post"><select name="land">';
-				while ($i < $n) { //Note that the last value of n will not correspond to an index.
-					echo '<option value="' . $lands[$i]['ID'] . '">Land of ' . $lands[$i]['land1'] . ' and ' . $lands[$i]['land2'] . '</option>';
-					$i++;
-				}
+				foreach ($chums as $chum)//Note that the last value of n will not correspond to an index.
+					echo '<option value="' . $chum['ID'] . '">Land of ' . $chum['land1'] . ' and ' . $chum['land2'] . '</option>';
 				if ($charrow['denizendown'] == 1) echo '<option value="battlefield">The Battlefield</option>';
 				echo '</select><br />';
-				$i = 1;
 				$maxenemies = 12; //More or less arbitrary. Does affect progression speed though.
 				echo 'Number of underlings to fight: <select name="quantity">';
-				while ($i <= $maxenemies) {
+				for ($i = 1; $i <= $maxenemies; $i++)
 					echo "<option value=\"$i\">$i</option>";
-					$i++;
-				}
 				echo '</select><br /><input type="submit" value="Fight on this Land" /></form><br />';
 				//Re-fight code here.
 				if (strpos($charrow['oldenemydata'],"land") !== false) { //Old enemy data is applicable to Lands
 					echo "Your last completed strife can be repeated, if you wish.<br />";
 					echo '<form action="strifebegin.php" method="post">';
 					$enemyarray = explode("|", $charrow['oldenemydata']);
-					$i = 0;
-					while (!empty($enemyarray[$i])) {
+					for ($i = 0; !empty($enemyarray[$i]); $i++) {
 						$currentitem = explode(":", $enemyarray[$i]);
 						echo "<input type='hidden' name='$currentitem[0]' value='$currentitem[1]'>";
-						$i++;
 					}
 					echo '<input type="submit" value="Repeat last strife"></form><br />';
 				}
 				//Waking assistance code here. If you can reach a character's Land, you can assist that character (as you can reach everywhere they can)
-				echo 'If any of your reachable allies are engaged in strife, you may assist them here:<br />';
-				$allyquery = "SELECT strifeID, name from Strifers WHERE Strifers.ID IN (";
-				$i = 0;
-				while ($i < $n) {
-					if ($lands[$i]['ID'] != $charrow['ID']) $allyquery .= $lands[$i]['wakeself'] . ", "; //No self-assisting!
-					$i++;
+				if (count($chums) > 1)
+				{
+					echo 'If any of your reachable allies are engaged in strife, you may assist them here:<br />';
+					$allyquery = "SELECT strifeID, name from Strifers WHERE ID IN (";
+					foreach ($chums as $chum)
+						if ($chum['ID'] != $charrow['ID']) //No self-assisting!
+							$allyquery .= $chum['wakeself'] . ", ";
+					$allyquery = substr($allyquery, 0, -2); //Chop the last ", " off the end
+					$allyquery .= ");";
+					$allyresult = mysqli_query($connection, $allyquery);
+					echo '<form action="strifeassist.php" method="post"><select name="strifetojoin">';
+					while ($allyrow = mysqli_fetch_array($allyresult)) //Note that the last value of n will not correspond to an index.
+						if ($allyrow['strifeID'] != 0) echo '<option value="' . $allyrow['strifeID'] . '">' . $allyrow['name'] . '</option>';
+					echo '</select><br /><input type="submit" value="Assist!" /></form><br />';
 				}
-				$allyquery = substr($allyquery, 0, -2); //Chop the last ", " off the end
-				$allyquery .= ");";
-				$allyresult = mysqli_query($connection, $allyquery);
-				echo '<form action="strifeassist.php" method="post"><select name="strifetojoin">';
-				while ($allyrow = mysqli_fetch_array($allyresult)) { //Note that the last value of n will not correspond to an index.
-					if ($allyrow['strifeID'] != 0) echo '<option value="' . $allyrow['strifeID'] . '">' . $allyrow['name'] . '</option>';
-				}
-				echo '</select><br /><input type="submit" value="Assist!" /></form><br />';
 			} else {
 				echo "You will need to enter the Medium to engage in waking strife.<br />";
 			}
