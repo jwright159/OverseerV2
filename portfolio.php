@@ -52,7 +52,7 @@ if (empty($_SESSION['username'])) {
 	$init = false;
 	if (!empty($_POST['newabs'])) { //player is assigning an abstratus manually
 		if (substr_count($charrow['abstratus'], "|") < $charrow['abslots']) {
-			$abresult = mysqli_query($connection, "SELECT * FROM System");
+			$abresult = mysqli_query($connection, "SELECT * FROM `System`");
 			$row = mysqli_fetch_array($abresult);
 			if (strpos($row['allabstrati'], $_POST['newabs']) !== false) {
 				$charrow['abstratus'] .= "|" . $_POST['newabs']; //add the abstratus to the character's abstrati
@@ -343,7 +343,7 @@ if (empty($_SESSION['username'])) {
 	}
 	if ($open) {
 		echo "<form action='portfolio.php' method='post'>Assign an abstratus to one of your open slots manually: <select name='newabs'>";
-		$abresult = mysqli_query($connection, "SELECT * FROM System");
+		$abresult = mysqli_query($connection, "SELECT * FROM `System`");
 		$row = mysqli_fetch_array($abresult);
 		$abs = explode("|", $row['allabstrati']);
 		$i = 0;

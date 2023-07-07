@@ -1,1 +1,1 @@
-ALTER TABLE System ADD announcements LONGTEXT NOT NULL;
+ALTER TABLE `System` ADD announcements LONGTEXT NOT NULL;

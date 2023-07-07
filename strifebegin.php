@@ -115,7 +115,7 @@ if ($legit) {
 			$fatiguestr = 'dreamfatigue';
 		}
 		//Retrieve the next ID from masterID and use it
-		mysqli_multi_query($connection, "UPDATE System SET masterID = masterID + 1; SELECT masterID from System WHERE 1;");
+		mysqli_multi_query($connection, "UPDATE `System` SET masterID = masterID + 1; SELECT masterID from `System` WHERE 1;");
 		mysqli_next_result($connection);
 		mysqli_next_result($connection);
 		$masterresult = mysqli_store_result($connection); //Store the second result

@@ -356,7 +356,7 @@ echo "<!DOCTYPE html><html><head><style>itemcode{font-family:'Courier New'}</sty
   elseif ($mode == "white") $modestring = "AND `Feedback`.`halp` = 1 ";
   elseif ($mode == "black") $modestring = "AND `Feedback`.`defunct` = 0 AND `Feedback`.`clarify` = 0 AND `Feedback`.`greenlight` = 0 AND `Feedback`.`suspended` = 0 ";
   elseif ($mode == "aotw") {
-  	$aotwresult = mysqli_query($connection, "SELECT `abstratusoftheweek` FROM System WHERE 1");
+  	$aotwresult = mysqli_query($connection, "SELECT `abstratusoftheweek` FROM `System` WHERE 1");
   	$aotwrow = mysqli_fetch_array($aotwresult);
   	$aotwstring = $aotwrow['abstratusoftheweek'];
   	$modestring = "AND `Feedback`.`comments` LIKE '%" . $aotwstring . "%' ";
