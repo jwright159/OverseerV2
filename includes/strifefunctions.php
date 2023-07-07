@@ -20,8 +20,7 @@ function generateEnemies($enemylist,$strifeID,$connection,$appearson,$generatele
 		$landrow = mysqli_fetch_array($landresult);
 		$gristarray = explode("|", $landrow['grist_type']); //Entries 0 through 8 are grist tiers 1 through 9. Entries 9 through 17 are the bonus grists.
 	}
-	$enemymaker = "INSERT INTO `Strifers` 
-	(`name`, `strifeID`, `side`, `leader`, `teamwork`, `grist`, `description`, `power`, `maxpower`, `health`, `maxhealth`, `energy`, `maxenergy`, `ondeath`, `status`, `bonuses`, `resistances`, `abilities`, `effects`, `persist`) VALUES ";
+	$enemymaker = "INSERT INTO `Strifers` (`name`, `strifeID`, `side`, `leader`, `teamwork`, `grist`, `description`, `power`, `maxpower`, `health`, `maxhealth`, `energy`, `maxenergy`, `ondeath`, `status`, `bonuses`, `resistances`, `abilities`, `effects`, `persist`) VALUES ";
 	$i = 0;
 	while (!empty($enemylist[$i])) {
 		$leader = 0;
@@ -123,6 +122,7 @@ function generateEnemies($enemylist,$strifeID,$connection,$appearson,$generatele
 	mysqli_query($connection, $enemymaker);
 	return true; //Success
 }
+
 function findResist($resiststr,$resist) {
 	if (strpos($resiststr,$resist) !== false) { //The resistance string is in there somewhere
 		$resistances = explode("|", $resiststr);

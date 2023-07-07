@@ -296,20 +296,18 @@ if (empty($_SESSION['character'])) {
 				echo "This shop's stock will refresh in $timestr.<br /><br />";
 				$shoprow = getDialogue("shop", $charrow, $gate);
 				echo "$consort: " . $shoprow['dialogue'] . "<br /><br />";
-				$querystring = "SELECT MAX(`power`) FROM `Captchalogue` WHERE `ID` IN (";
-				$strifedeck = explode("|", substr($charrow['strifedeck'], 0, -1));
-				for ($i = 0; $i < count($strifedeck); $i++) {
-					if ($i > 0) $querystring .= ", ";
-					$querystring .= $strifedeck[$i];
+				
+				$strifedeck = implode(", ", explode("|", substr($charrow['strifedeck'], 0, -1)));
+				if (!empty($strifedeck))
+				{
+					$sditems = mysqli_query($connection, "SELECT MAX(`power`) FROM `Captchalogue` WHERE `ID` IN ($strifedeck);");
+					$sditems = mysqli_fetch_row($sditems);
+					$maxpower = $sditems[0];
 				}
-				$querystring .= ");";
-				$sditems = mysqli_query($connection, $querystring);
-				$sditems = mysqli_fetch_row($sditems);
-				$maxpower = $sditems[0];
-				$querystring = "SELECT `ID`, `name`, `power`, `abstratus`, `wearable`, `effects` FROM `Captchalogue` WHERE `ID` IN (";
-				$querystring .= implode(", ", $shopitemID);
-				$querystring .= ");";
-				$shopitems = mysqli_query($connection, $querystring);
+				else
+					$maxpower = 0;
+				
+				$shopitems = mysqli_query($connection, "SELECT `ID`, `name`, `power`, `abstratus`, `wearable`, `effects` FROM `Captchalogue` WHERE `ID` IN (" . implode(", ", $shopitemID) . ");");
 				echo '<form action="?land=' . $land . '&search=shop" method="post">';
 				$csi = 0; //current shop item. no, not crime scene investigation.
 				while ($thisitem = mysqli_fetch_assoc($shopitems)) {
