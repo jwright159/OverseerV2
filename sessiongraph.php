@@ -39,7 +39,7 @@ foreach ($characterids as $char)
 	}
 	$circlex = $mult + $radius * cos($angle);
 	$circley = $mult + $radius * sin($angle);
-	imagettftext($image, $fontsize, -rad2deg($angle3), $circlex - $namewidth, $circley - $nameheight, $playercol, dirname(__FILE__) . '/fonts/ascii.ttf', $name);
+	imagettftext($image, $fontsize, (int)(-rad2deg($angle3)), (int)($circlex - $namewidth), (int)($circley - $nameheight), $playercol, dirname(__FILE__) . '/fonts/ascii.ttf', $name);
 	$angle += $angle2;
 }
 header('Content-type: image/png');
