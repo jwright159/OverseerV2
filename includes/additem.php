@@ -1,5 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . "/includes/global_functions.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/global_functions.php";
+
 function addItem($charrow, $id, $extras = "", $shouldeject = true, $shouldrefreshatheneum = true) { //adds an item to the player's inventory, returns true if the item was added
 	global $connection;
 	$taken = count($_SESSION['inv']); //find the number of occupied slots. $_SESSION['inv'] will always be more up to date.
@@ -227,4 +228,3 @@ function refreshAtheneum($charrow, $itemID, $obtained, $component1 = "", $compon
 		mysqli_query($connection, "UPDATE `Sessions` SET `atheneum` = '$newcontents' WHERE `Sessions`.`ID` = " . $charrow['session'] . " LIMIT 1;");
 	}
 }
-?>

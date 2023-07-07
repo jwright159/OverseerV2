@@ -1,6 +1,6 @@
 <?php
 require_once "header.php";
-require ("includes/additem.php");
+require_once "includes/additem.php";
 /*function initRandomGrists($charrow) {
 	global $connection;
 	$charresult = mysqli_query($connection, "SELECT `grist_type` FROM `Characters` WHERE `session` = " . $charrow['session'] . " AND `inmedium` = 1"); //query all medium-entered players for their grist types
@@ -32,10 +32,10 @@ require ("includes/additem.php");
 //}
 //echo $a;
 if (empty($_SESSION['character'])) {
-	echo "Choose a character to enter the Medium.<br />";	
+	echo "Choose a character to enter the Medium.<br />";
 } elseif ($charrow['inmedium'] == 1) {
 	echo "You are already in the Medium!<br />";
-} else if(strstr($charrow['inventory'],"14|") == false){
+} elseif (!strstr($charrow['inventory'],"14|")) {
 	echo "Enter where?<br />";
 } else {
 	 if (!empty($_POST['land1']) && !empty($_POST['land2'])) {
@@ -47,16 +47,17 @@ if (empty($_SESSION['character'])) {
 		//$grists = initRandomGrists($charrow);
 		while ($offset < 2) { //do this twice, once for each preset choice
 			if ($offset == 0) $thischoice = $_POST['preset'];
-			if ($offset == 1) $thischoice = $_POST['preset2'];
+			elseif ($offset == 1) $thischoice = $_POST['preset2'];
 			if ($thischoice == "manual") {
-				echo "Entering with manually selected grists...<br />";
+				if ($offset == 0) echo "Entering with manually selected grists...<br />";
+				else echo "Entering with manually selected bonus grists...<br />";
 				while ($i <= ($offset+1) * 9) {
-					if ($i > 9) {
-						$gristresult = mysqli_query($connection, "SELECT * FROM Grists WHERE name = '" . $_POST['tierb' . strval($i - 9)] . "'");
-						$tier = $i - 9;
-					} else {
-						$gristresult = mysqli_query($connection, "SELECT * FROM Grists WHERE name = '" . $_POST['tier' . strval($i)] . "'");
+					if ($i <= 9) {
+						$gristresult = mysqli_query($connection, "SELECT * FROM Grists WHERE `name` = '" . $_POST['tier' . strval($i)] . "'");
 						$tier = $i;
+					} else {
+						$gristresult = mysqli_query($connection, "SELECT * FROM Grists WHERE `name` = '" . $_POST['tierb' . strval($i - 9)] . "'");
+						$tier = $i - 9;
 					}
 					$row = mysqli_fetch_array($gristresult);
 					if (empty($row['name'])) {
@@ -66,16 +67,16 @@ if (empty($_SESSION['character'])) {
 						echo "Error entering Medium: " . $row['name'] . " is not available at tier $tier.<br />";
 						$alreadyentered = false;
 					}
-					if ($offset == 0) { //no need to do this if we're already on bonus grists
+					/*if ($offset == 0) { //no need to do this if we're already on bonus grists
 						$alls = implode("|", $grists[$i]); //the greatest way to remove all copies of this grist from available grists
 						$alls = str_replace($row['name'] . "|", "", $alls);
 						$grists[$i] = explode("|", $alls);
-					}
+					}*/
 					$griststr .= $row['name'] . "|";
 					$i++;
 				}
 				if ($alreadyentered) echo "Successful.<br />";
-			} elseif (/*$thischoice == "random"*/0) {
+			} /*elseif ($thischoice == "random") {
 				$available = array();
 				while ($i <= ($offset+1) * 9) {
 					$j = $i - ($offset * 9);
@@ -102,7 +103,7 @@ if (empty($_SESSION['character'])) {
 					echo "Error: could not find enough grists to populate land! This is probably a bug, please submit a report.<br />";
 					$alreadyentered = false;
 				}
-			} else {
+			}*/ else {
 				echo "Entering with grist preset " . $thischoice . "...<br />";
 				$presetresult = mysqli_query($connection, "SELECT * FROM Presets WHERE name = '" . $thischoice . "'");
 				$row = mysqli_fetch_array($presetresult);
@@ -229,4 +230,3 @@ if (empty($_SESSION['character'])) {
 }
 
 require_once "footer.php";
-?>
