@@ -277,12 +277,12 @@ if ($powerAllowed == True && $powerAllowedBonus == True && $fullyUnstable == 0) 
 	*/
 	$gristResult = mysqli_query($connection, "SELECT * FROM `Grists`;");
 	while ($v = mysqli_fetch_assoc($gristResult)) {
-		$$v['name'] = 0;
+		$v['name'] = 0;
 		if (isset($_POST[''.$v['name'].''])) {
 				if ($_POST[''.$v['name'].''] > 20) {
 					$_POST[''.$v['name'].''] = 20;
 				}
-			$gristWeightTotal = $gristWeightTotal + $_POST[''.$v['name'].''];
+			$gristWeightTotal = $gristWeightTotal + $_POST["$v[name]"];
 		}
 	}
 	$gristTiersSatisfied = 0;
