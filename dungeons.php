@@ -404,7 +404,7 @@ if (empty($_SESSION['character'])) {
 							$charrow['boondollars'] += $boonplus;
 							mysqli_query($connection, "UPDATE Characters SET boondollars = " . $charrow['boondollars'] . " WHERE Characters.ID = " . $charrow['ID'] . " LIMIT 1;");
 						}
-						$lootresult = mysqli_query($connection, "SELECT ID,name FROM Captchalogue WHERE $gotloot AND (session = 0 OR session = $charrow[session])");
+						$lootresult = mysqli_query($connection, "SELECT ID, `name` FROM Captchalogue WHERE $gotloot AND (`session` = 0 OR `session` = $charrow[session])");
 						while ($row = mysqli_fetch_array($lootresult)) {
 							$got = addItem($charrow, $row['ID']);
 							echo $row['name'];
