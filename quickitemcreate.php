@@ -76,11 +76,16 @@ if ($_SESSION['username'] != "") {
         $aok = false;
         $code1 = $_GET['code1'];
         $code2 = $_GET['code2'];
+		if ($op == "and") { // Begin new item code generation
+			$code = andcombine($code1,$code2);
+		} elseif ($op == "or") {
+			$code = orcombine($code1,$code2);
+		}
         // BEGIN STABILITY CHECK
         $fullyUnstable = 0;
         $stringArray = str_split($code, 1); // Splits the combined code into single characters.
         $binaryString = binary($stringArray[0]).binary($stringArray[1]).binary($stringArray[2]).binary($stringArray[3]).binary($stringArray[4]).binary($stringArray[5]).binary($stringArray[6]).binary($stringArray[7]);
-        if (substr_count($binaryString, '0') <= 12 || substr_count($binaryString, '0') >= 36) {
+		if (substr_count($binaryString, '0') <= 12 || substr_count($binaryString, '0') >= 36) {
             if ($op = 'or') {
                 $newCode = andCombine($code1, $code2);
                 $stringArray = str_split($newCode, 1);
