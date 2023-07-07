@@ -12,37 +12,35 @@ if(!empty($_GET['session']))
 	$sessionesc = str_replace("'", "''", $_GET['session']);
 	$ownsession = mysqli_query($connection, "SELECT * FROM Sessions WHERE `name` ='" . mysqli_real_escape_string($connection, $sessionesc) . "';");
 	$sessiont = mysqli_fetch_array($ownsession);
-	echo "Showing multi-player chains in session " . $_GET['session'] . ":</br>";
+	echo "Showing chains in session " . $_GET['session'] . ":</br>";
 }
 else
 {
 	$ownsession = mysqli_query($connection, "SELECT * FROM Sessions WHERE `ID` = $charrow[session];");
 	$sessiont = mysqli_fetch_array($ownsession);
-	echo "Showing multi-player chains in session " . $sessiont['name'] . ":</br>";
+	echo "Showing chains in session " . $sessiont['name'] . ":</br>";
 }
 
 if(!$sessiont) echo 'No chains found, or session not found';
 
 $characterid = explode("|", $sessiont['members']);
 
-if($sessiont && sizeof($characterid)<=2) echo 'No chains found';
-
 $backup = array();
 
-$charid = $characterid[0];
-while (sizeof($characterid) > 2)
+for ($charid = $characterid[0]; !empty($characterid); $charid = array_values($characterid)[0])
 {
 	$skip = false;
 	$closed = 0;
 	//we get the very first member of the chain or if the chain is closed we go back to where we were
 	$candidate = $charid;
-	if(in_array($candidate,$characterid)) $previous = getChar($candidate)['client'];
+	if (in_array($candidate, $characterid)) $previous = getChar($candidate)['client'];
 	else $previous = $candidate;
-	while($previous)
+	while ($previous)
 	{
 		$candidate = $previous;
 		$previous = getChar($previous)['client'];
-		if($previous == $charid){
+		if ($previous == $charid)
+		{
 			$candidate = $charid;
 			break;
 		}
@@ -69,20 +67,18 @@ while (sizeof($characterid) > 2)
 		array_shift($characterid);
 		//break;
 	}
-	else $backup = $chain;
+	else
+		$backup = $chain;
 
 	if (!$closed) array_push($chain, -1);
 
-	$characterid = array_diff($characterid,$chain);
-	if(sizeof($chain) > 2 && !$skip)
+	$characterid = array_diff($characterid, $chain);
+	if(!$skip)
 	{
 		$chain = urlencode(serialize($chain));
-
-		$charid = array_values($characterid)[0];
 	
 		echo '<img src="/sessiongraph.php?chain='. $chain . '&closed=' . $closed . '"/>';
 	}
-	else $charid = array_values($characterid)[0];
 }
 
 require_once "footer.php";
