@@ -1,5 +1,5 @@
 <?php
-function generateEnemies($enemylist,$strifeID,$connection,$appearson,$generateleader,$sessionID = 0,$landID = 0,$tierlist = "",$persist = 0) {
+function generateEnemies($enemylist, $strifeID, $connection, $appearson, $generateleader, $sessionID = 0, $landID = 0, $tierlist = "", $persist = 0) {
 	//This function takes an array of enemy names (starting at index 0), a strife ID, a database connection, and optionally a character ID and tier list.
 	//It uses the character ID to select grist types from that character's Land, applying them to the enemy based on the listed tier. It gives the enemies
 	//a side of 1, so they're opposed to the player side.
@@ -212,6 +212,7 @@ function powerCalc($strifer) {
 			case "Heart/I":
 				$offense = ceil($offense * 1.2) + 3300;
 				$defense = ceil($offense * 1.2) + 3300;
+				break;
 			case "Hope/I":
 				$factor = 1 + ((($strifer['health'] + $strifer['damagetaken']) / $strifer['maxhealth']) * 0.75); //Max is 1.75, min is 1
 				$offense = ceil($offense * $factor);
@@ -357,4 +358,3 @@ function endStrife($strifer) { //Function takes a strife row, returns a strife r
 	$strifer['motifsused'] = $newstr;
 	return $strifer;
 }
-?>
