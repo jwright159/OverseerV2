@@ -135,7 +135,7 @@ function gristSeeSaw($power) {
 		$highestPower = 60663;
 		$lowerGristBound = 30204292;
 		$upperGristBound = 43658786;
-	} elseif ($power >= 60663 && $power < 89991) {
+	} elseif ($power >= 60663 /* && $power < 89991 */) { // Man you didn't handle anything outside of the range
 		$lowestPower = 60663;
 		$highestPower = 89991;
 		$lowerGristBound = 43658786;
