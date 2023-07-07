@@ -3,81 +3,58 @@ $pagetitle = "Chain Viewer";
 $headericon = "/images/header/spirograph.png";
 require_once "header.php";
 require_once "includes/global_functions.php";
+?>
 
-echo '<form action="chainviewer.php" method="get">';
-echo 'Session to retrieve info about: <input id="session" name="session" type="text" /><input type="submit" value="Examine it!" /> </form></br>';
+<form action="chainviewer.php" method="get">
+Session to retrieve info about: <input id="session" name="session" type="text" /><input type="submit" value="Examine it!" /> </form></br>
 
+<?php
 if(!empty($_GET['session']))
 {
 	$sessionesc = str_replace("'", "''", $_GET['session']);
 	$ownsession = mysqli_query($connection, "SELECT * FROM Sessions WHERE `name` ='" . mysqli_real_escape_string($connection, $sessionesc) . "';");
 	$sessiont = mysqli_fetch_array($ownsession);
-	echo "Showing chains in session " . $_GET['session'] . ":</br>";
 }
 else
 {
-	$ownsession = mysqli_query($connection, "SELECT * FROM Sessions WHERE `ID` = $charrow[session];");
+	$ownsession = mysqli_query($connection, "SELECT * FROM Sessions WHERE ID = $charrow[session];");
 	$sessiont = mysqli_fetch_array($ownsession);
-	echo "Showing chains in session " . $sessiont['name'] . ":</br>";
 }
 
-if(!$sessiont) echo 'No chains found, or session not found';
-
-$characterid = explode("|", $sessiont['members']);
-
-$backup = array();
-
-for ($charid = $characterid[0]; !empty($characterid); $charid = array_values($characterid)[0])
+if(!$sessiont)
 {
-	$skip = false;
-	$closed = 0;
-	//we get the very first member of the chain or if the chain is closed we go back to where we were
-	$candidate = $charid;
-	if (in_array($candidate, $characterid)) $previous = getChar($candidate)['client'];
-	else $previous = $candidate;
-	while ($previous)
+	echo 'Session not found';
+}
+else
+{
+	echo "Showing chains in session " . $sessiont['name'] . ":</br>";
+
+	$characterids = array_filter(explode("|", $sessiont['members']), function($item) { return (bool)$item; });
+
+	while (!empty($characterids))
 	{
-		$candidate = $previous;
-		$previous = getChar($previous)['client'];
-		if ($previous == $charid)
+		$original = array_values($characterids)[0];
+		
+		// Start by navigating to the head of the chain (the most client-ways) until there is no client or until we reach the original char
+		$head = $original;
+		while (($client = getChar($head)['client']) && $client != $original)
 		{
-			$candidate = $charid;
-			break;
+			echo "Client $client <br>";
+			$head = $client;
 		}
-	}
-	//we go from there to the last server, or we find the same guy again, in which case we break
-	$chain = array($candidate);
-	$next = getchar($candidate)['server'];
-	while ($next)
-	{
-		array_push($chain, $next);
-		$next = getChar($next)['server'];
-		if($next == $candidate)
+		
+		// Now that we have the head, go server-wise and add members to the chain
+		$chain = [$head];
+		while (($server = getChar($head)['server']) && $server != $head)
 		{
-			$closed=1;
-			break;
+			$head = $server;
+			$chain[] = $head;
 		}
-	}
-
-	if($chain == $backup)
-	{
-		echo "<br>Infinite loop detected, check your chain structure and consult session administrator<br>";
-		echo "<br>This is likely to happen if developers edited your chain or if your chain name contains special characters<br>";
-		$skip = true;
-		array_shift($characterid);
-		//break;
-	}
-	else
-		$backup = $chain;
-
-	if (!$closed) array_push($chain, -1);
-
-	$characterid = array_diff($characterid, $chain);
-	if(!$skip)
-	{
-		$chain = urlencode(serialize($chain));
-	
-		echo '<img src="/sessiongraph.php?chain='. $chain . '&closed=' . $closed . '"/>';
+		
+		$characterids = array_diff($characterids, $chain);
+		
+		$chainStr = urlencode(serialize($chain));
+		echo "<img src='/sessiongraph.php?chain=$chainStr'/>";
 	}
 }
 

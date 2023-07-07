@@ -19,31 +19,28 @@ if ($fontsize < 5) $fontsize = 5;
 
 
 imageellipse($image, $mult, $mult, $mult * 1.5, $mult * 1.5, $black);
-if(sizeof($characterids) > 2)
+foreach ($characterids as $char)
 {
-	foreach($characterids as $key => $chars)
+	$angle3 = $angle;
+	$chara = getChar($char);
+	$name = $chara['name'];
+	$namewidth = ($fontsize * strlen($name) * cos(deg2rad($angle3))) / 2;
+	$color = $chara['colour'];
+	$playercol = ImageColorAllocate($image, hex2RGB($color)['red'], hex2RGB($color)['green'], hex2RGB($color)['blue']);
+	$nameheight = ($fontsize * strlen($name) * sin($angle)) / 2;
+	if((rad2deg($angle) > 90) && (rad2deg($angle) < 270))
 	{
-		$angle3 = $angle;
-		$chara = getChar($chars);
-		$name = $chara['name'];
-		$namewidth = ($fontsize * strlen($name) * cos(deg2rad($angle3))) / 2;
-		$color = $chara['colour'];
-		$playercol = ImageColorAllocate($image, hex2RGB($color)['red'], hex2RGB($color)['green'], hex2RGB($color)['blue']);
-		$nameheight = ($fontsize * strlen($name) * sin($angle)) / 2;
-		if((rad2deg($angle) > 90) && (rad2deg($angle) < 270))
-		{
-			$angle3 = deg2rad(rad2deg($angle) - 180);
-			$nameheight = (-$fontsize * strlen($name) * sin($angle)) / 2;
-		}
-		if(rad2deg($angle) > 270)
-		{
-			$angle3 = deg2rad(rad2deg($angle));
-		}
-		$circlex = $mult + $radius * cos($angle);
-		$circley = $mult + $radius * sin($angle);
-		imagettftext($image, $fontsize, -rad2deg($angle3), $circlex - $namewidth, $circley - $nameheight, $playercol, dirname(__FILE__) . '/fonts/ascii.ttf', $name);
-		$angle = $angle + $angle2;
+		$angle3 = deg2rad(rad2deg($angle) - 180);
+		$nameheight = (-$fontsize * strlen($name) * sin($angle)) / 2;
 	}
+	if(rad2deg($angle) > 270)
+	{
+		$angle3 = deg2rad(rad2deg($angle));
+	}
+	$circlex = $mult + $radius * cos($angle);
+	$circley = $mult + $radius * sin($angle);
+	imagettftext($image, $fontsize, -rad2deg($angle3), $circlex - $namewidth, $circley - $nameheight, $playercol, dirname(__FILE__) . '/fonts/ascii.ttf', $name);
+	$angle += $angle2;
 }
 header('Content-type: image/png');
 ImagePNG($image);

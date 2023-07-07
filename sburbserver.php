@@ -51,22 +51,22 @@ if (empty($_SESSION['username'])) {
     	$registered = "";
     	$sessionmates = mysqli_query($connection, "SELECT * FROM Characters WHERE `Characters`.`ID` = " . $_POST['client']);
     	while ($row = mysqli_fetch_array($sessionmates)) {
-      	if ($row['session'] == $charrow['session']) { //Make sure the client is actually in the correct session!
-					if ($row['ID'] == $_POST['client'] && ($row['server'] == 0 || $row['server'] == $cid)) { //Ensure they don't already have a server player
-	  				$playerfound = True;
-	  				$client = mysqli_real_escape_string($connection, $_POST['client']);
-	  				mysqli_query($connection, "UPDATE `Characters` SET `server` = $cid WHERE `Characters`.`ID` = $client LIMIT 1 ;");
-	  				mysqli_query($connection, "UPDATE `Characters` SET `client` = $client WHERE `Characters`.`ID` = $cid LIMIT 1 ;");
-	  				notifyCharacter($row['ID'], $charrow['name'] . " has become your server player!");
-	  				echo "Client registered.<br />";
-	  				$charrow['client'] = $client;
-					} else {
-	  				if ($row['server'] != "" && $playerfound != True) {
-	    				$playerfound = True;
-	    				echo "Client already possesses a server player: " . $row['server'] . "<br />";
-	  				}
+			if ($row['session'] == $charrow['session']) { //Make sure the client is actually in the correct session!
+				if ($row['ID'] == $_POST['client'] && ($row['server'] == 0 || $row['server'] == $cid)) { //Ensure they don't already have a server player
+					$playerfound = True;
+					$client = mysqli_real_escape_string($connection, $_POST['client']);
+					mysqli_query($connection, "UPDATE `Characters` SET `server` = $cid WHERE `Characters`.`ID` = $client LIMIT 1 ;");
+					mysqli_query($connection, "UPDATE `Characters` SET `client` = $client WHERE `Characters`.`ID` = $cid LIMIT 1 ;");
+					notifyCharacter($row['ID'], $charrow['name'] . " has become your server player!");
+					echo "Client registered.<br />";
+					$charrow['client'] = $client;
+				} else {
+					if ($row['server'] != "" && $playerfound != True) {
+						$playerfound = True;
+						echo "Client already possesses a server player: " . $row['server'] . "<br />";
 					}
-      	}
+				}
+			}
     	}
     	if ($playerfound == False) {
       	echo "Target player was not found in your session.<br />";
