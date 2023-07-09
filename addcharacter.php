@@ -147,7 +147,7 @@ unset($updatestrifers);
 
 // This is gonna need to be rewritten, I couldn't be bothered to do it right now.
 $dbtype = "";
-require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/database.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/inc/database.php'; // WHOOPS. THIS CANT BE require_once BECAUSE IT WAS REQUIRED AT THE TOP UH UH UH UH
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/global_functions.php';
 $charresult = mysqli_query($connection, "SELECT * FROM `Characters` WHERE `ID` = $newcharid LIMIT 1;");
 $charrow = mysqli_fetch_array($charresult);
