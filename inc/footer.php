@@ -19,13 +19,13 @@ elseif ($charrow['dreamingstatus']=='Derse') $background='derse';
 ?>
 			</div><?php // id: content-area ?>
 			<footer>
-				<?php
+				<!-- <?php
 					if (!empty($_SESSION['character'])) {
 						echo "Fatigue($me->wakefatigue) Dreamself fatigue($me->dreamfatigue)<br>";
 						if ($me->wakefatigue > 1025) echo "Waking fatigue penalty: " . (($me->wakefatigue - 1025) / 10) . "%<br>";
 						if ($me->dreamfatigue > 1025) echo "Dreamself fatigue penalty: " . (($me->dreamfatigue - 1025) / 10) . "%<br>";
 					}
-				?>
+				?> -->
 				Page generated in <span id="pagegentime">???</span> seconds and loaded in <span id="pageloadtime"><span style="color: blue;">calculating </span></span>ms.
 			</footer>
 		</div><?php // id: content-container ?>
