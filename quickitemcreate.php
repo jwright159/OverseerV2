@@ -74,49 +74,68 @@ if ($_SESSION['username'] != "") {
     if (!empty($_GET['op'])) {
         $op = $_GET['op'];
         $aok = false;
+
         $code1 = $_GET['code1'];
+		$code1Binary = breakdown($code1);
+		if (substr_count($code1Binary, '0') <= 12) {
+			echo 'The first code has a lot of holes punched... You feel like it might be best used in && alchemy. <br/>';
+		} elseif (substr_count($code1Binary, '0') >= 36) {
+			echo 'The first code doesn\'t have many holes punched... You feel like it might be best used in || alchemy. <br/>';
+		}
+
         $code2 = $_GET['code2'];
+		$code2Binary = breakdown($code2);
+		if (substr_count($code2Binary, '0') <= 12) {
+			echo 'The second code has a lot of holes punched. You feel like it might be best used in && alchemy. <br/>';
+		} elseif (substr_count($code2Binary, '0') >= 36) {
+			echo 'The second code doesn\'t have many holes punched. You feel like it might be best used in || alchemy. <br/>';
+		}
+
 		if ($op == "and") { // Begin new item code generation
 			$code = andcombine($code1,$code2);
 		} elseif ($op == "or") {
 			$code = orcombine($code1,$code2);
 		}
-        // BEGIN STABILITY CHECK
-        $fullyUnstable = 0;
-        $stringArray = str_split($code, 1); // Splits the combined code into single characters.
-        $binaryString = binary($stringArray[0]).binary($stringArray[1]).binary($stringArray[2]).binary($stringArray[3]).binary($stringArray[4]).binary($stringArray[5]).binary($stringArray[6]).binary($stringArray[7]);
+		
+        $usableCode = true;
+        $binaryString = breakdown($code);
 		if (substr_count($binaryString, '0') <= 12 || substr_count($binaryString, '0') >= 36) {
             if ($op = 'or') {
+				if (substr_count($binaryString, '0') <= 12) {
+					echo 'The result code has too many holes punched, which makes for terrible alchemy. You try && alchemy instead. <br/>';
+				} elseif (substr_count($binaryString, '0') >= 36) {
+					echo 'The result code doesn\'t have enough holes punched, which makes for terrible alchemy. You try && alchemy instead. <br/>';
+				}
+				
                 $newCode = andCombine($code1, $code2);
-                $stringArray = str_split($newCode, 1);
-                $binaryString = binary($stringArray[0]).binary($stringArray[1]).binary($stringArray[2]).binary($stringArray[3]).binary($stringArray[4]).binary($stringArray[5]).binary($stringArray[6]).binary($stringArray[7]);
-                $partiallyUnstable = 1;
+                $binaryString = breakdown($newCode);
                 $op = 'and';
                 if (substr_count($binaryString, '0') <= 12 || substr_count($binaryString, '0') >= 36) {
-                    $fullyUnstable = 1;
+					echo 'That still didn\'t work! Try again with different items. <br/>';
+                    $usableCode = false;
                 } else {
                     $code = $newCode;
                 }
             } elseif ($op = 'and') {
+				if (substr_count($binaryString, '0') <= 12) {
+					echo 'The result code has too many holes punched, which makes for terrible alchemy. You try || alchemy instead. <br/>';
+				} elseif (substr_count($binaryString, '0') >= 36) {
+					echo 'The result code doesn\'t have enough holes punched, which makes for terrible alchemy. You try || alchemy instead. <br/>';
+				}
+
                 $newCode = orCombine($code1, $code2);
-                $stringArray = str_split($newCode, 1);
-                $binaryString = binary($stringArray[0]).binary($stringArray[1]).binary($stringArray[2]).binary($stringArray[3]).binary($stringArray[4]).binary($stringArray[5]).binary($stringArray[6]).binary($stringArray[7]);
-                $partiallyUnstable = 1;
+                $binaryString = breakdown($newCode);
                 $op = 'or';
                 if (substr_count($binaryString, '0') <= 12 || substr_count($binaryString, '0') >= 36) {
-                    $fullyUnstable = 1;
+					echo 'That still didn\'t work! Try again with different items. <br/>';
+                    $usableCode = false;
                 } else {
                     $code = $newCode;
                 }
             }
         }
-        // END STABILITY CHECK
-        if ($fullyUnstable == 1) {
-            echo "The code you are trying to create is too unstable. Please pick other items.<br/>";
-        } else {
-            if ($partiallyUnstable == 1) {
-                echo "<b>PLEASE NOTE: The operation you picked resulted in an unstable code, and has automatically been changed.</b><br><br>";
-            }
+		
+        if ($usableCode) {
             echo "Quick Creation Form<br><br><i>Information:</i>
     If you found a code that doesn't belong to an item, you can use this form to create one and have it available for use instantly!<br>
     The item will be session-bound; that is, only characters in your session can use it.<br>
