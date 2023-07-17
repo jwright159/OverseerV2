@@ -75,21 +75,29 @@ if ($_SESSION['username'] != "") {
         $op = $_GET['op'];
         $aok = false;
 
+		$potentialInstability = false;
+
         $code1 = $_GET['code1'];
 		$code1Binary = breakdown($code1);
 		if (substr_count($code1Binary, '0') <= 12) {
-			echo 'The first code has a lot of holes punched... You feel like it might be best used in && alchemy. <br/>';
+			echo 'The first code has a lot of holes punched. You feel like it might be best used in && alchemy. <br/>';
+			$potentialInstability = true;
 		} elseif (substr_count($code1Binary, '0') >= 36) {
-			echo 'The first code doesn\'t have many holes punched... You feel like it might be best used in || alchemy. <br/>';
+			echo 'The first code doesn\'t have many holes punched. You feel like it might be best used in || alchemy. <br/>';
+			$potentialInstability = true;
 		}
 
         $code2 = $_GET['code2'];
 		$code2Binary = breakdown($code2);
 		if (substr_count($code2Binary, '0') <= 12) {
 			echo 'The second code has a lot of holes punched. You feel like it might be best used in && alchemy. <br/>';
+			$potentialInstability = true;
 		} elseif (substr_count($code2Binary, '0') >= 36) {
 			echo 'The second code doesn\'t have many holes punched. You feel like it might be best used in || alchemy. <br/>';
+			$potentialInstability = true;
 		}
+
+		if ($potentialInstability) { echo '<br/>'; }
 
 		if ($op == "and") { // Begin new item code generation
 			$code = andcombine($code1,$code2);
@@ -97,14 +105,17 @@ if ($_SESSION['username'] != "") {
 			$code = orcombine($code1,$code2);
 		}
 		
+		$usedOtherOp = false;
         $usableCode = true;
         $binaryString = breakdown($code);
 		if (substr_count($binaryString, '0') <= 12 || substr_count($binaryString, '0') >= 36) {
             if ($op = 'or') {
 				if (substr_count($binaryString, '0') <= 12) {
 					echo 'The result code has too many holes punched, which makes for terrible alchemy. You try && alchemy instead. <br/>';
+					$usedOtherOp = true;
 				} elseif (substr_count($binaryString, '0') >= 36) {
 					echo 'The result code doesn\'t have enough holes punched, which makes for terrible alchemy. You try && alchemy instead. <br/>';
+					$usedOtherOp = true;
 				}
 				
                 $newCode = andCombine($code1, $code2);
@@ -119,8 +130,10 @@ if ($_SESSION['username'] != "") {
             } elseif ($op = 'and') {
 				if (substr_count($binaryString, '0') <= 12) {
 					echo 'The result code has too many holes punched, which makes for terrible alchemy. You try || alchemy instead. <br/>';
+					$usedOtherOp = true;
 				} elseif (substr_count($binaryString, '0') >= 36) {
 					echo 'The result code doesn\'t have enough holes punched, which makes for terrible alchemy. You try || alchemy instead. <br/>';
+					$usedOtherOp = true;
 				}
 
                 $newCode = orCombine($code1, $code2);
@@ -134,6 +147,8 @@ if ($_SESSION['username'] != "") {
                 }
             }
         }
+
+		if ($usedOtherOp) { echo '<br/>'; }
 		
         if ($usableCode) {
             echo "Quick Creation Form<br><br><i>Information:</i>
