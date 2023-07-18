@@ -44,7 +44,7 @@ function removeItem(int $slot)
 	$_SESSION['imeta'] = $imeta;
 }
 
-function storeItem($charrow, $id, $amount, $extras = "", $shouldrefreshatheneum = true)
+function storeItem(&$charrow, $id, $amount, $extras = "", $shouldrefreshatheneum = true)
 {
 	global $connection;
 	$sresult = mysqli_query($connection, "SELECT `size`,`effects` FROM `Captchalogue` WHERE `ID` = $id");
@@ -78,7 +78,7 @@ function storeItem($charrow, $id, $amount, $extras = "", $shouldrefreshatheneum 
 	$newstorage = mysqli_real_escape_string($connection, $newstorage);
 	mysqli_query($connection, "UPDATE `Characters` SET `storeditems` = '$newstorage', `storedspace` = " . strval($charrow['storedspace'] + $size) . " WHERE `ID` = " . strval($charrow['ID']));
 	$charrow['storeditems'] = $newstorage;
-	$charrow['storedspace'] = $charrow['storedspace'] + $size;
+	$charrow['storedspace'] += $size;
 	if ($shouldrefreshatheneum) {
 	  refreshAtheneum($charrow, $id, 2);
 	}
