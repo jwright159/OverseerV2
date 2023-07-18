@@ -404,24 +404,27 @@ if (empty($_SESSION['character'])) {
 							$charrow['boondollars'] += $boonplus;
 							mysqli_query($connection, "UPDATE Characters SET boondollars = " . $charrow['boondollars'] . " WHERE Characters.ID = " . $charrow['ID'] . " LIMIT 1;");
 						}
-						$lootresult = mysqli_query($connection, "SELECT ID, `name` FROM Captchalogue WHERE $gotloot AND (`session` = 0 OR `session` = $charrow[session])");
-						while ($row = mysqli_fetch_array($lootresult)) {
-							$got = addItem($charrow, $row['ID']);
-							echo $row['name'];
-							if (!$got) {
-								echo ", but you can't pick it up.";
-							} else {
-								echo ", which you captchalogue.";
-								$copies = substr_count($loots, strval($row['ID']) . ":");
-								$loots = str_replace(strval($row['ID']) . ":", "", $loots); //item was taken, so remove it from the loot string
-								//str_replace will delete ALL instances of the item, but preg_replace was erroring. Hence we then restore all but one.
-								$copies--;
-								while ($copies > 0) {
-									$loots .= strval($row['ID'] . ":");
+						if ($gotloot)
+						{
+							$lootresult = mysqli_query($connection, "SELECT ID, `name` FROM Captchalogue WHERE $gotloot AND (`session` = 0 OR `session` = $charrow[session])");
+							while ($row = mysqli_fetch_array($lootresult)) {
+								$got = addItem($charrow, $row['ID']);
+								echo $row['name'];
+								if (!$got) {
+									echo ", but you can't pick it up.";
+								} else {
+									echo ", which you captchalogue.";
+									$copies = substr_count($loots, strval($row['ID']) . ":");
+									$loots = str_replace(strval($row['ID']) . ":", "", $loots); //item was taken, so remove it from the loot string
+									//str_replace will delete ALL instances of the item, but preg_replace was erroring. Hence we then restore all but one.
 									$copies--;
+									while ($copies > 0) {
+										$loots .= strval($row['ID'] . ":");
+										$copies--;
+									}
 								}
+								echo "<br />";
 							}
-							echo "<br />";
 						}
 					}
 					if ($loots != $startingloots) { //loot was acquired/generated, write the changes to the database
