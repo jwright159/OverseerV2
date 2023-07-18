@@ -1,8 +1,11 @@
 <?php
+
+/**
+ * This function takes an array of enemy names (starting at index 0), a strife ID, a database connection, and optionally a character ID and tier list.
+ * It uses the character ID to select grist types from that character's Land, applying them to the enemy based on the listed tier. It gives the enemies
+ * a side of 1, so they're opposed to the player side.
+ */
 function generateEnemies($enemylist, $strifeID, $connection, $appearson, $generateleader, $sessionID = 0, $landID = 0, $tierlist = "", $persist = 0) {
-	//This function takes an array of enemy names (starting at index 0), a strife ID, a database connection, and optionally a character ID and tier list.
-	//It uses the character ID to select grist types from that character's Land, applying them to the enemy based on the listed tier. It gives the enemies
-	//a side of 1, so they're opposed to the player side.
 	$i = 0;
 	$rowfetchquery = "SELECT * FROM `Enemy_Types` WHERE `Enemy_Types`.`basename` IN (";
 	while (!empty($enemylist[$i])) {
@@ -15,7 +18,7 @@ function generateEnemies($enemylist, $strifeID, $connection, $appearson, $genera
 		if (strpos($appearson,$row['appearson']) === false && $appearson != "ANY") return false; //Enemy not permitted
 		$enemyrows[$row['basename']] = $row;
 	}
-	if ($landID != 0) {
+	if ($landID != 0 && $landID != 'battlefield') {
 		$landresult = mysqli_query($connection, "SELECT `grist_type` FROM `Characters` WHERE `Characters`.`ID` = $landID LIMIT 1;");
 		$landrow = mysqli_fetch_array($landresult);
 		$gristarray = explode("|", $landrow['grist_type']); //Entries 0 through 8 are grist tiers 1 through 9. Entries 9 through 17 are the bonus grists.
