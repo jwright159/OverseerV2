@@ -77,6 +77,8 @@ function storeItem($charrow, $id, $amount, $extras = "", $shouldrefreshatheneum 
 	if (!$done) $newstorage .= strval($id) . ":$amount:" . $extras . "|";
 	$newstorage = mysqli_real_escape_string($connection, $newstorage);
 	mysqli_query($connection, "UPDATE `Characters` SET `storeditems` = '$newstorage', `storedspace` = " . strval($charrow['storedspace'] + $size) . " WHERE `ID` = " . strval($charrow['ID']));
+	$charrow['storeditems'] = $newstorage;
+	$charrow['storedspace'] = $charrow['storedspace'] + $size;
 	if ($shouldrefreshatheneum) {
 	  refreshAtheneum($charrow, $id, 2);
 	}
