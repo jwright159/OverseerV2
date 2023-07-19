@@ -99,7 +99,7 @@ if ($accrow['modlevel'] < 4) {
 			}
 			if (!empty($_POST['weightround'])) $round = intval($_POST['weightround']);
 			else $round = 1;
-			foreach ($totalgrists as $g) {
+			foreach ($grist as $g) {
 				$griststr = $g['name'];
 				if (!empty($_POST[$griststr])) {
 					$percent = intval($_POST[$griststr]) / $totalweight;
@@ -207,11 +207,11 @@ if ($accrow['modlevel'] < 4) {
 					}
 					if ($fname == "nonsense") {
 						if (empty($_POST['nonsense'])) $_POST['nonsense'] = anyglitch();
-            else {
-              while(strpos($_POST['nonsense'], 'GLITCH') !== false) {
-                $_POST['nonsense'] = preg_replace('/GLITCH/', horribleMess(), $_POST['nonsense'], 1);
-              }
-            }
+						else {
+							while(strpos($_POST['nonsense'], 'GLITCH') !== false) {
+								$_POST['nonsense'] = preg_replace('/GLITCH/', horribleMess(), $_POST['nonsense'], 1);
+							}
+						}
 					}
 					if (!$founditem) {
 						$updatequery .= ", '" . mysqli_real_escape_string($connection, $_POST[$fname]) . "'";
@@ -473,4 +473,4 @@ if ($accrow['modlevel'] < 4) {
 	}
 }
 
-require_once$_SERVER['DOCUMENT_ROOT'] . "/footer.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/footer.php";
