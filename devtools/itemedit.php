@@ -180,27 +180,25 @@ if ($accrow['modlevel'] < 4) {
 					}
 				} elseif ($fname != 'ID') {
 					if ($fname == "gristcosts") {
-						$i = 0;
 						$gstring = ""; //lol
-						while (!empty($grist[$i]['name'])) {
-							$gristnam = $grist[$i]['name'];
+						foreach ($grist as $g) {
+							$gristname = $g['name'];
 							if (!empty($_POST['gristify'])) {
 								if ($_POST['size'] == "large" && strpos($_POST['abstratus'], "headgear") !== false && $_POST['hybrid'] != 1) {
-									$_POST[$gristnam] = 4000000 * ($_POST[$gristnam] / 100);
+									$_POST[$gristname] = 4000000 * ($_POST[$gristname] / 100);
 								} elseif ((strpos($_POST['abstratus'], "headgear") !== false || strpos($_POST['abstratus'], "facegear") !== false || strpos($_POST['abstratus'], "accessory") !== false) && $_POST['hybrid'] != 1) {
-									$_POST[$gristnam] = 2000000 * ($_POST[$gristnam] / 100);
+									$_POST[$gristname] = 2000000 * ($_POST[$gristname] / 100);
 								} elseif (strpos($_POST['abstratus'], "bodygear") !== false && $_POST['hybrid'] != 1) {
-									$_POST[$gristnam] = 5000000 * ($_POST[$gristnam] / 100);
+									$_POST[$gristname] = 5000000 * ($_POST[$gristname] / 100);
 								} elseif ($_POST['size'] == "large") {
-									$_POST[$gristnam] = 50000000 * ($_POST[$gristnam] / 100);
+									$_POST[$gristname] = 50000000 * ($_POST[$gristname] / 100);
 								} else {
-									$_POST[$gristnam] = 25000000 * ($_POST[$gristnam] / 100);
+									$_POST[$gristname] = 25000000 * ($_POST[$gristname] / 100);
 								}
 							}
-							if ($_POST[$gristnam] != 0) {
-								$gstring .= $gristnam . ":" . $_POST[$gristnam] . "|";
+							if ($_POST[$gristname]) {
+								$gstring .= $gristname . ":" . $_POST[$gristname] . "|";
 							}
-							$i++;
 						}
 						if (empty($gstring)) $gstring = "Build_Grist:0|";
 						$_POST[$fname] = $gstring;
@@ -285,7 +283,9 @@ if ($accrow['modlevel'] < 4) {
 		}
 	}
 	$populate = false;
-	if (!empty($_GET['editcode'])) {
+	if (!empty($editcode)) {
+		$populate = true;
+	} elseif (!empty($_GET['editcode'])) {
 		$editcode = $_GET['editcode'];
 		$populate = true;
 	} else {
@@ -384,7 +384,7 @@ if ($accrow['modlevel'] < 4) {
 		} else echo "Either no submission with that ID exists, or it isn't ready to be processed.<br />";
 	}
 	//print_r($suggrist);
-	if ($processing == 0) $founditem = false;
+	//if (!$processing) $founditem = false;
 	if ($populate) {
 		$editresult = mysqli_query($connection, "SELECT * FROM `Captchalogue` WHERE `Captchalogue`.`code` = '$editcode' LIMIT 1;");
 		while($row = mysqli_fetch_array($editresult)) {
@@ -429,6 +429,7 @@ if ($accrow['modlevel'] < 4) {
 	}
 	echo '</tbody></table><br /><table cellpadding="0" cellspacing="0"><tbody>';
 	$col = 1;
+	$ctgc = 0;
 	foreach ($grist as $g) { //go through the grists now that they're being done differently
 		if ($col == 1) echo '<tr>';
 		echo '<td align="right">';
@@ -436,7 +437,6 @@ if ($accrow['modlevel'] < 4) {
 		if ($g['gif'] == 1) $gristimg = $gristname . ".gif";
 		else $gristimg = $gristname . ".png";
 		echo "<img src='../images/grist/".$gristimg."' height='15' width='15' alt = 'xcx'/>";
-		//$ctgc += $erow[$fname];
 		echo $gristname . '(' . strval($g['tier']) . '):</td><td> <input type="text" name="' . $gristname . '"';
 		if ($loadold || !empty($_GET['sub'])) {
 			if (!empty($erow[$gristname . "_Cost"])) {
@@ -446,7 +446,10 @@ if ($accrow['modlevel'] < 4) {
 			$am = howmuchGrist($erow['gristcosts'], $gristname);
 			if ($am != 0) $suggrist[$gristname] = $am;
 		}
-		if (!empty($suggrist[$gristname])) echo ' value="' . strval($suggrist[$gristname]) . '"';
+		if (!empty($suggrist[$gristname])) {
+			$ctgc += intval($suggrist[$gristname]);
+			echo ' value="' . strval($suggrist[$gristname]) . '"';
+		}
 		//echo strval($suggrist[$gristname]);
 		echo '></td>';
 		$col++;
