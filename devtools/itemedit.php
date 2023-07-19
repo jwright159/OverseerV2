@@ -459,7 +459,7 @@ if ($accrow['modlevel'] < 4) {
 	echo '<input type="checkbox" name="gristify" value="yes" /> Enable Endgamifier (grist values given are treated as percentage of endgame cost)<br />NOTE: Hybrids should always be balanced manually.<br />';
 	echo '<input type="checkbox" name="weighted" value="yes" /> Values given are not exact, but weights of the recommended cost rounded to the nearest: <input type="text" name="weightround" /><br />';
 	echo '- Tweak auto-balanced costs by <input type="text" name="costtweak" /> percent.<br />';
-	echo '- Force an override of the auto-balanced cost, instead using a manual total grist cost of <input type="text" name="costoverride" ' . (!empty($erow['totalweight']) ? strval($erow['totalweight']) : '') . '/><br />';
+	echo '- Force an override of the auto-balanced cost, instead using a manual total grist cost of <input type="text" name="costoverride" ' . (!empty($erow['totalweight']) ? 'value="' . strval($erow['totalweight']) . '" ' : '') . '/><br />';
 	if ($ctgc != 0) echo "Current total grist cost: $ctgc<br />";
 	echo 'Dev comments about the item: If you changed the item significantly, such as changing a component or switching the operation, say so here. Or just whatever you want to add to its entry in the addlog.<br /><textarea name="devcomments" rows="6" cols="40" form="itemeditor"></textarea><br />';
 	echo '<input type="submit" value="Edit/Create"></form><br />';
