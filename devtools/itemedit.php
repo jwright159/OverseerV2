@@ -45,7 +45,6 @@ if ($accrow['modlevel'] < 4) {
 	echo "What are you doing here?";
 } else {
 	$grist = initGrists();
-	$totalgrists = count($grist);
 	
 	if (!empty($_POST['publishlog'])) {
 		if ($accrow['modlevel'] >= 6) {
@@ -95,21 +94,17 @@ if ($accrow['modlevel'] < 4) {
 				}
 			}
 			$totalweight = 0;
-			$i = 0;
-			while ($i < $totalgrists) {
-				if (!empty($_POST[$grist[$i]['name']])) $totalweight += intval($_POST[$grist[$i]['name']]);
-				$i++;
+			foreach ($grist as $g) {
+				if (!empty($_POST[$g['name']])) $totalweight += intval($_POST[$g['name']]);
 			}
 			if (!empty($_POST['weightround'])) $round = intval($_POST['weightround']);
 			else $round = 1;
-			$g = 0;
-			while ($g < $totalgrists) {
-				$griststr = $grist[$g]['name'];
+			foreach ($totalgrists as $g) {
+				$griststr = $g['name'];
 				if (!empty($_POST[$griststr])) {
 					$percent = intval($_POST[$griststr]) / $totalweight;
 					$_POST[$griststr] = round(($percent * $basetotalcost) / $round) * $round;
 				}
-				$g++;
 			}
 		}
 		$blocked = false;
@@ -305,11 +300,11 @@ if ($accrow['modlevel'] < 4) {
 			//logDebugMessage($accrow['username'] . " - began working on the submission " . $feedrow['name']);
 			$founditem = true;
 			echo 'Submission ID: ' . strval($feedrow['ID']) . '<br />';
-    	echo 'Submitted by: ' . $feedrow['user'] . '<br />';
-    	echo 'Item code: ' . $feedrow['code'] . '<br />';
-    	$erow['code'] = $feedrow['code'];
-    	echo 'Item name: ' . $feedrow['name'] . '<br />';
-    	$erow['name'] = $feedrow['name'];
+			echo 'Submitted by: ' . $feedrow['user'] . '<br />';
+			echo 'Item code: ' . $feedrow['code'] . '<br />';
+			$erow['code'] = $feedrow['code'];
+			echo 'Item name: ' . $feedrow['name'] . '<br />';
+			$erow['name'] = $feedrow['name'];
 			echo 'Recipe: ' . $feedrow['recipe'] . '<br />';
 			echo 'Power level: ' . strval($feedrow['power']) . '<br />';
 			$erow['power'] = $feedrow['power'];
@@ -317,24 +312,24 @@ if ($accrow['modlevel'] < 4) {
 			$erow['description'] = $feedrow['description'];
 			echo "Submitter's comments: " . $feedrow['comments'] . "<br />";
 			echo "<br />";
-	  	echo "Viewers' comments:<br />";
-	  	$count = 0;
-	  	$boom = explode("|", $feedrow['usercomments']);
-	  	$allmessages = count($boom);
-	  	while ($count <= $allmessages) {
-	    	$boom[$count] = str_replace("THIS IS A LINE", "|", $boom[$count]);
-	    	echo $boom[$count] . "<br />";
-	    	$count++;
-	    }
-	    echo "<br /><br />";
-	    $processing = $feedrow['ID'];
-	    if (!empty($feedrow['size'])) $erow['size'] = $feedrow['size'];
-	    else $erow['size'] = "average";
-	    if ($feedrow['catalogue'] == 1) $erow['catalogue'] = 1;
-	    if ($feedrow['lootonly'] == 1) $erow['lootonly'] = 1;
-	    if ($feedrow['consumable'] == 1) $erow['consumable'] = 1;
-	    if ($feedrow['refrance'] == 1) $erow['refrance'] = 1;
-	    if (!empty($feedrow['bonuses'])) {
+			echo "Viewers' comments:<br />";
+			$count = 0;
+			$boom = explode("|", $feedrow['usercomments']);
+			$allmessages = count($boom);
+			while ($count <= $allmessages) {
+				$boom[$count] = str_replace("THIS IS A LINE", "|", $boom[$count]);
+				echo $boom[$count] . "<br />";
+				$count++;
+			}
+			echo "<br /><br />";
+			$processing = $feedrow['ID'];
+			if (!empty($feedrow['size'])) $erow['size'] = $feedrow['size'];
+			else $erow['size'] = "average";
+			if ($feedrow['catalogue'] == 1) $erow['catalogue'] = 1;
+			if ($feedrow['lootonly'] == 1) $erow['lootonly'] = 1;
+			if ($feedrow['consumable'] == 1) $erow['consumable'] = 1;
+			if ($feedrow['refrance'] == 1) $erow['refrance'] = 1;
+			if (!empty($feedrow['bonuses'])) {
 				$barray = explode("|", $feedrow['bonuses']);
 				$i = 0;
 				while (!empty($barray[$i])) {
@@ -349,13 +344,13 @@ if ($accrow['modlevel'] < 4) {
 				$erow['abstratus'] = $feedrow['abstratus'];
 				if (strpos($erow['abstratus'], "kind") !== false) $weapon = true;
 			} else {
-        $erow['abstratus'] = "notaweapon";
+				$erow['abstratus'] = "notaweapon";
 			}
-      if (!empty($feedrow['wearable'])) {
+			if (!empty($feedrow['wearable'])) {
 				$erow['wearable'] = $feedrow['wearable'];
 				if (strpos($erow['wearable'], "body") !== false) $bodygear = true;
 			} else {
-        $erow['wearable'] = "none";
+				$erow['wearable'] = "none";
 			}
 			$wornpower = $erow['power'] + $erow['aggrieve'] + $erow['aggress'] + $erow['assail'] + $erow['assault'] + $erow['abuse'] + $erow['accuse'] + $erow['abjure'] + $erow['abstain'];
 			$wpnpower = $erow['power'] + $erow[heaviestBonus($erow)];
@@ -368,23 +363,19 @@ if ($accrow['modlevel'] < 4) {
 			echo "Suggested total grist cost: $basetotalcost<br />";
 			if (!empty($feedrow['grists'])) {
 				$barray = explode("|", $feedrow['grists']);
-				$i = 0;
 				$gristw = array();
 				$totalweight = 0;
-				while (!empty($barray[$i])) {
-					$aarray = explode(":", $barray[$i]);
+				foreach ($barray as $b) {
+					$aarray = explode(":", $b);
 					$amoutn = intval($aarray[1]);
 					$gristw[$aarray[0]] = $amoutn;
 					$totalweight += $amoutn;
-					$i++;
 				}
 				$round = 1;
-				$g = 0;
-				while ($g < $totalgrists) {
-					$griststr = $grist[$g]['name'] . '_Cost';
-					$percent = $gristw[$grist[$g]['name']] / $totalweight;
+				foreach ($grist as $g) {
+					$griststr = $g['name'] . '_Cost';
+					$percent = $gristw[$g['name']] / $totalweight;
 					$erow[$griststr] = round(($percent * $basetotalcost) / $round) * $round;
-					$g++;
 				}
 			}
 		} else echo "Either no submission with that ID exists, or it isn't ready to be processed.<br />";
@@ -434,34 +425,32 @@ if ($accrow['modlevel'] < 4) {
 		}
 	}
 	echo '</tbody></table><br /><table cellpadding="0" cellspacing="0"><tbody>';
-	$i = 0;
 	$col = 1;
-	while (!empty($grist[$i]['name'])) { //go through the grists now that they're being done differently
+	foreach ($grist as $g) { //go through the grists now that they're being done differently
 		if ($col == 1) echo '<tr>';
 		echo '<td align="right">';
-		$gristnam = $grist[$i]['name'];
-		if ($grist[$i]['gif'] == 1) $gristimg = $gristnam . ".gif";
-		else $gristimg = $gristnam . ".png";
+		$gristname = $g['name'];
+		if ($g['gif'] == 1) $gristimg = $gristname . ".gif";
+		else $gristimg = $gristname . ".png";
 		echo "<img src='../images/grist/".$gristimg."' height='15' width='15' alt = 'xcx'/>";
 		//$ctgc += $erow[$fname];
-		echo $gristnam . '(' . strval($grist[$i]['tier']) . '):</td><td> <input type="text" name="' . $gristnam . '"';
-		if ($loadold) {
-			if (!empty($erow[$gristnam . "_Cost"])) {
-				$suggrist[$gristnam] = $erow[$gristnam . "_Cost"];
+		echo $gristname . '(' . strval($g['tier']) . '):</td><td> <input type="text" name="' . $gristname . '"';
+		if ($loadold || !empty($_GET['sub'])) {
+			if (!empty($erow[$gristname . "_Cost"])) {
+				$suggrist[$gristname] = $erow[$gristname . "_Cost"];
 			}
 		} elseif ($founditem) {
-      $am = howmuchGrist($erow['gristcosts'],$gristnam);
-      if ($am != 0) $suggrist[$gristnam] = $am;
-    }
-		if (!empty($suggrist[$gristnam])) echo ' value="' . strval($suggrist[$gristnam]) . '"';
-		//echo strval($suggrist[$gristnam]);
+			$am = howmuchGrist($erow['gristcosts'], $gristname);
+			if ($am != 0) $suggrist[$gristname] = $am;
+		}
+		if (!empty($suggrist[$gristname])) echo ' value="' . strval($suggrist[$gristname]) . '"';
+		//echo strval($suggrist[$gristname]);
 		echo '></td>';
 		$col++;
 		if ($col == 4) {
 			echo '</tr>';
 			$col = 1;
 		}
-		$i++;
 	}
 	echo '</tbody></table>';
 	echo '<input type="checkbox" name="gristify" value="yes" /> Enable Endgamifier (grist values given are treated as percentage of endgame cost)<br />NOTE: Hybrids should always be balanced manually.<br />';
