@@ -363,7 +363,7 @@ if ($accrow['modlevel'] < 4) {
 			echo "Suggested total grist cost: $basetotalcost<br />";
 			if (!empty($feedrow['grists'])) {
 				$barray = explode("|", $feedrow['grists']);
-				$gristw = array();
+				$gristw = [];
 				$totalweight = 0;
 				foreach ($barray as $b) {
 					$aarray = explode(":", $b);
@@ -371,12 +371,15 @@ if ($accrow['modlevel'] < 4) {
 					$gristw[$aarray[0]] = $amoutn;
 					$totalweight += $amoutn;
 				}
-				$round = 1;
 				foreach ($grist as $g) {
 					$griststr = $g['name'] . '_Cost';
+					/*
 					$percent = $gristw[$g['name']] / $totalweight;
-					$erow[$griststr] = round(($percent * $basetotalcost) / $round) * $round;
+					$erow[$griststr] = round(($percent * $basetotalcost));
+					*/
+					$erow[$griststr] = $gristw[$g['name']];
 				}
+				$erow['totalweight'] = $totalweight;
 			}
 		} else echo "Either no submission with that ID exists, or it isn't ready to be processed.<br />";
 	}
@@ -456,7 +459,7 @@ if ($accrow['modlevel'] < 4) {
 	echo '<input type="checkbox" name="gristify" value="yes" /> Enable Endgamifier (grist values given are treated as percentage of endgame cost)<br />NOTE: Hybrids should always be balanced manually.<br />';
 	echo '<input type="checkbox" name="weighted" value="yes" /> Values given are not exact, but weights of the recommended cost rounded to the nearest: <input type="text" name="weightround" /><br />';
 	echo '- Tweak auto-balanced costs by <input type="text" name="costtweak" /> percent.<br />';
-	echo '- Force an override of the auto-balanced cost, instead using a manual total grist cost of <input type="text" name="costoverride" /><br />';
+	echo '- Force an override of the auto-balanced cost, instead using a manual total grist cost of <input type="text" name="costoverride" ' . (!empty($erow['totalweight']) ? strval($erow['totalweight']) : '') . '/><br />';
 	if ($ctgc != 0) echo "Current total grist cost: $ctgc<br />";
 	echo 'Dev comments about the item: If you changed the item significantly, such as changing a component or switching the operation, say so here. Or just whatever you want to add to its entry in the addlog.<br /><textarea name="devcomments" rows="6" cols="40" form="itemeditor"></textarea><br />';
 	echo '<input type="submit" value="Edit/Create"></form><br />';
