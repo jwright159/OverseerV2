@@ -147,7 +147,7 @@ if ($_SESSION['username'] != "") {
         //don't keep from loading other existing versions
       }
       $itemrow = lookup($code,"Captchalogue"); //next look up in current database
-      if (!empty($itemrow['name'])) { //item exists in v2
+      if ($itemrow) { //item exists in v2
         if ($itemrow['session'] != 0) { //item is not generally available yet
           echo "Item found (Quick Creation): " . $itemrow['name'];
           $loaded = true;
@@ -158,24 +158,9 @@ if ($_SESSION['username'] != "") {
           echo "An item matching this code already exists in the current iteration of the game and is available to all.";
           $alreadyexists = true;
         }
-      } else {
-        $itemrow = lookup($code,"Feedback_Old");
-        if (!empty($itemrow['name'])) { //item was a submission on the old site
-          echo "Item found (Feedback Archive): " . $itemrow['name'];
-          if (!empty($itemrow['bonuses'])) {
-            $b = 0;
-            $bonuss = explode("|", $itemrow['bonuses']);
-            while (!empty($bonuss[$b])) {
-              $bonust = explode(":", $bonuss[$b]);
-              $itemrow[$bonust[0]] = $bonust[1];
-              $b++;
-            }
-          }
-          $loaded = true;
-        }
       }
       if (!$loaded && !$alreadyexists) {
-        echo "No item found with this code in any form. You may create one from scratch or search a different code.";
+        echo "No item found with this code. You may create one from scratch or search a different code.";
       }
     }
     echo "<br />";
@@ -228,22 +213,23 @@ if ($_SESSION['username'] != "") {
   }
   echo "</select><br />";
   echo "Grist costs:<br />Put an approximation of what costs you think this item should have. Note that your numbers will probably be tweaked, but any ratios or numerical schemes we will honor as best as we can.<br /><table cellpadding='0' cellspacing='0'><tbody>";
-  $i = 0;
   $col = 1;
-  while (!empty($grist[$i]['name'])) { //go through the grists now that they're being done differently
+  foreach ($grist as $g) { //go through the grists now that they're being done differently
     if ($col == 1) echo '<tr>';
     echo '<td align="right">';
-    $gristnam = $grist[$i]['name'];
-    if ($grist[$i]['gif'] == 1) $gristimg = $gristnam . ".gif";
-    else $gristimg = $gristnam . ".png";
+    $gristname = $g['name'];
+    if ($g['gif'] == 1) $gristimg = $gristname . ".gif";
+    else $gristimg = $gristname . ".png";
     echo "<img src='images/grist/".$gristimg."' height='15' width='15' alt = 'xcx'/>";
-    echo $gristnam . '(' . strval($grist[$i]['tier']) . '):</td><td> <input type="text" name="' . $gristnam . '"></td>';
+    echo $gristname . '(' . strval($g['tier']) . '):</td><td> <input type="text" name="' . $gristname . '"';
+	$am = howmuchGrist($itemrow['gristcosts'], $gristname);
+	if ($am != 0) echo ' value="' . $am . '"';
+	echo ' ></td>';
     $col++;
     if ($col == 4) {
       echo '</tr>';
       $col = 1;
     }
-    $i++;
   }
   echo '</tbody></table>';
   echo "Comments about this item - anything else you'd like to say to the devs about the item. Proposed effects, consumable or otherwise, go here.<br />";
