@@ -130,6 +130,7 @@ echo "<!DOCTYPE html><html><head><style>itemcode{font-family:'Courier New'}</sty
 	  		$rainbows = $dostring;
 	  	}
 	  	$realbody = "<" . $rainbows . ">" . $realbody . "</" . $rainbows . ">";
+		/* // JD: I don't feel like dealing with this, Messages doesn't exist anymore. There's a notifications field in characters, but not users :P
 	  	$msgresult = mysqli_query($connection, "SELECT * FROM `Messages` WHERE `Messages`.`username` = '" . $feedrow['user'] . "' LIMIT 1;");
   		$msgrow = mysqli_fetch_array($msgresult);
   		if ($msgrow['feedbacknotice'] == 1) {
@@ -172,6 +173,7 @@ echo "<!DOCTYPE html><html><head><style>itemcode{font-family:'Courier New'}</sty
 	  			mysqli_query($connection, "UPDATE Messages SET `$msgfield` = '$newmsgstring' WHERE `Messages`.`username` = '" . $feedrow['user'] . "'");
 	  			mysqli_query($connection, "UPDATE Players SET `newmessage` = `newmessage` + 1 WHERE `Players`.`username` = '" . $feedrow['user'] . "'");
   			}
+			*/
   		}
 	  }
 	  //echo $_POST['body'] . "</br>";
