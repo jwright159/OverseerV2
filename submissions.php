@@ -173,8 +173,8 @@ echo "<!DOCTYPE html><html><head><style>itemcode{font-family:'Courier New'}</sty
 	  			mysqli_query($connection, "UPDATE Messages SET `$msgfield` = '$newmsgstring' WHERE `Messages`.`username` = '" . $feedrow['user'] . "'");
 	  			mysqli_query($connection, "UPDATE Players SET `newmessage` = `newmessage` + 1 WHERE `Players`.`username` = '" . $feedrow['user'] . "'");
   			}
-			*/
   		}
+		*/
 	  }
 	  //echo $_POST['body'] . "</br>";
 	  if ($exstring != " (Submitter): ") {
