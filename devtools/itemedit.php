@@ -2,6 +2,7 @@
 $pagetitle = "Item Editor";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/glitches.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/inc/database.php";
 //require_once "includes/grist_icon_parser.php";
 
 function anyglitch() {
@@ -42,16 +43,7 @@ function heaviestBonus($workrow){
 
 if ($accrow['modlevel'] < 4) {
 	echo "What are you doing here?";
-} elseif (empty($_GET['db'])) {
-  echo "Select a database:<br />";
-  echo "<form action='itemedit.php";
-  if (!empty($_GET['sub'])) echo "&sub=" . strval($_GET['sub']);
-  echo "' method='get'><select name='db'><option value='live'>Live</option><option value='dev'>Dev</option></select><input type='submit' value='Go' /></form>";
 } else {
-  if ($_GET['db'] == "live") $connection = $liveConnect;
-  elseif ($_GET['db'] == "dev") $connection = $devConnect;
-  else echo "Error! The database you specified does not exist.<br />";
-  
 	$grist = initGrists();
 	$totalgrists = count($grist);
 	
@@ -412,12 +404,11 @@ if ($accrow['modlevel'] < 4) {
 		echo "No item loaded. You may use the following to search for one:<br />";
 		echo '<form action="itemedit.php" method="get">Item code: <input type="text" name="editcode" /><br />-OR-<br />Item name: <input type="text" name="editname" /><br /><input type="submit" value="Search" /></form>';
 	}
-	echo '<form action="itemedit.php';
-  echo '?db=' . $_GET['db'];
+	echo '<form action="itemedit.php?';
 	if (!empty($_GET['sub'])) {
-		echo '&sub=' . strval($_GET['sub']);
+		echo 'sub=' . strval($_GET['sub']) . '&';
 	} elseif (!empty($_GET['dobase'])) {
-		echo '&dobase=' . strval($_GET['dobase']);
+		echo 'dobase=' . strval($_GET['dobase']) . '&';
 	}
 	echo '" method="post" id="itemeditor"><table cellpadding="0" cellspacing="0"><tbody><tr><td align="right">Item Editor:</td><td> Ultra Hyper Mega Reboot Edition. Handy links: <a href="developerguidetoeffects.txt">Effect documentation</a> <a href="itemeditguide.txt">Item editing information</a></td></tr>';
 	if ($populate) echo '<input type="hidden" name="populate" value="yes">';
