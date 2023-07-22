@@ -1,8 +1,6 @@
 <?php
 function spendFatigue($fatigue, $charrow) {
-	if (true)
-		return $charrow;
-
+	$fatigue = 0;
 	global $connection;
 	if ($charrow['dreamingstatus'] == "Awake") {
 		$currentfatiguestr = 'wakefatigue';

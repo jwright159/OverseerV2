@@ -50,13 +50,13 @@ if ($_SESSION['username'] != "") {
 					mysqli_query($connection, "UPDATE Characters SET grists = '" . $newgrists . "' WHERE ID = $cid"); //Pay.
 				} else echo "Alchemy failed: not enough space in storage.<br />";
 			} else echo "Alchemy failed: your grist stores are insufficient.<br />";
-		} else { 
+		} else {
 			$itemResult = mysqli_query($connection, "SELECT * FROM Captchalogue WHERE code = '" . $_POST['alchcode'] . "';");
 			$itemRow = mysqli_fetch_array($itemResult);
 			if ($itemRow['session'] != 0) {
-				echo 'This item is created by another session and is awaiting approval!<br>'; 
+				echo 'This item is created by another session and is awaiting approval!<br>';
 			} else {
-			echo "The item corresponding to this code does not currently exist. You may create it using a full submission.<br />"; 
+			echo "The item corresponding to this code does not currently exist. You may create it using a full submission.<br />";
 			}
 		}
 	}

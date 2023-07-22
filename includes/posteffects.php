@@ -399,10 +399,10 @@ while ($i <= $n) {
 			$koresult = mysqli_query($connection, "SELECT * FROM Characters WHERE Characters.ID = " . $strifers[$i]['owner'] . " LIMIT 1;");
 			$korow = mysqli_fetch_array($koresult);
 			if (strpos($strifers[$i]['description'], "dreamself") !== false) { //Dreamself was KOed
-				$newfatigue = $korow['dreamfatigue'] + 100;
+				$newfatigue = $korow['dreamfatigue'];// + 100;
 				mysqli_query($connection, "UPDATE Characters set dreamfatigue = $newfatigue WHERE Characters.ID = " . $strifers[$i]['owner'] . " LIMIT 1;");
 			} else { //Waking self was KOed
-				$newfatigue = $korow['wakefatigue'] + 100;
+				$newfatigue = $korow['wakefatigue'];// + 100;
 				$olddungeonrow = $korow['olddungeonrow'];
 				$olddungeoncol = $korow['olddungeoncol'];
 				mysqli_query($connection, "UPDATE Characters set wakefatigue = $newfatigue, dungeonrow = $olddungeonrow, dungeoncol = $olddungeoncol WHERE Characters.ID = " . $strifers[$i]['owner'] . " LIMIT 1;");
