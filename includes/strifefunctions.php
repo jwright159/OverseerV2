@@ -184,8 +184,7 @@ function powerCalc($strifer) {
 	$bonusarray = array("AGGRIEVE" => 0, "AGGRESS" => 0, "ASSAIL" => 0, "ASSAULT" => 0, "ABUSE" => 0, "ACCUSE" => 0, "ABJURE" => 0, "ABSTAIN" => 0);
 	//First, we process the bonus field, since this is relevant to the strife commands
 	$bonuses = explode("|", $strifer['bonuses']);
-	$i = 0;
-	while (!empty($bonuses[$i])) { //We still have a bonus to evaluate.
+	for ($i = 0; !empty($bonuses[$i]); $i++) { //We still have a bonus to evaluate.
 		//A note on format: <Bonus type>:<duration>:<Bonus value>| is the standard format for bonuses.
 		$currentbonus = explode(":", $bonuses[$i]);
 		$value = intval($currentbonus[2]);
@@ -204,7 +203,6 @@ function powerCalc($strifer) {
 				$bonusarray[$currentbonus[0]] += $value;
 				break;
 		}
-		$i++;
 	}
 	//Then, we check their fraymotif if they have one active, since fraymotifs may provide a flat boost
 	if (!empty($strifer['currentmotif'])) {

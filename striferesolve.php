@@ -57,8 +57,7 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 		//added to updatedstatus.
 		if ($strifers[$n]['owner'] == $charrow['ID']) $playerside = $strifers[$n]['side']; //Set $playerside to the side the player is on
 	}
-	$i = 1;
-	while ($i <= $n) { //Change the "active" and "passive" entries of entities that receive them
+	for ($i = 1; $i <= $n; $i++) { //Change the "active" and "passive" entries of entities that receive them
 		//First, we set them to lastactive and lastpassive. This way if nothing acts to change them, they will remain at those values.
 		$strifers[$i]['active'] = $strifers[$i]['lastactive'];
 		$strifers[$i]['passive'] = $strifers[$i]['lastpassive'];
@@ -71,7 +70,6 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 		$strifers[$i]['lastactive'] = $strifers[$i]['active'];
 		$strifers[$i]['lastpassive'] = $strifers[$i]['passive'];
 		//If for some reason we want NPC strifers to have commands, an AI file can go here
-		$i++;
 	}
 	require_once "includes/preeffects.php"; //Pre-resolution effects go here. Note that immobilizing effects are resolved here so that
 	//if they are applied in an attack later they do not prevent the victim from performing their own attack.
@@ -85,8 +83,7 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 	$leaderoffarray = array();
 	$leaderdefarray = array();
 	$defarray = array();
-	$i = 1;
-	while ($i <= $n) { //Establish the power boosts for the leaders
+	for ($i = 1; $i <= $n; $i++) { //Establish the power boosts for the leaders
 		if ($strifers[$i]['leader'] != 1) {
 			$power = powerCalc($strifers[$i]);
 			if (empty($leaderoffarray[$strifers[$i]['side']])) $leaderoffarray[$strifers[$i]['side']] = 0; //Initialize these if they're not already.
@@ -94,10 +91,8 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 			$leaderoffarray[$strifers[$i]['side']] += floor($power['offense'] * ($strifers[$i]['teamwork'] / 100));
 			$leaderdefarray[$strifers[$i]['side']] += floor($power['defense'] * ($strifers[$i]['teamwork'] / 100));
 		}
-		$i++;
 	}
-	$i = 1;
-	while ($i <= $n) { //Apply the power boosts to the leaders and establish the boost for non-leaders
+	for ($i = 1; $i <= $n; $i++) { //Apply the power boosts to the leaders and establish the boost for non-leaders
 		if ($strifers[$i]['leader'] == 1) {
 			if (!empty($leaderoffarray[$strifers[$i]['side']])) $strifers[$i]['bonuses'] .= "OFFENSE:1:" . strval($leaderoffarray[$strifers[$i]['side']]) . "|";
 			if (!empty($leaderdefarray[$strifers[$i]['side']])) $strifers[$i]['bonuses'] .= "DEFENSE:1:" . strval($leaderdefarray[$strifers[$i]['side']]) . "|";
@@ -105,10 +100,8 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 			$defarray[$strifers[$i]['side']] = floor($power['defense'] * ($strifers[$i]['teamwork'] / 100));
 			$teamworkarray[$strifers[$i]['side']] = $strifers[$i]['teamwork'];
 		}
-		$i++;
 	}
-	$i = 1;
-	while ($i <= $n) { //Establish teamwork-based defense boosts for non-leaders.
+	for ($i = 1; $i <= $n; $i++) { //Establish teamwork-based defense boosts for non-leaders.
 		if ($strifers[$i]['leader'] != 1) {
 			//The below line subtracts the amount of this strifer's defensive power that got into the teamwide boost from the boost they receive.
 			//This is to prevent them from getting to double-up on their own defensive power due to teamwork. (Otherwise two players with 100% teamwork
@@ -116,17 +109,12 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 			$bonus = $defarray[$strifers[$i]['side']] - floor($power['defense'] * ($strifers[$i]['teamwork'] / 100) * ($teamworkarray[$strifers[$i]['side']] / 100));
 			if (!empty($defarray[$strifers[$i]['side']])) $strifers[$i]['bonuses'] .= "DEFENSE:1:" . strval($bonus) . "|";
 		}
-		$i++;
 	}
-	$i = 1;
 	//The resolution loop begins here. Each strifer will now perform an attack against each strifer who is not on their side.
-	while ($i <= $n) {
-		$t = 1; //$t for "target"
-		while ($t <= $n) {
+	for ($i = 1; $i <= $n; $i++) {
+		for ($t = 1; $t <= $n; $t++) { //$t for "target"
 			if ($strifers[$i]['side'] != $strifers[$t]['side']) { //Strifer $t is an enemy of strifer $i. ATTACK!
-				$attacks = $strifers[$i]['attacks']; //So we can modify the number of attacks for THIS attack series without affecting others.
-				while ($attacks > 0) {
-					$attacks--;
+				for ($attacks = $strifers[$i]['attacks']; $attacks > 0; $attacks--) {
 					$attackerpower = powerCalc($strifers[$i]);
 					$defenderpower = powerCalc($strifers[$t]);
 					$minoffenseroll = 90 + floor($strifers[$i]['luck'] / 5);
@@ -153,16 +141,14 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 					//Since a round of combat represents extended fighting, the felled strifer still gets to make their own attacks
 				}
 			}
-			$t++;
 		}
-		$i++;
 	}
 	$enemynumber=0;
 	require_once "includes/posteffects.php"; //Post-resolution effects go here. This includes and will largely consist of end-of-turn considerations.
 	//It also covers KOing, loot, rung climbing, and anything that happens with regards to exploration/dungeons/etc as a result of strife
 	sumStat($charrow, 'enemiesbeaten',$enemynumber);
 	sumStat($charrow, 'moonprince', $moonprince);
-	if(getStat($charrow, 'moonprince')>11) setAchievement($charrow,'moonprince'); 
+	if(getStat($charrow, 'moonprince')>11) setAchievement($charrow,'moonprince');
 	$megaquery = buildMegaquery($strifers,$n,$connection);
 	mysqli_query($connection, $megaquery);
 	echo $output;
