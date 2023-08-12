@@ -574,7 +574,7 @@ while ($i <= $n) {
 			}
 			//We'll need to hand out Echeladder rungs in here
 		}
-		//NOTE - If we're killing off the strifer, this is where we do it. 
+		//NOTE - If we're killing off the strifer, this is where we do it.
 	} elseif ($strifers[$i]['strifeID'] != 0 && !empty($strifers[$i]['strifeID'])) { //Make sure the strifer is still involved in strife.
 		$exists[$strifers[$i]['side']] = true; //This strifer's side of the strife still has a representative since they were not KOed this round
 	}
@@ -590,7 +590,7 @@ if ($enemyslain) {
 	`grists` = '$charrow[grists]', `inventory` = '$charrow[inventory]', `metadata` = '$charrow[metadata]', `boondollars` = '$charrow[boondollars]'
 	WHERE `Characters`.`ID` = $charrow[ID] LIMIT 1;"); //Update these characteristics if an enemy was slain this turn.
 }
-if (count($exists) == 1 && !$unstuck) { //There is only one side left in the strife. Strife is over!
+if ((empty($exists) || count($exists) == 1) && !$unstuck) { //There is only one side left in the strife. Strife is over!
 	$j = 1;
 	$strifeID = 0;
 	while ($j <= $n) {
@@ -604,7 +604,7 @@ if (count($exists) == 1 && !$unstuck) { //There is only one side left in the str
 		}
 		$j++;
 	}
-	if ($exists[$playerside]) { //Player victory!
+	if (!empty($exists[$playerside])) { //Player victory!
 		$output .= "You're a winner!<br />";
 		$j = 0;
 		while ($j <= $n) {
@@ -655,4 +655,3 @@ if (count($exists) == 1 && !$unstuck) { //There is only one side left in the str
 	if ($charrow['dreamingstatus'] == "Awake" && $charrow['dungeon'] != 0) echo "<a id='advance' href='dungeons.php'>Return to dungeon ==></a><br />";
 	$i++;
 }
-?>
