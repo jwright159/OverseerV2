@@ -1,6 +1,5 @@
 <?php
 function spendFatigue($fatigue, $charrow) {
-	$fatigue = 0;
 	global $connection;
 	if ($charrow['dreamingstatus'] == "Awake") {
 		$currentfatiguestr = 'wakefatigue';
@@ -11,9 +10,9 @@ function spendFatigue($fatigue, $charrow) {
 		$otherfatiguestr = 'wakefatigue';
 		$otherstriferstr = 'wakeself';
 	}
-	$newfatigue = $charrow[$currentfatiguestr] + $fatigue;
+	$newfatigue = 0; // $charrow[$currentfatiguestr] + $fatigue;
 	$charrow[$currentfatiguestr] = $newfatigue;
-	$reducedfatigue = max($charrow[$otherfatiguestr] - floor($fatigue * 0.3), 0);
+	$reducedfatigue = 0; // max($charrow[$otherfatiguestr] - floor($fatigue * 0.3), 0);
 	$charrow[$otherfatiguestr] = $reducedfatigue;
 	mysqli_query($connection, "UPDATE `Characters` SET `$currentfatiguestr` = $newfatigue, `$otherfatiguestr` = $reducedfatigue WHERE `Characters`.`ID` = " . $charrow['ID'] . " LIMIT 1;");
 	$striferesult = mysqli_query($connection, "SELECT * FROM `Strifers` WHERE `Strifers`.`ID` = " . $charrow[$otherstriferstr] . " LIMIT 1");
