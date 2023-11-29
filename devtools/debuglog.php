@@ -8,7 +8,13 @@ if ($accrow['modlevel'] < 10) {
     clearstatcache(); 
   }
   echo "Have a debug log.<br />";
-  if (filesize("debuglog.txt") == 0) {
+  if (!file_exists("debuglog.txt")) {
+    echo "<br />";
+    echo "The debug log hasn't been created yet! (This may be due to permission problems)<br />";
+  } elseif (!is_writable("debuglog.txt")) {
+    echo "<br />";
+    echo "The debug log isn't writable!<br />";
+  } elseif (filesize("debuglog.txt") === 0) {
     echo "<br />";
     echo "The debug log is empty!<br />";
   } else {
