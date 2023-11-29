@@ -8,11 +8,7 @@ if ($accrow['modlevel'] < 10) {
     clearstatcache(); 
   }
   echo "Have a debug log.<br />";
-  if (!is_writable(".")) {
-	$cwd = getcwd();
-    echo "<br />";
-    echo "The debug log directory ($cwd) isn't writable!<br />";
-  } elseif (!file_exists("debuglog.txt")) {
+  if (!file_exists("debuglog.txt")) {
     echo "<br />";
     echo "The debug log hasn't been created yet!<br />";
   } elseif (filesize("debuglog.txt") === 0) {

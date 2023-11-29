@@ -676,14 +676,16 @@ function surgicalSearch($string, $search, $first = false)
  */
 function logDebugMessage($debugmsg)
 {
-  $time = date('Y-m-d H:i:s');            //gets current time
-  $debugmsg = "($time) $debugmsg";
-  $debugfile = fopen($_SERVER['DOCUMENT_ROOT'] . "/overseer/devtools/debuglog.txt", "a");    //opens the debug log
-  if ($debugfile !== false)
-    {
-      fwrite($debugfile, "<br />\n" . $debugmsg);          //adds error message
-      fclose($debugfile);                                  //closes and saves debug log
-    }
+	$time = date('Y-m-d H:i:s');            //gets current time
+	$debugmsg = "($time) $debugmsg";
+	$debugfile = fopen("debuglog.txt", "a");    //opens the debug log
+	if ($debugfile !== false)
+	{
+		fwrite($debugfile, "<br />\n" . $debugmsg);          //adds error message
+		fclose($debugfile);                                  //closes and saves debug log
+	}
+	else
+		echo "Couldn't open debug log! <br>";
 }
 
 /**
@@ -691,14 +693,16 @@ function logDebugMessage($debugmsg)
  */
 function logCheatMessage($cheatmsg)
 {
-  $time = date('Y-m-d H:i:s');
-  $cheatmsg = "($time) $cheatmsg";
-  $cheatfile = fopen($_SERVER['DOCUMENT_ROOT'] . "/devtools/cheatpolice.txt", "a");
-  if ($cheatfile !== false)
-    {
-      fwrite($cheatfile, "<br />\n" . $cheatmsg);
-      fclose($cheatfile);
-    }
+	$time = date('Y-m-d H:i:s');
+	$cheatmsg = "($time) $cheatmsg";
+	$cheatfile = fopen("cheatpolice.txt", "a");
+	if ($cheatfile !== false)
+	{
+		fwrite($cheatfile, "<br />\n" . $cheatmsg);
+		fclose($cheatfile);
+	}
+	else
+		echo "Couldn't open cheat log! <br>";
 }
 
 /**
