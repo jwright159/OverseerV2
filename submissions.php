@@ -83,6 +83,7 @@ echo "<!DOCTYPE html><html><head><style>itemcode{font-family:'Courier New'}</sty
 	              $playerchars = explode("|", $playerarray['characters']);
 	              array_pop($playerchars); //remove phantom character from the end
 	              foreach($playerchars as $character){
+					logDebugMessage($character);
 	              	incrementStat(getChar($character), 'itemapproved');
 	              	sendAchievement(getChar($character), 'itemsub'); //sends achievement to each character
 	              }
