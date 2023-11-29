@@ -3,20 +3,21 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
 if ($accrow['modlevel'] < 10) {
   echo "You don't have sufficient permissions to view the debug log!";
  } else {
+  $filepath = dirname(__FILE__) . "/debuglog.txt";
   if ($_POST['clear'] == "true") {
-    unlink("debuglog.txt");
+    unlink($filepath);
     clearstatcache(); 
   }
   echo "Have a debug log.<br />";
-  if (!file_exists("debuglog.txt")) {
+  if (!file_exists($filepath)) {
     echo "<br />";
     echo "The debug log hasn't been created yet!<br />";
-  } elseif (filesize("debuglog.txt") === 0) {
+  } elseif (filesize($filepath) === 0) {
     echo "<br />";
     echo "The debug log is empty!<br />";
   } else {
-    $debuglog = fopen("debuglog.txt", "r");
-    $debugtext = fread($debuglog,filesize("debuglog.txt"));
+    $debuglog = fopen($filepath, "r");
+    $debugtext = fread($debuglog, filesize($filepath));
     echo $debugtext;
     fclose($debuglog);
   }

@@ -3,17 +3,18 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/header.php";
 if ($accrow['modlevel'] < 10) {
   echo "You don't have sufficient permissions to view the cheat log!";
  } else {
+  $filepath = dirname(__FILE__) . "/cheatpolice.txt";
   if ($_POST['clear'] == "true") {
-    unlink("cheatpolice.txt");
+    unlink($filepath);
     clearstatcache(); 
   }
   echo "Have a cheat log.<br />";
-  if (filesize("cheatpolice.txt") == 0) {
+  if (filesize($filepath) == 0) {
     echo "<br />";
     echo "The cheat log is empty!<br />";
   } else {
-    $cheatlog = fopen("cheatpolice.txt", "r");
-    $cheattext = fread($cheatlog,filesize("cheatpolice.txt"));
+    $cheatlog = fopen($filepath, "r");
+    $cheattext = fread($cheatlog, filesize($filepath));
     echo $cheattext;
     fclose($cheatlog);
   }

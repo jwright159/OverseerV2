@@ -678,7 +678,7 @@ function logDebugMessage($debugmsg)
 {
 	$time = date('Y-m-d H:i:s');            //gets current time
 	$debugmsg = "($time) $debugmsg";
-	$debugfile = fopen("debuglog.txt", "a");    //opens the debug log
+	$debugfile = fopen(dirname(__FILE__) . "/devtools/cheatpolice.txt", "a");    //opens the debug log
 	if ($debugfile !== false)
 	{
 		fwrite($debugfile, "<br />\n" . $debugmsg);          //adds error message
@@ -695,7 +695,7 @@ function logCheatMessage($cheatmsg)
 {
 	$time = date('Y-m-d H:i:s');
 	$cheatmsg = "($time) $cheatmsg";
-	$cheatfile = fopen("cheatpolice.txt", "a");
+	$cheatfile = fopen(dirname(__FILE__) . "/devtools/cheatpolice.txt", "a");
 	if ($cheatfile !== false)
 	{
 		fwrite($cheatfile, "<br />\n" . $cheatmsg);
