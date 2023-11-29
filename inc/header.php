@@ -9,8 +9,11 @@ set_error_handler(function ($errorNumber, $message, $errfile, $errline) {
 		case E_NOTICE: $errorLevel = 'Notice'; break;
 		default : $errorLevel = 'Undefined';
 	}
+	$errorline = '<b>' . $errorLevel . '</b>: ' . $message . ' in <b>'.$errfile . '</b> on line <b>' . $errline . "</b><br>\n";
+	if (!str_contains($errorline, "debuglog"))
+		logDebugMessage($errorline);
 	if (!isset($errorlog)) $errorlog = "<h1>PHP Errors:</h1>\n";
-	$errorlog .= '<b>' . $errorLevel . '</b>: ' . $message . ' in <b>'.$errfile . '</b> on line <b>' . $errline . "</b><br>\n";
+	$errorlog .= $errorline;
 });
 
 // Start up a session and see if we have a player, otherwise bounce them to index.
