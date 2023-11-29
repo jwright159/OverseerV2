@@ -4,7 +4,7 @@ if ($accrow['modlevel'] < 10) {
   echo "You don't have sufficient permissions to view the debug log!";
  } else {
   $filepath = dirname(__FILE__) . "/debuglog.txt";
-  if ($_POST['clear']) {
+  if (isset($_POST['clear']) AND $_POST['clear'] == true) {
     unlink($filepath);
     clearstatcache(); 
   }
