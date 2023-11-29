@@ -678,7 +678,7 @@ function logDebugMessage($debugmsg)
 {
 	$time = date('Y-m-d H:i:s');            //gets current time
 	$debugmsg = "($time) $debugmsg";
-	$filepath = dirname(__FILE__) . "/devtools/cheatpolice.txt";
+	$filepath = dirname(__FILE__) . "/devtools/debuglog.txt";
 	$debugfile = fopen($filepath, "a");    //opens the debug log
 	if ($debugfile !== false)
 	{
