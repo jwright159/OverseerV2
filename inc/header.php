@@ -1,7 +1,17 @@
 <?php
 
 // The magical error handling code handler of the future.
-set_error_handler(function ($errorNumber, $message, $errfile, $errline) { global $errorlog; switch ($errorNumber) { case E_ERROR: $errorLevel = 'Error'; break; case E_WARNING: $errorLevel = 'Warning'; break; case E_NOTICE: $errorLevel = 'Notice'; break; default : $errorLevel = 'Undefined'; } if (!isset($errorlog)) $errorlog = "<h1>PHP Errors:</h1>\n"; $errorlog .= '<b>' . $errorLevel . '</b>: ' . $message . ' in <b>'.$errfile . '</b> on line <b>' . $errline . "</b><br>\n"; });
+set_error_handler(function ($errorNumber, $message, $errfile, $errline) {
+	global $errorlog;
+	switch ($errorNumber) {
+		case E_ERROR: $errorLevel = 'Error'; break;
+		case E_WARNING: $errorLevel = 'Warning'; break;
+		case E_NOTICE: $errorLevel = 'Notice'; break;
+		default : $errorLevel = 'Undefined';
+	}
+	if (!isset($errorlog)) $errorlog = "<h1>PHP Errors:</h1>\n";
+	$errorlog .= '<b>' . $errorLevel . '</b>: ' . $message . ' in <b>'.$errfile . '</b> on line <b>' . $errline . "</b><br>\n";
+});
 
 // Start up a session and see if we have a player, otherwise bounce them to index.
 session_start(); 

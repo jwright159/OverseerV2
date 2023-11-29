@@ -678,14 +678,15 @@ function logDebugMessage($debugmsg)
 {
 	$time = date('Y-m-d H:i:s');            //gets current time
 	$debugmsg = "($time) $debugmsg";
-	$debugfile = fopen(dirname(__FILE__) . "/devtools/cheatpolice.txt", "a");    //opens the debug log
+	$filepath = dirname(__FILE__) . "/devtools/cheatpolice.txt";
+	$debugfile = fopen($filepath, "a");    //opens the debug log
 	if ($debugfile !== false)
 	{
 		fwrite($debugfile, "<br />\n" . $debugmsg);          //adds error message
 		fclose($debugfile);                                  //closes and saves debug log
 	}
 	else
-		echo "Couldn't open debug log! <br>";
+		echo "Couldn't open debug log at $filepath! <br>";
 }
 
 /**
@@ -695,14 +696,15 @@ function logCheatMessage($cheatmsg)
 {
 	$time = date('Y-m-d H:i:s');
 	$cheatmsg = "($time) $cheatmsg";
-	$cheatfile = fopen(dirname(__FILE__) . "/devtools/cheatpolice.txt", "a");
+	$filepath = dirname(__FILE__) . "/devtools/cheatpolice.txt";
+	$cheatfile = fopen($filepath, "a");
 	if ($cheatfile !== false)
 	{
 		fwrite($cheatfile, "<br />\n" . $cheatmsg);
 		fclose($cheatfile);
 	}
 	else
-		echo "Couldn't open cheat log! <br>";
+		echo "Couldn't open cheat log at $filepath! <br>";
 }
 
 /**
