@@ -39,7 +39,8 @@ function loadStriferow($id) {
 	return $row;
 }
 
-function initGrists() { //compiles an array with all grists in the game
+/** Compiles an array with all grists in the game */
+function initGrists() {
 	global $connection;
 	$result2 = mysqli_query($connection, "SELECT * FROM `Grists` ORDER BY `tier` ASC"); //document grist types now so we don't have to do it later
   $totalgrists = 0;
@@ -50,6 +51,7 @@ function initGrists() { //compiles an array with all grists in the game
   return $grist;
 }
 
+
 //STAT/ACHIEVEMENT LIBRARY DOCUMENTATION
 
 //1. if you want to get a stat value, use getStat(character row, stat you want)
@@ -58,63 +60,132 @@ function initGrists() { //compiles an array with all grists in the game
 //4. if you want to call by ID instead of character row just use function(getChar($char), whatever)
 //5. onStat and maxStat are useful for ranking/achievement values
 
-function getStat($char, $stat){ //gets a charrow and a stat and returns the value of that stat
+/** Gets a charrow and a stat and returns the value of that stat */
+function getStat($char, $stat)
+{
 	$stats = explode("|", $char['stats']); // [0] => [creation:143423423423], [1] => [stat2: 1]...
-	for($i=0; !empty($stats[$i]); $i++){
-		$result = explode(":", $stats[$i]); // [0] => [creation], [1] => [1424242323224124] ....
+	foreach ($stats as $existing_stat) {
+		$result = explode(":", $existing_stat); // [0] => [creation], [1] => [1424242323224124] ....
 		if ($result[0] == $stat) return $result[1]; //if any stat found is $stat, return its value
 	}
 	return null; //if there's no stat found return null
 }
 
-function incrementStat($char, $stat){ //adds 1 to a stat, for the lazy
+/** Adds 1 to a stat, for the lazy */
+function incrementStat($char, $stat)
+{
 	$statvalue = getStat($char, $stat);
-	if($statvalue==null) $statvalue = 0; //to save a function call
-	updateStat($char, $stat, $statvalue+1); //if it doesn't exist, it'll create it
+	if ($statvalue === null) $statvalue = 0; //to save a function call
+	updateStat($char, $stat, $statvalue + 1); //if it doesn't exist, it'll create it
 }
 
-function sumStat($char, $stat, $value){ //adds $value to a stat
+/** Adds $value to a stat */
+function sumStat($char, $stat, $value)
+{
 	$statvalue = getStat($char, $stat);
-	if($statvalue==null) $statvalue = 0; //to save a function call
-	updateStat($char, $stat, $statvalue+$value); //if it doesn't exist, it'll create it
+	if ($statvalue === null) $statvalue = 0; //to save a function call
+	updateStat($char, $stat, $statvalue + $value); //if it doesn't exist, it'll create it
 }
 
-function updateStat($char, $stat, $value){ //gets a charrow, a stat and a value and adds the stat if it doesn't exist, calls modifyStat if it does
-	if(getStat($char,$stat)!=null) modifyStat($char,$stat,$value);
-	else{
-		$string = $char['stats'] . $stat . ':' . $value . '|'; //just adds the stat at the end if it doesn't exist
-		writeStat($char,$string); //no point in even searching the row again
+/** Gets a charrow, a stat and a value and adds the stat if it doesn't exist, calls modifyStat if it does */
+function updateStat($char, $stat, $value)
+{
+	if (getStat($char, $stat) !== null)
+		modifyStat($char, $stat, $value);
+	else //just adds the stat at the end if it doesn't exist
+		writeStat($char, $char['stats'] . $stat . ':' . $value . '|'); //no point in even searching the row again
+}
+
+function removeStat($char, $stat)
+{
+	if (getStat($char, $stat) !== null)
+		modifyStat($char, $stat, null);
+}
+
+/** Ensures a value only gets stored if it's the new highest value */
+function maxStat($char, $stat, $value)
+{
+	$top = getStat($char, $stat);
+	if ($top === null OR $top < $value) updateStat($char, $stat, $value);
+}
+
+/** Sets a stat to 1 */
+function onStat($char, $stat){
+	if (getStat($char, $stat) != 1)
+		updateStat($char, $stat, 1);
+}
+
+/** Sets a stat to 0 */
+function offStat($char,$stat)
+{
+	if (getStat($char, $stat) != 0)
+		updateStat($char, $stat, 0);
+}
+
+/** Toggles between 1 and 0 */
+function toggleStat($char, $stat)
+{
+	if (getStat($char, $stat) != 1)
+		updateStat($char, $stat, 1);
+	else
+		updateStat($char, $stat, 0);
+}
+
+/** Writes a new stat string for a character into the DB, pretty much to get SQL out of the rest */
+function writeStat($char, $string)
+{
+	global $connection;
+	$query = "UPDATE Characters SET stats='$string' WHERE ID = $char[ID]";
+	mysqli_query($connection, $query);
+}
+
+/**
+ * Gets a charrow, a stat and a value and updates it.
+ * Returns true if the stat was deleted, false otherwise.
+ */
+function modifyStat($char, $stat, $value)
+{
+	$stats = explode("|", $char['stats']);
+	for ($i = 0; !empty($stats[$i]); $i++) {
+		$candidate = explode(":", $stats[$i]); //checks if it already exists
+		if ($candidate[0] === $stat) { //if it's found, we update it
+			if ($value === null) {// if it's null, trigger deletion
+				unset($stats[$i]); //removes the stat, but the indexes are fucked up now
+				$stats = array_values($stats); //so we fix em
+				writeStat($char, implode("|", $stats)); //and we write the changes without the array 
+				return true; //stops the function
+			}
+			else
+			{
+				$stats[$i] = $candidate[0] . ':' . $value; //[$i] => [$stat:oldvalue] becomes [$i] => [$stat:$value]
+				writeStat($char, implode("|", $stats)); // writes ....stat:value|stat2:value2|$stat:$value...| into the char's achievementrow
+				return false; //stops the function
+			}
+		}
 	}
+	//does nothing if it doesn't find the stat
 }
 
-function maxStat($char, $stat, $value){ //ensures a value only gets stored if it's the new highest value
-	$top = getStat($char,$stat);
-	if($top<$value OR $top==null) updateStat($char,$stat,$value);
-}
-
-function onStat($char, $stat){ //sets a stat to 1
-	if(getStat($char,$stat)!=1) updateStat($char,$stat,1);
-}
-
-function toggleStat($char,$stat){ //toggles between 1 and 0
-	if(getStat($char,$stat)!=1) updateStat($char,$stat,1);
-	else updateStat($char,$stat,0);
-}
 
 // Achievements
 
-function setAchievement($char, $achievement){//adds an achievement, displays message and returns true if it's successfully added
-	if(!getAchievement($char,$achievement)){
+/** Adds an achievement, displays message and returns true if it's successfully added */
+function setAchievement($char, $achievement)
+{
+	if (!getAchievement($char, $achievement))
+	{
 		echo '<div id="notification"><img src="/images/achievements/'.$achievement.'.png" align="middle"><strong>ACHIEVEMENT UNLOCKED!</strong></div>';
 		$string = $char['achievements'] . $achievement . '|';
-		writeAchievement($char,$string);
+		writeAchievement($char, $string);
 		return true;
 	}
 	return false;
 }
 
-function sendAchievement($char, $achievement){//adds an achievement to a different character, displays message and returns true if it's successfully added
-	if(!getAchievement($char,$achievement)){
+/** Adds an achievement to a different character, displays message and returns true if it's successfully added */
+function sendAchievement($char, $achievement)
+{
+	if (!getAchievement($char,$achievement)) {
 		notifyCharacter($char['ID'], '<img src="/images/achievements/'.$achievement.'.png" align="middle">ACHIEVEMENT UNLOCKED!');
 		$string = $char['achievements'] . $achievement . '|';
 		writeAchievement($char,$string);
@@ -123,140 +194,113 @@ function sendAchievement($char, $achievement){//adds an achievement to a differe
 	return false;
 }
 
-
-function getAchievement($char, $achievement){ //returns true if achievement is found, false otherwise
+/** Returns true if achievement is found, false otherwise */
+function getAchievement($char, $achievement)
+{
 	$achievements = explode("|", $char['achievements']);
-	foreach($achievements as $cheev){
+	foreach ($achievements as $cheev) {
 		if($cheev==$achievement) return true;
 	}
 	return false;
+}
+
+/** Writes a new achievement string for a character into the DB, pretty much to get SQL out of the rest */
+function writeAchievement($char, $string)
+{
+	global $connection;
+	$query= "UPDATE Characters SET achievements='$string' WHERE ID = $char[ID]";
+	mysqli_query($connection, $query);
 }
 
 
 // Notifications
 // notifySession and notifyCharacter/notifyCharacterOnce are the only functions you'll ever need to use, everything else is already coded
 
-function checkNotifications($char){ //displays the oldest notification found in the character's notification table and removes it
+/** Displays the oldest notification found in the character's notification table and removes it */
+function checkNotifications($char)
+{
 	$notes = explode("|", $char['notifications']);
-	if($notes[0]!=''){
+	if ($notes[0]!='') {
 		echo '<div id="notification"><strong>' . $notes[0] .'</strong></div>';
-		if(count($notes)>2){
+		if (count($notes) > 2) {
 			unset($notes[0]);
-			$notes=array_values($notes);
+			$notes = array_values($notes);
 			$string = implode("|", (array)$notes);
 		}
-		else $string = '';
+		else
+			$string = '';
 		writeNotifications($char, $string);
 	}
 }
 
-function notifySession($char, $message){ //sends an unique notification to every other player in the session
-	$send = true;
+/** Sends an unique notification to every other player in the session */
+function notifySession($char, $message)
+{
 	$sent = explode("|",$char['notif_history']);
-	foreach($sent as $notif){
-		if($notif==$message) $send=false;
-	}
-	if($send) appendNotifications($char, $message);
-	else return false;
+	foreach ($sent as $notif)
+		if ($notif == $message)
+			return false;
+	appendNotifications($char, $message);
 }
 
-function notifyCharacterOnce($char, $charid, $message){ //sends an unique notification to charid, which is the ID, not the row
-	$send = true;
+/** Sends an unique notification to charid, which is the ID, not the row */
+function notifyCharacterOnce($char, $charid, $message){
 	$sent = explode("|",$char['notif_history']);
-	foreach($sent as $notif){
-		if($notif==$message) $send=false;
-	}
-	if($send) appendNotificationsOnceChar($char, $charid, $message);
-	else return false;
+	foreach ($sent as $notif)
+		if ($notif == $message)
+			return false;
+	appendNotificationsOnceChar($char, $charid, $message);
 }
 
-function notifyCharacter($charid, $message){ //sends a notification to charid, which is the ID, not the row
+/** Sends a notification to charid, which is the ID, not the row */
+function notifyCharacter($charid, $message){
 	//make sure to only use this where it can't be spammed
 	global $connection;
-	$fixedstring=str_replace("|","",$message);
-	$query= "UPDATE Characters SET notifications=concat(notifications,'" . $fixedstring . "|') WHERE ID=" . $charid . ";";
+	$fixedstring = str_replace("|", "", $message);
+	$query = "UPDATE Characters SET notifications=concat(notifications, '$fixedstring|') WHERE ID = $charid";
 	mysqli_query($connection, $query);
 }
 
-
-//You probably won't ever need to actually use these yourself
-
-function appendNotificationsOnceChar($char, $charid, $string){ //appends a unique string to the notifications column of a single charid
+/** Appends a unique string to the notifications column of a single charid */
+function appendNotificationsOnceChar($char, $charid, $string)
+{
 	global $connection;
-	$fixedstring=str_replace("|","",$string);
-	$query= "UPDATE Characters SET notifications=concat(notifications,'" . $fixedstring . "|') WHERE ID=" . $charid . ";";
+	$fixedstring = str_replace("|", "", $string);
+	$query = "UPDATE Characters SET notifications=concat(notifications, '$fixedstring|') WHERE ID = $charid";
 	mysqli_query($connection, $query);
-	$query2= "UPDATE Characters SET notif_history=concat(notif_history,'" . $fixedstring . "|') WHERE ID=" . $char['ID'] . ";";
+	$query2 = "UPDATE Characters SET notif_history=concat(notif_history, '$fixedstring|') WHERE ID = $char[ID]";
 	mysqli_query($connection, $query2);
 }
 
-function appendNotifications($char, $string){ //appends a string to the notifications column of every sessionmate of $char 
+/** Appends a string to the notifications column of every sessionmate of $char  */
+function appendNotifications($char, $string)
+{
 	global $connection;
-	$members = mysqli_query($connection, "SELECT members FROM Sessions WHERE ID=". $char['session'] . ";");
+	$members = mysqli_query($connection, "SELECT members FROM Sessions WHERE ID = $char[session]");
 	$membersarray = mysqli_fetch_array($members);
 	$sesids = rtrim($membersarray['members'], "|"); //removes the last slash, 1|2|3| => 1|2|3 
 	$sesidsarray = explode("|", $sesids); // [1,2,3]
-	$sess= implode(",", $sesidsarray); // 1,2,3
-	$fixedstring=str_replace("|","",$string);
-	$query= "UPDATE Characters SET notifications=concat(notifications,'" . $fixedstring . "|') WHERE ID IN (" . $sess . ") AND ID!=" . $char['ID'] .";";
+	$sess = implode(",", $sesidsarray); // 1,2,3
+	$fixedstring = str_replace("|","",$string);
+	$query = "UPDATE Characters SET notifications=concat(notifications, '$fixedstring|') WHERE ID IN ($sess) AND ID != $char[ID]";
 	mysqli_query($connection, $query);
-	$query2= "UPDATE Characters SET notif_history=concat(notif_history,'" . $fixedstring . "|') WHERE ID=" . $char['ID'] . ";";
+	$query2 = "UPDATE Characters SET notif_history=concat(notif_history,'$fixedstring|') WHERE ID = $char[ID]";
 	mysqli_query($connection, $query2);
 }
 
-function writeNotifications($char, $string){ //for when you want to write a new state of the notifications table for a single character, DOESN'T APPEND | BY ITSELF
+/** For when you want to write a new state of the notifications table for a single character, DOESN'T APPEND | BY ITSELF */
+function writeNotifications($char, $string){
 	global $connection;
-	$query= "UPDATE Characters SET notifications='" . $string . "' WHERE ID=" . $char['ID'] . ";";
+	$query= "UPDATE Characters SET notifications='$string' WHERE ID = $char[ID]";
 	mysqli_query($connection, $query);
 }
 
-
-function removeStat($char, $stat){
-	if(getStat($char, $stat)!=null); //if it doesn't exist, do nothing
-	else modifyStat($char, $stat, null); //call deletion otherwise
-}
-
-function offStat($char,$stat){
-	if(getStat($char,$stat)!=0) updateStat($char,$stat,0);
-}
-
-function writeStat($char, $string){ //writes a new stat string for a character into the DB, pretty much to get SQL out of the rest
-	global $connection;
-	$query= "UPDATE Characters SET stats='" . $string . "' WHERE ID=" . $char['ID'] . ";";
-	mysqli_query($connection, $query);
-}
-
-function writeAchievement($char, $string){ //writes a new achievement string for a character into the DB, pretty much to get SQL out of the rest
-	global $connection;
-	$query= "UPDATE Characters SET achievements='" . $string . "' WHERE ID=" . $char['ID'] . ";";
-	mysqli_query($connection, $query);
-}
-
-function modifyStat($char, $stat, $value){ //gets a charrow, a stat and a value and updates it
-	$stats = explode("|", $char['stats']);
-	for($i=0; !empty($stats[$i]); $i++){
-		$candidate = explode(":", $stats[$i]); //checks if it already exists
-		if ($candidate[0]==$stat){ //if it's found, we update it
-			if($value==null){// if it's null, trigger deletion
-				unset($stats[$i]); //removes the stat, but the indexes are fucked up now
-				$stats = array_values($stats); //so we fix em
-				writeStat($char, (implode("|", $stats))); //and we write the changes without the array 
-				return 1; //stops the function
-			}
-
-			$stats[$i] = $candidate[0] . ':' . $value; //[$i] => [$stat:oldvalue] becomes [$i] => [$stat:$value]
-			writeStat($char,(implode("|", $stats))); // writes ....stat:value|stat2:value2|$stat:$value...| into the char's achievementrow
-			return 0; //stops the function
-		}
-	}
-	//does nothing if it doesn't find the stat
-}
 
 //GRIST
-//
-//
 
-function modifyGrist($griststr, $type, $amount) { //adds/subtracts $amount from the user's reserve of $type grist and writes to $griststr
+/** Adds/subtracts $amount from the user's reserve of $type grist and writes to $griststr */
+function modifyGrist($griststr, $type, $amount)
+{
 	$grist = explode("|", $griststr);
 	$newstr = "";
 	$i = 0;
@@ -276,7 +320,9 @@ function modifyGrist($griststr, $type, $amount) { //adds/subtracts $amount from 
 	return $newstr;
 }
 
-function howmuchGrist($griststr, $type) { //returns the amount of $type grist in $griststr, works for players and items
+/** Returns the amount of $type grist in $griststr, works for players and items */
+function howmuchGrist($griststr, $type)
+{
 	if (strpos($griststr, $type . ":") !== false) { //skip the whole calculation if the grist isn't in the string
 		$grist = explode("|", $griststr);
 		foreach ($grist as $g) {
@@ -292,7 +338,8 @@ function howmuchGrist($griststr, $type) { //returns the amount of $type grist in
 /**
  * Looks up and returns the full tag with the keyword $search
  */
-function specialArray($string, $search) {
+function specialArray($string, $search)
+{
 	$boom = explode("|", $string);
 	for ($i = 0; !empty($boom[$i]); $i++) {
 		$boomo = explode(":", $boom[$i]);
@@ -301,23 +348,26 @@ function specialArray($string, $search) {
 	return ["nope"];
 }
 
-function gristImage($name) { //old hardcoded grist image producer because sometimes the cheapest solution is the best
+/** old hardcoded grist image producer because sometimes the cheapest solution is the best */
+function gristImage($name)
+{
 	if ($name == "Rainbow" || $name == "Polychromite" || $name == "Opal" || $name == "Plasma") $name .= ".gif";
 	else $name .= ".png";
 	$name = "images/grist/" . $name;
 	return $name;
 }
 
-function bonusStr($bonus) { //converts a number to a string and puts a + in front if positive
+/** Converts a number to a string and puts a + in front if positive */
+function bonusStr($bonus)
+{
 	if ($bonus > 0) $b = "+" . strval($bonus);
 	else $b = strval($bonus);
 	return $b;
 }
 
-function chainArray($charrow) {
-	//Function takes a character row and returns a boolean array which contains true or false at each player index in the
-	//session, true meaning the player is part of the chain, false meaning they are not
-
+/** Function takes a character row and returns a boolean array which contains true or false at each player index in the session, true meaning the player is part of the chain, false meaning they are not */
+function chainArray($charrow)
+{
         global $connection;
 	$chumroll = mysqli_query($connection, "SELECT * FROM `Characters` WHERE `Characters`.`session` = '$charrow[session]';");
   $auto = false; //Condition for automatic success (e.g. flight, god tier).
@@ -378,27 +428,33 @@ function getChar($charid) {
 
 //PROFILE """"API""""
 
-function profileString($charid){ //returns a formatted link to a profile, colored with player's color
-	$chara=getChar($charid);
-	if($chara) return "<a href='profile.php?ID=" . $chara['ID'] . "'><span style='color:#" . $chara['colour'] . "'>" . $chara['name'] . "</span></a>";
-	else return "[ERROR RETRIEVING PLAYER ID]";
+/** Returns a formatted link to a profile, colored with player's color */
+function profileString($charid)
+{
+	return rowProfileString(getChar($charid));
 }
 
-function profileStringSoft($charid){ //same as profileString but no underlines
-	$chara=getChar($charid);
-	if($chara) return "<a style='text-decoration:none' href='profile.php?ID=" . $chara['ID'] . "'><span style='color:#" . $chara['colour'] . "'>" . $chara['name'] . "</span></a>";
-	else return "[ERROR RETRIEVING PLAYER ID]";
+/** Returns a formatted link to a profile, colored with player's color, but with no underlines */
+function profileStringSoft($charid)
+{
+	return rowProfileStringSoft(getChar($charid));
 }
 
 
 //more efficient versions but require the charrow instead of IDs, also it's like I'm a real java programmer
-function rowProfileString($row){ //returns a formatted link to a profile, colored with player's color;
-	if($row) return "<a href='profile.php?ID=" . $row['ID'] . "'><span style='color:#" . $row['colour'] . "'>" . $row['name'] . "</span></a>";
+
+/** Returns a formatted link to a profile, colored with player's color */
+function rowProfileString($row)
+{
+	if ($row) return "<a href='profile.php?ID=$row[ID]'><span style='color:#$row[colour]'>$row[name]</span></a>";
 	else return "[ERROR RETRIEVING PLAYER ID]";
 }
 
-function rowProfileStringSoft($row){ //same as rowProfileString but no underlines
-	if($row) return "<a style='text-decoration:none' href='profile.php?ID=" . $row['ID'] . "'><span style='color:#" . $row['colour'] . "'>" . $row['name'] . "</span></a>";
+
+/** Returns a formatted link to a profile, colored with player's color, but with no underlines */
+function rowProfileStringSoft($row)
+{
+	if ($row) return "<a style='text-decoration:none' href='profile.php?ID=$row[ID]'><span style='color:#$row[colour]'>$row[name]</span></a>";
 	else return "[ERROR RETRIEVING PLAYER ID]";
 }
 
