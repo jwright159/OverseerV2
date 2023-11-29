@@ -7,7 +7,7 @@ set_error_handler(function ($errorNumber, $message, $errfile, $errline) {
 		case E_ERROR: $errorLevel = 'Error'; break;
 		case E_WARNING: $errorLevel = 'Warning'; break;
 		case E_NOTICE: $errorLevel = 'Notice'; break;
-		default : $errorLevel = 'Undefined';
+		default: $errorLevel = "Undefined ($errorNumber)";
 	}
 	$errorline = '<b>' . $errorLevel . '</b>: ' . $message . ' in <b>'.$errfile . '</b> on line <b>' . $errline . "</b><br>\n";
 	if (!str_contains($errorline, "debuglog"))
