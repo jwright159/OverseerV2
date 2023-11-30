@@ -135,6 +135,7 @@ function toggleStat($char, $stat)
 function writeStat($char, $string)
 {
 	global $connection;
+	if (!$char) return;
 	$query = "UPDATE Characters SET stats='$string' WHERE ID = $char[ID]";
 	logDebugMessage($query);
 	mysqli_query($connection, $query);
@@ -209,6 +210,7 @@ function getAchievement($char, $achievement)
 function writeAchievement($char, $string)
 {
 	global $connection;
+	if (!$char) return;
 	$query= "UPDATE Characters SET achievements='$string' WHERE ID = $char[ID]";
 	mysqli_query($connection, $query);
 }
@@ -292,7 +294,8 @@ function appendNotifications($char, $string)
 /** For when you want to write a new state of the notifications table for a single character, DOESN'T APPEND | BY ITSELF */
 function writeNotifications($char, $string){
 	global $connection;
-	$query= "UPDATE Characters SET notifications='$string' WHERE ID = $char[ID]";
+	if (!$char) return;
+	$query = "UPDATE `Characters` SET notifications='$string' WHERE ID = $char[ID]";
 	mysqli_query($connection, $query);
 }
 
