@@ -135,8 +135,7 @@ function toggleStat($char, $stat)
 function writeStat($char, $string)
 {
 	global $connection;
-	if (!$char) return;
-	$query = "UPDATE Characters SET stats='$string' WHERE ID = $char[ID]";
+	$query = "UPDATE Characters SET stats='$string' WHERE ID = '$char[ID]'";
 	mysqli_query($connection, $query);
 }
 
@@ -209,8 +208,7 @@ function getAchievement($char, $achievement)
 function writeAchievement($char, $string)
 {
 	global $connection;
-	if (!$char) return;
-	$query= "UPDATE Characters SET achievements='$string' WHERE ID = $char[ID]";
+	$query= "UPDATE Characters SET achievements='$string' WHERE ID = '$char[ID]'";
 	mysqli_query($connection, $query);
 }
 
@@ -259,7 +257,7 @@ function notifyCharacter($charid, $message){
 	//make sure to only use this where it can't be spammed
 	global $connection;
 	$fixedstring = str_replace("|", "", $message);
-	$query = "UPDATE Characters SET notifications=concat(notifications, '$fixedstring|') WHERE ID = $charid";
+	$query = "UPDATE Characters SET notifications=concat(notifications, '$fixedstring|') WHERE ID = '$charid'";
 	mysqli_query($connection, $query);
 }
 
@@ -268,9 +266,9 @@ function appendNotificationsOnceChar($char, $charid, $string)
 {
 	global $connection;
 	$fixedstring = str_replace("|", "", $string);
-	$query = "UPDATE Characters SET notifications=concat(notifications, '$fixedstring|') WHERE ID = $charid";
+	$query = "UPDATE Characters SET notifications=concat(notifications, '$fixedstring|') WHERE ID = '$charid'";
 	mysqli_query($connection, $query);
-	$query2 = "UPDATE Characters SET notif_history=concat(notif_history, '$fixedstring|') WHERE ID = $char[ID]";
+	$query2 = "UPDATE Characters SET notif_history=concat(notif_history, '$fixedstring|') WHERE ID = '$char[ID]'";
 	mysqli_query($connection, $query2);
 }
 
@@ -278,23 +276,22 @@ function appendNotificationsOnceChar($char, $charid, $string)
 function appendNotifications($char, $string)
 {
 	global $connection;
-	$members = mysqli_query($connection, "SELECT members FROM Sessions WHERE ID = $char[session]");
+	$members = mysqli_query($connection, "SELECT members FROM Sessions WHERE ID = '$char[session]'");
 	$membersarray = mysqli_fetch_array($members);
 	$sesids = rtrim($membersarray['members'], "|"); //removes the last slash, 1|2|3| => 1|2|3 
 	$sesidsarray = explode("|", $sesids); // [1,2,3]
 	$sess = implode(",", $sesidsarray); // 1,2,3
 	$fixedstring = str_replace("|","",$string);
-	$query = "UPDATE Characters SET notifications=concat(notifications, '$fixedstring|') WHERE ID IN ($sess) AND ID != $char[ID]";
+	$query = "UPDATE Characters SET notifications=concat(notifications, '$fixedstring|') WHERE ID IN ($sess) AND ID = '$char[ID]'";
 	mysqli_query($connection, $query);
-	$query2 = "UPDATE Characters SET notif_history=concat(notif_history,'$fixedstring|') WHERE ID = $char[ID]";
+	$query2 = "UPDATE Characters SET notif_history=concat(notif_history,'$fixedstring|') WHERE ID = '$char[ID]'";
 	mysqli_query($connection, $query2);
 }
 
 /** For when you want to write a new state of the notifications table for a single character, DOESN'T APPEND | BY ITSELF */
 function writeNotifications($char, $string){
 	global $connection;
-	if (!$char) return;
-	$query = "UPDATE `Characters` SET notifications='$string' WHERE ID = $char[ID]";
+	$query = "UPDATE `Characters` SET notifications='$string' WHERE ID = '$char[ID]'";
 	mysqli_query($connection, $query);
 }
 
