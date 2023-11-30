@@ -137,7 +137,6 @@ function writeStat($char, $string)
 	global $connection;
 	if (!$char) return;
 	$query = "UPDATE Characters SET stats='$string' WHERE ID = $char[ID]";
-	logDebugMessage($query);
 	mysqli_query($connection, $query);
 }
 
