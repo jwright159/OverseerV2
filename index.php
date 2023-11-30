@@ -209,37 +209,38 @@ elseif (isset($_GET['credits'])) include($_SERVER['DOCUMENT_ROOT'] . '/inc/title
 				$charquery = "SELECT `ID`,`name`,`session`,`symbol`,`colour` FROM Characters WHERE ";
 				$foundone = false;
 				while (!empty($chars[$i])) {
-								$foundone = true;
-								$charquery .= "ID = " . strval($chars[$i]) . " OR ";
-								$i++;
+					$foundone = true;
+					$charquery .= "ID = " . strval($chars[$i]) . " OR ";
+					$i++;
 				}
 				if ($foundone) {
-								$charquery = substr($charquery, 0, -4);
-								$charresult = mysqli_query($connection, $charquery);
-								while ($row = mysqli_fetch_array($charresult)) {
-												if (empty($sname[$row['session']])) {
-																$sesrow = loadSessionrow($row['session']);
-																$sname[$row['session']] = $sesrow['name'];
-												}
-				$symbol = "'" . $row['symbol'] . "'";?>
-				<a title="<?php echo($sname[$row['session']]); ?>" href="/changechar.php?c=<?php echo($row['ID']); ?>">
-					<div class="character" charid="<?php echo($row['ID']); ?>" style="<?php echo(getcharbgcolor('#'.$row['colour'])); ?>;">
-						<div class="charimg" style="background: url(<?php echo($symbol); ?>) center center no-repeat, #fff;"></div>
-						<div class="chartext">
-							<span style="text-decoration: underline;">Name</span>:<br>
-							<span style="color: <?php echo('#'.$row['colour']); ?>;"><?php echo($row['name']); ?></span><br>
-							<span style="text-decoration: underline;">Session</span>:<br>
-							<?php echo($sname[$row['session']]); ?>
-						</div>
-					</div>
-				</a>
+					$charquery = substr($charquery, 0, -4);
+					$charresult = mysqli_query($connection, $charquery);
+					while ($row = mysqli_fetch_array($charresult)) {
+						if (empty($sname[$row['session']])) {
+							$sesrow = loadSessionrow($row['session']);
+							if ($sesrow === null) continue;
+							$sname[$row['session']] = $sesrow['name'];
+						}
+						$symbol = "'" . $row['symbol'] . "'";?>
+						<a title="<?php echo($sname[$row['session']]); ?>" href="/changechar.php?c=<?php echo($row['ID']); ?>">
+							<div class="character" charid="<?php echo($row['ID']); ?>" style="<?php echo(getcharbgcolor('#'.$row['colour'])); ?>;">
+								<div class="charimg" style="background: url(<?php echo($symbol); ?>) center center no-repeat, #fff;"></div>
+								<div class="chartext">
+									<span style="text-decoration: underline;">Name</span>:<br>
+									<span style="color: <?php echo('#'.$row['colour']); ?>;"><?php echo($row['name']); ?></span><br>
+									<span style="text-decoration: underline;">Session</span>:<br>
+									<?php echo($sname[$row['session']]); ?>
+								</div>
+							</div>
+						</a>
 		
-<?php } ?>
-To delete a character, right click it and select delete.
-				</div>
-<?php } else { // Account has no characters ?>
-			<div>No characters found</div>
-<?php } } } ?>
+					<?php } ?>
+				To delete a character, right click it and select delete.
+			</div>
+				<?php } else { // Account has no characters ?>
+							<div>No characters found</div>
+				<?php } } } ?>
 		</div>
 		<script src="/js/jquery.min.js"></script>
 		<script src="/js/jquery.ui.position.js"></script>
