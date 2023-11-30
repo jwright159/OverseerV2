@@ -1,7 +1,7 @@
 <?php
 
 // The magical error handling code handler of the future.
-set_error_handler(function ($errorNumber, $message, $errfile, $errline) {
+function error_handler($errorNumber, $message, $errfile, $errline) {
 	global $errorlog;
 	switch ($errorNumber) {
 		case E_ERROR: $errorLevel = 'Error'; break;
@@ -14,6 +14,13 @@ set_error_handler(function ($errorNumber, $message, $errfile, $errline) {
 		logDebugMessage($errorline);
 	if (!isset($errorlog)) $errorlog = "<h1>PHP Errors:</h1>\n";
 	$errorlog .= $errorline;
+}
+
+set_error_handler('error_handler');
+register_shutdown_function(function () {
+	$error = error_get_last();
+	if ($error !== null)
+        error_handler($error["type"], $error["message"], $error["file"], $error["line"]);
 });
 
 // Start up a session and see if we have a player, otherwise bounce them to index.
