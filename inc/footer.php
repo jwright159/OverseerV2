@@ -216,7 +216,7 @@ elseif ($charrow['dreamingstatus']=='Derse') $background='derse';
 $me->save();
 
 // More of this epic fancy error code handler stuff.
-if (isset($errorlog))
+if (isset($errorlog) && explode(":", $_SERVER['HTTP_HOST'])[0] == "localhost")
 	echo '<div style="background-color: #F88; padding: 5px; margin: 10px; border-radius: 8px;">' . $errorlog . '</div>';
 require_once "bugcatcher.php"; ?>
 	</body>
