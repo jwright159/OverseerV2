@@ -417,14 +417,14 @@ function getBonusname($n) {
 }
 
 function getChar($charid) {
-  global $connection, $characters, $querycount;
-  if($charid==-1) return array("name"=>"[MISSING PLAYER]", "colour"=>"000000");
-  if (!isset($characters[$charid])) {
-    $querycount++;
-    $charquery = mysqli_query($connection, "SELECT * FROM `Characters` WHERE `ID` = '" . $charid . "' LIMIT 1;");
-    $characters[$charid] = mysqli_fetch_array($charquery, MYSQLI_ASSOC);
-  }
-  return $characters[$charid];
+	global $connection, $characters, $querycount;
+	if ($charid == -1) return array("name"=>"[MISSING PLAYER]", "colour"=>"000000");
+	if (!isset($characters[$charid])) {
+		$querycount++;
+		$charquery = mysqli_query($connection, "SELECT * FROM `Characters` WHERE `ID` = '$charid' LIMIT 1");
+		$characters[$charid] = mysqli_fetch_array($charquery, MYSQLI_ASSOC);
+	}
+	return $characters[$charid];
 }
 
 //PROFILE """"API""""
