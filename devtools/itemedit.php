@@ -443,7 +443,7 @@ if ($accrow['modlevel'] < 4) {
 				$suggrist[$gristname] = $erow[$gristname . "_Cost"];
 			}
 		} elseif ($founditem) {
-			$am = howmuchGrist($erow['gristcosts'], $gristname);
+			$am = howMuchGrist($erow['gristcosts'], $gristname);
 			if ($am != 0) $suggrist[$gristname] = $am;
 		}
 		if (!empty($suggrist[$gristname])) {

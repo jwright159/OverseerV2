@@ -222,7 +222,7 @@ if ($_SESSION['username'] != "") {
     else $gristimg = $gristname . ".png";
     echo "<img src='images/grist/".$gristimg."' height='15' width='15' alt = 'xcx'/>";
     echo $gristname . '(' . strval($g['tier']) . '):</td><td> <input type="text" name="' . $gristname . '"';
-	$am = howmuchGrist($itemrow['gristcosts'], $gristname);
+	$am = howMuchGrist($itemrow['gristcosts'], $gristname);
 	if ($am != 0) echo ' value="' . $am . '"';
 	echo ' ></td>';
     $col++;

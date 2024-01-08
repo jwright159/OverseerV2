@@ -321,7 +321,7 @@ function modifyGrist($griststr, $type, $amount)
 }
 
 /** Returns the amount of $type grist in $griststr, works for players and items */
-function howmuchGrist($griststr, $type)
+function howMuchGrist($griststr, $type)
 {
 	if (strpos($griststr, $type . ":") !== false) { //skip the whole calculation if the grist isn't in the string
 		$grist = explode("|", $griststr);

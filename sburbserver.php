@@ -101,13 +101,12 @@ if (empty($_SESSION['username'])) {
 		} else { //Player has a client registered
 			$clientresult = mysqli_query($connection, "SELECT * FROM Characters WHERE `ID` = '" . $charrow['client'] . "'");
 			$clientrow = mysqli_fetch_array($clientresult);
+			$build = howMuchGrist($clientrow['grists'], "Build_Grist");
 			$landgrists = explode("|", $clientrow['grist_type']);
-			if (!empty($landgrists[1])) $tier1grist = $landgrists[1];
-			$cgrists = explode("|", $clientrow['grists']);
-			$builds = explode(":", $cgrists[0]); //build grist will always be first
-			$build = (int)$builds[1];
-			$t1s = explode(":", $cgrists[1]); //land first tier will always be second (canon)
-			if (!empty($t1s[1]))$tier1 = (int)$t1s[1];
+			if (!empty($landgrists[1])) {
+				$tier1grist = $landgrists[1];
+				$tier1 = howMuchGrist($clientrow['grists'], $tier1grist);
+			}
 			if ($clientrow['server'] != $cid) {
 				echo "Something went amiss, and your client player doesn't have you set as their server! We've just attempted to fix this, but if you see this message multiple times, please submit a bug report.<br />";
 				mysqli_query($connection, "UPDATE `Characters` SET `server` = $cid WHERE `Characters`.`ID` = '" . $clientrow['ID'] . "' LIMIT 1;");
@@ -167,10 +166,10 @@ if (empty($_SESSION['username'])) {
 							} elseif ($deploytag[1] == "TIER1") {
 								if ($tier1 >= (int)$deploytag[2]) {
 									if ($charrow['inmedium'] == 1) $canafford = true;
-									$newgrist = modifyGrist($clientrow['grists'], $tier1grist, ((int)$deploytag[2] * -1));
+									$newgrist = modifyGrist($clientrow['grists'], $tier1grist, -(int)$deploytag[2]);
 								}
 							} else {
-								$bcost = howmuchGrist($drow['gristcosts'], "Build_Grist");
+								$bcost = howMuchGrist($drow['gristcosts'], "Build_Grist");
 								if ($build >= $bcost) {
 									if ($charrow['inmedium'] == 1) $canafford = true;
 									$newgrist = modifyGrist($clientrow['grists'], "Build_Grist", ($bcost * -1));
@@ -304,7 +303,7 @@ if (empty($_SESSION['username'])) {
 				$deploytag = specialArray($drow['effects'], "DEPLOYABLE"); //should always return an array because of the search query above
 				if ($deploytag[1] == "FREE") $coststring = "--";
 				elseif ($deploytag[1] == "TIER1") $coststring = strval($deploytag[2]) . " " . $tier1grist;
-				else $coststring = howmuchGrist($drow['gristcosts'], "Build_Grist") . " Build Grist";
+				else $coststring = howMuchGrist($drow['gristcosts'], "Build_Grist") . " Build Grist";
 				if ($coststring == "--" || $clientrow['inmedium'] == 1) //don't allow other stuff to be deployed until the player enters the medium
 				echo '<option value="' . $drow['ID'] . '">' . $drow['name'] . ' (Cost: ' . $coststring . ')</option>';
 			}

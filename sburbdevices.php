@@ -124,7 +124,7 @@ if (empty($_SESSION['username'])) {
 						$realcost = $boomo[1] * $_POST['alchnum']; //multiply cost by quantity to determine how much this will cost in total
 						if (strpos($newgrists, $boomo[0] . ":") !== false || $realcost < 0) { //check if this is a discovered grist type, or that it'll generate the grist (artifact, for instance)
 							echo '<img src="' . gristImage($boomo[0]) . '" height="50" width="50" title="' . $boomo[0] . '"></img>'; //yee
-							if (howmuchGrist($newgrists, $boomo[0]) >= $realcost || $realcost < 0) { //check if the user has enough grist. Negative costs will always work.
+							if (howMuchGrist($newgrists, $boomo[0]) >= $realcost || $realcost < 0) { //check if the user has enough grist. Negative costs will always work.
 	      				echo " <gristvalue2>" . strval($boomo[1]) . "</gristvalue2>";
 	      				$newgrists = modifyGrist($newgrists, $boomo[0], $realcost * -1); //Subtract (or add) the cost of the item here.
 	      				//If alchemy fails, this change won't commit.
