@@ -353,10 +353,9 @@ if (empty($_SESSION['character'])) {
 		echo "Select an item to captchalogue.<br />";
 		echo '<form method="post" action="inventory.php"><select name="getitem">';
 		$boom = explode("|", $charrow['storeditems']);
-		$totalitems = count($boom);
-		$i = 1;
-		while ($i < $totalitems) {
-			$args = explode(":", $boom[$i - 1]);
+		foreach ($boom as $arg) {
+			if (!$arg) continue;
+			$args = explode(":", $arg);
 			$newequip = $args[0];
 			if (empty($irow[$newequip]['name'])) {
 				$eresult = mysqli_query($connection, "SELECT * FROM Captchalogue WHERE ID = " . $newequip);
@@ -370,7 +369,6 @@ if (empty($_SESSION['character'])) {
 				}
 				echo '</option>';
 			}
-			$i++;
 		}
 		echo '</select><input type="submit" value="Captchalogue" /></form>';
 	} else {
