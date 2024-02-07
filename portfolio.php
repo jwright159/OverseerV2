@@ -206,7 +206,7 @@ if (empty($_SESSION['username'])) {
 			$charrow['equips'] = $wequips;
 			//echo 'updating strifedeck to newdeck= ' . $newdeck . '<br>';
 			mysqli_query($connection, "UPDATE Characters SET invslots = $charrow[invslots], strifedeck = '$newdeck', equips = '$wequips' WHERE ID = $cid"); //commit the change
-			strifeInit($charrow,$connection);
+			strifeInit($charrow);
 			$initted = true;
 		}
 	}
@@ -326,7 +326,7 @@ if (empty($_SESSION['username'])) {
 	$equipstr = implode("|", $equip); //implode the string so that any changes will be updated below
 	if ($charrow['equips'] != $equipstr) { //equips were updated
 		mysqli_query($connection, "UPDATE Characters SET invslots = $charrow[invslots], equips = '$equipstr' WHERE ID = $cid");
-		if (!$initted) strifeInit($charrow,$connection); //call strifeinit if we haven't already
+		if (!$initted) strifeInit($charrow); //call strifeinit if we haven't already
 	}
 	echo $eqecho;
 	echo "<br />Allocated kind abstrati:<br />";
