@@ -86,7 +86,7 @@ if ($maint != 0 && $accrow['modlevel'] < 99) { ?>
       .statbar {  background: url(/images/header/aspect/<?php echo(strtolower($charrow['aspect'])); ?>_statbarcend.png) top right no-repeat,
                               url(/images/header/aspect/<?php echo(strtolower($charrow['aspect'])); ?>_statbarcrepeat.png) top right repeat-x; }
       .statbarinner { background: url(/images/header/aspect/<?php echo(strtolower($charrow['aspect'])); ?>_statbarend.png) top right no-repeat,
-                                  url(/images/header/aspect/<?php echo(strtolower($charrow['aspect'])); ?>_statbarrepeat.png) top right repeat-x;
+                                  url(/images/header/aspect/<?php echo(strtolower($charrow['aspect'])); ?>_statbarrepeat.png) top right repeat-x; }
     </style>
   </head>
   <body>
