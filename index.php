@@ -187,8 +187,8 @@ elseif (isset($_GET['credits'])) include($_SERVER['DOCUMENT_ROOT'] . '/inc/title
 				}
 				?>
 					</select><br>
-				Dreaming status: <select name="dreamer">
-					<option value="Unawakened">Unawakened</option>
+				Dream moon: <select name="dreamer">
+					<option value="Null">Select...</option>
 					<option value="Prospit">Prospit</option>
 					<option value="Derse">Derse</option>
 				</select><br>

@@ -25,7 +25,7 @@ if ($accquery->rowcount() != 1) {
 $accrow = $accquery->fetch();
 unset($accquery);
 
-// Check that the character's name isnt' blank, otherwise error out.
+// Check that the character's name isn't blank, otherwise error out.
 if ($_POST['charname'] == "") {
   $_SESSION['loginmsg'] = "Your character's name cannot be blank!";
   header('Location: /?newchar');
@@ -41,6 +41,27 @@ if (!preg_match('/^[a-zA-Z0-9 ]*$/', $_POST['charname'])) {
 
 // Trim extra surrounding space from the character's name to eliminate problems.
 $_POST['charname'] = trim($_POST['charname']);
+
+// Check that the character's class isn't blank or Null.
+if ($_POST['class'] == "" || $_POST['class'] == "Null") {
+  $_SESSION['loginmsg'] = "Your character's class cannot be blank!";
+  header('Location: /?newchar');
+  exit();
+}
+
+// Check that the character's aspect isn't blank or Null.
+if ($_POST['aspect'] == "" || $_POST['aspect'] == "Null") {
+  $_SESSION['loginmsg'] = "Your character's aspect cannot be blank!";
+  header('Location: /?newchar');
+  exit();
+}
+
+// Check that the character's dream moon isn't blank or Null.
+if ($_POST['dreamer'] == "" || $_POST['dreamer'] == "Null") {
+  $_SESSION['loginmsg'] = "Your character's dream moon cannot be blank!";
+  header('Location: /?newchar');
+  exit();
+}
 
 // Load the session, since we'll need that to check if the password matches and to check for name collisions.
 $sessionquery = $db->prepare("SELECT ID,name,password,members FROM Sessions WHERE name = :sessionname");
