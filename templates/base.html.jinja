@@ -23,30 +23,14 @@
 	<script src="/static/htmx.min.js"></script>
 	<script src="/static/sse.js"></script>
 	<script src="/static/oob-if-exists.js"></script>
+
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/nanoscroller.js"></script>
+
+	{% block head %}{% endblock %}
 </head>
 
-<body>
-	<div id="layout-container">
-		<div id="ad-container">
-		</div>
-		<div id="content-container">
-			<div id="content-header-container">
-				<div id="content-header"><img id="pageimg"
-						src="{% block header_icon %}/images/header/spirograph.png{% endblock %}">
-					<div id="content-header-text">
-						{% block title %}The Overseer Project{% endblock %}
-					</div>
-				</div>
-			</div>
-			<div id="content-area">
-
-				{% block content %}{% endblock %}
-
-			</div>
-		</div>
-		<footer></footer>
-	</div>
-	</div>
+<body style="background-image: url(/images/Backgrounds/{{ background }}background.jpg);">
 	<svg width=400 height=220 style="position: fixed; left: 0px; top: 0px; pointer-events: none;">
 		<defs>
 			<mask id="maskedtext">
@@ -65,9 +49,21 @@
 		<rect x=0 y=0 width=393 height=88 fill=#72e655 pointer-events="all" />
 	</svg>
 
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/nanoscroller.js"></script>
-	<script type="text/javascript" src="/js/jquery.tooltipster.min.js"></script>
+	{% if !announcements.is_empty() %}
+	<div id="announcement-container">
+		<div class="nano" id="announcement">
+			<div class="nano-content">
+				<strong>
+					<center>ANNOUNCEMENTS</center>
+				</strong>
+
+				{% for announcement in announcements %}
+				{{ announcement }} <br />
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% endif %}
 
 	<div id="avatar" style="background: url({{ character.symbol }}) no-repeat center center, white;"></div>
 	<div style="position: fixed; top: 160px; left: 0px; width: 162px; height: 26px; text-align: center;">
@@ -79,9 +75,11 @@
 	<div class="statbox" id="charactername" style="text-overflow: clip; white-space: nowrap; overflow: hidden;">
 		{{ character.name }}
 	</div>
+
 	<a href="/">
 		<div id="button-charswitch"></div>
 	</a>
+
 	<div class="statbox" id="echeladder" style="text-overflow: clip; white-space: nowrap; overflow: hidden;"><a
 			href="/abilities.php"><img src="/images/header/echeladder.png">
 			{{ character.echeladder }}
@@ -90,7 +88,7 @@
 			href="/portfolio.php"><img src="/images/header/powerlevel.png">
 			{{ character.strife.power }}
 		</a></div>
-	{% if character.is_in_medium %}
+
 	<div style="position: fixed; top: 47px; left: 177px; width: 164px;" class="statbar">
 		<div id="healthbar" class="statbarinner" style="width: {{ character.strife.health_percent }}%;"></div>
 	</div>
@@ -105,13 +103,15 @@
 		title="Aspect: {{ character.strife.energy_percent }}% [{{ character.strife.energy }}/{{ character.strife.max_energy }}]">
 		<img src="/images/symbols/aspect_{{ character.aspect | lower }}.png" style="width: 100%; height: 100%;">
 	</div>
-	{% endif %}
+
 	<a href="/porkhollow.php"><img src="/images/header/boondollars.png"
 			style="position: fixed; left: 189px; top: 123px;"></a>
 	<div style="position: fixed; left: 216px; top: 128px;">
 		{{ character.boondollars }}
 	</div>
+
 	<span id="overseerlogo"></span>
+
 	<div id="navbar"
 		style="position: fixed; top: 0px; left: 358px; height: 75px; background-color: white; border-radius: 0 0 8px 38px;">
 		<nav style="margin: 10px;">
@@ -191,40 +191,27 @@
 			</ul>
 		</nav>
 	</div>
-	<!-- Achievement overlay -->
-	<script>
-		$(document).ready(function ()
-		{
-			$('.tooltip').tooltipster({
-				minWidth: 250,
-				offsetY: 40,
-				offsetX: -10,
-				contentAsHTML: true
-			})
-		});
-	</script>
-	<script>
-		$(document).ready(function ()
-		{
-			$('.tooltip2').tooltipster({
-				theme: 'my-custom-theme',
-				minWidth: 250,
-				offsetY: 40,
-				offsetX: -10,
-				contentAsHTML: true
-			})
-		});
-	</script>
 
-	<!-- Derse/Prospit backgrounds -->
-	<script type="text/javascript">
-		$(document).ready(function ()
-		{
-			$('body').css('background-image', 'url(/images/Backgrounds/{{ background }}background.jpg)')
-		});
-	</script>
+	<div id="layout-container">
+		<div id="content-container">
+			<div id="content-header-container">
+				<div id="content-header"><img id="pageimg"
+						src="{% block header_icon %}/images/header/spirograph.png{% endblock %}">
+					<div id="content-header-text">
+						{% block title %}The Overseer Project{% endblock %}
+					</div>
+				</div>
+			</div>
+			<div id="content-area">
 
-	<!-- Scrollbars for banner-->
+				{% block content %}{% endblock %}
+
+			</div>
+		</div>
+		<footer></footer>
+	</div>
+
+	<!-- Scrollbars for announcements-->
 	<script> $(".nano").nanoScroller(); </script>
 </body>
 

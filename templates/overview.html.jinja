@@ -1,6 +1,57 @@
 {% extends "base.html.jinja" %}
+{% block head %}
+
+<link rel="stylesheet" href="/css/tooltipster.css" />
+<link rel="stylesheet" href="/css/tooltipster2.css" />
+
+<script src="/js/jquery.tooltipster.min.js"></script>
+
+{% endblock %}
 {% block content %}
 
-overview
+
+Name: {{ character.profile_string() | safe }} <br />
+
+Title:
+{% if !character.class.is_empty() && !character.aspect.is_empty() %}
+{{ character.class }} of {{ character.aspect }}
+{% else %}
+As of yet unknown.
+{% endif %}
+<br />
+
+{{ character_dreamer | safe }}
+
+<form hx-post="/character/colour" hx-target="#character-colour" hx-push-url="false" hx-swap="outerHTML">
+	Colour: <font id="character-colour" color='{{ character.colour }}'>{{ character.colour }}</font> -
+	<input type='color' name='colour' value='{{ character.colour }}' />
+	<input type='submit' value='Change' />
+</form>
+
+
+<!-- Achievement overlay -->
+<script>
+	$(document).ready(function ()
+	{
+		$('.tooltip').tooltipster({
+			minWidth: 250,
+			offsetY: 40,
+			offsetX: -10,
+			contentAsHTML: true
+		})
+	});
+</script>
+<script>
+	$(document).ready(function ()
+	{
+		$('.tooltip2').tooltipster({
+			theme: 'my-custom-theme',
+			minWidth: 250,
+			offsetY: 40,
+			offsetX: -10,
+			contentAsHTML: true
+		})
+	});
+</script>
 
 {% endblock %}

@@ -584,6 +584,8 @@ dependencies = [
  "axum-htmx",
  "axum-login",
  "itertools",
+ "serde",
+ "thiserror",
  "tokio",
  "tower-http",
  "tracing",

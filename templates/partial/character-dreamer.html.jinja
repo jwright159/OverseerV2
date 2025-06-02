@@ -1,0 +1,15 @@
+<div id="character-dreamer">
+	{% if let Some(dreamer) = dreamer %}
+	Moon: {{ dreamer }}
+	{% else %}
+	<form hx-post="/character/dreamer" hx-target="#character-dreamer" hx-push-url="false" hx-swap="outerHTML">
+		Input a moon: <input type="text" name="moon" value="{{ input }}" />
+		<input type="submit" value="Register" />
+	</form>
+	{% endif %}
+
+	{% if let Some(error) = error %}
+	<br />
+	<span style="color: red;">{{ error }}</span>
+	{% endif %}
+</div>
