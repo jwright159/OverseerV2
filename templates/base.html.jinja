@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+
+	<title>{% block title %}Overseer v2{% endblock %}</title>
+	<meta name="description" content="A Homestuck-based online game.">
+
+	<link rel="stylesheet" href="/css/overseer.css">
+	<style>
+		.statbar {
+			background: url(/images/header/aspect/{{ character.aspect | lower }}_statbarcend.png) top right no-repeat,
+			url(/images/header/aspect/{{ character.aspect | lower }}_statbarcrepeat.png) top right repeat-x;
+		}
+
+		.statbarinner {
+			background: url(/images/header/aspect/{{ character.aspect | lower }}_statbarend.png) top right no-repeat,
+			url(/images/header/aspect/{{ character.aspect | lower }}_statbarrepeat.png) top right repeat-x;
+		}
+	</style>
+
+	<script src="/static/htmx.min.js"></script>
+	<script src="/static/sse.js"></script>
+	<script src="/static/oob-if-exists.js"></script>
+</head>
+
+<body>
+	<div id="layout-container">
+		<div id="ad-container">
+		</div>
+		<div id="content-container">
+			<div id="content-header-container">
+				<div id="content-header"><img id="pageimg"
+						src="{% block header_icon %}/images/header/spirograph.png{% endblock %}">
+					<div id="content-header-text">
+						{% block title %}The Overseer Project{% endblock %}
+					</div>
+				</div>
+			</div>
+			<div id="content-area">
+
+				{% block content %}{% endblock %}
+
+			</div>
+		</div>
+		<footer></footer>
+	</div>
+	</div>
+	<svg width=400 height=220 style="position: fixed; left: 0px; top: 0px; pointer-events: none;">
+		<defs>
+			<mask id="maskedtext">
+				<rect x="0" y="0" width="100%" height="100%" fill="white" />
+				<circle cx=81.5 cy=110 r=112 />
+			</mask>
+		</defs>
+		<circle cx=339 cy=143 r=5 fill="#FFF" pointer-events="all" />
+		<rect x=140 y=115 width=153 height=33 fill=#ccc pointer-events="all" />
+		<rect x=200 y=115 width=144 height=18 fill=#ccc pointer-events="all" />
+		<rect x=200 y=125 width=144 height=18 fill=#FFF pointer-events="all" />
+		<rect x=186 y=125 width=153 height=23 fill=#FFF mask="url(#maskedtext)" pointer-events="all" />
+		<circle cx=359 cy=88 r=34 fill="#72E655" pointer-events="all" />
+		<circle cx=81.5 cy=110 r=106.5 fill="#72E655" pointer-events="all" />
+		<rect x=0 y=0 width=359 height=122 fill=#72e655 pointer-events="all" />
+		<rect x=0 y=0 width=393 height=88 fill=#72e655 pointer-events="all" />
+	</svg>
+
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/nanoscroller.js"></script>
+	<script type="text/javascript" src="/js/jquery.tooltipster.min.js"></script>
+
+	<div id="avatar" style="background: url({{ character.symbol }}) no-repeat center center, white;"></div>
+	<div style="position: fixed; top: 160px; left: 0px; width: 162px; height: 26px; text-align: center;">
+		<div
+			style="position: relative; background-color:#f3f3f3; display: inline;padding: 3px; border-radius: 2px; box-shadow: 3px 3px 0 rgba(0,0,0,0.3); white-space: nowrap;">
+			{{ character.class }} of {{ character.aspect }}
+		</div>
+	</div>
+	<div class="statbox" id="charactername" style="text-overflow: clip; white-space: nowrap; overflow: hidden;">
+		{{ character.name }}
+	</div>
+	<a href="/">
+		<div id="button-charswitch"></div>
+	</a>
+	<div class="statbox" id="echeladder" style="text-overflow: clip; white-space: nowrap; overflow: hidden;"><a
+			href="/abilities.php"><img src="/images/header/echeladder.png">
+			{{ character.echeladder }}
+		</a></div>
+	<div class="statbox" id="powerlevel" style="text-overflow: clip; white-space: nowrap; overflow: hidden;"><a
+			href="/portfolio.php"><img src="/images/header/powerlevel.png">
+			{{ character.strife.power }}
+		</a></div>
+	{% if character.is_in_medium %}
+	<div style="position: fixed; top: 47px; left: 177px; width: 164px;" class="statbar">
+		<div id="healthbar" class="statbarinner" style="width: {{ character.strife.health_percent }}%;"></div>
+	</div>
+	<div style="position: fixed; top: 78px; left: 202px; width: 139px;" class="statbar">
+		<div id="aspectbar" class="statbarinner" style="width: {{ character.strife.energy_percent }}%;"></div>
+	</div>
+	<div style="position: fixed; left: 145px; top: 41px; width: 36px; height: 36px; border-radius: 18px; background-color: #ffffff; text-align:center; vertical-align: center;"
+		title="Health: {{ character.strife.health_percent }}% [{{ character.strife.health }}/{{ character.strife.max_health }}]">
+		<img src="/images/header/healthchum.png" style="margin-top: 3px;">
+	</div>
+	<div style="position: fixed; left: 170px; top: 72px; width: 36px; height: 36px; border-radius: 18px; background-color: #ffffff; text-align:center; vertical-align: center;"
+		title="Aspect: {{ character.strife.energy_percent }}% [{{ character.strife.energy }}/{{ character.strife.max_energy }}]">
+		<img src="/images/symbols/aspect_{{ character.aspect | lower }}.png" style="width: 100%; height: 100%;">
+	</div>
+	{% endif %}
+	<a href="/porkhollow.php"><img src="/images/header/boondollars.png"
+			style="position: fixed; left: 189px; top: 123px;"></a>
+	<div style="position: fixed; left: 216px; top: 128px;">
+		{{ character.boondollars }}
+	</div>
+	<span id="overseerlogo"></span>
+	<div id="navbar"
+		style="position: fixed; top: 0px; left: 358px; height: 75px; background-color: white; border-radius: 0 0 8px 38px;">
+		<nav style="margin: 10px;">
+			<ul>
+				<li class="navbutton"><a href="#"><img src="/images/header/chummy.png" title="Player"></a>
+					<ul>
+						<li><a href="/overview.php">Character Profile</a></li>
+						<li><a href="/logread.php">Character Log</a></li>
+						<li><a href="/sprite.php">Sprite</a></li>
+					</ul>
+				</li>
+				<li class="navbutton"><a href="#"><img src="/images/header/rancorous.png" title="Strife"></a>
+					<ul>
+						<li><a href="/strifedisplay.php">Strife!</a></li>
+						<li><a href="/portfolio.php">Portfolio</a></li>
+						<li><a href="/abilities.php">Abilities</a></li>
+						<li><a href="/aspectpatterns.php">Aspect Patterns</a></li>
+						<li><a href="/fraymotifs.php">Fraymotifs</a></li>
+					</ul>
+				</li>
+				<li class="navbutton"><a href="#"><img src="/images/header/compass.png" title="Exploration"></a>
+					<ul>
+						<li><a href="/dungeons.php">Dungeons</a></li>
+						<li><a href="/consorts.php">Consorts</a></li>
+						<li><a href="/mercenaries.php">Consort Mercenaries</a></li>
+					</ul>
+				</li>
+				<li class="navbutton"><a href="/gristwire.php"><img src="/images/header/gristy.png" title="Grist"></a>
+				</li>
+				<li class="navbutton"><a href="#"><img src="/images/header/inventory.png" title="Inventory"></a>
+					<ul>
+						<li><a href="/inventory.php">Inventory</a></li>
+						<li><a href="/alchemy.php">Alchemy</a></li>
+						<li><a href="/quickitemcreate.php">Quick Item Creator</a></li>
+						<li><a href="/submissions.php">Item Submissions</a></li>
+						<li><a href="/submitart.php">Art Submitter</a></li>
+					</ul>
+				</li>
+				<li class="navbutton"><a href="#"><img src="/images/header/atheneum.png" title="Atheneum"></a>
+					<ul>
+						<li><a href="/atheneum.php">Atheneum</a></li>
+						<li><a href="/catalogue.php">Item Catalogue</a></li>
+						<li><a href="/itemlist.php">Item List</a></li>
+					</ul>
+				</li>
+				<li class="navbutton"><a href="#"><img src="/images/header/spirograph.png" title="SBURB"></a>
+					<ul>
+						<li><a href="/sburbserver.php">SBURB Server</a></li>
+						<li><a href="/sburbdevices.php">SBURB Client</a></li>
+						<li><a href="/sessionadmin.php">SBURB Administrative Console</a></li>
+					</ul>
+				</li>
+				<li class="navbutton"><a href="#"><img src="/images/header/pester.png" title="Social"></a>
+					<ul>
+						<li><a href="/sessioninfo.php">Session Viewer</a></li>
+						<li><a href="/sessionstats.php">Session Stats</a></li>
+						<li><a href="/sessionmates.php">Session Mates</a></li>
+						<li><a href="/chainviewer.php">Chain Viewer</a></li>
+					</ul>
+				</li>
+
+				<li class="navbutton"><a href="/dreamtransition.php"><img src="/images/header/sleep.png"
+							title="Sleep"></a></li>
+				<li class="navbutton"><a href="#"><img src="/images/header/whatpumpkin.png" title="Meta Stuff"></a>
+					<ul>
+						<li><a href="/changelog.php">Changelog</a></li>
+						<li><a href="/abilityscan.php">New Ability Scanner</a></li>
+						<li><a href="/devtools/rewards.php">Gift items</a></li>
+						<li><a href="/devtools/logviewer.php">Log viewer</a></li>
+						<li><a href="/devtools/debuglog.php">Debug log</a></li>
+						<li><a href="/devtools/cheatpolice.php">Cheat log</a></li>
+						<li><a href="/devtools/itemedit.php">Fabricate objects</a></li>
+						<li><a href="/devtools/art.php">Art approver</a></li>
+						<li><a href="/devtools/announcer.php">Announcer</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<!-- Achievement overlay -->
+	<script>
+		$(document).ready(function ()
+		{
+			$('.tooltip').tooltipster({
+				minWidth: 250,
+				offsetY: 40,
+				offsetX: -10,
+				contentAsHTML: true
+			})
+		});
+	</script>
+	<script>
+		$(document).ready(function ()
+		{
+			$('.tooltip2').tooltipster({
+				theme: 'my-custom-theme',
+				minWidth: 250,
+				offsetY: 40,
+				offsetX: -10,
+				contentAsHTML: true
+			})
+		});
+	</script>
+
+	<!-- Derse/Prospit backgrounds -->
+	<script type="text/javascript">
+		$(document).ready(function ()
+		{
+			$('body').css('background-image', 'url(/images/Backgrounds/{{ background }}background.jpg)')
+		});
+	</script>
+
+	<!-- Scrollbars for banner-->
+	<script> $(".nano").nanoScroller(); </script>
+</body>
+
+</html>
