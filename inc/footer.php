@@ -85,7 +85,7 @@ elseif ($charrow['dreamingstatus']=='Derse') $background='derse';
 	<a href="/"><div id="button-charswitch"></div></a>
 	<div class="statbox" id="echeladder" style="text-overflow: clip; white-space: nowrap; overflow: hidden;"><a href="/abilities.php"><img src="/images/header/echeladder.png"> <?php echo $me->echeladder; ?></a></div>
 	<div class="statbox" id="powerlevel" style="text-overflow: clip; white-space: nowrap; overflow: hidden;"><a href="/portfolio.php"><img src="/images/header/powerlevel.png"> <?php echo $me->strife->power; ?></a></div>
-<?php if ($me->inmedium) { ?>
+
 	<div style="position: fixed; top: 47px; left: 177px; width: 164px;" class="statbar"><div id="healthbar" class="statbarinner" style="width: <?php echo $me->strife->healthpercent; ?>%;"></div></div>
 	<div style="position: fixed; top: 78px; left: 202px; width: 139px;" class="statbar"><div id="aspectbar" class="statbarinner" style="width: <?php echo $me->strife->energypercent; ?>%;"></div></div>
 	<div style="position: fixed; left: 145px; top: 41px; width: 36px; height: 36px; border-radius: 18px; background-color: #ffffff; text-align:center; vertical-align: center;" title="Health: <?php echo ceil($me->strife->healthpercent); ?>% [<?php echo $me->strife->health.'/'.$me->strife->maxhealth; ?>]">
@@ -94,7 +94,7 @@ elseif ($charrow['dreamingstatus']=='Derse') $background='derse';
 	<div style="position: fixed; left: 170px; top: 72px; width: 36px; height: 36px; border-radius: 18px; background-color: #ffffff; text-align:center; vertical-align: center;" title="Aspect: <?php echo ceil($me->strife->energypercent); ?>% [<?php echo $me->strife->energy.'/'.$me->strife->maxenergy; ?>]">
 		<img src="/images/symbols/aspect_<?php echo strtolower($me->aspect); ?>.png" style="width: 100%; height: 100%;">
 	</div>
-<?php } ?>
+
 	<a href="/porkhollow.php"><img src="/images/header/boondollars.png" style="position: fixed; left: 189px; top: 123px;"></a>
 	<div style="position: fixed; left: 216px; top: 128px;"><?php echo $me->boondollars; ?></div>
 	<span id="overseerlogo"></span>
