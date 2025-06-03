@@ -22,12 +22,55 @@ As of yet unknown.
 
 {{ character_dreamer | safe }}
 
-<form hx-post="/character/colour" hx-target="#character-colour" hx-push-url="false" hx-swap="outerHTML">
-	Colour: <font id="character-colour" color='{{ character.colour }}'>{{ character.colour }}</font> -
-	<input type='color' name='colour' value='{{ character.colour }}' />
-	<input type='submit' value='Change' />
-</form>
+{{ character_colour | safe }}
 
+{{ character_symbol | safe }}
+<br />
+
+Description: {{ character.strife.description }} <br />
+Echeladder rung: {{ character.strife.echeladder }} <br />
+Health Vial: <b>{{ character.strife.health_percent }}%</b> <br />
+Aspect Vial: <b>{{ character.strife.energy_percent }}%</b> <br />
+{% if let (Some(land_1), Some(land_2)) = (&character.land_1, &character.land_2) %}
+Land: The Land of {{ land_1 }} and {{ land_2 }} <br />
+{% endif %}
+{% if let Some(grist_type) = character.grist_type %}
+Grists available on this land: {{ grist_type | join(", ") }} <br />
+{% endif %}
+{% if let Some(consort) = character.consort %}
+Consorts: {{ consort }} <br />
+{% endif %}
+<br />
+
+{% match server_player %}
+{% when Some(server_player) %} Server player: {{ server_player.profile_string() | safe }} <br />
+{% when None %} Server player: Not yet connected. <br />
+{% endmatch %}
+
+Build grist expended on your dwelling: {{ character.house_build }} <br />
+
+{{ character_gates | safe }}
+<br />
+
+<button hx-post="/waste-time">Waste time</button>
+<br />
+
+Achievement badges ({{ character.achievements.len() }}/{{ achievements.len() }}) <br />
+<br />
+{% for achievement in achievements %}
+{% if character.achievements.contains(achievement.id) %}
+<!-- TODO: wow this sucks clean this up with new tooltipster features -->
+<span class="tooltip"
+	title="&lt;img src=&quot;/images/achievements/{{ achievement.id }}.png&quot; style=&quot;float:left;margin-right:10px;&quot; /&gt; &lt;strong&gt; {{ achievement.name }} &lt;/strong&gt;&lt;br&gt; {{ achievement.description }}">
+	<img src="/images/achievements/{{ achievement.id }}.png" />
+</span>
+{% else %}
+<span class="tooltip2"
+	title="&lt;img src=&quot;/images/achievements/unknown.png&quot; style=&quot;float:left;margin-right:10px;&quot; /&gt; &lt;strong&gt;Unknown Achievement&lt;/strong&gt;&lt;br&gt;???">
+	<img src="/images/achievements/unknown.png" />
+</span>
+{% endif %}
+{% endfor %}
 
 <!-- Achievement overlay -->
 <script>

@@ -2,6 +2,8 @@ use askama::Template;
 
 pub mod colour;
 pub mod dreamer;
+pub mod gates;
+pub mod symbol;
 
 #[derive(Debug, Clone)]
 pub struct Character {
@@ -15,6 +17,12 @@ pub struct Character {
     pub symbol: String,
     pub colour: String,
     pub dreamer: Option<String>,
+    pub land_1: Option<String>,
+    pub land_2: Option<String>,
+    pub grist_type: Option<Vec<String>>,
+    pub consort: Option<String>,
+    pub house_build: i32,
+    pub achievements: Vec<String>,
 }
 
 impl Character {
@@ -44,4 +52,6 @@ pub struct Strife {
     pub energy: i32,
     pub max_energy: i32,
     pub energy_percent: f32,
+    pub description: String,
+    pub echeladder: i32,
 }

@@ -1,0 +1,14 @@
+<div id="character-gates">
+	Gates reached: {{ gates_reached }} <br />
+	Gates accessible: {{ gates_cleared }} <br />
+	{% if gates_cleared
+	< gates_reached %} You cannot reach the highest gate to which your server has built yet, as this newly-built
+		structure is unexplored and full of underlings! You will have to fight your way up if you want to make use of
+		it. <br />
+	Click here to enter the new territory and claim it as your own. <br />
+	<!-- TODO: will add link here when dungeons are in -->
+	NOTE: This feature is not yet implemented. For the time being, you can
+	<button hx-post="/character/debug-clear" hx-target="#character-gates" hx-push-url="false" hx-swap="outerHTML">click
+		here</button> to clear the next gate. <br />
+	{% endif %}
+</div>

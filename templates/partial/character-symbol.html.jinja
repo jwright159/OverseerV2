@@ -1,0 +1,13 @@
+<form hx-post="/character/symbol" enctype="multipart/form-data" hx-push-url="false" hx-swap="outerHTML">
+	Symbol: <img style="display:inline" src="{{ symbol }}" /><br />
+	<br />
+	Upload custom symbol image (PNG, 64x64):
+	<br />
+	<input type="file" name="file" id="file">
+	<input type="submit" value="Submit" name="symbol">
+	Or just press submit to reset image. <br />
+
+	{% if let Some(error) = error %}
+	<span style="color: red;">{{ error }}</span><br />
+	{% endif %}
+</form>

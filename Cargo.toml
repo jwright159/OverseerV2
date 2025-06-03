@@ -5,11 +5,14 @@ edition = "2024"
 
 [dependencies]
 askama = "0.14.0"
-axum = "0.8.4"
+axum = { version = "0.8.4", features = ["multipart"] }
 axum-htmx = "0.7.0"
 axum-login = "0.17.0"
+axum_typed_multipart = "0.16.2"
+imagesize = "0.14.0"
 itertools = "0.14.0"
 serde = { version = "1.0.219", features = ["derive"] }
+tempfile = "3.20.0"
 thiserror = "2.0.12"
 tokio = { version = "1.45.1", features = ["full"] }
 tower-http = { version = "0.6.5", features = ["fs"] }

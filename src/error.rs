@@ -24,6 +24,12 @@ pub enum Error {
     QueryRejected(#[from] axum::extract::rejection::QueryRejection),
     #[error("form rejected: {0}")]
     FormRejected(#[from] axum::extract::rejection::FormRejection),
+    #[error("image: {0}")]
+    Image(#[from] imagesize::ImageError),
+    #[error("persist: {0}")]
+    Persist(#[from] tempfile::PersistError),
+    #[error("invalid filename")]
+    InvalidFilename,
 }
 
 impl IntoResponse for Error {
