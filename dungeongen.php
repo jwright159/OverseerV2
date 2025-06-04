@@ -194,7 +194,7 @@ if (empty($_SESSION['character'])) {
 						elseif ($i < 4) $dir += 1; //loop is still going, check a different direction
 					}
 				}
-				if ($distance > 1) { //No encounters or loot on the first or second rooms since this is where the player appears
+				if ($x != 0 || $y != 0) { //No encounters or loot on the first room since this is where the player appears
 					if (rand(1,100) <= $encchance) $enc[$x][$y] .= $dist[$x][$y] . ":"; //put an encounter here
 					if (rand(1,100) <= $lootchance) $loot[$x][$y] .= $dist[$x][$y] . ":"; //put loot here
 				}
