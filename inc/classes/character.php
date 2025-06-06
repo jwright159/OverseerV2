@@ -16,6 +16,7 @@
 namespace Overseer;
 
 use \PDO;
+use Exception;
 
 /**
  * Character data handling class
@@ -32,11 +33,15 @@ use \PDO;
 class Character
 {
 
-    public $id, $grist, $wakeself, $dreamself, $strife;
+    public int $id;
+    public Grist $grist;
+    public Strifer $wakeself;
+    public Strifer $dreamself;
+    public Strifer $strife;
 
-    private $_dbhandle;
+    private PDO $_dbhandle;
     
-    // Gate  height definitions, defined in reverse.
+    // Gate height definitions, defined in reverse.
     private $_gates = array(
                        7 => 24000000,
                        6 => 11111100,
@@ -48,7 +53,7 @@ class Character
                        0 => 0,
                       );
 
-    private $_data = array(), $_datamod = array();
+    private $_data = [], $_datamod = [];
 
 
     /**
@@ -57,12 +62,10 @@ class Character
      * Automatically calls load() if there is a character ID passed during
      * creation of the class.
      *
-     * @param PDO     $dbhandle The global PDO object for the database.
-     * @param integer $initid   The character ID to start with.
-     *
-     * @access public
+     * @param PDO $dbhandle The global PDO object for the database.
+     * @param int $initid   The character ID to start with.
      */
-    function __construct(PDO $dbhandle, $initid=-1)
+    public function __construct(PDO $dbhandle, int $initid=-1)
     {
 
         $this->_dbhandle = $dbhandle;
@@ -85,10 +88,8 @@ class Character
      *
      * @return mixed The definition of the variable being requested,
      *               otherwise, null.
-     *
-     * @access public
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
 
         // Check for any special variables that require "thinking".
@@ -129,7 +130,7 @@ class Character
      *
      * @access public
      */
-    public function __set($name, $value): void
+    public function __set(string $name, mixed $value): void
     {
 
         if (array_key_exists($name, $this->_data)) {
@@ -149,13 +150,12 @@ class Character
      * that is wholly responsible for populating every single aspect of data
      * served from this class.
      *
-     * @param integer $characterID The ID of the character that needs to be loaded.
+     * @param int $characterID The ID of the character that needs to be loaded.
      *
      * @access public
      */
-    public function load($characterID): void
+    public function load(int $characterID): void
     {
-
         // Get the character's row to load it into the object.
         $charquery = $this->_dbhandle->prepare(
             'SELECT * FROM `Characters` WHERE `ID` = :charid'
@@ -180,7 +180,7 @@ class Character
         $this->id = $charrow['ID'];
 
         // Start with an empty data table.
-        $this->_data = array();
+        $this->_data = [];
 
         // Enumerate direct values (strings and numbers).
         $directs = array(
@@ -277,7 +277,7 @@ class Character
         
         // Convert lists to arrays and store into data keys.
         foreach ($lists as $dbkey) {
-            $this->_data[$dbkey] = array();
+            $this->_data[$dbkey] = [];
             foreach (explode('|', $charrow[$dbkey]) as $listNode) {
                 if (!empty($listNode)) {
                     $this->_data[$dbkey][] = $listNode;
@@ -290,15 +290,15 @@ class Character
         true;
 
         // Instantiate the grist object and load it from the db.
-        $this->grist = new \Overseer\Grist;
+        $this->grist = new Grist();
         $this->grist->importOld($charrow['grists']);
 
         // Initialize the strifer objects for wakeself and dreamself.
-        $this->wakeself  = new \Overseer\Strifer(
+        $this->wakeself  = new Strifer(
             $this->_dbhandle,
             $charrow['wakeself']
         );
-        $this->dreamself = new \Overseer\Strifer(
+        $this->dreamself = new Strifer(
             $this->_dbhandle,
             $charrow['dreamself']
         );
@@ -310,7 +310,7 @@ class Character
             $this->strife = &$this->dreamself;
         }
 
-    }//end load()
+    }
 
 
     /**
@@ -319,15 +319,13 @@ class Character
      * A fancy save function that detects which variables have been changed and
      * dynamically assembles an SQL query for them.  Also kicks off the save
      * function for associated sub-objects such as strife.
-     *
-     * @access public
      */
     public function save(): void
     {
         // Initialize the query formation arrays.
-        $updatepairs  = array();
-        $updatebinds  = array();
-        $updatevalues = array();
+        $updatepairs  = [];
+        $updatebinds  = [];
+        $updatevalues = [];
 
         // Save the strifer rows since they should handle themselves.
         //$this->wakeself->save();
@@ -382,7 +380,7 @@ class Character
         // Check if we have anything to submit.
         if (count($updatepairs) != 0) {
             // Create an empty array as a basis.
-            $querypairs = array();
+            $querypairs = [];
 
             // Iterate over each prepared pair and add it to the pairs array.
             foreach ($updatepairs as $sqlvar) {
@@ -408,8 +406,5 @@ class Character
             $updatechar->bindParam(':charid', $this->id);
             $updatechar->execute();
         }//end if
-
     }//end save()
-
-
 }//end class

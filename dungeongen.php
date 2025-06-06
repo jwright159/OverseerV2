@@ -52,7 +52,8 @@ function getLoot($gate) {
 /**
  * @return (int|mixed|string)[]
  *
- * @psalm-return array{maxdistance: 10, complexity: 10, telechance: 10, encchance: 40, lootchance: 30, loots: '1', floors: 1, enemies: 'appearson = \'Lands\' OR appearson = \'Dungeons\'', error: 0|1, minpower?: int|mixed, maxpower?: int|mixed, minloot?: int|mixed, maxloot?: int|mixed, boss?: mixed|string,...}
+ * TODO: Fix this psalm-return to be accurate or use some sort of data transfer object!
+ * @psalm-return array<array-key, mixed>
  */
 function getSpecs($dungeonkind,$charrow): array {
 	//Fills out the specs for the specified dungeon kind

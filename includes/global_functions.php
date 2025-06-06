@@ -542,7 +542,7 @@ function rowProfileStringSoft($row): string
 function hex2RGB($hexStr, $returnAsString = false, $seperator = ','): array|string|false
 {
     $hexStr = preg_replace("/[^0-9A-Fa-f]/", '', $hexStr); // Gets a proper hex string
-    $rgbArray = array();
+    $rgbArray = [];
     if (strlen($hexStr) == 6) { //If a proper hex code, convert using bitwise operation. No overhead... faster
         $colorVal = hexdec($hexStr);
         $rgbArray['red'] = 0xFF & ($colorVal >> 0x10);
@@ -596,7 +596,7 @@ function strifeInit($charrow): void
 	$equips = explode("|", $charrow['equips']);
 	$portfolio = explode("|", $charrow['strifedeck']);
 	$i = 0;
-	$bonuses = array();
+	$bonuses = [];
 	$limit = ($charrow['echeladder'] * 9999) / 413;
 	$equippedcomputer = 0;
 	while (!empty($equips[$i])) { //sort through player's equipped, er, equipment
@@ -726,18 +726,14 @@ function gainRungs($charrow,$rungs): string|false
  * all bits that have the search term in it and the associated arguments. Should be cleaner/faster than just a straight up explosion search.
  *
  * @param bool $first If true, you only care about the first tag that you find; in this case, it'll return just the one array.
- *
- * @return (string|string[])[]
- *
- * @psalm-return array<int<0, max>, non-empty-list<string>|string>
  */
-function surgicalSearch($string, $search, $first = false): array
+function surgicalSearch(string $string, string $search, bool $first = false): array
 {
 	$i = 0;
 	$string = "|" . $string; //add a | to the beginning so that you can search for "|EFFECT:", for instance, and still be able to count the first tag
 	$pos = strpos($string, $search); //Search for ANY occurrence of the search in the string. Add format characters (:, |, etc) as necessary to ensure you pick up the right instances
 	//The beauty of this system is that you can search for multiple congruent arguments, such as a status with exactly 1 turn remaining, and they'll still be split into separate array keys
-	$returnarray = array();
+	$returnarray = [];
 	while ($pos !== false) {
 		$beginning = strrpos(substr($string, 0, $pos + 1), "|"); //grab the | that begins the tag the first term is in.
 		//We add 1 in case "|" was used to find the search term in a specific place within the tag, it shouldn't make a difference if not

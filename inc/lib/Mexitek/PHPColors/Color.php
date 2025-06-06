@@ -66,7 +66,7 @@ class Color {
         $G = hexdec($color[2].$color[3]);
         $B = hexdec($color[4].$color[5]);
 
-        $HSL = array();
+        $HSL = [];
 
         $var_R = ($R / 255);
         $var_G = ($G / 255);
@@ -113,7 +113,7 @@ class Color {
      * @return string HEX string
      * @throws Exception "Bad HSL Array"
      */
-    public static function hslToHex( $hsl = array() ){
+    public static function hslToHex( $hsl = [] ){
          // Make sure it's HSL
         if(empty($hsl) || !isset($hsl["H"]) || !isset($hsl["S"]) || !isset($hsl["L"]) ) {
             throw new Exception("Param was not an HSL array");
@@ -184,7 +184,7 @@ class Color {
      * @return string RGB string
      * @throws Exception "Bad RGB Array"
      */
-    public static function rgbToHex( $rgb = array() ){
+    public static function rgbToHex( $rgb = [] ){
          // Make sure it's RGB
         if(empty($rgb) || !isset($rgb["R"]) || !isset($rgb["G"]) || !isset($rgb["B"]) ) {
             throw new Exception("Param was not an RGB array");

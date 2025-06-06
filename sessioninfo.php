@@ -46,15 +46,15 @@ if (!empty($session)) { //Session to examine
   		$strifersqlquery = "SELECT * FROM Strifers WHERE owner IN (" . $characterids2 . ");";
   		$striferquery = mysqli_query($connection, $strifersqlquery);
 
-  		$strifernames = array();
-  		$striferpower = array();
+  		$strifernames = [];
+  		$striferpower = [];
   		while ($striferrow = mysqli_fetch_assoc($striferquery)){
   			$strifernames[$striferrow['ID']] = $striferrow['name'];
   			$striferpower[$striferrow['ID']] = $striferrow['power'];
   		}
 
   		$itemquery = mysqli_query($connection, "SELECT * FROM Captchalogue;");
-  		$itemnames = array();
+  		$itemnames = [];
   		while ($itemrow = mysqli_fetch_assoc($itemquery)){
   			$itemnames[$itemrow['ID']] = $itemrow['name'];
   		}

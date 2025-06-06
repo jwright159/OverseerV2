@@ -20,9 +20,9 @@ function anyglitch() {
 }
 
 /**
- * @return null|string
+ * @psalm-return non-empty-string
  */
-function heaviestBonus($workrow){
+function heaviestBonus(array $workrow): string{
 	$bonusrow['abstain']=$workrow['abstain'];
 	$bonusrow['abjure']=$workrow['abjure'];
 	$bonusrow['accuse']=$workrow['accuse'];
@@ -32,7 +32,7 @@ function heaviestBonus($workrow){
 	$bonusrow['assail']=$workrow['assail'];
 	$bonusrow['assault']=$workrow['assault'];
 	$bonusrow = array_map('intval', $bonusrow); //Make sure they're all integer values.
-	$bestbonus=max($bonusrow);
+	$bestbonus = max($bonusrow);
 	if($bestbonus==0)return "none";
 	elseif($bonusrow['abstain']==$bestbonus)return "abstain";
 	elseif($bonusrow['abjure']==$bestbonus)return "abjure";
@@ -42,6 +42,8 @@ function heaviestBonus($workrow){
 	elseif($bonusrow['aggress']==$bestbonus)return "aggress";
 	elseif($bonusrow['assail']==$bestbonus)return "assail";
 	elseif($bonusrow['assault']==$bestbonus)return "assault";
+	// This shouldn't happen, but just in case it does.
+	return "none";
 }
 
 if ($accrow['modlevel'] < 4) {
