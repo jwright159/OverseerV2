@@ -1,5 +1,11 @@
 {
     "require": {
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "orklah/psalm-strict-equality": "^3.1",
+        "orklah/psalm-strict-numeric-cast": "^2.1",
+        "orklah/psalm-not-empty": "^2.1"
+    },
+    "require-dev": {
+        "vimeo/psalm": "^6.12"
     }
 }
