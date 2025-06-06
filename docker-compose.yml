@@ -1,0 +1,52 @@
+services:
+  database:
+    &database
+    profiles:
+      - prod
+    build:
+      dockerfile: ./config/mysql/Dockerfile
+    environment:
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - "db_data:/var/lib/mysql/"
+  
+  database-dev:
+    <<: *database
+    profiles:
+      - dev
+    ports:
+      - 3306:3306
+  
+  php:
+    &php
+    profiles:
+      - prod
+    restart: on-failure
+    build:
+      dockerfile: ./config/php/Dockerfile.prod
+    env_file:
+      - .env
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - database
+  
+  php-dev:
+    <<: *php
+    profiles:
+      - dev
+    build:
+      dockerfile: ./config/php/Dockerfile.dev
+    volumes:
+      - .:/var/www/html/
+    ports:
+      - 9000:9000
+    depends_on:
+      - database-dev
+
+volumes:
+  db_data:
