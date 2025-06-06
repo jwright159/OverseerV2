@@ -1,7 +1,7 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] . "/includes/global_functions.php");
 
-function renderItem2($irow, $meta = "", $contextid = "", $showart = true, $holo = false) {
+function renderItem2($irow, $meta = "", $contextid = "", $showart = true, $holo = false): void {
 	if (!empty($irow)) {
 		if (!empty($irow['art'])) {
 			$imgstring = '<img src="/images/art/' . $irow['art'] . '" title="Image by ' . $irow['credit'] . '" />';

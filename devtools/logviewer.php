@@ -7,7 +7,10 @@ $phplogpath = 'C:/wamp/logs/php_error.log';
 $apachelogpath = 'C:/wamp/logs/apache_error.log';
 $accesslogpath = 'C:/wamp/logs/access.log';
 
-	function tailCustom($filepath, $lines = 1, $adaptive = true) {
+	/**
+	 * @return false|string
+	 */
+	function tailCustom($filepath, $lines = 1, $adaptive = true): string|false {
 
 		// Open file
 		$f = @fopen($filepath, "rb");

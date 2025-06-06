@@ -1,6 +1,6 @@
 <?php
 
-function slowLogThis($string) {
+function slowLogThis($string): void {
     $filename = "/errorlogs/slowQuery.txt";
     $newString = $string.'<br>';
     if (!file_exists($filename)) {

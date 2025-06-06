@@ -10,13 +10,13 @@ if (!empty($_SESSION['username'])) { // If the user is already logged in, get ac
 	$accresult = mysqli_query($connection, "SELECT * FROM `Users` WHERE `username` = '" . $_SESSION['username'] . "' LIMIT 1;");
 	$accrow = mysqli_fetch_array($accresult);
 }
-function showloginmsg() {
+function showloginmsg(): void {
 	if (isset($_SESSION['loginmsg'])) {
 		echo('<br>' . $_SESSION['loginmsg'] . '<br>');
 		unset($_SESSION['loginmsg']);
 	}
 }
-function getcharbgcolor($charcolor) {
+function getcharbgcolor($charcolor): string {
 	$charcolorhsl = Mexitek\PHPColors\Color::hexToHsl($charcolor);
 	if ($charcolorhsl['L'] > 0.7) {
 		$newL = 0.1;
@@ -28,7 +28,7 @@ function getcharbgcolor($charcolor) {
 	$charcolorhsl['L'] = $newL;
 	return('background: #' . Mexitek\PHPColors\Color::hslToHex($charcolorhsl) . '; color: ' . $textc .';');
 }
-function showCaptcha() {
+function showCaptcha(): void {
 	global $captcha;
 	$captcha = true;
 	echo('<div class="g-recaptcha" data-sitekey="6LcsfQgTAAAAAKGVoQbr1nNjVrD88UnYHHrZDaxr" data-size="compact"></div>');

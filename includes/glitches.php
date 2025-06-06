@@ -1,5 +1,5 @@
 <?php
-function horribleMess() {
+function horribleMess(): string {
 	$chararray = array(1 => "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", 
 	"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", 
 	"!", "@", "#", "$", "%", "^", "&", "*", "+", "=", "?", "/", "\\", " ");
@@ -17,7 +17,7 @@ function horribleMess() {
 	}
 	return $str;
 }
-function generateGlitchString() { //DATA: Holds info on the glitch strings.
+function generateGlitchString(): string|null { //DATA: Holds info on the glitch strings.
 	$strarray = array(1 => "You and your opponents trade a series offffffGLITCH",	
 	"You hit the GLITCH several times, and it falls over and begins twitching", 
 	"GLITCH GLITCH GLITCH", 
@@ -105,7 +105,7 @@ function generateGlitchString() { //DATA: Holds info on the glitch strings.
 	}
 	return $str;
 }
-function generateStatusGlitchString() { //This will appear when a strifer is glitched in the format "Glitched Out: <your text here>"
+function generateStatusGlitchString(): string|null { //This will appear when a strifer is glitched in the format "Glitched Out: <your text here>"
 	$strarray = array(1 => "This strifer GLITCHGLITCH",
 	"This is a bug, please submit a GLITCH!",
 	"This GLITCH doesn't know what it means to love.",
@@ -176,7 +176,7 @@ function generateStatusGlitchString() { //This will appear when a strifer is gli
 	}
 	return $str;
 }
-function generateBuyGlitchString() { //DATA: Info on glitch strings that force you to buy something.
+function generateBuyGlitchString(): string|null { //DATA: Info on glitch strings that force you to buy something.
 	$strarray = array(1 => "The MILLIE BAYS HERE WITH ANOTHER FANTASTIC GLITCH", 
 	"The Stoned Clown offers you some GLITCH potions", 
 	"GLITCHGLITCH Welcome to the GLITCH mart!", 

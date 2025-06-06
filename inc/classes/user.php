@@ -110,11 +110,9 @@ class User
      * @param string $name  The variable to set
      * @param mixed  $value The value to give to the variable
      *
-     * @return null
-     *
      * @access public
      */
-    public function __set($name, $value)
+    public function __set($name, $value): void
     {
 
         if (array_key_exists($name, $this->_data)) {
@@ -140,11 +138,9 @@ class User
      * @param integer $userID       The ID of the user that needs to be loaded.
      * @param boolean $userbystring Use "true" if finding username by string.
      *
-     * @return null
-     *
      * @access public
      */
-    public function load($userID, $userbystring=false)
+    public function load($userID, $userbystring=false): void
     {
 
         // Get the user's row to load it into the object.
@@ -225,11 +221,9 @@ class User
      * dynamically assembles an SQL query for them.  Also kicks off the save
      * function for associated sub-objects.
      *
-     * @return null
-     *
      * @access public
      */
-    public function save()
+    public function save(): void
     {
         // Initialize the query formation arrays.
         $updatepairs  = array();
@@ -349,11 +343,11 @@ class User
      * @param string $recoveryKey The challenge recovery key.
      * @param string $newPassword The password to set on success.
      *
-     * @return string The freshly generated password recovery key.
+     * @return bool The freshly generated password recovery key.
      *
      * @access public
      */
-    function recoverPassword($recoveryKey, $newPassword)
+    function recoverPassword($recoveryKey, $newPassword): bool
     {
         // Check that the recovery key matches
         if ($recoveryKey == $this->password_recovery) {
