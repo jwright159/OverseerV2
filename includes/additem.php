@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/global_functions.php";
 /**
  * Adds an item to the player's inventory, returns true if the item was added
  */
-function addItem(array $charrow, string $id, string $extras = "", bool $shouldeject = true, bool $shouldrefreshatheneum = true)
+function addItem(array $charrow, string $id, string $extras = "", bool $shouldeject = true, bool $shouldrefreshatheneum = true): bool
 {
 	global $connection;
 	$taken = count($_SESSION['inv']); //find the number of occupied slots. $_SESSION['inv'] will always be more up to date.
@@ -30,7 +30,7 @@ function addItem(array $charrow, string $id, string $extras = "", bool $shouldej
 /**
  * Removes an item from the player's inventory in a specific slot
  */
-function removeItem(int $slot)
+function removeItem(int $slot): void
 {
 	$inv = $_SESSION['inv'];
 	$imeta = $_SESSION['imeta'];
@@ -44,7 +44,7 @@ function removeItem(int $slot)
 	$_SESSION['imeta'] = $imeta;
 }
 
-function storeItem(&$charrow, $id, $amount, $extras = "", $shouldrefreshatheneum = true)
+function storeItem(&$charrow, $id, $amount, $extras = "", $shouldrefreshatheneum = true): bool
 {
 	global $connection;
 	$sresult = mysqli_query($connection, "SELECT `size`,`effects` FROM `Captchalogue` WHERE `ID` = $id");
@@ -85,7 +85,7 @@ function storeItem(&$charrow, $id, $amount, $extras = "", $shouldrefreshatheneum
 	return true;
 }
 
-function itemSize($size)
+function itemSize($size): int
 {
 	switch ($size)
 	{
@@ -101,11 +101,11 @@ function itemSize($size)
 	}
 }
 
-function ejectItem($charrow) { //eject an item yep this is totally happening
+function ejectItem($charrow): void { //eject an item yep this is totally happening
 
 }
 
-function willEject($charrow) { //returns true if the user's modus will eject an item if inventory is full
+function willEject($charrow): bool { //returns true if the user's modus will eject an item if inventory is full
 	if ($charrow['modus'] == "Array") return false;
 	else return true;
 }
@@ -143,7 +143,7 @@ function availableInv($charrow)
 	return $available;
 }
 
-function renderItem($trow) { //shows full item information, for inventory/portfolio page
+function renderItem($trow): void { //shows full item information, for inventory/portfolio page
 	echo $trow['name'] . "<br />";
 	echo "Code: " . $trow['code'] . "<br />";
 	if (!empty($trow['art'])) echo "<img src='images/art/" . $trow['art'] . "' title='Image by " . $trow['credit'] . "' /><br />";
@@ -162,17 +162,17 @@ function renderItem($trow) { //shows full item information, for inventory/portfo
 	if ($trow['old'] == 1) echo "This item has been automatically ported from Overseer v1. It has lost all on-hit effects, the consumable effects may be simplified or incorrect, and it does not take advantage of the new grist types. To update the item to v2, <a href='submissions.php'>submit a suggestion!</a><br />";
 }
 
-function renderGristCosts($gristsfield) { //shows grist costs for an item
+function renderGristCosts($gristsfield): void { //shows grist costs for an item
 
 }
 
-function itemName($itemID, $connection) {
+function itemName($itemID, $connection): float|int|string|null {
 	$itemresult = mysqli_query($connection, "SELECT `name` FROM `Captchalogue` WHERE `Captchalogue`.`ID` = $itemID LIMIT 1;");
 	$itemrow = mysqli_fetch_array($itemresult);
 	return $itemrow['name'];
 }
 
-function refreshAtheneum($charrow, $itemID, $obtained, $component1 = "", $component2 = "", $recipe = "") {  //add item to atheneum if not already present
+function refreshAtheneum($charrow, $itemID, $obtained, $component1 = "", $component2 = "", $recipe = ""): void {  //add item to atheneum if not already present
 /*possible values for $obtained: 0 - known to be valid code, 1 - name, image, description known, 2 - all info known ie. was obtained or viewed with holo+
   recipe may be either "and" or "or"
   items are stored as |$itemID:$obtained:$component1//$component2,$component3&&$component4,etc  */

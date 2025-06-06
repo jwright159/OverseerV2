@@ -25,14 +25,24 @@ function spendFatigue($fatigue, $charrow) {
 	return $charrow;
 }
 
-function loadSessionrow($id) {
+/**
+ * @return (float|int|null|string)[]|false|null
+ *
+ * @psalm-return array<float|int|null|string>|false|null
+ */
+function loadSessionrow($id): array|false|null {
 	global $connection;
 	$result = mysqli_query($connection, "SELECT * FROM `Sessions` WHERE `ID` = $id");
 	$row = mysqli_fetch_array($result);
 	return $row;
 }
 
-function loadStriferow($id) {
+/**
+ * @return (float|int|null|string)[]|false|null
+ *
+ * @psalm-return array<float|int|null|string>|false|null
+ */
+function loadStriferow($id): array|false|null {
 	global $connection;
 	$result = mysqli_query($connection, "SELECT * FROM `Strifers` WHERE `ID` = $id");
 	$row = mysqli_fetch_array($result);
@@ -60,8 +70,12 @@ function initGrists() {
 //4. if you want to call by ID instead of character row just use function(getChar($char), whatever)
 //5. onStat and maxStat are useful for ranking/achievement values
 
-/** Gets a charrow and a stat and returns the value of that stat */
-function getStat($char, $stat)
+/**
+ * Gets a charrow and a stat and returns the value of that stat
+ *
+ * @return null|string
+ */
+function getStat($char, $stat): string|null
 {
 	$stats = explode("|", $char['stats']); // [0] => [creation:143423423423], [1] => [stat2: 1]...
 	foreach ($stats as $existing_stat) {
@@ -71,24 +85,30 @@ function getStat($char, $stat)
 	return null; //if there's no stat found return null
 }
 
-/** Adds 1 to a stat, for the lazy */
-function incrementStat($char, $stat)
+/**
+ * Adds 1 to a stat, for the lazy
+ */
+function incrementStat($char, $stat): void
 {
 	$statvalue = getStat($char, $stat);
 	if ($statvalue === null) $statvalue = 0; //to save a function call
 	updateStat($char, $stat, $statvalue + 1); //if it doesn't exist, it'll create it
 }
 
-/** Adds $value to a stat */
-function sumStat($char, $stat, $value)
+/**
+ * Adds $value to a stat
+ */
+function sumStat($char, $stat, $value): void
 {
 	$statvalue = getStat($char, $stat);
 	if ($statvalue === null) $statvalue = 0; //to save a function call
 	updateStat($char, $stat, $statvalue + $value); //if it doesn't exist, it'll create it
 }
 
-/** Gets a charrow, a stat and a value and adds the stat if it doesn't exist, calls modifyStat if it does */
-function updateStat($char, $stat, $value)
+/**
+ * Gets a charrow, a stat and a value and adds the stat if it doesn't exist, calls modifyStat if it does
+ */
+function updateStat($char, $stat, $value): void
 {
 	if (getStat($char, $stat) !== null)
 		modifyStat($char, $stat, $value);
@@ -96,34 +116,42 @@ function updateStat($char, $stat, $value)
 		writeStat($char, $char['stats'] . $stat . ':' . $value . '|'); //no point in even searching the row again
 }
 
-function removeStat($char, $stat)
+function removeStat($char, $stat): void
 {
 	if (getStat($char, $stat) !== null)
 		modifyStat($char, $stat, null);
 }
 
-/** Ensures a value only gets stored if it's the new highest value */
-function maxStat($char, $stat, $value)
+/**
+ * Ensures a value only gets stored if it's the new highest value
+ */
+function maxStat($char, $stat, $value): void
 {
 	$top = getStat($char, $stat);
 	if ($top === null OR $top < $value) updateStat($char, $stat, $value);
 }
 
-/** Sets a stat to 1 */
-function onStat($char, $stat){
+/**
+ * Sets a stat to 1
+ */
+function onStat($char, $stat): void{
 	if (getStat($char, $stat) != 1)
 		updateStat($char, $stat, 1);
 }
 
-/** Sets a stat to 0 */
-function offStat($char,$stat)
+/**
+ * Sets a stat to 0
+ */
+function offStat($char,$stat): void
 {
 	if (getStat($char, $stat) != 0)
 		updateStat($char, $stat, 0);
 }
 
-/** Toggles between 1 and 0 */
-function toggleStat($char, $stat)
+/**
+ * Toggles between 1 and 0
+ */
+function toggleStat($char, $stat): void
 {
 	if (getStat($char, $stat) != 1)
 		updateStat($char, $stat, 1);
@@ -131,8 +159,10 @@ function toggleStat($char, $stat)
 		updateStat($char, $stat, 0);
 }
 
-/** Writes a new stat string for a character into the DB, pretty much to get SQL out of the rest */
-function writeStat($char, $string)
+/**
+ * Writes a new stat string for a character into the DB, pretty much to get SQL out of the rest
+ */
+function writeStat($char, $string): void
 {
 	global $connection;
 	$query = "UPDATE Characters SET stats='$string' WHERE ID = '$char[ID]'";
@@ -142,6 +172,8 @@ function writeStat($char, $string)
 /**
  * Gets a charrow, a stat and a value and updates it.
  * Returns true if the stat was deleted, false otherwise.
+ *
+ * @return bool|null
  */
 function modifyStat($char, $stat, $value)
 {
@@ -169,8 +201,10 @@ function modifyStat($char, $stat, $value)
 
 // Achievements
 
-/** Adds an achievement, displays message and returns true if it's successfully added */
-function setAchievement($char, $achievement)
+/**
+ * Adds an achievement, displays message and returns true if it's successfully added
+ */
+function setAchievement($char, $achievement): bool
 {
 	if (!getAchievement($char, $achievement))
 	{
@@ -182,8 +216,10 @@ function setAchievement($char, $achievement)
 	return false;
 }
 
-/** Adds an achievement to a different character, displays message and returns true if it's successfully added */
-function sendAchievement($char, $achievement)
+/**
+ * Adds an achievement to a different character, displays message and returns true if it's successfully added
+ */
+function sendAchievement($char, $achievement): bool
 {
 	if (!getAchievement($char,$achievement)) {
 		notifyCharacter($char['ID'], '<img src="/images/achievements/'.$achievement.'.png" align="middle">ACHIEVEMENT UNLOCKED!');
@@ -194,8 +230,10 @@ function sendAchievement($char, $achievement)
 	return false;
 }
 
-/** Returns true if achievement is found, false otherwise */
-function getAchievement($char, $achievement)
+/**
+ * Returns true if achievement is found, false otherwise
+ */
+function getAchievement($char, $achievement): bool
 {
 	$achievements = explode("|", $char['achievements']);
 	foreach ($achievements as $cheev) {
@@ -204,8 +242,10 @@ function getAchievement($char, $achievement)
 	return false;
 }
 
-/** Writes a new achievement string for a character into the DB, pretty much to get SQL out of the rest */
-function writeAchievement($char, $string)
+/**
+ * Writes a new achievement string for a character into the DB, pretty much to get SQL out of the rest
+ */
+function writeAchievement($char, $string): void
 {
 	global $connection;
 	$query= "UPDATE Characters SET achievements='$string' WHERE ID = '$char[ID]'";
@@ -216,8 +256,10 @@ function writeAchievement($char, $string)
 // Notifications
 // notifySession and notifyCharacter/notifyCharacterOnce are the only functions you'll ever need to use, everything else is already coded
 
-/** Displays the oldest notification found in the character's notification table and removes it */
-function checkNotifications($char)
+/**
+ * Displays the oldest notification found in the character's notification table and removes it
+ */
+function checkNotifications($char): void
 {
 	$notes = explode("|", $char['notifications']);
 	if ($notes[0]!='') {
@@ -233,7 +275,11 @@ function checkNotifications($char)
 	}
 }
 
-/** Sends an unique notification to every other player in the session */
+/**
+ * Sends an unique notification to every other player in the session
+ *
+ * @return false|null
+ */
 function notifySession($char, $message)
 {
 	$sent = explode("|",$char['notif_history']);
@@ -243,7 +289,11 @@ function notifySession($char, $message)
 	appendNotifications($char, $message);
 }
 
-/** Sends an unique notification to charid, which is the ID, not the row */
+/**
+ * Sends an unique notification to charid, which is the ID, not the row
+ *
+ * @return false|null
+ */
 function notifyCharacterOnce($char, $charid, $message){
 	$sent = explode("|",$char['notif_history']);
 	foreach ($sent as $notif)
@@ -252,8 +302,10 @@ function notifyCharacterOnce($char, $charid, $message){
 	appendNotificationsOnceChar($char, $charid, $message);
 }
 
-/** Sends a notification to charid, which is the ID, not the row */
-function notifyCharacter($charid, $message){
+/**
+ * Sends a notification to charid, which is the ID, not the row
+ */
+function notifyCharacter($charid, $message): void{
 	//make sure to only use this where it can't be spammed
 	global $connection;
 	$fixedstring = str_replace("|", "", $message);
@@ -261,8 +313,10 @@ function notifyCharacter($charid, $message){
 	mysqli_query($connection, $query);
 }
 
-/** Appends a unique string to the notifications column of a single charid */
-function appendNotificationsOnceChar($char, $charid, $string)
+/**
+ * Appends a unique string to the notifications column of a single charid
+ */
+function appendNotificationsOnceChar($char, $charid, $string): void
 {
 	global $connection;
 	$fixedstring = str_replace("|", "", $string);
@@ -272,8 +326,10 @@ function appendNotificationsOnceChar($char, $charid, $string)
 	mysqli_query($connection, $query2);
 }
 
-/** Appends a string to the notifications column of every sessionmate of $char  */
-function appendNotifications($char, $string)
+/**
+ * Appends a string to the notifications column of every sessionmate of $char
+ */
+function appendNotifications($char, $string): void
 {
 	global $connection;
 	$members = mysqli_query($connection, "SELECT members FROM Sessions WHERE ID = '$char[session]'");
@@ -288,8 +344,10 @@ function appendNotifications($char, $string)
 	mysqli_query($connection, $query2);
 }
 
-/** For when you want to write a new state of the notifications table for a single character, DOESN'T APPEND | BY ITSELF */
-function writeNotifications($char, $string){
+/**
+ * For when you want to write a new state of the notifications table for a single character, DOESN'T APPEND | BY ITSELF
+ */
+function writeNotifications($char, $string): void{
 	global $connection;
 	$query = "UPDATE `Characters` SET notifications='$string' WHERE ID = '$char[ID]'";
 	mysqli_query($connection, $query);
@@ -298,8 +356,10 @@ function writeNotifications($char, $string){
 
 //GRIST
 
-/** Adds/subtracts $amount from the user's reserve of $type grist and writes to $griststr */
-function modifyGrist($griststr, $type, $amount)
+/**
+ * Adds/subtracts $amount from the user's reserve of $type grist and writes to $griststr
+ */
+function modifyGrist($griststr, $type, $amount): string
 {
 	$grist = explode("|", $griststr);
 	$newstr = "";
@@ -320,8 +380,10 @@ function modifyGrist($griststr, $type, $amount)
 	return $newstr;
 }
 
-/** Returns the amount of $type grist in $griststr, works for players and items */
-function howMuchGrist($griststr, $type)
+/**
+ * Returns the amount of $type grist in $griststr, works for players and items
+ */
+function howMuchGrist($griststr, $type): int
 {
 	if (strpos($griststr, $type . ":") !== false) { //skip the whole calculation if the grist isn't in the string
 		$grist = explode("|", $griststr);
@@ -337,8 +399,12 @@ function howMuchGrist($griststr, $type)
 
 /**
  * Looks up and returns the full tag with the keyword $search
+ *
+ * @return string[]
+ *
+ * @psalm-return non-empty-list<string>
  */
-function specialArray($string, $search)
+function specialArray($string, $search): array
 {
 	$boom = explode("|", $string);
 	for ($i = 0; !empty($boom[$i]); $i++) {
@@ -348,8 +414,10 @@ function specialArray($string, $search)
 	return ["nope"];
 }
 
-/** old hardcoded grist image producer because sometimes the cheapest solution is the best */
-function gristImage($name)
+/**
+ * old hardcoded grist image producer because sometimes the cheapest solution is the best
+ */
+function gristImage($name): string
 {
 	if ($name == "Rainbow" || $name == "Polychromite" || $name == "Opal" || $name == "Plasma") $name .= ".gif";
 	else $name .= ".png";
@@ -357,8 +425,10 @@ function gristImage($name)
 	return $name;
 }
 
-/** Converts a number to a string and puts a + in front if positive */
-function bonusStr($bonus)
+/**
+ * Converts a number to a string and puts a + in front if positive
+ */
+function bonusStr($bonus): string
 {
 	if ($bonus > 0) $b = "+" . strval($bonus);
 	else $b = strval($bonus);
@@ -400,7 +470,7 @@ function chainArray($charrow)
 	}
 	return $chain; //Will be all false if we weren't build up to the first gate yet
 }
-function getBonusname($n) {
+function getBonusname($n): string {
 	switch ($n) {
 		case 0: return "aggrieve";
 		case 1: return "aggress";
@@ -443,16 +513,20 @@ function profileStringSoft($charid)
 
 //more efficient versions but require the charrow instead of IDs, also it's like I'm a real java programmer
 
-/** Returns a formatted link to a profile, colored with player's color */
-function rowProfileString($row)
+/**
+ * Returns a formatted link to a profile, colored with player's color
+ */
+function rowProfileString($row): string
 {
 	if ($row) return "<a href='profile.php?ID=$row[ID]'><span style='color:#$row[colour]'>$row[name]</span></a>";
 	else return "[ERROR RETRIEVING PLAYER ID]";
 }
 
 
-/** Returns a formatted link to a profile, colored with player's color, but with no underlines */
-function rowProfileStringSoft($row)
+/**
+ * Returns a formatted link to a profile, colored with player's color, but with no underlines
+ */
+function rowProfileStringSoft($row): string
 {
 	if ($row) return "<a style='text-decoration:none' href='profile.php?ID=$row[ID]'><span style='color:#$row[colour]'>$row[name]</span></a>";
 	else return "[ERROR RETRIEVING PLAYER ID]";
@@ -460,7 +534,12 @@ function rowProfileStringSoft($row)
 
 //end of profile shit
 
-function hex2RGB($hexStr, $returnAsString = false, $seperator = ',')
+/**
+ * @return false|int[]|string
+ *
+ * @psalm-return array{red: int, green: int, blue: int}|false|string
+ */
+function hex2RGB($hexStr, $returnAsString = false, $seperator = ','): array|string|false
 {
     $hexStr = preg_replace("/[^0-9A-Fa-f]/", '', $hexStr); // Gets a proper hex string
     $rgbArray = array();
@@ -482,7 +561,7 @@ function hex2RGB($hexStr, $returnAsString = false, $seperator = ',')
 /**
  * Takes the given character row and re-initializes the character's strife rows based on it
  */
-function strifeInit($charrow)
+function strifeInit($charrow): void
 {
 	//NOTE: Recalculates power, abilities, equipment bonuses (NOT the regular bonus field), and on-hit effects
 	//A lot of this will be going over equipped items and getting the proper properties out of them
@@ -593,8 +672,10 @@ function strifeInit($charrow)
 
 /**
  * Takes a character row and a number of rungs, updates all the associated database entries with the rung-up
+ *
+ * @return false|string
  */
-function gainRungs($charrow,$rungs)
+function gainRungs($charrow,$rungs): string|false
 {
      global $connection;
 	$class = $charrow['class'];
@@ -643,9 +724,14 @@ function gainRungs($charrow,$rungs)
 /**
  * Take an effect/status/similar string, search for a tag (or component) and build an array containing
  * all bits that have the search term in it and the associated arguments. Should be cleaner/faster than just a straight up explosion search.
+ *
  * @param bool $first If true, you only care about the first tag that you find; in this case, it'll return just the one array.
+ *
+ * @return (string|string[])[]
+ *
+ * @psalm-return array<int<0, max>, non-empty-list<string>|string>
  */
-function surgicalSearch($string, $search, $first = false)
+function surgicalSearch($string, $search, $first = false): array
 {
 	$i = 0;
 	$string = "|" . $string; //add a | to the beginning so that you can search for "|EFFECT:", for instance, and still be able to count the first tag
@@ -673,7 +759,7 @@ function surgicalSearch($string, $search, $first = false)
 /**
  * Writes a message to the debug log
  */
-function logDebugMessage($debugmsg)
+function logDebugMessage($debugmsg): void
 {
 	$time = date('Y-m-d H:i:s');            //gets current time
 	$debugmsg = "($time) $debugmsg";
@@ -691,7 +777,7 @@ function logDebugMessage($debugmsg)
 /**
  * Writes a message to the cheat log, same format as logDebugMessage
  */
-function logCheatMessage($cheatmsg)
+function logCheatMessage($cheatmsg): void
 {
 	$time = date('Y-m-d H:i:s');
 	$cheatmsg = "($time) $cheatmsg";
@@ -709,7 +795,7 @@ function logCheatMessage($cheatmsg)
 /**
  * Check to see if a string is a valid grist type
  */
-function checkValidGrist($teststring)
+function checkValidGrist($teststring): bool
 {
   $gristarray = initGrists();                         //retrieve grist names
   for ($i = 1; $i <= count($gristarray); $i++) {      //for each grist
@@ -733,7 +819,7 @@ function grist($griststring)
   return $gristarray;
 }
 
-function logThis($string, $charID)
+function logThis($string, $charID): void
 {
     $filename = "../logs/char".$charID.".txt";
     $newString = $string.'<br>';
@@ -751,7 +837,7 @@ function logThis($string, $charID)
     }
 }
 
-function readCharLog($charID)
+function readCharLog($charID): string
 {
 	$filename = "logs/char".$charID.".txt";
 	if (!file_exists($filename))
@@ -776,7 +862,7 @@ function readCharLog($charID)
 	}
 }
 
-function calculateComputability($charrow) //NOTE - computability 2 is currently non-functional.
+function calculateComputability($charrow): int //NOTE - computability 2 is currently non-functional.
 {
 	$computability = 0;
 	if (strpos($charrow['storeditems'], "ISCOMPUTER.") !== false) $computability = 1;

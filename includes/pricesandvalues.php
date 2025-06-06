@@ -38,7 +38,7 @@ function randomItem($querystring = "", $costcap = false, $session = 0) {
 }
 
 
-function compileSearchString($requirements) {
+function compileSearchString($requirements): int|string {
   // compile mysqli_query string from item requirements
   // takes requirement string as CAT1:req1/req2|CAT2:req3:req4 or ITEM:CAT1/req1.req2:CAT2/req3/req4
   // returns SQL requirements (WHERE `x` = y AND...) or 1 if errored
@@ -206,7 +206,7 @@ function compileSearchString($requirements) {
 }
 
 
-function matchItem($itemrow, $requirements) {
+function matchItem($itemrow, $requirements): bool {
   // decides whether item matches quest item requirements
   // takes requirement string as CAT1:req1/req2|CAT2:req3:req4 and an item's row
   // returns true if item matches requirements, false if not
@@ -336,7 +336,7 @@ function matchItem($itemrow, $requirements) {
 }
 
 
-function totalGristcost($costfield) { //calculates total grist cost of an item from the gristcosts field - EDIT THIS TO CHECK GRIST NAMES
+function totalGristcost($costfield): int|float { //calculates total grist cost of an item from the gristcosts field - EDIT THIS TO CHECK GRIST NAMES
   if (empty($costfield)) {            //if no grist types, return 0
     return 0;
   }
@@ -390,7 +390,7 @@ function totalBooncost($costfield, $charrow) {
 }
 
 
-function calcGristValue($gristname, $charrow) {
+function calcGristValue($gristname, $charrow): int|float {
   // given a grist, the grist's tier, and a character row
   // returns the value of the grist within the character's land based on land and session
 
@@ -492,7 +492,7 @@ function parseDialogue($pickrow, $charrow) {
 }
 
 
-function abbreviateLand($land1, $land2) {
+function abbreviateLand($land1, $land2): int|string {
   // land1 and land2 are the land name strings
   // returns acronym, ie LOWAS, LOLCAT, etc or 1 if errored
 
@@ -521,7 +521,7 @@ function abbreviateLand($land1, $land2) {
 }
 
 
-function econonyLevel($exp) {
+function econonyLevel($exp): float {
   // given exp in the land's economy
   // returns land's economy level
 
@@ -530,7 +530,7 @@ function econonyLevel($exp) {
 }
 
 
-function explorationLevel($exp) {
+function explorationLevel($exp): float {
   // given exp in the land's exploration
   // returns land's exploration level
 
@@ -539,7 +539,7 @@ function explorationLevel($exp) {
 }
 
 
-function phatLoot(& $charrow, $qrow, & $landrow, $gate = 1, $itemcost = 0) {
+function phatLoot(& $charrow, $qrow, & $landrow, $gate = 1, $itemcost = 0): int|bool {
   // given a character row, the quest row, the land row, the gate reached on the land, and the cost of the item if an item quest
   // echoes the quest reward information and updates charrow and the database with the rewards
 

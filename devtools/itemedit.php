@@ -19,6 +19,9 @@ function anyglitch() {
 	return $glitch;
 }
 
+/**
+ * @return null|string
+ */
 function heaviestBonus($workrow){
 	$bonusrow['abstain']=$workrow['abstain'];
 	$bonusrow['abjure']=$workrow['abjure'];

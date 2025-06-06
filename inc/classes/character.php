@@ -127,11 +127,9 @@ class Character
      * @param string $name  The variable to set
      * @param mixed  $value The value to give to the variable
      *
-     * @return null
-     *
      * @access public
      */
-    public function __set($name, $value)
+    public function __set($name, $value): void
     {
 
         if (array_key_exists($name, $this->_data)) {
@@ -153,11 +151,9 @@ class Character
      *
      * @param integer $characterID The ID of the character that needs to be loaded.
      *
-     * @return null
-     *
      * @access public
      */
-    public function load($characterID)
+    public function load($characterID): void
     {
 
         // Get the character's row to load it into the object.
@@ -324,11 +320,9 @@ class Character
      * dynamically assembles an SQL query for them.  Also kicks off the save
      * function for associated sub-objects such as strife.
      *
-     * @return null
-     *
      * @access public
      */
-    public function save()
+    public function save(): void
     {
         // Initialize the query formation arrays.
         $updatepairs  = array();

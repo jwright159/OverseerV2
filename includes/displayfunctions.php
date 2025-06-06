@@ -1,5 +1,5 @@
 <?php
-function displayStatus($statustr) {
+function displayStatus($statustr): void {
 	$statuses = explode('|', $statustr);
 	$i = 0;
 	while (!empty($statuses[$i])) {
@@ -113,7 +113,7 @@ function displayStatus($statustr) {
 		$i++;
 	}
 }
-function displayBonus($bonustr) {
+function displayBonus($bonustr): void {
 	$bonuses = explode('|', $bonustr);
 	$i = 0;
 	while (!empty($bonuses[$i])) {
@@ -167,7 +167,7 @@ function displayBonus($bonustr) {
 		$i++;
 	}
 }
-function fraymotifMessage($strifer) { //Function takes a strifer and prints out the deets on their current fraymotif
+function fraymotifMessage($strifer): string { //Function takes a strifer and prints out the deets on their current fraymotif
 	if(empty($strifer['currentmotif'])) return "Whoops! $strifer[name] isn't currently using a fraymotif.<br>";
 	$message = "Now Playing: " . $strifer['currentmotif'] . ": " . $strifer['currentmotifname'] . "<br>";
 	$message .= "User: $strifer[name]<br>";

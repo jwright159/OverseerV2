@@ -83,11 +83,9 @@ class Item {
      *
      * @param integer $itemID The ID of the item that needs to be loaded.
      *
-     * @return null
-     *
      * @access public
      */
-    public function load($itemID) {
+    public function load($itemID): void {
         // Get the item's row to load it into the object
         $itemquery = $this->_dbhandle->prepare(
             'SELECT * FROM `Captchalogue` WHERE `ID` = :itemid'

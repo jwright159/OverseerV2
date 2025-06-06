@@ -73,18 +73,16 @@ class Grist
     
     /**
      * Serialized gristArray import
-     * 
+     *
      * This function accepts a serialized string to populate the
      * gristArray, using the builtin PHP unserialize() function, as
      * proposed for a new data storage method.
-     * 
+     *
      * @param string $gristInput serialized array to populate the gristArray
-     * 
-     * @return null
-     * 
+     *
      * @access public
      */
-    public function import($gristInput)
+    public function import($gristInput): void
     {
 
         $this->gristArray = unserialize($gristInput);
@@ -95,18 +93,16 @@ class Grist
     
     /**
      * Old imploded string gristArray import
-     * 
+     *
      * This function accepts the old storage method of an imploded
      * string, taking the format "Grist_Type:Amount|" and restores it
      * to the object's gristArray.
-     * 
+     *
      * @param string $gristInput imploded array to populate the gristArray
-     * 
-     * @return null
-     * 
+     *
      * @access public
      */
-    public function importOld($gristInput)
+    public function importOld($gristInput): void
     {
 
         // Initialize the grist array.
@@ -329,17 +325,15 @@ class Grist
     
     /**
      * Remove ALL of a specified grist type
-     * 
+     *
      * Effectively removes all of a specified type of grist by unsetting
      * the specified grist type key.
-     * 
+     *
      * @param string $gristType type of grist to remove
-     * 
-     * @return null
-     * 
+     *
      * @access public
      */
-    public function removeAll($gristType)
+    public function removeAll($gristType): bool
     {
 
         // Check if we have the requested grist.

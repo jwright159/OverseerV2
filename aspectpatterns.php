@@ -1,7 +1,7 @@
 <?php
 $pagetitle = "Aspect Patterns";
 $headericon = "/images/header/rancorous.png";
-function getHintStr($effectiveness) { //Takes an effectiveness value (assume 10k average) and spits out the appropriate hint string.
+function getHintStr($effectiveness): string { //Takes an effectiveness value (assume 10k average) and spits out the appropriate hint string.
 	if ($effectiveness <= 0) {
 		return "nonexistent";
 	} elseif ($effectiveness <= 2000) {

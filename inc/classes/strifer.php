@@ -94,11 +94,9 @@ class Strifer
      *
      * @param integer $striferID The ID of the strifer that needs to be loaded.
      *
-     * @return null
-     *
      * @access public
      */
-    public function load($striferID)
+    public function load($striferID): void
     {
 
         // Get the character's row to load it into the object

@@ -5,7 +5,7 @@
  * It uses the character ID to select grist types from that character's Land, applying them to the enemy based on the listed tier. It gives the enemies
  * a side of 1, so they're opposed to the player side.
  */
-function generateEnemies($enemylist, $strifeID, $connection, $appearson, $generateleader, $sessionID = 0, $landID = 0, $tierlist = "", $persist = 0) {
+function generateEnemies($enemylist, $strifeID, $connection, $appearson, $generateleader, $sessionID = 0, $landID = 0, $tierlist = "", $persist = 0): bool {
 	$i = 0;
 	$rowfetchquery = "SELECT * FROM `Enemy_Types` WHERE `Enemy_Types`.`basename` IN (";
 	while (!empty($enemylist[$i])) {
@@ -126,7 +126,7 @@ function generateEnemies($enemylist, $strifeID, $connection, $appearson, $genera
 	return true; //Success
 }
 
-function findResist($resiststr,$resist) {
+function findResist($resiststr,$resist): int {
 	if (strpos($resiststr,$resist) !== false) { //The resistance string is in there somewhere
 		$resistances = explode("|", $resiststr);
 		$i = 0;
@@ -140,7 +140,7 @@ function findResist($resiststr,$resist) {
 	}
 	return 0; //The resistance was not found, so the resist value returned is 0.
 }
-function buildMegaquery($strifers,$n,$connection) { //$n is the number of strifers. We could just count, but we have the value on hand so why not pass it in?
+function buildMegaquery($strifers,$n,$connection): string { //$n is the number of strifers. We could just count, but we have the value on hand so why not pass it in?
 	$values = array("health", "power", "status", "bonuses", "energy", "lastactive", "lastpassive", "subaction", "strifeID", "currentmotif", "motifsused", "teammotif", "brief_luck");
 	$types = array("num", "num", "str", "str", "num", "str", "str", "num", "num", "str", "str", "num", "num"); //Contains the type of data (we need this for proper formatting)
 	$j = 0;
@@ -176,7 +176,12 @@ function buildMegaquery($strifers,$n,$connection) { //$n is the number of strife
 	}
 	return $megaquery;
 }
-function powerCalc($strifer) {
+/**
+ * @return (float|int|mixed)[]
+ *
+ * @psalm-return array{offense: 0|float|mixed, defense: 0|float|mixed}
+ */
+function powerCalc($strifer): array {
 	//Initially, set both values to the strifer's power
 	$offense = $strifer['power'];
 	$defense = $strifer['power'];
