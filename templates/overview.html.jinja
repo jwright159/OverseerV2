@@ -9,6 +9,11 @@
 {% endblock %}
 {% block content %}
 
+{% if let Some(user) = user %}
+UR LOGGED IN AS {{ user.username }} <br />
+{% else %}
+UR NOT LOGGED IN <br />
+{% endif %}
 
 Name: {{ character.profile_string() | safe }} <br />
 

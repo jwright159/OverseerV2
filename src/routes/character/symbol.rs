@@ -42,7 +42,11 @@ pub async fn character_symbol_post(
             )),
         }))
     } else {
-        file.persist(format!("/var/www/OverseerV2/{}", new_filepath))?;
+        file.persist(format!(
+            "{}/{}",
+            std::env::var("OVERSEER_ROOT")?,
+            new_filepath
+        ))?;
         Ok(HtmlTemplate(CharacterSymbolTemplate {
             symbol: new_filepath,
             error: Some("File uploaded successfully".to_string()),

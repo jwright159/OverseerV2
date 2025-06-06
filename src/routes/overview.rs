@@ -2,14 +2,16 @@ use askama::Template;
 use axum::response::IntoResponse;
 
 use crate::achievement::Achievement;
+use crate::auth::AuthSession;
 use crate::routes::HtmlTemplate;
 use crate::routes::character::colour::CharacterColourTemplate;
 use crate::routes::character::dreamer::CharacterDreamerTemplate;
 use crate::routes::character::gates::CharacterGatesTemplate;
 use crate::routes::character::symbol::CharacterSymbolTemplate;
 use crate::routes::character::{Character, Strife};
+use crate::routes::user::User;
 
-pub async fn overview_get() -> impl IntoResponse {
+pub async fn overview_get(auth: AuthSession) -> impl IntoResponse {
     let character = Character {
         id: 1,
         name: "John Doe".to_string(),
@@ -39,6 +41,7 @@ pub async fn overview_get() -> impl IntoResponse {
         house_build: 0,
     };
     HtmlTemplate(OverviewTemplate {
+        user: auth.user,
         character: character.clone(),
         server_player: None,
         background: "".to_string(),
@@ -69,6 +72,7 @@ pub async fn overview_get() -> impl IntoResponse {
 #[derive(Template)]
 #[template(path = "overview.html.jinja")]
 pub struct OverviewTemplate {
+    pub user: Option<User>,
     pub character: Character,
     pub server_player: Option<Character>,
     pub background: String,

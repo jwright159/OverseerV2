@@ -28,6 +28,18 @@ pub enum Error {
     Image(#[from] imagesize::ImageError),
     #[error("persist: {0}")]
     Persist(#[from] tempfile::PersistError),
+    #[error("sqlx error: {0}")]
+    Sqlx(#[from] sqlx::Error),
+    #[error("var error: {0}")]
+    Var(#[from] std::env::VarError),
+    #[error("php error: {0}")]
+    Php(#[from] crate::php::Error),
+    #[error("parse int error: {0}")]
+    ParseInt(#[from] std::num::ParseIntError),
+    #[error("parse float error: {0}")]
+    ParseFloat(#[from] std::num::ParseFloatError),
+    #[error("dotenv error: {0}")]
+    Dotenv(#[from] dotenvy::Error),
     #[error("invalid filename")]
     InvalidFilename,
 }

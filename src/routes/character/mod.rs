@@ -7,7 +7,7 @@ pub mod symbol;
 
 #[derive(Debug, Clone)]
 pub struct Character {
-    pub id: i32,
+    pub id: i64,
     pub name: String,
     pub aspect: String,
     pub class: String,
