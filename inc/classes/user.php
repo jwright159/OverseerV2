@@ -32,11 +32,15 @@ use \PDO;
 class User
 {
 
-    public $id, $characters;
+    public int $id;
+    /** @var list<Character> */
+    public array $characters;
 
-    private $_dbhandle;
+    private PDO $_dbhandle;
 
-    private $_data = array(), $_datamod = array();
+    private array $_data = [];
+    private array $_datamod = [];
+    private string $password_recovery;
 
 
     /**
@@ -51,7 +55,7 @@ class User
      *
      * @access public
      */
-    function __construct(PDO $dbhandle, $initid=-1, $userbystring=false)
+    public function __construct(PDO $dbhandle, int $initid=-1, bool $userbystring=false)
     {
 
         $this->_dbhandle = $dbhandle;
@@ -77,7 +81,7 @@ class User
      *
      * @access public
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
 
         // Check for any special variables that require "thinking".
@@ -112,7 +116,7 @@ class User
      *
      * @access public
      */
-    public function __set($name, $value): void
+    public function __set(string $name, mixed $value): void
     {
 
         if (array_key_exists($name, $this->_data)) {
@@ -140,7 +144,7 @@ class User
      *
      * @access public
      */
-    public function load($userID, $userbystring=false): void
+    public function load(int $userID, bool $userbystring=false): void
     {
 
         // Get the user's row to load it into the object.
@@ -174,7 +178,7 @@ class User
         $this->id = $userrow['ID'];
 
         // Start with an empty data table.
-        $this->_data = array();
+        $this->_data = [];
 
         // Enumerate direct values (strings and numbers).
         $directs = array(
@@ -204,9 +208,9 @@ class User
         );
         $getcharq->bindParam(':id', $this->id);
         $getcharq->execute();
-        $this->characters = array();
+        $this->characters = [];
         foreach ($getcharq->fetchAll() as $character) {
-            $this->characters[$character['ID']] = new \Overseer\Character(
+            $this->characters[$character['ID']] = new Character(
                 $this->_dbhandle, $character['ID']
             );
         }
@@ -220,15 +224,13 @@ class User
      * A fancy save function that detects which variables have been changed and
      * dynamically assembles an SQL query for them.  Also kicks off the save
      * function for associated sub-objects.
-     *
-     * @access public
      */
     public function save(): void
     {
         // Initialize the query formation arrays.
-        $updatepairs  = array();
-        $updatebinds  = array();
-        $updatevalues = array();
+        $updatepairs  = [];
+        $updatebinds  = [];
+        $updatevalues = [];
 
         if (count($this->_datamod) != 0) {
             foreach ($this->_datamod as $modkey) {
@@ -264,7 +266,7 @@ class User
         // Check if we have anything to submit.
         if (count($updatepairs) != 0) {
             // Create an empty array as a basis.
-            $querypairs = array();
+            $querypairs = [];
 
             // Iterate over each prepared pair and add it to the pairs array.
             foreach ($updatepairs as $sqlvar) {
@@ -305,7 +307,7 @@ class User
      *
      * @access public
      */
-    function verifyPassword($passverify)
+    public function verifyPassword(string $passverify): bool
     {
         return password_verify($passverify, $this->password);
     }
@@ -320,7 +322,7 @@ class User
      *
      * @access public
      */
-    function generateRecoveryKey()
+    public function generateRecoveryKey(): string
     {
         // Code taken from http://stackoverflow.com/a/48125
         $genchars = 'abcdefghijklmnopqrstuvwxyz';
@@ -347,7 +349,7 @@ class User
      *
      * @access public
      */
-    function recoverPassword($recoveryKey, $newPassword): bool
+    public function recoverPassword(string $recoveryKey, string $newPassword): bool
     {
         // Check that the recovery key matches
         if ($recoveryKey == $this->password_recovery) {
@@ -374,7 +376,7 @@ class User
      *
      * @access public
      */
-    function sendRecoveryEmail()
+    public function sendRecoveryEmail(): bool
     {
         // First, make sure that the user account has an email address
         if (!$this->email) {

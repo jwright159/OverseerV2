@@ -11,7 +11,7 @@ if (!empty($_SESSION['username'])) {
 		if ($charrow['owner'] != $accrow['ID']) {
 			echo "ERROR: You tried to select a character that doesn't belong to you!";
 			$_SESSION['character'] = 0; //reset character
-			$charrow = array(); //blank charrow
+			$charrow = []; //blank charrow
 		} else {
 			$cid = $charrow['ID'];
 			//$striferesult = mysqli_query($connection, "SELECT * FROM `Users` WHERE `ID` = " . $_SESSION['character'] . " LIMIT 1;");

@@ -80,9 +80,9 @@ if ($striferow['strifeID'] == 0 || empty($striferow['strifeID'])) { //This user 
 	//NOTE - Due to the way the teamwork code is structured, the entire team's offense/defense is invested into the leader, who then provides
 	//a blanket defense boost according to their own teamwork value. Hence if everyone is at 100%, everyone will share the same defense value:
 	//the sum of everyone's defenses. However, only the leader will receive the sum of everyone's offenses.
-	$leaderoffarray = array();
-	$leaderdefarray = array();
-	$defarray = array();
+	$leaderoffarray = [];
+	$leaderdefarray = [];
+	$defarray = [];
 	for ($i = 1; $i <= $n; $i++) { //Establish the power boosts for the leaders
 		if ($strifers[$i]['leader'] != 1) {
 			$power = powerCalc($strifers[$i]);

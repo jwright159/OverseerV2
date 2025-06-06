@@ -473,7 +473,12 @@
     </UndefinedGlobalVariable>
     <UnusedVariable>
       <code><![CDATA[$allgristshere]]></code>
+      <code><![CDATA[$amoutn]]></code>
+      <code><![CDATA[$basetotalcost]]></code>
+      <code><![CDATA[$basetotalcost]]></code>
+      <code><![CDATA[$basetotalcost]]></code>
       <code><![CDATA[$bodygear]]></code>
+      <code><![CDATA[$gristw]]></code>
       <code><![CDATA[$pagetitle]]></code>
       <code><![CDATA[$totalweight]]></code>
       <code><![CDATA[$totalweight]]></code>
@@ -780,22 +785,9 @@
     </UnusedVariable>
   </file>
   <file src="inc/classes/character.php">
-    <InvalidThrow>
-      <code><![CDATA[throw new Exception(
-                    'Non-boolean numeric value found in dbkey '.$dbkey.'.'
-                )]]></code>
-    </InvalidThrow>
     <PossiblyUnusedMethod>
       <code><![CDATA[__set]]></code>
     </PossiblyUnusedMethod>
-    <PossiblyUnusedReturnValue>
-      <code><![CDATA[null]]></code>
-      <code><![CDATA[null]]></code>
-    </PossiblyUnusedReturnValue>
-    <UndefinedClass>
-      <code><![CDATA[Exception]]></code>
-      <code><![CDATA[Exception]]></code>
-    </UndefinedClass>
     <UndefinedThisPropertyFetch>
       <code><![CDATA[$this->dreamingstatus]]></code>
       <code><![CDATA[$this->house_build]]></code>
@@ -818,117 +810,39 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="inc/classes/grist.php">
-    <FalsableReturnStatement>
-      <code><![CDATA[false]]></code>
-    </FalsableReturnStatement>
-    <InvalidReturnStatement>
-      <code><![CDATA[true]]></code>
-    </InvalidReturnStatement>
-    <InvalidReturnType>
-      <code><![CDATA[null]]></code>
-    </InvalidReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[add]]></code>
       <code><![CDATA[dump]]></code>
       <code><![CDATA[export]]></code>
-      <code><![CDATA[exportOld]]></code>
       <code><![CDATA[get]]></code>
       <code><![CDATA[import]]></code>
       <code><![CDATA[remove]]></code>
       <code><![CDATA[removeAll]]></code>
     </PossiblyUnusedMethod>
-    <PossiblyUnusedParam>
-      <code><![CDATA[$gristInput]]></code>
-    </PossiblyUnusedParam>
-    <PossiblyUnusedProperty>
-      <code><![CDATA[$modified]]></code>
-    </PossiblyUnusedProperty>
-    <PossiblyUnusedReturnValue>
-      <code><![CDATA[null]]></code>
-    </PossiblyUnusedReturnValue>
-    <UndefinedThisPropertyAssignment>
-      <code><![CDATA[$this->gristArray]]></code>
-      <code><![CDATA[$this->gristArray]]></code>
-      <code><![CDATA[$this->gristArray]]></code>
-      <code><![CDATA[$this->gristArray]]></code>
-      <code><![CDATA[$this->gristArray]]></code>
-      <code><![CDATA[$this->gristArray]]></code>
-      <code><![CDATA[$this->gristArray]]></code>
-    </UndefinedThisPropertyAssignment>
-    <UndefinedThisPropertyFetch>
-      <code><![CDATA[$this->gristArray]]></code>
-      <code><![CDATA[$this->gristArray]]></code>
-      <code><![CDATA[$this->gristArray]]></code>
-      <code><![CDATA[$this->gristArray]]></code>
-    </UndefinedThisPropertyFetch>
-    <UnusedProperty>
-      <code><![CDATA[$_gristArray]]></code>
-    </UnusedProperty>
-    <UnusedVariable>
-      <code><![CDATA[$gristArray]]></code>
-    </UnusedVariable>
   </file>
   <file src="inc/classes/item.php">
-    <UndefinedThisPropertyAssignment>
-      <code><![CDATA[$this->_data]]></code>
-      <code><![CDATA[$this->_data]]></code>
-      <code><![CDATA[$this->_data]]></code>
-      <code><![CDATA[$this->_dbhandle]]></code>
-      <code><![CDATA[$this->code]]></code>
-    </UndefinedThisPropertyAssignment>
-    <UndefinedThisPropertyFetch>
-      <code><![CDATA[$this->_data]]></code>
-      <code><![CDATA[$this->_dbhandle]]></code>
-    </UndefinedThisPropertyFetch>
     <UnusedClass>
       <code><![CDATA[Item]]></code>
     </UnusedClass>
   </file>
   <file src="inc/classes/strifer.php">
-    <PossiblyUnusedReturnValue>
-      <code><![CDATA[null]]></code>
-    </PossiblyUnusedReturnValue>
-    <UndefinedThisPropertyAssignment>
-      <code><![CDATA[$this->_data]]></code>
-      <code><![CDATA[$this->_data]]></code>
-      <code><![CDATA[$this->_dbhandle]]></code>
-    </UndefinedThisPropertyAssignment>
     <UndefinedThisPropertyFetch>
-      <code><![CDATA[$this->_data]]></code>
-      <code><![CDATA[$this->_dbhandle]]></code>
       <code><![CDATA[$this->energy]]></code>
       <code><![CDATA[$this->health]]></code>
       <code><![CDATA[$this->maxenergy]]></code>
       <code><![CDATA[$this->maxhealth]]></code>
     </UndefinedThisPropertyFetch>
-    <UnevaluatedCode>
-      <code><![CDATA[break;]]></code>
-      <code><![CDATA[break;]]></code>
-    </UnevaluatedCode>
     <UnusedVariable>
       <code><![CDATA[$lists]]></code>
     </UnusedVariable>
   </file>
   <file src="inc/classes/user.php">
-    <FalsableReturnStatement>
-      <code><![CDATA[false]]></code>
-    </FalsableReturnStatement>
-    <InvalidReturnStatement>
-      <code><![CDATA[true]]></code>
-    </InvalidReturnStatement>
-    <InvalidReturnType>
-      <code><![CDATA[string]]></code>
-    </InvalidReturnType>
     <UndefinedThisPropertyAssignment>
       <code><![CDATA[$this->password]]></code>
-      <code><![CDATA[$this->password_recovery]]></code>
-      <code><![CDATA[$this->password_recovery]]></code>
     </UndefinedThisPropertyAssignment>
     <UndefinedThisPropertyFetch>
       <code><![CDATA[$this->email]]></code>
       <code><![CDATA[$this->password]]></code>
-      <code><![CDATA[$this->password_recovery]]></code>
-      <code><![CDATA[$this->password_recovery]]></code>
       <code><![CDATA[$this->username]]></code>
     </UndefinedThisPropertyFetch>
     <UnsupportedPropertyReferenceUsage>
@@ -989,6 +903,9 @@
     </UndefinedGlobalVariable>
   </file>
   <file src="inc/header.php">
+    <InvalidArgument>
+      <code><![CDATA['error_handler']]></code>
+    </InvalidArgument>
     <UndefinedFunction>
       <code><![CDATA[logDebugMessage($errorline)]]></code>
     </UndefinedFunction>
@@ -1048,13 +965,6 @@
       <code><![CDATA[$suffix]]></code>
       <code><![CDATA[$vintageBrowsers]]></code>
     </PossiblyUnusedParam>
-    <UnusedMethod>
-      <code><![CDATA[_checkHex]]></code>
-      <code><![CDATA[_darken]]></code>
-      <code><![CDATA[_huetorgb]]></code>
-      <code><![CDATA[_lighten]]></code>
-      <code><![CDATA[_mix]]></code>
-    </UnusedMethod>
     <UnusedProperty>
       <code><![CDATA[$_hex]]></code>
       <code><![CDATA[$_hsl]]></code>

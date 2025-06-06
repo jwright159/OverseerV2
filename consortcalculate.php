@@ -1,5 +1,5 @@
 <?php
-	$enemiesBeaten = array(); //This section is adapted from quickitemcreate. 
+	$enemiesBeaten = []; //This section is adapted from quickitemcreate. 
 	$enemiesList = $charRow['beatenenemies'];
 	$enemiesBeatenPre = explode( '|', $item1Grist);
 	array_pop($enemiesBeatenPre); 

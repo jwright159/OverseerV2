@@ -15,7 +15,7 @@ require_once "includes/additem.php";
 	$gristresult = mysqli_query($connection, "SELECT * FROM Grists WHERE tier > 0 AND tier < 10 ORDER BY tier DESC"); //pull all land-available grists
 	$j = 1;
 	while ($j <= 9) {
-		$grists[$j] = array(); //initialize grist choice list arrays
+		$grists[$j] = []; //initialize grist choice list arrays
 		$j++;
 	}
 	while ($row = mysqli_fetch_array($gristresult)) {
@@ -77,7 +77,7 @@ if (empty($_SESSION['character'])) {
 				}
 				if ($alreadyentered) echo "Successful.<br />";
 			} /*elseif ($thischoice == "random") {
-				$available = array();
+				$available = [];
 				while ($i <= ($offset+1) * 9) {
 					$j = $i - ($offset * 9);
 					while ($j > 0) { //add this tier's grists a number of times equal to the tier so that they're weighted towards higher tiers, when available
@@ -113,7 +113,7 @@ if (empty($_SESSION['character'])) {
 				} else {
 					$griststr .= $row['grists'] . "|";
 					/*$presetgrists = explode("|", $row['grists']);
-					$available = array();
+					$available = [];
 					while ($i <= ($offset+1) * 9) {
 						$thisgrist = $presetgrists[$i - ($offset * 9) - 1];
 						if ($offset == 1) {

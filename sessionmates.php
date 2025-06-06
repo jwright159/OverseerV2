@@ -4,7 +4,7 @@ $headericon = "/images/header/chummy.png";
 require($_SERVER['DOCUMENT_ROOT'] . '/inc/header.php');
 require_once "includes/global_functions.php";
 
-$characters = array();
+$characters = [];
 $querycount = 0;
 
 $querycount++;

@@ -272,9 +272,9 @@ if (empty($_SESSION['character'])) {
 				$charland['shopstock'] = $shopstring;
 			} else {
 				$shopitems = explode("|", $charland['shopstock'], -1);
-				$shopitemID = array();
-				$shopitemprice = array();
-				$shopitemstock = array();
+				$shopitemID = [];
+				$shopitemprice = [];
+				$shopitemstock = [];
 				foreach($shopitems as $shopitem) {
 					$thisone = explode(":", $shopitem);
 					$shopitemID[] = $thisone[0];

@@ -5,7 +5,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/inc/header.php');
 
 // list all grists
 $gresult = mysqli_query($connection, "SELECT * FROM `Grists`;");
-$gristlist = array();
+$gristlist = [];
 while($grow = mysqli_fetch_array($gresult, MYSQLI_ASSOC)) {
 	$gristlist[$grow['name']] = $grow;
 }
