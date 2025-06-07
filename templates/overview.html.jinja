@@ -9,12 +9,6 @@
 {% endblock %}
 {% block content %}
 
-{% if let Some(user) = user %}
-UR LOGGED IN AS {{ user.username }} <br />
-{% else %}
-UR NOT LOGGED IN <br />
-{% endif %}
-
 Name: {{ character.profile_string() | safe }} <br />
 
 Title:
@@ -34,8 +28,8 @@ As of yet unknown.
 
 Description: {{ character.strife.description }} <br />
 Echeladder rung: {{ character.strife.echeladder }} <br />
-Health Vial: <b>{{ character.strife.health_percent }}%</b> <br />
-Aspect Vial: <b>{{ character.strife.energy_percent }}%</b> <br />
+Health Vial: <b>{{ character.strife.health_percent() }}%</b> <br />
+Aspect Vial: <b>{{ character.strife.energy_percent() }}%</b> <br />
 {% if let (Some(land_1), Some(land_2)) = (&character.land_1, &character.land_2) %}
 Land: The Land of {{ land_1 }} and {{ land_2 }} <br />
 {% endif %}

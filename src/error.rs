@@ -40,8 +40,18 @@ pub enum Error {
     ParseFloat(#[from] std::num::ParseFloatError),
     #[error("dotenv error: {0}")]
     Dotenv(#[from] dotenvy::Error),
+    #[error("session error: {0}")]
+    Session(#[from] axum_login::tower_sessions::session::Error),
     #[error("invalid filename")]
     InvalidFilename,
+    #[error("not logged in as a character")]
+    NotLoggedInCharacter,
+    #[error("strifer not found: {0}")]
+    StriferNotFound(i64),
+    #[error("character not found: {0}")]
+    CharacterNotFound(i64),
+    #[error("should have dreamer: {0}")]
+    ShouldHaveDreamer(i64),
 }
 
 impl IntoResponse for Error {

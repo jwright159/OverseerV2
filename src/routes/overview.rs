@@ -1,50 +1,43 @@
 use askama::Template;
+use axum::Extension;
 use axum::response::IntoResponse;
+use axum_login::tower_sessions::Session;
+use sqlx::MySqlPool;
 
 use crate::achievement::Achievement;
-use crate::auth::AuthSession;
+use crate::error::{Error, Result};
 use crate::routes::HtmlTemplate;
+use crate::routes::character::Character;
 use crate::routes::character::colour::CharacterColourTemplate;
 use crate::routes::character::dreamer::CharacterDreamerTemplate;
 use crate::routes::character::gates::CharacterGatesTemplate;
 use crate::routes::character::symbol::CharacterSymbolTemplate;
-use crate::routes::character::{Character, Strife};
-use crate::routes::user::User;
 
-pub async fn overview_get(auth: AuthSession) -> impl IntoResponse {
-    let character = Character {
-        id: 1,
-        name: "John Doe".to_string(),
-        aspect: "Time".to_string(),
-        class: "Knight".to_string(),
-        strife: Strife {
-            power: 10,
-            health: 75,
-            max_health: 100,
-            health_percent: 75.0,
-            energy: 50,
-            max_energy: 50,
-            energy_percent: 100.0,
-            description: "my waking self".to_string(),
-            echeladder: 1,
-        },
-        echeladder: 1,
-        boondollars: 1000,
-        symbol: "/images/symbols/jade1.png".to_string(),
-        colour: "#00ff00".to_string(),
-        dreamer: None,
-        achievements: vec!["medium".to_string()],
-        consort: None,
-        grist_type: None,
-        land_1: Some("Light".to_string()),
-        land_2: Some("Rain".to_string()),
-        house_build: 0,
-    };
-    HtmlTemplate(OverviewTemplate {
-        user: auth.user,
+pub async fn overview_get(
+    session: Session,
+    Extension(db): Extension<MySqlPool>,
+) -> Result<impl IntoResponse> {
+    let character_id = session
+        .get::<String>("character")
+        .await?
+        .map(|s| s.parse::<i64>())
+        .transpose()?
+        .ok_or(Error::NotLoggedInCharacter)?;
+    let character = Character::load(character_id, &db)
+        .await?
+        .ok_or(Error::CharacterNotFound(character_id))?;
+
+    Ok(HtmlTemplate(OverviewTemplate {
         character: character.clone(),
         server_player: None,
-        background: "".to_string(),
+        background: if character.dreaming_status == "Awake" {
+            "".to_string()
+        } else {
+            character
+                .dreamer
+                .clone()
+                .ok_or(Error::ShouldHaveDreamer(character_id))?
+        },
         announcements: vec![
             "Welcome to the game!".to_string(),
             "New update available!".to_string(),
@@ -62,17 +55,16 @@ pub async fn overview_get(auth: AuthSession) -> impl IntoResponse {
             error: None,
         },
         character_gates: CharacterGatesTemplate {
-            gates_reached: 1,
-            gates_cleared: 0,
+            gates_reached: character.gates_reached(),
+            gates_cleared: character.gates_cleared as usize,
         },
         achievements: crate::achievement::get_achievements(),
-    })
+    }))
 }
 
 #[derive(Template)]
 #[template(path = "overview.html.jinja")]
 pub struct OverviewTemplate {
-    pub user: Option<User>,
     pub character: Character,
     pub server_player: Option<Character>,
     pub background: String,

@@ -5,14 +5,14 @@ use crate::routes::HtmlTemplate;
 
 pub async fn debug_clear() -> impl IntoResponse {
     HtmlTemplate(CharacterGatesTemplate {
-        gates_reached: 1,
-        gates_cleared: 1,
+        gates_reached: 0,
+        gates_cleared: 0,
     })
 }
 
 #[derive(Template)]
 #[template(path = "partial/character-gates.html.jinja")]
 pub struct CharacterGatesTemplate {
-    pub gates_reached: i32,
-    pub gates_cleared: i32,
+    pub gates_reached: usize,
+    pub gates_cleared: usize,
 }

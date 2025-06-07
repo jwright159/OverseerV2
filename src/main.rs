@@ -26,7 +26,9 @@ mod routes;
 #[tokio::main]
 async fn main() -> Result<()> {
     tracing_subscriber::fmt()
-        .with_env_filter("debug,overseer_reboot=trace,sqlx::query=warn")
+        .with_env_filter(
+            "debug,overseer_reboot=trace,sqlx::query=warn,sqlx_mysql::connection::tls=warn",
+        )
         .init();
 
     dotenvy::dotenv()?;

@@ -90,17 +90,17 @@
 		</a></div>
 
 	<div style="position: fixed; top: 47px; left: 177px; width: 164px;" class="statbar">
-		<div id="healthbar" class="statbarinner" style="width: {{ character.strife.health_percent }}%;"></div>
+		<div id="healthbar" class="statbarinner" style="width: {{ character.strife.health_percent() }}%;"></div>
 	</div>
 	<div style="position: fixed; top: 78px; left: 202px; width: 139px;" class="statbar">
-		<div id="aspectbar" class="statbarinner" style="width: {{ character.strife.energy_percent }}%;"></div>
+		<div id="aspectbar" class="statbarinner" style="width: {{ character.strife.energy_percent() }}%;"></div>
 	</div>
 	<div style="position: fixed; left: 145px; top: 41px; width: 36px; height: 36px; border-radius: 18px; background-color: #ffffff; text-align:center; vertical-align: center;"
-		title="Health: {{ character.strife.health_percent }}% [{{ character.strife.health }}/{{ character.strife.max_health }}]">
+		title="Health: {{ character.strife.health_percent() }}% [{{ character.strife.health }}/{{ character.strife.max_health }}]">
 		<img src="/images/header/healthchum.png" style="margin-top: 3px;">
 	</div>
 	<div style="position: fixed; left: 170px; top: 72px; width: 36px; height: 36px; border-radius: 18px; background-color: #ffffff; text-align:center; vertical-align: center;"
-		title="Aspect: {{ character.strife.energy_percent }}% [{{ character.strife.energy }}/{{ character.strife.max_energy }}]">
+		title="Aspect: {{ character.strife.energy_percent() }}% [{{ character.strife.energy }}/{{ character.strife.max_energy }}]">
 		<img src="/images/symbols/aspect_{{ character.aspect | lower }}.png" style="width: 100%; height: 100%;">
 	</div>
 
