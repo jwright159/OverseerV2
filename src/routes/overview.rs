@@ -1,8 +1,5 @@
 use askama::Template;
-use axum::Extension;
 use axum::response::IntoResponse;
-use sqlx::MySqlPool;
-use tower_sessions::Session;
 
 use crate::achievement::Achievement;
 use crate::error::{Error, Result};
@@ -13,20 +10,7 @@ use crate::routes::character::dreamer::CharacterDreamerTemplate;
 use crate::routes::character::gates::CharacterGatesTemplate;
 use crate::routes::character::symbol::CharacterSymbolTemplate;
 
-pub async fn overview_get(
-    session: Session,
-    Extension(db): Extension<MySqlPool>,
-) -> Result<impl IntoResponse> {
-    let character_id = session
-        .get::<String>("character")
-        .await?
-        .map(|s| s.parse::<i64>())
-        .transpose()?
-        .ok_or(Error::NotLoggedInCharacter)?;
-    let character = Character::load(character_id, &db)
-        .await?
-        .ok_or(Error::CharacterNotFound(character_id))?;
-
+pub async fn overview_get(character: Character) -> Result<impl IntoResponse> {
     Ok(HtmlTemplate(OverviewTemplate {
         character: character.clone(),
         server_player: None,
@@ -36,7 +20,7 @@ pub async fn overview_get(
             character
                 .dreamer
                 .clone()
-                .ok_or(Error::ShouldHaveDreamer(character_id))?
+                .ok_or(Error::ShouldHaveDreamer(character.id))?
         },
         announcements: vec![
             "Welcome to the game!".to_string(),

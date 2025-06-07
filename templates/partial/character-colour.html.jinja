@@ -1,5 +1,5 @@
 <form hx-post="/character/colour" hx-push-url="false" hx-swap="outerHTML">
-	Colour: <font id="character-colour" color='{{ colour }}'>{{ colour }}</font> -
-	<input type='color' name='colour' value='{{ colour }}' />
+	Colour: <font id="character-colour" color='#{{ colour }}'>#{{ colour }}</font> -
+	<input type='color' name='colour' value='#{{ colour }}' />
 	<input type='submit' value='Change' />
 </form>

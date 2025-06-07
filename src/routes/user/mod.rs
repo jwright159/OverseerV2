@@ -1,4 +1,8 @@
+use axum::extract::FromRequestParts;
+use axum::http::request::Parts;
+use axum::{Extension, RequestPartsExt as _};
 use sqlx::MySqlPool;
+use tower_sessions::Session;
 
 use crate::error::{Error, Result};
 
@@ -30,5 +34,30 @@ impl User {
         .fetch_optional(db)
         .await
         .map_err(Error::Sqlx)
+    }
+}
+
+impl<S> FromRequestParts<S> for User
+where
+    S: Send + Sync,
+{
+    type Rejection = Error;
+
+    async fn from_request_parts(req: &mut Parts, _state: &S) -> Result<Self> {
+        let session = req
+            .extract::<Session>()
+            .await
+            .map_err(|(_, err)| Error::Extract(err.to_string()))?;
+        let Extension(db): Extension<MySqlPool> = req.extract().await?;
+
+        let user_id = session
+            .get::<i64>("userid")
+            .await?
+            .ok_or(Error::NotLoggedIn)?;
+        let user = User::load(user_id, &db)
+            .await?
+            .ok_or(Error::UserNotFound(user_id))?;
+
+        Ok(user)
     }
 }

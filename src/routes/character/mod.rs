@@ -1,6 +1,10 @@
 use askama::Template;
+use axum::extract::FromRequestParts;
+use axum::http::request::Parts;
+use axum::{Extension, RequestPartsExt as _};
 use return_ok::some_or_return_ok;
 use sqlx::MySqlPool;
+use tower_sessions::Session;
 
 use crate::error::{Error, Result};
 
@@ -42,11 +46,11 @@ impl Character {
         .map_err(Error::Sqlx)?);
 
         let strife = if sql.dreamingstatus == "Awake" {
-            Strifer::load(sql.wakeself, &db)
+            Strifer::load(sql.wakeself, db)
                 .await?
                 .ok_or(Error::StriferNotFound(sql.wakeself))?
         } else {
-            Strifer::load(sql.dreamself, &db)
+            Strifer::load(sql.dreamself, db)
                 .await?
                 .ok_or(Error::StriferNotFound(sql.dreamself))?
         };
@@ -103,6 +107,33 @@ impl Character {
             .into_iter()
             .filter(|g| self.house_build > *g)
             .count()
+    }
+}
+
+impl<S> FromRequestParts<S> for Character
+where
+    S: Send + Sync,
+{
+    type Rejection = Error;
+
+    async fn from_request_parts(req: &mut Parts, _state: &S) -> Result<Self> {
+        let session = req
+            .extract::<Session>()
+            .await
+            .map_err(|(_, err)| Error::Extract(err.to_string()))?;
+        let Extension(db): Extension<MySqlPool> = req.extract().await?;
+
+        let character_id = session
+            .get::<String>("character")
+            .await?
+            .map(|s| s.parse::<i64>())
+            .transpose()?
+            .ok_or(Error::NotLoggedInCharacter)?;
+        let character = Character::load(character_id, &db)
+            .await?
+            .ok_or(Error::CharacterNotFound(character_id))?;
+
+        Ok(character)
     }
 }
 

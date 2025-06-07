@@ -44,14 +44,20 @@ pub enum Error {
     Session(#[from] tower_sessions::session::Error),
     #[error("invalid filename")]
     InvalidFilename,
+    #[error("not logged in")]
+    NotLoggedIn,
     #[error("not logged in as a character")]
     NotLoggedInCharacter,
     #[error("strifer not found: {0}")]
     StriferNotFound(i64),
     #[error("character not found: {0}")]
     CharacterNotFound(i64),
+    #[error("user not found: {0}")]
+    UserNotFound(i64),
     #[error("should have dreamer: {0}")]
     ShouldHaveDreamer(i64),
+    #[error("extract error: {0}")]
+    Extract(String),
 }
 
 impl IntoResponse for Error {
