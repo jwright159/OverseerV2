@@ -1,8 +1,8 @@
 use askama::Template;
 use axum::Extension;
 use axum::response::IntoResponse;
-use axum_login::tower_sessions::Session;
 use sqlx::MySqlPool;
+use tower_sessions::Session;
 
 use crate::achievement::Achievement;
 use crate::error::{Error, Result};

@@ -4,10 +4,10 @@ use std::hash::Hash;
 use std::path::Path;
 
 use async_trait::async_trait;
-use axum_login::tower_sessions::cookie::time::{Duration, OffsetDateTime};
-use axum_login::tower_sessions::session::{Id, Record};
-use axum_login::tower_sessions::{SessionStore, session_store};
 use sqlx::types::JsonValue;
+use tower_sessions::cookie::time::{Duration, OffsetDateTime};
+use tower_sessions::session::{Id, Record};
+use tower_sessions::{SessionStore, session_store};
 
 use crate::error::Result;
 

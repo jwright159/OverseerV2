@@ -41,7 +41,7 @@ pub enum Error {
     #[error("dotenv error: {0}")]
     Dotenv(#[from] dotenvy::Error),
     #[error("session error: {0}")]
-    Session(#[from] axum_login::tower_sessions::session::Error),
+    Session(#[from] tower_sessions::session::Error),
     #[error("invalid filename")]
     InvalidFilename,
     #[error("not logged in as a character")]

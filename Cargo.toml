@@ -8,7 +8,6 @@ askama = "0.14.0"
 async-trait = "0.1.88"
 axum = { version = "0.8.4", features = ["multipart"] }
 axum-htmx = "0.7.0"
-axum-login = { git = "https://github.com/OverseerReboot/axum-login.git" }
 axum_typed_multipart = "0.16.2"
 dotenvy = "0.15.7"
 imagesize = "0.14.0"
@@ -22,8 +21,6 @@ tempfile = "3.20.0"
 thiserror = "2.0.12"
 tokio = { version = "1.45.1", features = ["full"] }
 tower-http = { version = "0.6.5", features = ["fs"] }
+tower-sessions = { git = "https://github.com/OverseerReboot/tower-sessions.git" }
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
-
-[patch.crates-io]
-tower-sessions = { git = "https://github.com/jwright159/tower-sessions.git" }
