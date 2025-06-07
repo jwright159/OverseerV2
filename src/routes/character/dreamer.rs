@@ -1,50 +1,66 @@
 use askama::Template;
-use axum::Form;
 use axum::response::IntoResponse;
+use axum::{Extension, Form};
 use serde::{Deserialize, Serialize};
+use sqlx::MySqlPool;
 
+use crate::error::Result;
 use crate::routes::HtmlTemplate;
+use crate::routes::character::Character;
 
-pub async fn character_dreamer_post(Form(form): Form<CharacterDreamerPost>) -> impl IntoResponse {
+pub async fn character_dreamer_post(
+    character: Character,
+    Extension(db): Extension<MySqlPool>,
+    Form(form): Form<CharacterDreamerPost>,
+) -> Result<impl IntoResponse> {
     let character_dreamer: Option<String> = None;
     if let Some(dreamer) = character_dreamer {
-        return HtmlTemplate(CharacterDreamerTemplate {
+        return Ok(HtmlTemplate(CharacterDreamerTemplate {
             dreamer: None,
             input: form.moon.clone(),
             error: Some(format!("You're already a {} dreamer!", dreamer)),
-        });
+        }));
     };
 
-    match form.moon.as_str() {
-        "Prospit" | "Derse" => HtmlTemplate(CharacterDreamerTemplate {
-            dreamer: Some(form.moon.clone()),
-            input: form.moon.clone(),
-            error: None,
-        }),
-        "Space station" => HtmlTemplate(CharacterDreamerTemplate {
+    Ok(HtmlTemplate(match form.moon.as_str() {
+        "Prospit" | "Derse" => {
+            sqlx::query!(
+                "UPDATE Characters SET dreamer = ? WHERE id = ?",
+                form.moon,
+                character.id
+            )
+            .execute(&db)
+            .await?;
+            CharacterDreamerTemplate {
+                dreamer: Some(form.moon.clone()),
+                input: form.moon.clone(),
+                error: None,
+            }
+        }
+        "Space station" => CharacterDreamerTemplate {
             dreamer: None,
             input: form.moon.clone(),
             error: Some("That's not a moon...".to_string()),
-        }),
-        "The Battlefield" | "Battlefield" | "Skaia" => HtmlTemplate(CharacterDreamerTemplate {
+        },
+        "The Battlefield" | "Battlefield" | "Skaia" => CharacterDreamerTemplate {
             dreamer: None,
             input: form.moon.clone(),
             error: Some("Nice try, but no.".to_string()),
-        }),
-        _ if form.moon.contains("Land") => HtmlTemplate(CharacterDreamerTemplate {
+        },
+        _ if form.moon.contains("Land") => CharacterDreamerTemplate {
             dreamer: None,
             input: form.moon.clone(),
             error: Some("You can't start your dreamself off on a Land, sorry.".to_string()),
-        }),
-        _ => HtmlTemplate(CharacterDreamerTemplate {
+        },
+        _ => CharacterDreamerTemplate {
             dreamer: None,
             input: form.moon.clone(),
             error: Some(
                 "Only Derse and Prospit are valid dream moons. Don't forget the capitalization!"
                     .to_string(),
             ),
-        }),
-    }
+        },
+    }))
 }
 
 #[derive(Clone, Serialize, Deserialize)]
