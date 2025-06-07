@@ -1,12 +1,17 @@
 use askama::Template;
+use axum::Extension;
 use axum::response::IntoResponse;
 use axum_typed_multipart::TypedMultipart;
 use imagesize::ImageSize;
+use sqlx::MySqlPool;
 
 use crate::error::{Error, Result};
 use crate::routes::HtmlTemplate;
+use crate::routes::character::Character;
 
 pub async fn character_symbol_post(
+    character: Character,
+    Extension(db): Extension<MySqlPool>,
     TypedMultipart(form): TypedMultipart<CharacterSymbolSubmission>,
 ) -> Result<impl IntoResponse> {
     let file = form.file;
@@ -47,6 +52,13 @@ pub async fn character_symbol_post(
             std::env::var("OVERSEER_ROOT")?,
             new_filepath
         ))?;
+        sqlx::query!(
+            "UPDATE Characters SET symbol = ? WHERE id = ?",
+            new_filepath,
+            character.id
+        )
+        .execute(&db)
+        .await?;
         Ok(HtmlTemplate(CharacterSymbolTemplate {
             symbol: new_filepath,
             error: Some("File uploaded successfully".to_string()),
