@@ -1,3 +1,5 @@
+#![feature(pattern)]
+
 use axum::routing::{get, post};
 use axum::{Extension, Router};
 use sqlx::MySqlPool;
@@ -13,12 +15,14 @@ use crate::routes::character::dreamer::character_dreamer_post;
 use crate::routes::character::gates::debug_clear;
 use crate::routes::character::symbol::character_symbol_post;
 use crate::routes::overview::overview_get;
+use crate::routes::strife::strife_display_get;
 use crate::routes::waste_time::waste_time;
 
 mod achievement;
 mod error;
 mod php;
 mod routes;
+mod status;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -33,7 +37,7 @@ async fn main() -> Result<()> {
         "loaded .env, sessions at {}",
         std::env::var("OVERSEER_PHP_SESSIONS_ROOT")?
     );
-    let db = MySqlPool::connect("mysql://root:@localhost/overseerv2").await?;
+    let db = MySqlPool::connect(std::env::var("DATABASE_URL")?.as_str()).await?;
 
     let session_layer = SessionManagerLayer::new(PhpStore).with_name("PHPSESSID");
 
@@ -44,6 +48,7 @@ async fn main() -> Result<()> {
         .route("/character/dreamer", post(character_dreamer_post))
         .route("/character/symbol", post(character_symbol_post))
         .route("/character/debug-clear", post(debug_clear))
+        .route("/strifedisplay", get(strife_display_get))
         .route("/waste-time", post(waste_time))
         .nest_service("/static", ServeDir::new("static"))
         .layer(session_layer)

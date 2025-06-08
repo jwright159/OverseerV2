@@ -58,6 +58,8 @@ pub enum Error {
     ShouldHaveDreamer(i64),
     #[error("extract error: {0}")]
     Extract(String),
+    #[error("tuple parse error: {0}")]
+    TupleParse(String),
 }
 
 impl IntoResponse for Error {
