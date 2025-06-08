@@ -3,14 +3,17 @@ use axum::response::IntoResponse;
 use axum::{Extension, Form};
 use serde::{Deserialize, Serialize};
 use sqlx::MySqlPool;
+use tokio::sync::broadcast::Sender;
 
+use crate::broadcast::BroadcastMessage;
 use crate::error::Result;
 use crate::routes::HtmlTemplate;
 use crate::routes::character::Character;
 
 pub async fn character_colour_post(
-    character: Character,
+    mut character: Character,
     Extension(db): Extension<MySqlPool>,
+    Extension(sse): Extension<Sender<BroadcastMessage>>,
     Form(form): Form<CharacterColourSubmission>,
 ) -> Result<impl IntoResponse> {
     let colour = form.colour.replace("#", "");
@@ -22,6 +25,13 @@ pub async fn character_colour_post(
     )
     .execute(&db)
     .await?;
+
+    character.colour = colour.clone();
+
+    sse.send(BroadcastMessage::ProfileString {
+        id: character.id,
+        profile_string: character.profile_string(),
+    })?;
 
     Ok(HtmlTemplate(CharacterColourTemplate { colour }))
 }

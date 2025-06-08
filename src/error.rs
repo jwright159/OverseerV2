@@ -42,6 +42,12 @@ pub enum Error {
     Dotenv(#[from] dotenvy::Error),
     #[error("session error: {0}")]
     Session(#[from] tower_sessions::session::Error),
+    #[error("broadcast send error: {0}")]
+    BroadcastSend(
+        #[from] tokio::sync::broadcast::error::SendError<crate::broadcast::BroadcastMessage>,
+    ),
+    #[error("broadcast recv error: {0}")]
+    BroadcastRecv(#[from] tokio::sync::broadcast::error::RecvError),
     #[error("invalid filename")]
     InvalidFilename,
     #[error("not logged in")]
