@@ -4,6 +4,7 @@ use axum::response::{Html, IntoResponse, Response};
 
 pub mod character;
 pub mod overview;
+pub mod sse;
 pub mod user;
 pub mod waste_time;
 

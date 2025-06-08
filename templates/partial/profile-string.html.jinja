@@ -1,1 +1,2 @@
-<a href='profile.php?ID={{ character.id }}'><span style='color: #{{ character.colour }}'>{{ character.name }}</span></a>
+<a href='profile.php?ID={{ character.id }}' sse-swap="profile-string-{{ character.id }}" hx-swap="outerHTML"><span
+		style='color: #{{ character.colour }}'>{{ character.name }}</span></a>

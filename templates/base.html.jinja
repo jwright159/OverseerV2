@@ -30,7 +30,8 @@
 	{% block head %}{% endblock %}
 </head>
 
-<body style="background-image: url(/images/Backgrounds/{{ background }}background.jpg);">
+<body style="background-image: url(/images/Backgrounds/{{ background }}background.jpg);" hx-ext="sse"
+	sse-connect="/sse">
 	<svg width=400 height=220 style="position: fixed; left: 0px; top: 0px; pointer-events: none;">
 		<defs>
 			<mask id="maskedtext">

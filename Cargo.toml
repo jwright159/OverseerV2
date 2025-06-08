@@ -10,6 +10,7 @@ axum = { version = "0.8.4", features = ["multipart"] }
 axum-htmx = "0.7.0"
 axum_typed_multipart = "0.16.2"
 dotenvy = "0.15.7"
+futures = "0.3.31"
 imagesize = "0.14.0"
 itertools = "0.14.0"
 password-auth = "1.0.0"
