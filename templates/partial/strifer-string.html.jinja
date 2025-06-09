@@ -1,0 +1,25 @@
+{% if strifer.grist.is_some() %}
+    {{ strifer.grist.as_ref().unwrap() ~ " " }}
+{% endif %}
+
+{% if strifer.get_owner().is_some() && strifer.energy != 0 %}
+    {{ strifer.get_owner().unwrap().profile_string() | safe }}<br />
+{% else %}
+    {{ strifer.name }}<br />
+{% endif %}
+
+{{ strifer.description }}<br />
+
+{% let power = strifer.power() %}
+Offense/Defense: {{ power.offense }}/{{ power.defense }}<br />
+Health Vial: {{ strifer.health_percent().floor() }}%<br />
+{% if strifer.owner_id.is_some() && strifer.energy != 0 %}
+    Aspect Vial: {{ strifer.energy_percent().floor() }}%<br />
+{% endif %}
+
+{% for status in strifer.statuses %}
+    {{ status | safe }} {{ "\n" }}
+{% endfor %}
+{% for bonus in strifer.bonuses %}
+    {{ bonus | safe }} {{ "\n" }}
+{% endfor %}

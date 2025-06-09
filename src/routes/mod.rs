@@ -7,6 +7,7 @@ pub mod overview;
 pub mod sse;
 pub mod user;
 pub mod waste_time;
+pub mod strife;
 
 /// A wrapper type that we'll use to encapsulate HTML parsed by askama into valid HTML for axum to serve.
 pub struct HtmlTemplate<T: Template>(pub T);

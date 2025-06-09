@@ -1,0 +1,17 @@
+Your current opponents:<br />
+
+{% for strifer in strifers %}
+    {% if strifer.side != player_side %}
+        {{ strifer.strifer_string() | safe }}
+    {% endif %}
+    <br />
+{% endfor %}
+
+Yourself and your allies:<br />
+
+{% for strifer in strifers %}
+    {% if strifer.side == player_side %}
+        {{ strifer.strifer_string() | safe }}
+    {% endif %}
+    <br />
+{% endfor %}

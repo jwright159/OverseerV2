@@ -1,0 +1,32 @@
+{% if fraymotif.is_empty() %}
+    Whoops! {{ strifer_name }} isn't currently using a fraymotif.<br />
+{% else %}
+    Now Playing: {{ fraymotif }}: {{ fraymotif_name }}<br />
+    Effects:
+    {% match fraymotif.as_str() %}
+        {% when "Breath/I" %} The Breeze softens blows against the user, doubling their defense.
+        {% when "Heart/I" %} Unlocks inner power, providing a large power boost this round with a smaller ongoing one.
+        {% when "Life/I" %} The user is healed for 100% of their Health Vial this round, while allies are healed for 41.3%.
+        {% when "Hope/I" %} Multiplies offense and defense by an amount increasing the healthier the user is.
+        {% when "Light/I" %} The user gains +100% luck from the start of this strife round to the end of the strife.
+        {% when "Mind/I" %} Enemies the user damages will suffer extra flat damage and a power reduction.
+        {% when "Blood/I" %} Enemies damaged by the user will suffer extra flat damage and minor bleeding. Enemies so damaged will bolster the morale of all allies, providing a power boost.
+        {% when "Doom/I" %} The user deals bonus damage against injured opponents.
+        {% when "Rage/I" %} The user gains an offense multiplier based on their missing health, as well as a residual power boost for a few turns after this one.
+        {% when "Void/I" %} Enemies damaged by the user suffer a series of glitchy effects, suffering power and health randomization.
+        {% when "Space/I" %} The user's next attack gains a spatial warping property. If the user hits the enemy leader, they will suffer massive damage!
+        {% when "Time/I" %} The user makes four attacks against every enemy this round.
+        {% when "Breath/II" %} Empowers the user's blows to knock over and deal bonus damage to any enemy they successfully damage.
+        {% when "Heart/II" %} Each enemy hit by the user suffers bonus damage based on their own power.
+        {% when "Life/II" %} A massive surge of Life washes over the user and their allies. They are sure to be on full health at the end of the round.
+        {% when "Mind/II" %} A sudden surge of insight, the perfect battle plan. The user and those under their command will not take combat damage this round, and will find themselves more effective.
+        {% when "Blood/II" %} The user's strikes sever the bonds each enemy shares with their allies, temporarily nullifying their ability to use teamwork and applying a power reduction.
+        {% when "Doom/II" %} If the user hits the enemy leader, they are isolated and suffer significant damage and hopelessness.
+        {% when "Rage/II" %} Enemies struck by the user will temporarily join a random side in the strife, almost certainly placing them in opposition to all other combatants.
+        {% when "Void/II" %} Enemies hit by the user become unstuck from reality, gaining a random chance to simply not exist on any given combat round.
+        {% when "Space/II" %} This terminology can be quite literal sometimes. The user borrows the unfathomable heat of a star, setting struck foes ablaze and dealing bonus damage.
+        {% when "Time/II" %} Freezes the strife in time for a round. All strifers but the user will fail to attack OR defend.
+        {% when "Light/II" %} Any attack that connects will deal critical damage.
+        {% else %} Effects not yet implemented!
+    {% endmatch %} <br/><br />
+{% endif %}

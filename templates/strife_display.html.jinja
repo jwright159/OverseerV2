@@ -1,0 +1,121 @@
+{% extends "base.html.jinja" %}
+{% block title %}Strife!{% endblock %}
+{% block header_icon %}/images/header/rancorous.png{% endblock %}
+
+{% block content %}
+
+<span id="strife-content">
+{% if main_strifer.strife_id.is_none() %}
+
+    You are not currently engaged in strife!<br />
+
+    {% if character.dreaming_status == "Awake" %}
+        {% if !character.down && character.dungeon.is_none() %}
+            {% if character.in_medium %}
+                <form action="strifeselect.php" method="post">
+                    <select name="land">
+                        {% for chum in chumroll %}
+                            {% if chum.land_1.is_some() && chum.land_2.is_some() && (chain[&chum.id] || chum.id == character.id) %}
+                                <option value="{{ chum.id }}">Land of {{ chum.land_1.as_ref().unwrap() }} and {{ chum.land_2.as_ref().unwrap() }}</option>
+                            {% endif %}
+                        {% endfor %}
+                        {% if character.denizen_down %}
+                            <option value="battlefield">The Battlefield</option>
+                        {% endif %}
+                    </select><br />
+
+                    {% let max_enemies = 12 %} {# More or less arbitrary. Does affect progression speed though #}
+                    Number of underlings to fight:
+                    <select name="quantity">
+                        {% for i in 1..=max_enemies %}
+                            <option value="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+                    </select><br />
+
+                    <input type="submit" value="Fight on this Land" />
+                </form><br />
+
+                {% if character.old_enemy_data.contains_key("land") %}
+                    Your last completed strife can be repeated, if you wish.<br />
+                    <form action="strifebegin.php" method="post">
+                        {% for (key, value) in &character.old_enemy_data %}
+                            <input type="hidden" name="{{ key }}" value="{{ value }}" />
+                        {% endfor %}
+                        <input type="submit" value="Repeat last strife" />
+                    </form><br />
+                {% endif %}
+
+                {% if !allies.is_empty() %}
+                    If any of your reachable allies are engaged in strife, you may assist them here:<br />
+                    <form action="strifeassist.php" method="post">
+                        <select name="strifetojoin">
+                            {% for (ally_strife_id, ally_name) in allies %}
+                                <option value="{{ ally_strife_id }}">{{ ally_name }}</option>
+                            {% endfor %}
+                        </select><br />
+                        <input type="submit" value="Assist!" />
+                    </form><br />
+                {% endif %}
+            {% else %}
+                You will need to enter the Medium to engage in waking strife.<br />
+            {% endif %}
+        {% else %}
+            {% if character.down %}
+                You are in no condition to be strifing right now!<br />
+            {% endif %}
+            {% if character.dungeon.is_some() %}
+                <a id="advance" href="dungeons.php">You are currently exploring a dungeon!</a> You can probably find enemies to fight in there.<br />
+            {% endif %}
+        {% endif %}
+    {% else %}
+        {% if !character.dreamer_down %}
+            {% let max_enemies = 12 %}
+
+            <form action="strifebegin.php" method="post">
+                {% for i in 1..=max_enemies %}
+                    <select name="enemy{{ i }}">
+                        <option value=""></option>
+                        {% for (enemy_name, enemy_power) in dream_enemies %}
+                            <option value="{{ enemy_name }}">{{ enemy_name }} (Power: {{ enemy_power }})</option>
+                        {% endfor %}
+                    </select><br />
+                {% endfor %}
+                <input type="submit" value="Go looking for these enemies!" />
+            </form><br />
+
+            {% if character.old_enemy_data.contains_key("dreaming") %}
+                Your last completed strife can be repeated, if you wish.<br />
+                <form action="strifebegin.php" method="post">
+                    {% for (key, value) in &character.old_enemy_data %}
+                        <input type="hidden" name="{{ key }}" value="{{ value }}" />
+                    {% endfor %}
+                    <input type="submit" value="Repeat last strife" />
+                </form>
+            {% endif %}
+        {% else %}
+            You are in no condition to be strifing right now!<br />
+        {% endif %}
+    {% endif %}
+{% else %}
+    <span id="leader-result"></span> {# To be replaced with swap leader post #}
+
+    <span hx-ext="sse" sse-connect="/sse" sse-swap="strifers-update-{{ main_strifer.strife_id.unwrap() }}">
+        {{ strifers | safe }}
+    </span>
+
+    {% match fraymotif_message %}
+        {% when Some with (val) %} {{ val | safe }}
+        {% when None %}
+    {% endmatch %}
+
+    <span hx-ext="sse" sse-connect="/sse" sse-swap="leader-add-{{ main_strifer.id }},leader-remove-{{ main_strifer.id }}">
+        {{ strife_commands | safe }}
+    </span>
+
+    <form hx-post="/strife/abscond" hx-target="#strife-content" hx-swap="outerHTML">
+        <input type="submit" value="Abscond" />
+    </form><br />
+{% endif %}
+</span>
+
+{% endblock %}

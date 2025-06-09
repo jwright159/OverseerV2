@@ -1,0 +1,5 @@
+You abscond from strife.<br />
+
+{% if !character.strife.description.contains("dreamself") && character.dungeon.is_some() %}
+    You are forced back into the room you just left! <a id="advance" href="dungeons.php">Return to dungeon ==></a><br />
+{% endif %}
