@@ -47,8 +47,7 @@ pub async fn strife_display(character: Character, Extension(db): Extension<MySql
                 strifer_name: strifer.name.clone(),
             };
 
-            Some(template.render()
-                .unwrap_or_else(|_err| "[ERROR RENDERING FRAYMOTIF MESSAGE]".to_string()))
+            Some(template)
         }
     };
 
@@ -132,7 +131,12 @@ pub async fn strife_display(character: Character, Extension(db): Extension<MySql
         main_strifer: main_strifer.clone(),
         strifers: strifers.clone(),
         potential_leaders,
-    }.render().unwrap_or_else(|_err| "[ERROR RENDERING STRIFE COMMANDS]".to_string());
+    };
+
+    let strifers = StrifersTemplate {
+        strifers,
+        player_side
+    };
 
     Ok(HtmlTemplate(StrifeDisplayTemplate {
         character,
@@ -140,7 +144,6 @@ pub async fn strife_display(character: Character, Extension(db): Extension<MySql
         strifers,
         background,
         announcements: vec![],
-        player_side,
         fraymotif_message,
         chain,
         chumroll,
@@ -155,16 +158,15 @@ pub async fn strife_display(character: Character, Extension(db): Extension<MySql
 pub struct StrifeDisplayTemplate {
     pub character: Character,
     pub main_strifer: Strifer,
-    pub strifers: Vec<Strifer>,
     pub background: String,
     pub announcements: Vec<String>,
-    pub player_side: i8,
-    pub fraymotif_message: Option<String>,
+    pub fraymotif_message: Option<StrifeFraymotifTemplate>,
     pub chain: HashMap<i64, bool>,
     pub chumroll: Vec<Character>,
     pub allies: Vec<(i64, String)>,
     pub dream_enemies: Vec<(String, i64)>,
-    pub strife_commands: String,
+    pub strife_commands: StrifeCommandsTemplate,
+    pub strifers: StrifersTemplate,
 }
 
 #[derive(Template)]
@@ -173,4 +175,11 @@ pub struct StrifeFraymotifTemplate {
     pub fraymotif: String,
     pub fraymotif_name: String,
     pub strifer_name: String,
+}
+
+#[derive(Template)]
+#[template(path = "partial/strife-strifers.html.jinja")]
+pub struct StrifersTemplate {
+    pub strifers: Vec<Strifer>,
+    pub player_side: i8
 }

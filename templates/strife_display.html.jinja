@@ -99,23 +99,9 @@
 {% else %}
     <span id="leader-result"></span> {# To be replaced with swap leader post #}
 
-    Your current opponents:<br />
-
-    {% for strifer in strifers %}
-        {% if strifer.side != player_side %}
-            {{ strifer.strifer_string() | safe }}
-        {% endif %}
-        <br />
-    {% endfor %}
-
-    Yourself and your allies:<br />
-
-    {% for strifer in strifers %}
-        {% if strifer.side == player_side %}
-            {{ strifer.strifer_string() | safe }}
-        {% endif %}
-        <br />
-    {% endfor %}
+    <span hx-ext="sse" sse-connect="/sse" sse-swap="strifers-update-{{ main_strifer.strife_id.unwrap() }}">
+        {{ strifers | safe }}
+    </span>
 
     {% match fraymotif_message %}
         {% when Some with (val) %} {{ val | safe }}

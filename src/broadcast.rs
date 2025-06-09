@@ -3,6 +3,7 @@ pub enum BroadcastMessage {
     ProfileString { id: i64, profile_string: String },
     LeaderAdd { id: i64, command_select_string: String },
     LeaderRemove { id: i64, command_select_string: String },
+    StrifersUpdate { strife_id: i64, strifers_string: String },
 }
 
 impl BroadcastMessage {
@@ -11,6 +12,7 @@ impl BroadcastMessage {
             BroadcastMessage::ProfileString { id, .. } => format!("profile-string-{}", id),
             BroadcastMessage::LeaderAdd { id, .. } => format!("leader-add-{}", id),
             BroadcastMessage::LeaderRemove { id, .. } => format!("leader-remove-{}", id),
+            BroadcastMessage::StrifersUpdate { strife_id, .. } => format!("strifers-update-{}", strife_id),
         }
     }
 
@@ -19,6 +21,7 @@ impl BroadcastMessage {
             BroadcastMessage::ProfileString { profile_string, .. } => profile_string.clone(),
             BroadcastMessage::LeaderAdd { command_select_string, .. } => command_select_string.clone(),
             BroadcastMessage::LeaderRemove { command_select_string, .. } => command_select_string.clone(),
+            BroadcastMessage::StrifersUpdate { strifers_string, .. } => strifers_string.clone(),
         })
     }
 
