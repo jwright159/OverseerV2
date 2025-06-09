@@ -46,6 +46,10 @@ pub struct Character {
     pub in_medium: bool,
     pub dungeon: Option<i64>,
     pub denizen_down: bool,
+    pub dungeon_row: i64,
+    pub dungeon_col: i64,
+    pub old_dungeon_row: i64,
+    pub old_dungeon_col: i64,
 }
 
 impl Character {
@@ -61,7 +65,7 @@ impl Character {
 
     pub async fn load(id: i64, db: &MySqlPool) -> Result<Option<Character>> {
         let sql = some_or_return_ok!(sqlx::query!(
-            r#"SELECT id, name, aspect, class, wakeself, dreamself, dreamingstatus, echeladder, boondollars, symbol, colour, dreamer, land1, land2, grist_type, consort, house_build, achievements, gatescleared, session, server, oldenemydata as old_enemy_data, down, dreamdown as dreamer_down, dungeon, inmedium as in_medium, denizendown as denizen_down FROM Characters WHERE id = ?"#,
+            r#"SELECT id, name, aspect, class, wakeself, dreamself, dreamingstatus, echeladder, boondollars, symbol, colour, dreamer, land1, land2, grist_type, consort, house_build, achievements, gatescleared, session, server, oldenemydata as old_enemy_data, down, dreamdown as dreamer_down, dungeon, inmedium as in_medium, denizendown as denizen_down, dungeonrow as dungeon_row, dungeoncol as dungeon_col, olddungeonrow as old_dungeon_row, olddungeoncol as old_dungeon_col FROM Characters WHERE id = ?"#,
             id
         )
         .fetch_optional(db)
@@ -132,7 +136,11 @@ impl Character {
                 _ => Some(sql.dungeon as i64)
             },
             in_medium: sql.in_medium == 1,
-            denizen_down: sql.denizen_down == 1
+            denizen_down: sql.denizen_down == 1,
+            dungeon_row: sql.dungeon_row as i64,
+            dungeon_col: sql.dungeon_col as i64,
+            old_dungeon_row: sql.old_dungeon_row as i64,
+            old_dungeon_col: sql.old_dungeon_col as i64,
         }))
     }
 

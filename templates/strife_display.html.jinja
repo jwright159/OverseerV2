@@ -4,6 +4,7 @@
 
 {% block content %}
 
+<span id="strife-content">
 {% if main_strifer.strife_id.is_none() %}
 
     You are not currently engaged in strife!<br />
@@ -125,10 +126,10 @@
         {{ strife_commands | safe }}
     </span>
 
-    <form action="strifedisplay.php" method="post">
-        <input type="hidden" name="abscond" value="yes" />
+    <form hx-post="/strife/abscond" hx-target="#strife-content" hx-swap="outerHTML">
         <input type="submit" value="Abscond" />
     </form><br />
 {% endif %}
+</span>
 
 {% endblock %}
