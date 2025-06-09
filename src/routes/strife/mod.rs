@@ -1,3 +1,7 @@
+pub mod leader;
+
+pub use leader::*;
+
 use std::collections::HashMap;
 use askama::Template;
 use axum::Extension;
@@ -7,7 +11,7 @@ use crate::error::{Error, Result};
 use crate::routes::character::{Character, Strifer};
 use crate::routes::HtmlTemplate;
 
-pub async fn strife_display_get(character: Character, Extension(db): Extension<MySqlPool>) -> Result<impl IntoResponse> {
+pub async fn strife_display(character: Character, Extension(db): Extension<MySqlPool>) -> Result<impl IntoResponse> {
     let main_strifer = character.strife.clone();
     let db = &db;
 
@@ -113,13 +117,20 @@ pub async fn strife_display_get(character: Character, Extension(db): Extension<M
             .ok_or(Error::ShouldHaveDreamer(character.id))?
     };
 
-    let potential_leaders = if main_strifer.is_leader { Vec::new() } else {
+    let potential_leaders = if !main_strifer.is_leader { Vec::new() } else {
         strifers
             .iter()
             .filter(|s| s.aspect.is_some() && s.side == main_strifer.side && s.id != main_strifer.id)
             .map(|s| s.clone())
             .collect()
     };
+
+    let strife_commands = StrifeCommandsTemplate {
+        character: character.clone(),
+        main_strifer: main_strifer.clone(),
+        strifers: strifers.clone(),
+        potential_leaders,
+    }.render().unwrap_or_else(|_err| "[ERROR RENDERING STRIFE COMMANDS]".to_string());
 
     Ok(HtmlTemplate(StrifeDisplayTemplate {
         character,
@@ -133,7 +144,7 @@ pub async fn strife_display_get(character: Character, Extension(db): Extension<M
         chumroll,
         allies,
         dream_enemies,
-        potential_leaders
+        strife_commands
     }))
 }
 
@@ -151,7 +162,7 @@ pub struct StrifeDisplayTemplate {
     pub chumroll: Vec<Character>,
     pub allies: Vec<(i64, String)>,
     pub dream_enemies: Vec<(String, i64)>,
-    pub potential_leaders: Vec<Strifer>,
+    pub strife_commands: String,
 }
 
 #[derive(Template)]

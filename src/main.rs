@@ -16,7 +16,7 @@ use crate::routes::character::dreamer::character_dreamer_post;
 use crate::routes::character::gates::debug_clear;
 use crate::routes::character::symbol::character_symbol_post;
 use crate::routes::overview::overview_get;
-use crate::routes::strife::strife_display_get;
+use crate::routes::strife::{strife_display, swap_leader};
 use crate::routes::sse::sse_get;
 use crate::routes::waste_time::waste_time;
 
@@ -54,7 +54,8 @@ async fn main() -> Result<()> {
         .route("/character/dreamer", post(character_dreamer_post))
         .route("/character/symbol", post(character_symbol_post))
         .route("/character/debug-clear", post(debug_clear))
-        .route("/strifedisplay", get(strife_display_get))
+        .route("/strifedisplay", get(strife_display))
+        .route("/strife/leader", post(swap_leader))
         .route("/waste-time", post(waste_time))
         .nest_service("/static", ServeDir::new("static"))
         .layer(session_layer)
