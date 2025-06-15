@@ -54,7 +54,7 @@ function realpower($row) {
     echo "<br />--testing for power of " . $row['name'] . " = " . strval($power) . "--<br />";
     if ($power == 0) { //no power, probably because the item isn't a weapon, so let's determine what its effective power would be based on grist cost
         $grists = $row['gristcosts'];
-        $gristarray = array();
+        $gristarray = [];
         $gristshit = explode( '|', $grists);
         array_pop($gristshit);
         foreach( $gristshit as $val ){

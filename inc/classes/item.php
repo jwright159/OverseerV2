@@ -15,6 +15,7 @@
 
 namespace Overseer;
 use \PDO;
+use Exception;
 
 /**
  * Item data handling class
@@ -28,7 +29,12 @@ use \PDO;
  * @link     http://overseer2.com/ Project Site
  */
 class Item {
-    public $id, $gristCost;
+    public int $id;
+    public Code $code;
+    public Grist $gristCost;
+
+    private PDO $_dbhandle;
+    private array $_data;
 
     /**
      * Class initialization function
@@ -36,12 +42,12 @@ class Item {
      * Automatically calls load() if there is an item ID passed during
      * creation of the class.
      *
-     * @param PDO     $dbhandle The global PDO object for the database.
-     * @param integer $initid   The item ID to start with.
+     * @param PDO $dbhandle The global PDO object for the database.
+     * @param int $initid   The item ID to start with.
      *
      * @access public
      */
-    function __construct($dbhandle, $initid=-1) {
+    public function __construct(PDO $dbhandle, int $initid=-1) {
         $this->_dbhandle = $dbhandle;
         $this->id = $initid;
         if ($this->id != -1) {
@@ -83,11 +89,9 @@ class Item {
      *
      * @param integer $itemID The ID of the item that needs to be loaded.
      *
-     * @return null
-     *
      * @access public
      */
-    public function load($itemID) {
+    public function load($itemID): void {
         // Get the item's row to load it into the object
         $itemquery = $this->_dbhandle->prepare(
             'SELECT * FROM `Captchalogue` WHERE `ID` = :itemid'
@@ -97,7 +101,7 @@ class Item {
 
         // Check that there is only one item returned from the query
         if ($itemquery->rowcount() != 1) {
-            throw new \Exception('Item could not be found.');
+            throw new Exception('Item could not be found.');
         }
         $itemrow = $itemquery->fetch(PDO::FETCH_ASSOC);
         unset($itemquery);
@@ -152,7 +156,7 @@ class Item {
             } elseif ($itemrow[$dbkey] == 0) {
                 $convertedvalue = false;
             } else {
-                throw new \Exception(
+                throw new Exception(
                     'Non-boolean numeric value found in dbkey '.$dbkey.'.'
                 );
             }

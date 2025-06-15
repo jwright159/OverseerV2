@@ -2,6 +2,9 @@
 require_once "header.php";
 require_once "includes/global_functions.php";
 
+/**
+ * @return null|string
+ */
 function getEnemy($gate) { //retrieves standard enemy spawns from this gate
 	switch ($gate) {
 		case 1: return "basename = 'Imp'"; break;
@@ -14,6 +17,9 @@ function getEnemy($gate) { //retrieves standard enemy spawns from this gate
 	}
 }
 
+/**
+ * @return int|null
+ */
 function getPower($gate) {
 	switch ($gate) {
 		case 1: return 1; break;
@@ -27,6 +33,9 @@ function getPower($gate) {
 	}
 }
 
+/**
+ * @return int|null
+ */
 function getLoot($gate) {
 	switch ($gate) {
 		case 1: return 5; break;
@@ -40,7 +49,13 @@ function getLoot($gate) {
 	}
 }
 
-function getSpecs($dungeonkind,$charrow) {
+/**
+ * @return (int|mixed|string)[]
+ *
+ * TODO: Fix this psalm-return to be accurate or use some sort of data transfer object!
+ * @psalm-return array<array-key, mixed>
+ */
+function getSpecs($dungeonkind,$charrow): array {
 	//Fills out the specs for the specified dungeon kind
 	//First, set defaults. These values can be modified by a specific dungeon kind, but often aren't.
 	$specs['maxdistance'] = 10; //the most amount of rooms the dungeon can go from the start

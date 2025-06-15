@@ -15,6 +15,7 @@
 
 namespace Overseer;
 use \PDO;
+use Exception;
 
 /**
  * Strifer data handling class
@@ -30,8 +31,10 @@ use \PDO;
  */
 class Strifer
 {
+    public int $id;
 
-    public $id;
+    private PDO $_dbhandle;
+    private array $_data;
 
     /**
      * Class initialization function
@@ -39,12 +42,12 @@ class Strifer
      * Automatically calls load() if there is a strifer ID passed during
      * creation of the class.
      *
-     * @param PDO     $dbhandle The global PDO object for the database.
-     * @param integer $initid   The strifer ID to start with.
+     * @param PDO $dbhandle The global PDO object for the database.
+     * @param int $initid   The strifer ID to start with.
      *
      * @access public
      */
-    function __construct($dbhandle, $initid=-1)
+    public function __construct(PDO $dbhandle, int $initid = -1)
     {
         $this->_dbhandle = $dbhandle;
         $this->id = $initid;
@@ -64,18 +67,14 @@ class Strifer
      *
      * @return mixed The definition of the variable being requested,
      *               otherwise, null.
-     *
-     * @access public
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
         switch ($name) {
         case "healthpercent":
             return (($this->health / $this->maxhealth)*100);
-            break;
         case "energypercent":
             return (($this->energy / $this->maxenergy)*100);
-            break;
         default:
             if (array_key_exists($name, $this->_data)) {
                 return $this->_data[$name];
@@ -93,12 +92,8 @@ class Strifer
      * served from this class.
      *
      * @param integer $striferID The ID of the strifer that needs to be loaded.
-     *
-     * @return null
-     *
-     * @access public
      */
-    public function load($striferID)
+    public function load($striferID): void
     {
 
         // Get the character's row to load it into the object
@@ -155,7 +150,7 @@ class Strifer
             } elseif ($striferow[$dbkey] == 0) {
                 $convertedvalue = false;
             } else {
-                throw new \Exception(
+                throw new Exception(
                     'Non-boolean numeric value found in dbkey '.$dbkey.'.'
                 );
             }

@@ -19,7 +19,12 @@ function realpower($row) {
 	return $power;
 }
 
-function lookup($code,$table) {
+/**
+ * @return (float|int|null|string)[]|false|null
+ *
+ * @psalm-return array<float|int|null|string>|false|null
+ */
+function lookup($code,$table): array|false|null {
   global $connection;
   $codevar = "code";
   $result = mysqli_query($connection, "SELECT * FROM `$table` WHERE `$codevar` = '$code'");
@@ -27,7 +32,12 @@ function lookup($code,$table) {
   return mysqli_fetch_array($result);
 }
 
-function lookleft($name) {
+/**
+ * @return (float|int|null|string)[]|false|null
+ *
+ * @psalm-return array<float|int|null|string>|false|null
+ */
+function lookleft($name): array|false|null {
   global $connection;
   $name = mysqli_real_escape_string($connection, $name);
   $result = mysqli_query($connection, "SELECT * FROM `Captchalogue` WHERE `name` = '$name'");

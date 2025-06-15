@@ -18,7 +18,7 @@ require_once "includes/designix.php";
 // size
 // grists <--- ok fuck same as above
 // comments
-function getMaxBonus($array) { //take an array containing bonus values and find the highest one, we'll use this several times here
+function getMaxBonus($array): int { //take an array containing bonus values and find the highest one, we'll use this several times here
   $b = 0;
   $thisbonus = 0;
   $maxbonus = -9999; //an item with all negative bonuses will indeed lower the item's effective power

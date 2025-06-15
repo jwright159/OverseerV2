@@ -1,6 +1,6 @@
 <?php
 
-function rowRowFightThePower($consortID, $charID) {
+function rowRowFightThePower($consortID, $charID): void {
 	global $connection;
 	// Get necesary data here
 	$consortQuery = mysqli_query($connection, "SELECT * FROM `Consorts` WHERE `id` = '$consortID';");

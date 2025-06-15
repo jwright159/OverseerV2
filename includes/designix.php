@@ -32,7 +32,7 @@ function andcombine($code1,$code2) { //Performs a bitwise AND operation on the t
   $coderesult = reassemble($binaryresult);
   return $coderesult;
 }
-function breakdown($code) { //Breaks the given code down into the appropriate binary string and returns it. Assumes input of length 8 string.
+function breakdown($code): string { //Breaks the given code down into the appropriate binary string and returns it. Assumes input of length 8 string.
   $binarystr = "";
   $i = 0;
   while($i < 8) {
@@ -41,7 +41,7 @@ function breakdown($code) { //Breaks the given code down into the appropriate bi
   }
   return $binarystr;
 }
-function reassemble($binarystr) { //Reassembles the given binary string into a captchalogue code. Assumes input of length 48 binary string.
+function reassemble($binarystr): string { //Reassembles the given binary string into a captchalogue code. Assumes input of length 48 binary string.
   $code = "";
   $i = 0;
   while($i < 8) {
@@ -50,7 +50,7 @@ function reassemble($binarystr) { //Reassembles the given binary string into a c
   }
   return $code;
 }
-function binary($char) { //Maps a character to the relevant binary string. Only works if given a string of length 1 containing the correct character.
+function binary($char): string { //Maps a character to the relevant binary string. Only works if given a string of length 1 containing the correct character.
   if ($char == "0") return "000000";
   if ($char == "1") return "000001";
   if ($char == "2") return "000010";
@@ -117,7 +117,7 @@ function binary($char) { //Maps a character to the relevant binary string. Only 
   if ($char == "!") return "111111";
   return "000000"; //If character doesn't match, treat it like a zero.
 }
-function character($str) { //Turns a string of six binary digits into the relevant character.
+function character($str): string { //Turns a string of six binary digits into the relevant character.
   if ($str == "000000") return "0";
   if ($str == "000001") return "1";
   if ($str == "000010") return "2";

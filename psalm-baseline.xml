@@ -1,0 +1,2436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="6.12.0@cf420941d061a57050b6c468ef2c778faf40aee2">
+  <file src="abilities.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$strpos]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="abilityscan.php">
+    <UndefinedFunction>
+      <code><![CDATA[strifeInit($charrow)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="addaccount.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$dbtype]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="addcharacter.php">
+    <UndefinedFunction>
+      <code><![CDATA[notifySession($charrow, $string)]]></code>
+      <code><![CDATA[strifeInit($charrow)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$achievements]]></code>
+      <code><![CDATA[$dbtype]]></code>
+      <code><![CDATA[$dbtype]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="addsession.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$dbtype]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="alchemy.php">
+    <InvalidArgument>
+      <code><![CDATA[MYSQLI_ASSOC]]></code>
+    </InvalidArgument>
+    <InvalidArrayOffset>
+      <code><![CDATA[$itemrow['session']]]></code>
+    </InvalidArrayOffset>
+    <UndefinedFunction>
+      <code><![CDATA[gristImage($boomo[0])]]></code>
+      <code><![CDATA[howMuchGrist($newgrists, $boomo[0])]]></code>
+      <code><![CDATA[howMuchGrist($newgrists, $boomo[0])]]></code>
+      <code><![CDATA[incrementStat($charrow, 'alchemy')]]></code>
+      <code><![CDATA[modifyGrist($newgrists, $boomo[0], $realcost * -1)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="aspectpatterns.php">
+    <UndefinedFunction>
+      <code><![CDATA[incrementStat($charrow, 'aspect')]]></code>
+      <code><![CDATA[notifyCharacter($targetrow['owner'], $notification)]]></code>
+      <code><![CDATA[setAchievement($charrow, 'aspectheal')]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$siphon]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="atheneum.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$othersearches]]></code>
+      <code><![CDATA[$othersearches]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$sortby]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="betheotherguy.php">
+    <UndefinedFunction>
+      <code><![CDATA[loadSessionrow($charrow['session'])]]></code>
+      <code><![CDATA[loadSessionrow($row['session'])]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="catalogue.php">
+    <UndefinedFunction>
+      <code><![CDATA[setAchievement($charrow, 'itemfull')]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="chainviewer.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="changechar.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$charrow]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="changelog.php">
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="charlog.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="consortcalculate.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charRow]]></code>
+      <code><![CDATA[$item1Grist]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$enemiesBeaten]]></code>
+      <code><![CDATA[$enemiesList]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="consorts.php">
+    <UndefinedFunction>
+      <code><![CDATA[addItem($charrow, $_POST['shopaction'], "", false)]]></code>
+      <code><![CDATA[chainArray($charrow)]]></code>
+      <code><![CDATA[chainArray($charrow,$connection)]]></code>
+      <code><![CDATA[econonyLevel($charland['economy'])]]></code>
+      <code><![CDATA[explorationLevel($charland['landexplored'])]]></code>
+      <code><![CDATA[explorationLevel($charland['landexplored'])]]></code>
+      <code><![CDATA[getDialogue("shop", $charrow, $gate)]]></code>
+      <code><![CDATA[getDialogue($questtype, $charrow, $gate)]]></code>
+      <code><![CDATA[getStat($charrow,'consortboon')]]></code>
+      <code><![CDATA[logDebugMessage("Something went drastically wrong while printing shop contents of " . $charland['shopstock'])]]></code>
+      <code><![CDATA[matchItem($itemrow, $questrow['requirements'])]]></code>
+      <code><![CDATA[parseDialogue($questrow, $charrow)]]></code>
+      <code><![CDATA[phatLoot($charrow, $questrow, $charland, $gate, $booncost)]]></code>
+      <code><![CDATA[randomItem("", $gaterow[$gate-1], $charrow['session'])]]></code>
+      <code><![CDATA[randomItem("`gristcosts` LIKE '%" . $thisgrist . "%' ", $gaterow[$gate-1], $charrow['session'])]]></code>
+      <code><![CDATA[removeItem($slot)]]></code>
+      <code><![CDATA[setAchievement($charrow, 'boonshop')]]></code>
+      <code><![CDATA[sumStat($charrow, 'consortboon', $shopprice)]]></code>
+      <code><![CDATA[totalBooncost($itemrow['gristcosts'], $charland)]]></code>
+      <code><![CDATA[totalBooncost($randitem['gristcosts'], $charland)]]></code>
+      <code><![CDATA[totalGristcost($itemrow['gristcosts'])]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$explorationlevel]]></code>
+      <code><![CDATA[$strpos]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$booncost]]></code>
+      <code><![CDATA[$booncost]]></code>
+      <code><![CDATA[$booncost]]></code>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$csi]]></code>
+      <code><![CDATA[$explorelevel]]></code>
+      <code><![CDATA[$explorelevel]]></code>
+      <code><![CDATA[$explorelevel]]></code>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$maxshopitems]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$playerland]]></code>
+      <code><![CDATA[$playerland]]></code>
+      <code><![CDATA[$playerland]]></code>
+      <code><![CDATA[$thisone]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="delchar.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$dbtype]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="devtools/absfix.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="devtools/announcer.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[$exploded[$_POST['delete']]]]></code>
+    </InvalidArrayOffset>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="devtools/art.php">
+    <UndefinedFunction>
+      <code><![CDATA[getChar($character)]]></code>
+      <code><![CDATA[getChar($character)]]></code>
+      <code><![CDATA[incrementStat(getChar($character), 'artapproved')]]></code>
+      <code><![CDATA[renderItem2($irow, NULL, "", false)]]></code>
+      <code><![CDATA[sendAchievement(getChar($character), 'artsub')]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="devtools/authoring.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="devtools/blahsquirrel.php">
+    <UndefinedFunction>
+      <code><![CDATA[logDebugMessage($username . " - executed query: $query")]]></code>
+      <code><![CDATA[logDebugMessage($username . " - executed query: $query")]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="devtools/cheatpolice.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="devtools/debuglog.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="devtools/itemedit.php">
+    <UndefinedFunction>
+      <code><![CDATA[generateGlitchString()]]></code>
+      <code><![CDATA[generateStatusGlitchString()]]></code>
+      <code><![CDATA[horribleMess()]]></code>
+      <code><![CDATA[horribleMess()]]></code>
+      <code><![CDATA[howMuchGrist($erow['gristcosts'], $gristname)]]></code>
+      <code><![CDATA[initGrists()]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$loadold]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$allgristshere]]></code>
+      <code><![CDATA[$amoutn]]></code>
+      <code><![CDATA[$basetotalcost]]></code>
+      <code><![CDATA[$basetotalcost]]></code>
+      <code><![CDATA[$basetotalcost]]></code>
+      <code><![CDATA[$bodygear]]></code>
+      <code><![CDATA[$gristw]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$totalweight]]></code>
+      <code><![CDATA[$totalweight]]></code>
+      <code><![CDATA[$weapon]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="devtools/logviewer.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$chunk]]></code>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="devtools/oldwearables.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="devtools/rewards.php">
+    <UndefinedFunction>
+      <code><![CDATA[storeItem($recipientrow, $_POST['itemID'], 1, "")]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="dreamtransition.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="dungeonexit.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="dungeongen.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnevaluatedCode>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+    </UnevaluatedCode>
+    <UnusedParam>
+      <code><![CDATA[$charrow]]></code>
+    </UnusedParam>
+    <UnusedVariable>
+      <code><![CDATA[$floors]]></code>
+      <code><![CDATA[$floors]]></code>
+      <code><![CDATA[$grists]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="dungeons.php">
+    <UndefinedFunction>
+      <code><![CDATA[loadStriferow($charrow['wakeself'])]]></code>
+      <code><![CDATA[spendFatigue(10,$charrow)]]></code>
+      <code><![CDATA[surgicalSearch("|" . $dungeonrow['enc'], "|" . $currentroom . ":", true)]]></code>
+      <code><![CDATA[surgicalSearch($dungeonrow['loot'], "|" . $currentroom . ":", true)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$names]]></code>
+      <code><![CDATA[$names]]></code>
+      <code><![CDATA[$room]]></code>
+      <code><![CDATA[$room]]></code>
+      <code><![CDATA[$room]]></code>
+      <code><![CDATA[$symbolarray]]></code>
+      <code><![CDATA[$tiers]]></code>
+      <code><![CDATA[$tiers]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$ensearchstr]]></code>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$onentrance]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$playerpresent]]></code>
+      <code><![CDATA[$playerpresent]]></code>
+      <code><![CDATA[$tier]]></code>
+      <code><![CDATA[$tier]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="enter.php">
+    <UndefinedFunction>
+      <code><![CDATA[notifySession($charrow, $charrow['name'] . " has entered the Land of ". $land1 . " and " .$land2 . "!")]]></code>
+      <code><![CDATA[setAchievement($charrow,'medium')]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="fallenmercs.php">
+    <UndefinedFunction>
+      <code><![CDATA[setAchievement($charrow, 'deadconsort')]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="fraymotifs.php">
+    <UndefinedFunction>
+      <code><![CDATA[setAchievement($charrow, 'fray3')]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="fullitemcreate.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[$sizedarray[$s]]]></code>
+    </InvalidArrayOffset>
+    <UndefinedFunction>
+      <code><![CDATA[howMuchGrist($itemrow['gristcosts'], $gristname)]]></code>
+      <code><![CDATA[initGrists()]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$totalgrists]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="getartsubmission.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$loadtime]]></code>
+      <code><![CDATA[$loadtime]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="gristwire.php">
+    <InvalidArgument>
+      <code><![CDATA[MYSQLI_ASSOC]]></code>
+    </InvalidArgument>
+    <InvalidArrayOffset>
+      <code><![CDATA[$grow['name']]]></code>
+    </InvalidArrayOffset>
+    <UndefinedFunction>
+      <code><![CDATA[calculateComputability($charrow)]]></code>
+      <code><![CDATA[howMuchGrist($charrow['grists'], $type)]]></code>
+      <code><![CDATA[howMuchGrist($charrow['grists'], $type)]]></code>
+      <code><![CDATA[modifyGrist($charrow['grists'], $type, ($modifier * -1))]]></code>
+      <code><![CDATA[modifyGrist($wirerow['grists'], $type, $modifier)]]></code>
+      <code><![CDATA[notifyCharacter($wirerow['ID'], $string)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$quantity]]></code>
+      <code><![CDATA[$reachgrist]]></code>
+      <code><![CDATA[$reachgrist]]></code>
+      <code><![CDATA[$type]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="inc/accrow.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$time]]></code>
+      <code><![CDATA[$username]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="inc/classes/character.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__set]]></code>
+    </PossiblyUnusedMethod>
+    <UndefinedThisPropertyFetch>
+      <code><![CDATA[$this->dreamingstatus]]></code>
+      <code><![CDATA[$this->house_build]]></code>
+    </UndefinedThisPropertyFetch>
+    <UnevaluatedCode>
+      <code><![CDATA[break;]]></code>
+    </UnevaluatedCode>
+    <UnsupportedPropertyReferenceUsage>
+      <code><![CDATA[$this->strife = &$this->dreamself]]></code>
+      <code><![CDATA[$this->strife = &$this->wakeself]]></code>
+      <code><![CDATA[$updatebinds[$modkey] = &$this->_data[$modkey]]]></code>
+    </UnsupportedPropertyReferenceUsage>
+  </file>
+  <file src="inc/classes/code.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[combineAnd]]></code>
+      <code><![CDATA[combineOr]]></code>
+      <code><![CDATA[combineXor]]></code>
+      <code><![CDATA[string]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="inc/classes/grist.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[add]]></code>
+      <code><![CDATA[dump]]></code>
+      <code><![CDATA[export]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[import]]></code>
+      <code><![CDATA[remove]]></code>
+      <code><![CDATA[removeAll]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="inc/classes/item.php">
+    <UnusedClass>
+      <code><![CDATA[Item]]></code>
+    </UnusedClass>
+  </file>
+  <file src="inc/classes/strifer.php">
+    <UndefinedThisPropertyFetch>
+      <code><![CDATA[$this->energy]]></code>
+      <code><![CDATA[$this->health]]></code>
+      <code><![CDATA[$this->maxenergy]]></code>
+      <code><![CDATA[$this->maxhealth]]></code>
+    </UndefinedThisPropertyFetch>
+    <UnusedVariable>
+      <code><![CDATA[$lists]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="inc/classes/user.php">
+    <UndefinedThisPropertyAssignment>
+      <code><![CDATA[$this->password]]></code>
+    </UndefinedThisPropertyAssignment>
+    <UndefinedThisPropertyFetch>
+      <code><![CDATA[$this->email]]></code>
+      <code><![CDATA[$this->password]]></code>
+      <code><![CDATA[$this->username]]></code>
+    </UndefinedThisPropertyFetch>
+    <UnsupportedPropertyReferenceUsage>
+      <code><![CDATA[$updatebinds[$modkey] = &$this->_data[$modkey]]]></code>
+    </UnsupportedPropertyReferenceUsage>
+    <UnusedClass>
+      <code><![CDATA[User]]></code>
+    </UnusedClass>
+  </file>
+  <file src="inc/database.php">
+    <InvalidGlobal>
+      <code><![CDATA[global $connection;]]></code>
+      <code><![CDATA[global $dbtype;]]></code>
+    </InvalidGlobal>
+    <UnusedVariable>
+      <code><![CDATA[$db]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="inc/footer.php">
+    <UndefinedFunction>
+      <code><![CDATA[checkNotifications($charrow)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$loadtime]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="inc/header.php">
+    <InvalidArgument>
+      <code><![CDATA['error_handler']]></code>
+    </InvalidArgument>
+    <UndefinedFunction>
+      <code><![CDATA[logDebugMessage($errorline)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$db]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$loadtime]]></code>
+      <code><![CDATA[$loadtime]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$striferow]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="inc/lib/Color.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[complementary]]></code>
+      <code><![CDATA[darken]]></code>
+      <code><![CDATA[getCssGradient]]></code>
+      <code><![CDATA[getHex]]></code>
+      <code><![CDATA[getHsl]]></code>
+      <code><![CDATA[getRgb]]></code>
+      <code><![CDATA[hexToRgb]]></code>
+      <code><![CDATA[isDark]]></code>
+      <code><![CDATA[isLight]]></code>
+      <code><![CDATA[lighten]]></code>
+      <code><![CDATA[makeGradient]]></code>
+      <code><![CDATA[mix]]></code>
+      <code><![CDATA[rgbToHex]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code><![CDATA[$amount]]></code>
+      <code><![CDATA[$amount]]></code>
+      <code><![CDATA[$amount]]></code>
+      <code><![CDATA[$amount]]></code>
+      <code><![CDATA[$amount]]></code>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$color]]></code>
+      <code><![CDATA[$hex]]></code>
+      <code><![CDATA[$hex2]]></code>
+      <code><![CDATA[$hsl]]></code>
+      <code><![CDATA[$prefix]]></code>
+      <code><![CDATA[$rgb]]></code>
+      <code><![CDATA[$suffix]]></code>
+      <code><![CDATA[$vintageBrowsers]]></code>
+    </PossiblyUnusedParam>
+    <UnusedProperty>
+      <code><![CDATA[$_hex]]></code>
+      <code><![CDATA[$_hsl]]></code>
+      <code><![CDATA[$_rgb]]></code>
+    </UnusedProperty>
+  </file>
+  <file src="inc/lib/Mexitek/PHPColors/Color.php">
+    <DuplicateClass>
+      <code><![CDATA[Color]]></code>
+    </DuplicateClass>
+  </file>
+  <file src="inc/pageload.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$username]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="includes/additem.php">
+    <UndefinedFunction>
+      <code><![CDATA[bonusStr($trow['abjure'])]]></code>
+      <code><![CDATA[bonusStr($trow['abstain'])]]></code>
+      <code><![CDATA[bonusStr($trow['abuse'])]]></code>
+      <code><![CDATA[bonusStr($trow['accuse'])]]></code>
+      <code><![CDATA[bonusStr($trow['aggress'])]]></code>
+      <code><![CDATA[bonusStr($trow['aggrieve'])]]></code>
+      <code><![CDATA[bonusStr($trow['assail'])]]></code>
+      <code><![CDATA[bonusStr($trow['assault'])]]></code>
+      <code><![CDATA[logDebugMessage("Tried to write recipe to atheneum but some fields were blank! " . $component1 . ", " . $component2 . ", " . $recipe)]]></code>
+      <code><![CDATA[logDebugMessage("Tried to write recipe to atheneum but some fields were blank! " . $component1 . ", " . $component2 . ", " . $recipe)]]></code>
+      <code><![CDATA[logDebugMessage("When adding to atheneum recipe was invalid: " . $recipe)]]></code>
+      <code><![CDATA[specialArray($srow['effects'], "STORAGE")]]></code>
+    </UndefinedFunction>
+    <UnevaluatedCode>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+      <code><![CDATA[break;]]></code>
+    </UnevaluatedCode>
+    <UnusedParam>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$gristsfield]]></code>
+    </UnusedParam>
+    <UnusedVariable>
+      <code><![CDATA[$connection]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="includes/consumeeffects.php">
+    <UndefinedFunction>
+      <code><![CDATA[surgicalSearch($strow['resistances'], "|" . $args[2], true)]]></code>
+      <code><![CDATA[surgicalSearch($strow['resistances'], "|" . $args[3], true)]]></code>
+      <code><![CDATA[surgicalSearch($strow['status'], $cures[$ii])]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$consumeffectstr]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumerindex]]></code>
+      <code><![CDATA[$consumuser]]></code>
+      <code><![CDATA[$consumuser]]></code>
+      <code><![CDATA[$consumuser]]></code>
+      <code><![CDATA[$consumuser]]></code>
+      <code><![CDATA[$consumuser]]></code>
+      <code><![CDATA[$targetindex]]></code>
+      <code><![CDATA[$targetindex]]></code>
+      <code><![CDATA[$targetindex]]></code>
+      <code><![CDATA[$targetindex]]></code>
+      <code><![CDATA[$targetindex]]></code>
+      <code><![CDATA[$targetindex]]></code>
+      <code><![CDATA[$targetindex]]></code>
+      <code><![CDATA[$targetindex]]></code>
+      <code><![CDATA[$targetuser]]></code>
+      <code><![CDATA[$targetuser]]></code>
+      <code><![CDATA[$targetuser]]></code>
+      <code><![CDATA[$targetuser]]></code>
+      <code><![CDATA[$targetuser]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$donotconsume]]></code>
+      <code><![CDATA[$donotconsume]]></code>
+      <code><![CDATA[$donotconsume]]></code>
+      <code><![CDATA[$donotconsume]]></code>
+      <code><![CDATA[$donotconsume]]></code>
+      <code><![CDATA[$donotconsume]]></code>
+      <code><![CDATA[$st]]></code>
+      <code><![CDATA[$st]]></code>
+      <code><![CDATA[$st]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="includes/consumeeffects_hard.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$args]]></code>
+      <code><![CDATA[$args]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$donotconsume]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="includes/damageeffects.php">
+    <UndefinedFunction>
+      <code><![CDATA[findResist($strifers[$t]['resistances'], "Blood")]]></code>
+      <code><![CDATA[findResist($strifers[$t]['resistances'], "Breath")]]></code>
+      <code><![CDATA[findResist($strifers[$t]['resistances'], $currenteffect[1])]]></code>
+      <code><![CDATA[findResist($strifers[$t]['resistances'], $currenteffect[2])]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$attackerpower]]></code>
+      <code><![CDATA[$attackerpower]]></code>
+      <code><![CDATA[$basedamage]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$n]]></code>
+      <code><![CDATA[$offense]]></code>
+      <code><![CDATA[$strifers]]></code>
+      <code><![CDATA[$strifers]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$t]]></code>
+      <code><![CDATA[$updatedstatus]]></code>
+      <code><![CDATA[$updatedstatus]]></code>
+      <code><![CDATA[$updatedstatus]]></code>
+      <code><![CDATA[$updatedstatus]]></code>
+      <code><![CDATA[$updatedstatus]]></code>
+      <code><![CDATA[$updatedstatus]]></code>
+      <code><![CDATA[$updatedstatus]]></code>
+      <code><![CDATA[$updatedstatus]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$attacks]]></code>
+      <code><![CDATA[$damage]]></code>
+      <code><![CDATA[$flatdamage]]></code>
+      <code><![CDATA[$flatdamage]]></code>
+      <code><![CDATA[$flatdamage]]></code>
+      <code><![CDATA[$flatdamage]]></code>
+      <code><![CDATA[$flatdamage]]></code>
+      <code><![CDATA[$flatdamage]]></code>
+      <code><![CDATA[$flatdamage]]></code>
+      <code><![CDATA[$flatdamage]]></code>
+      <code><![CDATA[$flatdamage]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$side]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="includes/displayfunctions.php">
+    <UndefinedFunction>
+      <code><![CDATA[generateStatusGlitchString()]]></code>
+    </UndefinedFunction>
+  </file>
+  <file src="includes/dungeondrawtest.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$downmost]]></code>
+      <code><![CDATA[$encstr]]></code>
+      <code><![CDATA[$leftmost]]></code>
+      <code><![CDATA[$leftmost]]></code>
+      <code><![CDATA[$lootstr]]></code>
+      <code><![CDATA[$rightmost]]></code>
+      <code><![CDATA[$roomstr]]></code>
+      <code><![CDATA[$upmost]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$onentrance]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="includes/global_functions.php">
+    <InvalidArgument>
+      <code><![CDATA[MYSQLI_ASSOC]]></code>
+    </InvalidArgument>
+    <UnusedVariable>
+      <code><![CDATA[$newdollars]]></code>
+      <code><![CDATA[$newdollars]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="includes/item_render.php">
+    <UndefinedFunction>
+      <code><![CDATA[bonusStr($irow['abjure'])]]></code>
+      <code><![CDATA[bonusStr($irow['abstain'])]]></code>
+      <code><![CDATA[bonusStr($irow['abuse'])]]></code>
+      <code><![CDATA[bonusStr($irow['accuse'])]]></code>
+      <code><![CDATA[bonusStr($irow['aggress'])]]></code>
+      <code><![CDATA[bonusStr($irow['aggrieve'])]]></code>
+      <code><![CDATA[bonusStr($irow['assail'])]]></code>
+      <code><![CDATA[bonusStr($irow['assault'])]]></code>
+    </UndefinedFunction>
+  </file>
+  <file src="includes/posteffects.php">
+    <UndefinedFunction>
+      <code><![CDATA[addItem($charrow,intval($current[1]),$metadata)]]></code>
+      <code><![CDATA[endStrife($strifers[$i])]]></code>
+      <code><![CDATA[endStrife($strifers[$i])]]></code>
+      <code><![CDATA[endStrife($strifers[$j])]]></code>
+      <code><![CDATA[endStrife($strifers[$j])]]></code>
+      <code><![CDATA[findResist($strifers[$i]['resistances'], "Blood")]]></code>
+      <code><![CDATA[findResist($strifers[$i]['resistances'], "Doom")]]></code>
+      <code><![CDATA[findResist($strifers[$i]['resistances'], "Life")]]></code>
+      <code><![CDATA[findResist($strifers[$i]['resistances'], "Mind")]]></code>
+      <code><![CDATA[findResist($strifers[$i]['resistances'], "Rage")]]></code>
+      <code><![CDATA[findResist($strifers[$i]['resistances'], $currentstatus[4])]]></code>
+      <code><![CDATA[gainRungs($allyrow, 1)]]></code>
+      <code><![CDATA[generateEnemies($enemylist,$strifers[$i]['strifeID'],$connection,"Event",0)]]></code>
+      <code><![CDATA[getChar($strifers[$j]['owner'])]]></code>
+      <code><![CDATA[gristImage($current[1])]]></code>
+      <code><![CDATA[itemName($current[1], $connection)]]></code>
+      <code><![CDATA[modifyGrist($charrow['grists'], "Opal", intval($current[1]))]]></code>
+      <code><![CDATA[modifyGrist($charrow['grists'], "Plasma", intval($current[1]))]]></code>
+      <code><![CDATA[modifyGrist($charrow['grists'], "Polychromite", intval($current[1]))]]></code>
+      <code><![CDATA[modifyGrist($charrow['grists'], "Rainbow", intval($current[1]))]]></code>
+      <code><![CDATA[modifyGrist($charrow['grists'], $current[1], intval($current[2]))]]></code>
+      <code><![CDATA[notifySession($charrow, $charrow['name'] . " has defeated their Denizen!")]]></code>
+      <code><![CDATA[sendAchievement(getChar($strifers[$j]['owner']), 'assist')]]></code>
+      <code><![CDATA[setAchievement($charrow, 'denizen')]]></code>
+      <code><![CDATA[setAchievement($charrow, 'itemfull')]]></code>
+      <code><![CDATA[setAchievement($charrow, 'ko')]]></code>
+      <code><![CDATA[setAchievement($charrow,'dungeon1')]]></code>
+      <code><![CDATA[setAchievement($charrow,'dungeon2')]]></code>
+      <code><![CDATA[setAchievement($charrow,'dungeon3')]]></code>
+      <code><![CDATA[sumStat($charrow, 'battlefield',intval($current[1]))]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$n]]></code>
+      <code><![CDATA[$n]]></code>
+      <code><![CDATA[$n]]></code>
+      <code><![CDATA[$n]]></code>
+      <code><![CDATA[$n]]></code>
+      <code><![CDATA[$n]]></code>
+      <code><![CDATA[$n]]></code>
+      <code><![CDATA[$n]]></code>
+      <code><![CDATA[$n]]></code>
+      <code><![CDATA[$playerside]]></code>
+      <code><![CDATA[$playerside]]></code>
+      <code><![CDATA[$playerside]]></code>
+      <code><![CDATA[$playerside]]></code>
+      <code><![CDATA[$playerside]]></code>
+      <code><![CDATA[$striferow]]></code>
+      <code><![CDATA[$unstuck]]></code>
+      <code><![CDATA[$updatedstatus]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$enemies]]></code>
+      <code><![CDATA[$enemynumber]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$lootstr]]></code>
+      <code><![CDATA[$moonprince]]></code>
+      <code><![CDATA[$moonprince]]></code>
+      <code><![CDATA[$moonprince]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$removed]]></code>
+      <code><![CDATA[$starthealth]]></code>
+      <code><![CDATA[$toadd]]></code>
+      <code><![CDATA[$toadd]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="includes/preeffects.php">
+    <UndefinedFunction>
+      <code><![CDATA[generateGlitchString()]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$n]]></code>
+      <code><![CDATA[$n]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$heal]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$unstuck]]></code>
+      <code><![CDATA[$unstuck]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="includes/pricesandvalues.php">
+    <InvalidArgument>
+      <code><![CDATA[$thisone == 3]]></code>
+      <code><![CDATA[$thisone >= 2]]></code>
+      <code><![CDATA[$thisone >= 2]]></code>
+      <code><![CDATA[$thisone >= 2]]></code>
+      <code><![CDATA[$thisone >= 2]]></code>
+      <code><![CDATA[$thisone >= 2]]></code>
+      <code><![CDATA[$thisone >= 2]]></code>
+      <code><![CDATA[$thisone >= 2]]></code>
+      <code><![CDATA[$thisone >= 2]]></code>
+      <code><![CDATA[$thisone >= 2]]></code>
+    </InvalidArgument>
+    <UndefinedFunction>
+      <code><![CDATA[addItem($charrow, $itemreward['ID'])]]></code>
+      <code><![CDATA[initGrists()]]></code>
+      <code><![CDATA[lobDebugMessage("Couldn't find random item with no special query!")]]></code>
+      <code><![CDATA[logDebugMessage("Invalid item requirement string: " . $boom[$i])]]></code>
+      <code><![CDATA[logDebugMessage("Invalid item requirement string: " . $boom[$i])]]></code>
+      <code><![CDATA[logDebugMessage("Invalid land names passed to abbreviateLand: $land1, $land2")]]></code>
+      <code><![CDATA[logDebugMessage("Invalid size while scanning item requirement string: searchsize = " . strval($searchsize) . ", itemsize = " . strval($itemsize))]]></code>
+      <code><![CDATA[logDebugMessage("No matching quests found for $dtype and $gate!")]]></code>
+      <code><![CDATA[logDebugMessage("Something went wrong while reading an item requirement tag of " . $boom[$i])]]></code>
+      <code><![CDATA[logDebugMessage("There was an issue giving a reward! Item: " . $item . ", boons: " . $boons . ", unlock: " . $ally)]]></code>
+      <code><![CDATA[logDebugMessage("Unexpected text in an item's cost! Expected grist:cost, found " . $gristcosts[$i] . " in " . $costfield)]]></code>
+      <code><![CDATA[logDebugMessage("Unexpected | in item requirement string: " . $requirements)]]></code>
+      <code><![CDATA[logDebugMessage("Unknown reward tag: " . $rewards[$i])]]></code>
+      <code><![CDATA[logDebugMessage("User got no rewards for quest " . $charrow['currentquest'])]]></code>
+      <code><![CDATA[logDebugMessage("phatLoot didn't recieve $errormessage")]]></code>
+      <code><![CDATA[logDebugMessage("randomItem given invalid string for costcap: $costcap")]]></code>
+      <code><![CDATA[logDebugMessage("randomItem returned -1 for $searchstring, $costtemp!")]]></code>
+      <code><![CDATA[storeItem($charrow, $itemreward['ID'])]]></code>
+    </UndefinedFunction>
+    <UnusedVariable>
+      <code><![CDATA[$basecost]]></code>
+      <code><![CDATA[$basecost]]></code>
+      <code><![CDATA[$basecost]]></code>
+      <code><![CDATA[$basecost]]></code>
+      <code><![CDATA[$gristvalue]]></code>
+      <code><![CDATA[$rewardquery]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="includes/strifefunctions.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[$types[$j]]]></code>
+      <code><![CDATA[$types[$j]]]></code>
+      <code><![CDATA[$values[$j+1]]]></code>
+    </InvalidArrayOffset>
+    <UndefinedFunction>
+      <code><![CDATA[getChar($strifer['owner'])]]></code>
+      <code><![CDATA[setAchievement(getChar($strifer['owner']), 'fatigue')]]></code>
+    </UndefinedFunction>
+    <UnusedVariable>
+      <code><![CDATA[$ondeath]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="index.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$username]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="inventory.php">
+    <UndefinedFunction>
+      <code><![CDATA[gristImage($boomo[0])]]></code>
+      <code><![CDATA[initGrists()]]></code>
+      <code><![CDATA[loadStriferow($charrow['wakeself'])]]></code>
+      <code><![CDATA[loadStriferow($targetcharrow['wakeself'])]]></code>
+      <code><![CDATA[modifyGrist($newgrist, $boomo[0], $boomo[1])]]></code>
+      <code><![CDATA[setAchievement($charrow, 'allgrist')]]></code>
+      <code><![CDATA[setAchievement($charrow, 'itemfull')]]></code>
+      <code><![CDATA[specialArray($irow[$i]['effects'], "READ")]]></code>
+      <code><![CDATA[specialArray($irow['effects'], "DEPLOYABLE")]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$invslots]]></code>
+      <code><![CDATA[$invslots]]></code>
+      <code><![CDATA[$tier1]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$consumeffectstr]]></code>
+      <code><![CDATA[$consumuser]]></code>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$nothing]]></code>
+      <code><![CDATA[$nothing]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$targetindex]]></code>
+      <code><![CDATA[$targetindex]]></code>
+      <code><![CDATA[$targetindex]]></code>
+      <code><![CDATA[$targetindex]]></code>
+      <code><![CDATA[$targetuser]]></code>
+      <code><![CDATA[$targetuser]]></code>
+      <code><![CDATA[$totalgrists]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="itemlist.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="login.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$db]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$dbtype]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="logread.php">
+    <UndefinedFunction>
+      <code><![CDATA[readCharLog($charID)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="mercenaries.php">
+    <UndefinedFunction>
+      <code><![CDATA[modifyGrist($gristString, $typeToAdd, $valueToAdd)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charRow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$consortCount]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="overview.php">
+    <UndefinedFunction>
+      <code><![CDATA[getAchievement($charrow, $name)]]></code>
+      <code><![CDATA[getAchievement($charrow, $name)]]></code>
+      <code><![CDATA[profileString($me->id)]]></code>
+      <code><![CDATA[profileString($server->id)]]></code>
+      <code><![CDATA[setAchievement($charrow, 'denizen')]]></code>
+      <code><![CDATA[setAchievement($charrow, 'fatigue')]]></code>
+      <code><![CDATA[setAchievement($charrow, 'gate7')]]></code>
+      <code><![CDATA[setAchievement($charrow, 'medium')]]></code>
+      <code><![CDATA[setAchievement($charrow, 'topeche')]]></code>
+      <code><![CDATA[spendFatigue(10,$charrow)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$db]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+      <code><![CDATA[$me]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedForeachValue>
+      <code><![CDATA[$achievement]]></code>
+    </UnusedForeachValue>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$queryex]]></code>
+      <code><![CDATA[$session]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="porkhollow.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$boon]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$lessmoney]]></code>
+      <code><![CDATA[$moremoney]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$reachgrist]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="portfolio.php">
+    <InvalidArgument>
+      <code><![CDATA[$deck]]></code>
+      <code><![CDATA[$deck]]></code>
+      <code><![CDATA[$deck]]></code>
+    </InvalidArgument>
+    <InvalidArrayOffset>
+      <code><![CDATA[$deck[$_POST['deckitem']]]]></code>
+      <code><![CDATA[$deck[$_POST['deckitem']]]]></code>
+      <code><![CDATA[$deck[$_POST['deckitem']]]]></code>
+    </InvalidArrayOffset>
+    <UndefinedFunction>
+      <code><![CDATA[setAchievement($charrow, 'fullport')]]></code>
+      <code><![CDATA[setAchievement($charrow,'ultweapon')]]></code>
+      <code><![CDATA[setAchievement($charrow,'ultweapon')]]></code>
+      <code><![CDATA[setAchievement($charrow,'ultweapon')]]></code>
+      <code><![CDATA[strifeInit($charrow)]]></code>
+      <code><![CDATA[strifeInit($charrow)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$invslots]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedFunctionCall>
+      <code><![CDATA[str_replace]]></code>
+    </UnusedFunctionCall>
+    <UnusedVariable>
+      <code><![CDATA[$canequip]]></code>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$unequipped]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="processes/consorts.php">
+    <MissingFile>
+      <code><![CDATA[include_once("/var/www/overseer2.com/processes/consortstrife.php")]]></code>
+      <code><![CDATA[require_once "/var/www/overseer2.com/inc/database.php"]]></code>
+      <code><![CDATA[require_once "/var/www/overseer2.com/includes/global_functions.php"]]></code>
+    </MissingFile>
+    <UndefinedFunction>
+      <code><![CDATA[logThis("".$consortDisplay." equipped ".$itemRow['name'].".", $charID)]]></code>
+      <code><![CDATA[logThis("".$consortDisplay." has recovered from their injuries, and are raring to get back in the fight!", $charID)]]></code>
+      <code><![CDATA[logThis("".$consortDisplay." succumbed to their injuries, and has died.", $charID)]]></code>
+      <code><![CDATA[logThis($goofArray[$randomGoof], $charID)]]></code>
+      <code><![CDATA[rowRowFightThePower($consortID, $charID)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="processes/consortstrife.php">
+    <UndefinedFunction>
+      <code><![CDATA[logThis("The ".$fightThis." that ".$consortDisplay." tried to fight was too strong! They got injured and need some time to recover.", $charID)]]></code>
+      <code><![CDATA[modifyGrist($gristStr, $gristTypeArray[$gristI], round($gristTable[$gristI]))]]></code>
+    </UndefinedFunction>
+    <UnusedVariable>
+      <code><![CDATA[$baseAcheronPower]]></code>
+      <code><![CDATA[$baseBasiliskPower]]></code>
+      <code><![CDATA[$baseGiclopsPower]]></code>
+      <code><![CDATA[$baseImpPower]]></code>
+      <code><![CDATA[$baseLichPower]]></code>
+      <code><![CDATA[$baseOgrePower]]></code>
+      <code><![CDATA[$baseTitachnidPower]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="processes/thellfuckedup.php">
+    <UnusedVariable>
+      <code><![CDATA[$backupRows]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="profile.php">
+    <UndefinedFunction>
+      <code><![CDATA[getAchievement($profiler, $name)]]></code>
+      <code><![CDATA[getAchievement($profiler, $name)]]></code>
+      <code><![CDATA[getChar($profiler['client'])]]></code>
+      <code><![CDATA[getChar($profiler['server'])]]></code>
+      <code><![CDATA[getChar(intval($_GET['ID']))]]></code>
+      <code><![CDATA[loadStriferow($profiler['wakeself'])]]></code>
+      <code><![CDATA[profileString($client['ID'])]]></code>
+      <code><![CDATA[profileString($server['ID'])]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedForeachValue>
+      <code><![CDATA[$achievement]]></code>
+    </UnusedForeachValue>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$session]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="quickitemcreate.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$code]]></code>
+      <code><![CDATA[$code]]></code>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$op]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="quickitemgen.php">
+    <UndefinedFunction>
+      <code><![CDATA[getBonusname($b)]]></code>
+      <code><![CDATA[getBonusname($b)]]></code>
+      <code><![CDATA[getBonusname($b)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$abstratus1]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$thisbonus]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="resetpass.php">
+    <InvalidArgument>
+      <code><![CDATA[$_POST['resetkey']]]></code>
+    </InvalidArgument>
+    <TooFewArguments>
+      <code><![CDATA[mysqli_escape_string($_POST['resetkey'])]]></code>
+    </TooFewArguments>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="sburbdevices.php">
+    <InvalidArgument>
+      <code><![CDATA[$_POST['firstdowel']]]></code>
+      <code><![CDATA[$store]]></code>
+    </InvalidArgument>
+    <InvalidArrayOffset>
+      <code><![CDATA[$store[$_POST['firstdowel']]]]></code>
+      <code><![CDATA[$store[$_POST['firstdowel']]]]></code>
+      <code><![CDATA[$store[$n]]]></code>
+    </InvalidArrayOffset>
+    <UndefinedFunction>
+      <code><![CDATA[gristImage($boomo[0])]]></code>
+      <code><![CDATA[howMuchGrist($newgrists, $boomo[0])]]></code>
+      <code><![CDATA[modifyGrist($newgrists, $boomo[0], $realcost * -1)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$invslots]]></code>
+      <code><![CDATA[$invslots]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="sburbserver.php">
+    <UndefinedFunction>
+      <code><![CDATA[calculateComputability($charrow)]]></code>
+      <code><![CDATA[howMuchGrist($clientrow['grists'], "Build_Grist")]]></code>
+      <code><![CDATA[howMuchGrist($clientrow['grists'], $tier1grist)]]></code>
+      <code><![CDATA[howMuchGrist($drow['gristcosts'], "Build_Grist")]]></code>
+      <code><![CDATA[howMuchGrist($drow['gristcosts'], "Build_Grist")]]></code>
+      <code><![CDATA[initGrists()]]></code>
+      <code><![CDATA[loadSessionrow($charrow['session'])]]></code>
+      <code><![CDATA[modifyGrist($clientrow['grists'], "Build_Grist", ($bcost * -1))]]></code>
+      <code><![CDATA[modifyGrist($clientrow['grists'], "Build_Grist", ($buildit * -1))]]></code>
+      <code><![CDATA[modifyGrist($clientrow['grists'], "Build_Grist", ($buildit * -1))]]></code>
+      <code><![CDATA[modifyGrist($clientrow['grists'], $tier1grist, -(int)$deploytag[2])]]></code>
+      <code><![CDATA[modifyGrist($newgrist, $boomo[0], $boomo[1])]]></code>
+      <code><![CDATA[notifyCharacter($clientrow['ID'], $charrow['name'] . " has spent " . $buildit . " Build Grist building your house!")]]></code>
+      <code><![CDATA[notifyCharacter($row['ID'], $charrow['name'] . " has become your server player!")]]></code>
+      <code><![CDATA[notifyCharacterOnce($charrow, $clientrow['ID'], $charrow['name'] . " has deployed a " . $drow['name'] . " in your house!")]]></code>
+      <code><![CDATA[profileString($clientrow['ID'])]]></code>
+      <code><![CDATA[setAchievement($charrow, 'gate7')]]></code>
+      <code><![CDATA[specialArray($clientrow['storeditems'], $_POST['deployitem'])]]></code>
+      <code><![CDATA[specialArray($drow['effects'], "DEPLOYABLE")]]></code>
+      <code><![CDATA[specialArray($drow['effects'], "DEPLOYABLE")]]></code>
+      <code><![CDATA[specialArray($irow['effects'], "DEPLOYABLE")]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$registered]]></code>
+      <code><![CDATA[$totalgrists]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="sessionadmin.php">
+    <UndefinedFunction>
+      <code><![CDATA[notifyCharacter($_POST['adminchar'], "You have become the session's admin!")]]></code>
+      <code><![CDATA[notifyCharacter($clientRow['ID'], $serverRow['name'] . " has become your server player!")]]></code>
+      <code><![CDATA[notifyCharacter($exileChar, "You have been sent to DoomHeim as a result of your session being destroyed!")]]></code>
+      <code><![CDATA[notifyCharacter($exiledRow['ID'], "You have been exiled! Welcome to DoomHeim, the exile session!")]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="sessiongraph.php">
+    <UndefinedFunction>
+      <code><![CDATA[getChar($char)]]></code>
+      <code><![CDATA[hex2RGB($color)]]></code>
+      <code><![CDATA[hex2RGB($color)]]></code>
+      <code><![CDATA[hex2RGB($color)]]></code>
+    </UndefinedFunction>
+    <UnusedFunctionCall>
+      <code><![CDATA[ImageDestroy]]></code>
+      <code><![CDATA[ImagePNG]]></code>
+    </UnusedFunctionCall>
+  </file>
+  <file src="sessioninfo.php">
+    <UndefinedFunction>
+      <code><![CDATA[highestGate($gaterow, $row['house_build_grist'])]]></code>
+      <code><![CDATA[parseEnemydata($row)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$favcolour]]></code>
+      <code><![CDATA[$favcolour]]></code>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="sessionmates.php">
+    <InvalidArgument>
+      <code><![CDATA[MYSQLI_ASSOC]]></code>
+    </InvalidArgument>
+    <InvalidArrayOffset>
+      <code><![CDATA[$session['ID']]]></code>
+      <code><![CDATA[$session['creator']]]></code>
+      <code><![CDATA[$session['members']]]></code>
+      <code><![CDATA[$session['name']]]></code>
+    </InvalidArrayOffset>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$characters]]></code>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="sessionstats.php">
+    <NoValue>
+      <code><![CDATA[$stat]]></code>
+    </NoValue>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="sprite.php">
+    <InvalidArgument>
+      <code><![CDATA[$exist[0]]]></code>
+    </InvalidArgument>
+    <UndefinedFunction>
+      <code><![CDATA[loadStriferow($charrow['sprite'])]]></code>
+      <code><![CDATA[loadStriferow($charrow['wakeself'])]]></code>
+      <code><![CDATA[surgicalSearch($effectstr, "|" . $_POST[$thiseff])]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$cid]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="strifeassist.php">
+    <UndefinedFunction>
+      <code><![CDATA[notifyCharacter($leader['owner'], $charrow['name'] . " has joined you in Strife #" . $newID . "!")]]></code>
+      <code><![CDATA[spendFatigue(10, $charrow)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$fatiguestr]]></code>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="strifebegin.php">
+    <UndefinedFunction>
+      <code><![CDATA[chainArray($charrow)]]></code>
+      <code><![CDATA[spendFatigue(10, $charrow)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$fatiguestr]]></code>
+      <code><![CDATA[$gristarray]]></code>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="strifedisplay.php">
+    <UndefinedFunction>
+      <code><![CDATA[bonusStr($bonusarray['ABJURE'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['ABJURE'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['ABSTAIN'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['ABSTAIN'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['ABUSE'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['ABUSE'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['ACCUSE'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['ACCUSE'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['AGGRESS'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['AGGRESS'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['AGGRIEVE'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['AGGRIEVE'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['ASSAIL'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['ASSAIL'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['ASSAULT'])]]></code>
+      <code><![CDATA[bonusStr($bonusarray['ASSAULT'])]]></code>
+      <code><![CDATA[chainArray($charrow)]]></code>
+      <code><![CDATA[displayBonus($strifers[$i]['bonuses'])]]></code>
+      <code><![CDATA[displayBonus($strifers[$i]['bonuses'])]]></code>
+      <code><![CDATA[displayStatus($strifers[$i]['status'])]]></code>
+      <code><![CDATA[displayStatus($strifers[$i]['status'])]]></code>
+      <code><![CDATA[fraymotifMessage($strifers[$i])]]></code>
+      <code><![CDATA[profileStringSoft($strifers[$i]['owner'])]]></code>
+      <code><![CDATA[setAchievement($charrow, 'thebug')]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$i]]></code>
+      <code><![CDATA[$strifers]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="striferesolve.php">
+    <UndefinedFunction>
+      <code><![CDATA[getStat($charrow, 'moonprince')]]></code>
+      <code><![CDATA[maxStat($charrow, 'maxdamage', $offense)]]></code>
+      <code><![CDATA[setAchievement($charrow,'moonprince')]]></code>
+      <code><![CDATA[sumStat($charrow, 'enemiesbeaten',$enemynumber)]]></code>
+      <code><![CDATA[sumStat($charrow, 'moonprince', $moonprince)]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$basedamage]]></code>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$playerside]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="strifeselect.php">
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="submissions.php">
+    <UndefinedFunction>
+      <code><![CDATA[getChar($character)]]></code>
+      <code><![CDATA[getChar($character)]]></code>
+      <code><![CDATA[incrementStat(getChar($character), 'itemapproved')]]></code>
+      <code><![CDATA[sendAchievement(getChar($character), 'itemsub')]]></code>
+    </UndefinedFunction>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$accrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$feedrow]]></code>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$modmsg]]></code>
+      <code><![CDATA[$modmsg]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+      <code><![CDATA[$row]]></code>
+      <code><![CDATA[$search]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="submitart.php">
+    <InvalidArgument>
+      <code><![CDATA[$irow['art'] != ""]]></code>
+      <code><![CDATA[$irow['art'] != ""]]></code>
+    </InvalidArgument>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$charrow]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+      <code><![CDATA[$connection]]></code>
+    </UndefinedGlobalVariable>
+    <UnusedVariable>
+      <code><![CDATA[$headericon]]></code>
+      <code><![CDATA[$pagetitle]]></code>
+    </UnusedVariable>
+  </file>
+</files>

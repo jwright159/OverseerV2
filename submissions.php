@@ -3,7 +3,7 @@ $pagetitle = "Item Submissions";
 $headericon = "/images/header/inventory.png";
 require_once "header.php";
 
-function updateSubmission($subid) {
+function updateSubmission($subid): void {
   global $connection;
 	$currenttime = time();
 	mysqli_query($connection, "UPDATE `Feedback` SET `lastupdated` = $currenttime WHERE `Feedback`.`ID` = $subid ;");

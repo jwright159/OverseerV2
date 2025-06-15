@@ -1,7 +1,7 @@
 <?php
 
 // The magical error handling code handler of the future.
-function error_handler($errorNumber, $message, $errfile, $errline) {
+function error_handler($errorNumber, $message, $errfile, $errline): void {
 	global $errorlog;
 	switch ($errorNumber) {
 		case E_ERROR: $errorLevel = 'Error'; break;

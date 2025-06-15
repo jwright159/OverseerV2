@@ -43,7 +43,10 @@ require_once "includes/additem.php";
 };
 </script>
 <?php
-function genEncounter($minpower, $maxpower, $search) {
+/**
+ * @return false|string
+ */
+function genEncounter($minpower, $maxpower, $search): string|false {
 	global $connection;
 	$enemyresult = mysqli_query($connection, "SELECT * FROM Enemy_Types WHERE ($search) AND basepower * 9 + 81 > $minpower AND basepower < $maxpower ORDER BY RAND()"); //return a random enemy that fits the criteria
 	if ($row = mysqli_fetch_array($enemyresult)) { //see if we found anything
@@ -67,7 +70,10 @@ function genEncounter($minpower, $maxpower, $search) {
 	} else return false;
 }
 
-function genLoot($minloot, $maxloot, $search, $session) {
+/**
+ * @return false|string
+ */
+function genLoot($minloot, $maxloot, $search, $session): string|false {
 	global $connection;
 	$lootresult = mysqli_query($connection, "SELECT * FROM Captchalogue WHERE $search AND (session = 0 OR session = $session) ORDER BY RAND()");
 	while ($row = mysqli_fetch_array($lootresult)) {
